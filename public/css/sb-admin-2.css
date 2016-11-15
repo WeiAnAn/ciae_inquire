@@ -10,7 +10,6 @@ body {
   width: 100%;
 }
 #page-wrapper {
-  display: block;
   padding: 0 15px;
   min-height: 568px;
   background-color: white;
