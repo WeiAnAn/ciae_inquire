@@ -8,9 +8,9 @@
 </div>
 <div class="col-md-6">
 	<div class="list-group">
-		<a href="#" class="list-group-item disabled">
+		<li class="list-group-item list-group-item-success">
 			基本資料
-		</a>
+		</li>
 		<a href="#" class="list-group-item">單位資料修改</a>
 		<a href="#" class="list-group-item">英檢畢業門檻</a>
 		<a href="#" class="list-group-item">全外語授課之課程</a>
@@ -18,9 +18,9 @@
 </div>
 <div class="col-md-6">
 	<div class="list-group">
-		<a href="#" class="list-group-item disabled">
+		<li class="list-group-item-success list-group-item">
 			教師、研究員專區
-		</a>
+		</li>
 		<a href="#" class="list-group-item">本校教師赴國外出席國際會議</a>
 		<a href="#" class="list-group-item">本校教師赴國外交換</a>
 		<a href="#" class="list-group-item">本校教師赴國外研究</a>
@@ -29,9 +29,9 @@
 </div>
 <div class="col-md-6">
 	<div class="list-group">
-		<a href="#" class="list-group-item disabled">
+		<li href="#" class="list-group-item-success list-group-item">
 			學生專區
-		</a>
+		</li>
 		<a href="#" class="list-group-item">赴國外出席國際會議</a>
 		<a href="#" class="list-group-item">出國赴姊妹校參加交換計畫</a>
 		<a href="#" class="list-group-item">其他出國研修情形</a>
@@ -42,9 +42,9 @@
 </div>
 <div class="col-md-6">
 	<div class="list-group">
-		<a href="#" class="list-group-item disabled">
+		<li class="list-group-item-success list-group-item">
 			其他國際交流活動
-		</a>
+		</li>
 		<a href="#" class="list-group-item">跨國學位</a>
 		<a href="#" class="list-group-item">姊妹校締約情形</a>
 		<a href="#" class="list-group-item">國際合作交流計畫</a>
