@@ -24,8 +24,9 @@ Route::group(['middleware' => 'auth'],function(){
 		return view('/user/graduate_threshold');
 	});
 	Route::get('/foreign_language_class',function(){
-		return view('foreign_language_class');
+		return view('/user/foreign_language_class');
 	});
+	Route::post('/foreign_language_class',['uses' => 'ForeignLanguageClassController@insert']);
 	Route::get('/cooperation_proj',function(){
 		return view('cooperation_proj');
 	});
@@ -66,4 +67,8 @@ Route::group(['middleware' => 'auth'],function(){
 		return view('transnational_degree');
 	});
 
+});
+
+Route::get('/test',function(){
+	return view('layouts/select');
 });

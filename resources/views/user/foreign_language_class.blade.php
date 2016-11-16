@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<h1 class="page-header">英檢畢業門檻</h1>
+		<h1 class="page-header">全外語授課之課程</h1>
 	</div>
 </div>
 <div class="row">	
@@ -27,9 +27,14 @@
 								<tr>
 									<td>單位</td>
 									<td>系所部門</td>
-									<td>語言測驗名稱</td>
-									<td>等級或分數</td>
-									<td>備註</td>
+									<td>學年</td>
+									<td>學期</td>
+									<td>中文名稱</td>
+									<td>英文名稱</td>
+									<td>教師</td>
+									<td>授課語言</td>
+									<td>修課總人數</td>
+									<td>國際生人數</td>
 									<td>管理</td>
 								</tr>
 								</thead>
@@ -39,6 +44,11 @@
 									<td>123</td>
 									<td>123</td>
 									<td>123</td>
+									<td>圖形識別</td>
+									<td>Pattern Recognition</td>
+									<td>林維暘</td>
+									<td>英語</td>
+									<td>123</td>
 									<td>123</td>
 									<td>123</td>
 								</tr>
@@ -47,10 +57,13 @@
 					</div>
 
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
-						<form action="{{url('graduate_threshold')}}" method="post">
+						<form action="{{url('/foreign_language_class')}}" method="post">
+                        	{{ csrf_field() }}
+							@include('../layouts/select')
 							<div class="form-group">
 								<label for="">語言測驗名稱</label>
 								<textarea type="text" class="form-control"></textarea>
+
 							</div>
 							<button class="btn btn-success">新增</button>
 						</form>
