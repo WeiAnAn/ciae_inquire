@@ -18,9 +18,7 @@ Auth::routes();
 Route::group(['middleware' => 'auth'],function(){
 	Route::get('/home',['as' => 'home', 'uses' => 'HomeController@index']);
 	
-	Route::get('/user', function(){
-		return view('user/user');
-	});
+	Route::get('/user',['uses'=>'UserController@index']);
 	Route::post('/user', ['uses'=>'UserController@update']);
 	Route::get('/graduate_threshold',function(){
 		return view('graduate_threshold');

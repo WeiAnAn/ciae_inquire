@@ -8,28 +8,39 @@
 </div>
 <div class="row">
 	<div class="col-md-12">
-    @if(session('success'))
-                        <div class="alert alert-success alert-dismissible" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <strong> {{ session('success') }}</strong>
-                        </div>
-                        @endif
+        @if(session('success'))
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong> {{ session('success') }}</strong>
+        </div>
+        @endif
 		<div class="panel panel-default">
 			<div class="panel-heading"><b>個人資料</b></div>
 			<div class="panel-body">
 				<div class="row">
                     <div class="col-md-12">
 
+                       
+                        <div class="form-group">
+                            <label for="username" >使用者名稱</label>
+                            <input type="text" class="form-control" name="username" 
+                            disabled value="{{Auth::user()->username}}">
+                        </div>
+                    
+                    
+                        <div class="form-group">
+                            <label for="username" >系所名稱</label>
+                            <input type="text" class="form-control" name="username" 
+                            disabled value="{{$collegeData->chtName}}">
+                        </div>
+                       
+
     					<form role="form" action="{{url('/user')}}" method="post">
                         {{ csrf_field() }}
                             <input type="text" hidden name="id" value="{{Auth::user()->id}}">
-    						<div class="form-group">
-    							<label for="username" >使用者名稱</label>
-    							<input type="text" class="form-control" name="username" 
-                                disabled value="{{Auth::user()->username}}">
-    						</div>
+
                             <div class="form-group">
                                 <label for="username" >密碼</label>
                                 <input type="password" class="form-control" name="password">

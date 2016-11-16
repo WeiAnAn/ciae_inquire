@@ -4,13 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use Validator;
+use App\CollegeData;
 
 
 class UserController extends Controller
 {
-	protected function validator($data){
-
+	public function index(Request $request){
+		
+		$user = $request->user();
+		$college = CollegeData::where('college',$user->college)
+						   ->where('dept',$user->dept)->get();
+		$collegeData = $college[0];
+		$data = compact('collegeData');
+		return view('user/user',$data);
 	}
     //
     public function update(Request $request){
