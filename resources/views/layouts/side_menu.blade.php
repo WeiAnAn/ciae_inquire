@@ -9,7 +9,7 @@
                                     <a href="{{URL('/user')}}">單位資料修改</a>
                                 </li>
                                 <li>
-                                    <a href="{{URL('/english_threshold')}}">英檢畢業門檻</a>
+                                    <a href="{{URL('/graduate_threshold')}}">英檢畢業門檻</a>
                                 </li>
                                 <li>
                                     <a href="{{URL('/foreign_language_class')}}">全外語授課之課程</a>

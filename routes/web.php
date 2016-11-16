@@ -21,7 +21,7 @@ Route::group(['middleware' => 'auth'],function(){
 	Route::get('/user',['uses'=>'UserController@index']);
 	Route::post('/user', ['uses'=>'UserController@update']);
 	Route::get('/graduate_threshold',function(){
-		return view('graduate_threshold');
+		return view('/user/graduate_threshold');
 	});
 	Route::get('/foreign_language_class',function(){
 		return view('foreign_language_class');
