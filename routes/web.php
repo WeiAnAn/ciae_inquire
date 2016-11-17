@@ -33,6 +33,10 @@ Route::group(['middleware' => 'auth'],function(){
 		return view('prof/prof_attend_conference');
 	});
 
+	Route::get('/prof_exchange',function(){
+		return view('prof/prof_exchange');
+	});
+
 	Route::get('/prof_foreign_research',function(){
 		return view('prof/prof_foreign_research');
 	});
@@ -50,9 +54,7 @@ Route::group(['middleware' => 'auth'],function(){
 		return view('partner_school');
 	});
 	
-	Route::get('/prof_exchange',function(){
-		return view('prof_exchange');
-	});
+	
 	
 	Route::get('/short_term_foreign_stu',function(){
 		return view('short_term_foreign_stu');

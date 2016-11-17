@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<h1 class="page-header">本校教師赴國外研究</h1>
+		<h1 class="page-header">本校教師赴國外交換</h1>
 	</div>
 </div>
 <div class="row">	
@@ -53,7 +53,7 @@
 					</div>
 
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
-						<form action="{{url('prof_attend_conference')}}" method="post">
+						<form action="{{url('prof_exchange')}}" method="post">
 							{{ csrf_field() }}
 							@include('../layouts/select')
 							<div class="form-group">
@@ -98,7 +98,7 @@
 				            </button>
 				            <strong>不加入搜尋條件之選項留空即可</strong>
 				        </div>
-						<form action="{{url('prof_attend_conference/search')}}">
+						<form action="{{url('prof_exchange/search')}}">
 							{{ csrf_field() }}
 							@include('../layouts/select_search')
 							<div class="form-group">
@@ -140,7 +140,7 @@
 					</div>
 
 					<div class="tab-pane fade in col-md-12" id="upload" style="margin-top: 10px;">
-						<form action="{{url('prof_attend_conference/upload')}}">
+						<form action="{{url('prof_exchange/upload')}}">
 							<input type="file" class="" style="margin: 2px">
 							<button class="btn btn-primary" style="margin: 2px">上傳</button>								
 						</form>
