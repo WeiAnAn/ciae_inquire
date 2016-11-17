@@ -61,9 +61,35 @@
                         	{{ csrf_field() }}
 							@include('../layouts/select')
 							<div class="form-group">
-								<label for="">語言測驗名稱</label>
-								<textarea type="text" class="form-control"></textarea>
-
+								<label for="">學年</label>
+								<input type="number" name="year" class="form-control" value="105">
+							</div>
+							<div class="form-group">
+								<label for="semester">學期</label>
+								<select name="semester" id="semester" class="form-control">
+									<option value="1">上學期</option>
+									<option value="2">下學期</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="">課程中文名稱</label>
+								<input type="text"  name="chtName" class="form-control"></input>
+							</div>
+							<div class="form-group">
+								<label for="engName">課程英文名稱</label>
+								<input type="text" name="teacher" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="teacher">授課教師</label>
+								<input type="text" name="teacher" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="totalCount">總人數</label>
+								<input type="number" name="totalCount" class="form-control" value="0">
+							</div>
+							<div class="form-group">
+								<label for="nationalCount">外籍生人數</label>
+								<input type="number" name="nationalCount" class="form-control" value="0">
 							</div>
 							<button class="btn btn-success">新增</button>
 						</form>
@@ -77,7 +103,7 @@
 							</div>
 						</form>
 					</div>
-
+					
 					<div class="tab-pane fade in col-md-12" id="upload" style="margin-top: 10px;">
 						<form action="{{url('graduate_threshold/search')}}">
 							<input type="file" class="" style="margin: 2px">

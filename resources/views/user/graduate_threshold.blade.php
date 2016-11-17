@@ -48,10 +48,21 @@
 
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
 						<form action="{{url('graduate_threshold')}}" method="post">
+                        	{{ csrf_field() }}
+							@include("../layouts/select")
 							<div class="form-group">
-								<label for="">語言測驗名稱</label>
-								<textarea type="text" class="form-control"></textarea>
+								<label for="testName">語言測驗名稱</label>
+								<input type="text" name="testName" class="form-control"></input>
 							</div>
+							<div class="form-group">
+								<label for="testGrade">等級或分數</label>
+								<input type="text" name="testGrade" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="comments">備註</label>
+								<textarea type="text" class="form-control" name="comments"></textarea>
+							</div>
+
 							<button class="btn btn-success">新增</button>
 						</form>
 					</div>
@@ -65,12 +76,7 @@
 						</form>
 					</div>
 
-					<div class="tab-pane fade in col-md-12" id="upload" style="margin-top: 10px;">
-						<form action="{{url('graduate_threshold/search')}}">
-							<input type="file" class="" style="margin: 2px">
-							<button class="btn btn-primary" style="margin: 2px">上傳</button>								
-						</form>
-					</div>
+					@include('../layouts/upload')
 
 				</div>
 			</div>

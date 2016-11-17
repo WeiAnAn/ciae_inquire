@@ -13,7 +13,11 @@
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i><p class="fa" style="margin:0">{{Auth::user()->chtName}}</p> <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user fa-fw"></i>
+                        <p class="fa" style="margin:0">
+                        {{Auth::user()->contactPeople}}  {{Auth::user()->chtName}}
+                        </p>
+                        <i class="fa fa-caret-down"></i>
 
                     </a>
                     <ul class="dropdown-menu dropdown-user">
