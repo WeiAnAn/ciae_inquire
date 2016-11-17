@@ -29,6 +29,9 @@ Route::group(['middleware' => 'auth'],function(){
 	Route::post('/foreign_language_class',['uses' => 'ForeignLanguageClassController@insert']);
 	Route::get('/foreign_language_class/search',['uses' => 'ForeignLanguageClassController@search']);
 
+	Route::get('/prof_attend_conference',function(){
+		return view('prof/prof_attend_conference');
+	});
 	Route::get('/cooperation_proj',function(){
 		return view('cooperation_proj');
 	});
@@ -41,9 +44,7 @@ Route::group(['middleware' => 'auth'],function(){
 	Route::get('/partner_school',function(){
 		return view('partner_school');
 	});
-	Route::get('/prof_attend_conference',function(){
-		return view('prof_attend_conference');
-	});
+	
 	Route::get('/prof_exchange',function(){
 		return view('prof_exchange');
 	});

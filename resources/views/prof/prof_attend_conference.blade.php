@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<h1 class="page-header">全外語授課之課程</h1>
+		<h1 class="page-header">本校教師赴國外出席國際會議</h1>
 	</div>
 </div>
 <div class="row">	
@@ -27,14 +27,12 @@
 								<tr>
 									<td>單位</td>
 									<td>系所部門</td>
-									<td>學年</td>
-									<td>學期</td>
-									<td>中文名稱</td>
-									<td>英文名稱</td>
-									<td>教師</td>
-									<td>授課語言</td>
-									<td>修課總人數</td>
-									<td>國際生人數</td>
+									<td>姓名</td>
+									<td>身分</td>
+									<td>會議名稱</td>
+									<td>開始時間</td>
+									<td>結束時間</td>
+									<td>備註</td>
 									<td>管理</td>
 								</tr>
 								</thead>
@@ -49,34 +47,90 @@
 									<td>林維暘</td>
 									<td>英語</td>
 									<td>123</td>
-									<td>123</td>
-									<td>123</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
-						<form action="{{url('graduate_threshold')}}" method="post">
+						<form action="{{url('prof_attend_conference')}}" method="post">
+							{{ csrf_field() }}
+							@include('../layouts/select')
 							<div class="form-group">
-								<label for="">語言測驗名稱</label>
-								<textarea type="text" class="form-control"></textarea>
+								<label for="">姓名</label>
+								<input type="text" class="form-control" name="name" />
+							</div>
+							<div class="form-group">
+								<label for="profLevel">身分</label>
+								<select name="profLevel" id="profLevel" class="form-control">
+									<option value="1">教授</option>
+									<option value="2">副教授</option>
+									<option value="3">助理教授</option>
+									<option value="4">博士候選人</option>
+									<option value="5">研究生</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="confName">會議名稱</label>
+								<textarea name="confName" id="confName" cols="30" rows="3" class="form-control"></textarea>
+							</div>
+							<div class="form-group col-md-6" style="padding-left:0">
+								<label for="startDate">開始時間</label>
+								<input type="date" name="startDate" class="form-control">
+							</div>
+							<div class="form-group col-md-6" style="padding-right: 0">
+								<label for="endDate">結束時間</label>
+								<input type="date" name="endDate" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="comments">備註</label>
+								<textarea name="comments" id="comments" cols="30" rows="3" class="form-control"></textarea>
 							</div>
 							<button class="btn btn-success">新增</button>
 						</form>
 					</div>
 
 					<div class="tab-pane fade in col-md-12" id="search" style="margin-top: 10px;">
-						<form action="{{url('graduate_threshold/search')}}">
+						<form action="{{url('prof_attend_conference/search')}}">
+							{{ csrf_field() }}
+							@include('../layouts/select_search')
 							<div class="form-group">
-								<label for="">搜尋</label>
-								<input type="text" class="form-control">
+								<label for="">姓名</label>
+								<input type="text" class="form-control" name="name" />
 							</div>
+							<div class="form-group">
+								<label for="profLevel">身分</label>
+								<select name="profLevel" id="profLevel" class="form-control">
+									<option value=""></option>
+									<option value="1">教授</option>
+									<option value="2">副教授</option>
+									<option value="3">助理教授</option>
+									<option value="4">博士候選人</option>
+									<option value="5">研究生</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="confName">會議名稱</label>
+								<textarea name="confName" id="confName" cols="30" rows="3" class="form-control"></textarea>
+							</div>
+							<div class="form-group col-md-6" style="padding-left:0">
+								<label for="startDate">開始時間</label>
+								<input type="date" name="startDate" class="form-control">
+							</div>
+							<div class="form-group col-md-6" style="padding-right: 0">
+								<label for="endDate">結束時間</label>
+								<input type="date" name="endDate" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="comments">備註</label>
+								<textarea name="comments" id="comments" cols="30" rows="3" class="form-control"></textarea>
+							</div>
+							<button class="btn btn-success">搜尋</button>
 						</form>
 					</div>
 
 					<div class="tab-pane fade in col-md-12" id="upload" style="margin-top: 10px;">
-						<form action="{{url('graduate_threshold/search')}}">
+						<form action="{{url('prof_attend_conference/upload')}}">
 							<input type="file" class="" style="margin: 2px">
 							<button class="btn btn-primary" style="margin: 2px">上傳</button>								
 						</form>

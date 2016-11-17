@@ -102,7 +102,7 @@
 				            </button>
 				            <strong>不加入搜尋條件之選項留空即可</strong>
 				        </div>
-						<form action="{{url('/foreign_language_class/search')}}" method="get">
+						<form action="{{url('foreign_language_class/search')}}" method="get">
 							@include('../layouts/select_search')
 							<div class="form-group">
 								<label for="">學年</label>
@@ -141,7 +141,7 @@
 					</div>
 
 					<div class="tab-pane fade in col-md-12" id="upload" style="margin-top: 10px;">
-						<form action="{{url('/foreign_language_class/upload')}}">
+						<form action="{{url('foreign_language_class/upload')}}">
 							<input type="file" class="" style="margin: 2px">
 							<button class="btn btn-primary" style="margin: 2px">上傳</button>								
 						</form>
