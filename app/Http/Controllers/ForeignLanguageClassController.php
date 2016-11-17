@@ -10,4 +10,8 @@ class ForeignLanguageClassController extends Controller
     public function insert(Request $request){
     	dd($request->request);
     }
+
+    public function search(Request $request){
+    	dd($request);
+    }
 }

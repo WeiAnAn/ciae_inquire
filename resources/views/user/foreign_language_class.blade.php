@@ -96,16 +96,52 @@
 					</div>
 
 					<div class="tab-pane fade in col-md-12" id="search" style="margin-top: 10px;">
-						<form action="{{url('graduate_threshold/search')}}">
+						<div class="alert alert-success alert-dismissible" role="alert">
+				            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				                <span aria-hidden="true">&times;</span>
+				            </button>
+				            <strong>不加入搜尋條件之選項留空即可</strong>
+				        </div>
+						<form action="{{url('/foreign_language_class/search')}}" method="get">
+							@include('../layouts/select_search')
 							<div class="form-group">
-								<label for="">搜尋</label>
-								<input type="text" class="form-control">
+								<label for="">學年</label>
+								<input type="number" name="year" class="form-control">
 							</div>
+							<div class="form-group">
+								<label for="semester">學期</label>
+								<select name="semester" id="semester" class="form-control">
+									<option ></option>
+									<option value="1">上學期</option>
+									<option value="2">下學期</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="">課程中文名稱</label>
+								<input type="text"  name="chtName" class="form-control"></input>
+							</div>
+							<div class="form-group">
+								<label for="engName">課程英文名稱</label>
+								<input type="text" name="teacher" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="teacher">授課教師</label>
+								<input type="text" name="teacher" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="totalCount">總人數</label>
+								<input type="number" name="totalCount" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="nationalCount">外籍生人數</label>
+								<input type="number" name="nationalCount" class="form-control">
+							</div>
+							<button class="btn btn-success">搜尋</button>
 						</form>
 					</div>
-					
+
 					<div class="tab-pane fade in col-md-12" id="upload" style="margin-top: 10px;">
-						<form action="{{url('graduate_threshold/search')}}">
+						<form action="{{url('/foreign_language_class/upload')}}">
 							<input type="file" class="" style="margin: 2px">
 							<button class="btn btn-primary" style="margin: 2px">上傳</button>								
 						</form>

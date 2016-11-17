@@ -27,6 +27,8 @@ Route::group(['middleware' => 'auth'],function(){
 		return view('/user/foreign_language_class');
 	});
 	Route::post('/foreign_language_class',['uses' => 'ForeignLanguageClassController@insert']);
+	Route::get('/foreign_language_class/search',['uses' => 'ForeignLanguageClassController@search']);
+
 	Route::get('/cooperation_proj',function(){
 		return view('cooperation_proj');
 	});
