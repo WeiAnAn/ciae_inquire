@@ -29,6 +29,7 @@
 									<td>系所部門</td>
 									<td>姓名</td>
 									<td>身分</td>
+									<td>前往國家</td>
 									<td>會議名稱</td>
 									<td>開始時間</td>
 									<td>結束時間</td>
@@ -71,6 +72,10 @@
 								</select>
 							</div>
 							<div class="form-group">
+								<label for="nation">前往國家</label>
+								<input type="text" name="nation" class="form-control">
+							</div>
+							<div class="form-group">
 								<label for="confName">會議名稱</label>
 								<textarea name="confName" id="confName" cols="30" rows="3" class="form-control"></textarea>
 							</div>
@@ -108,6 +113,10 @@
 									<option value="4">博士候選人</option>
 									<option value="5">研究生</option>
 								</select>
+							</div>
+							<div class="form-group">
+								<label for="nation">前往國家</label>
+								<input type="text" name="nation" class="form-control">
 							</div>
 							<div class="form-group">
 								<label for="confName">會議名稱</label>
