@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<h1 class="page-header">本校教師赴國外出席國際會議</h1>
+		<h1 class="page-header">本校教師赴國外研究</h1>
 	</div>
 </div>
 <div class="row">	
@@ -30,7 +30,6 @@
 									<td>姓名</td>
 									<td>身分</td>
 									<td>前往國家</td>
-									<td>會議名稱</td>
 									<td>開始時間</td>
 									<td>結束時間</td>
 									<td>備註</td>
@@ -47,7 +46,6 @@
 									<td>Pattern Recognition</td>
 									<td>林維暘</td>
 									<td>英語</td>
-									<td>123</td>
 									<td>123</td>
 								</tr>
 							</tbody>
@@ -74,12 +72,9 @@
 							</div>
 							<div class="form-group">
 								<label for="nation">前往國家</label>
-								<input type="text" name="nation" class="form-control">
+								<textarea name="nation" id="nation" cols="30" rows="3" class="form-control"></textarea>
 							</div>
-							<div class="form-group">
-								<label for="confName">會議名稱</label>
-								<textarea name="confName" id="confName" cols="30" rows="3" class="form-control"></textarea>
-							</div>
+							
 							<div class="form-group col-md-6" style="padding-left:0">
 								<label for="startDate">開始時間</label>
 								<input type="date" name="startDate" class="form-control">
@@ -123,11 +118,7 @@
 							</div>
 							<div class="form-group">
 								<label for="nation">前往國家</label>
-								<input type="text" name="nation" class="form-control">
-							</div>
-							<div class="form-group">
-								<label for="confName">會議名稱</label>
-								<textarea name="confName" id="confName" cols="30" rows="3" class="form-control"></textarea>
+								<textarea name="nation" id="nation" cols="30" rows="3" class="form-control"></textarea>
 							</div>
 							<div class="form-group" style="margin-bottom: 0px">
 								<label >日期</label>

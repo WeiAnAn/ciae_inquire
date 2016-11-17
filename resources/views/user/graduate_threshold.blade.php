@@ -68,6 +68,12 @@
 					</div>
 
 					<div class="tab-pane fade in col-md-12" id="search" style="margin-top: 10px;">
+						<div class="alert alert-success alert-dismissible" role="alert">
+				            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				                <span aria-hidden="true">&times;</span>
+				            </button>
+				            <strong>不加入搜尋條件之選項留空即可</strong>
+				        </div>
 						<form action="{{url('graduate_threshold/search')}}">
 							{{ csrf_field() }}
 							@include("../layouts/select_search")
