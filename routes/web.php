@@ -20,9 +20,11 @@ Route::group(['middleware' => 'auth'],function(){
 	
 	Route::get('/user',['uses'=>'UserController@index']);
 	Route::post('/user', ['uses'=>'UserController@update']);
+
 	Route::get('/graduate_threshold',function(){
 		return view('/user/graduate_threshold');
 	});
+
 	Route::get('/foreign_language_class',function(){
 		return view('/user/foreign_language_class');
 	});
@@ -57,6 +59,10 @@ Route::group(['middleware' => 'auth'],function(){
 		return view('stu/stu_foreign_research');
 	});
 
+	Route::get('/stu_from_partner_school',function(){
+		return view('stu/stu_from_partner_school');
+	});
+
 	Route::get('/cooperation_proj',function(){
 		return view('cooperation_proj');
 	});
@@ -75,9 +81,7 @@ Route::group(['middleware' => 'auth'],function(){
 	});
 	
 	
-	Route::get('/stu_from_partner_school',function(){
-		return view('stu_from_partner_school');
-	});
+	
 	Route::get('/transnational_degree',function(){
 		return view('transnational_degree');
 	});

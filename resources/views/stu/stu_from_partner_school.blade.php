@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<h1 class="page-header">其他出國研修情形</h1>
+		<h1 class="page-header">姊妹校學生至本校參加交換計畫</h1>
 	</div>
 </div>
 <div class="row">	
@@ -29,7 +29,7 @@
 									<td>系所部門</td>
 									<td>姓名</td>
 									<td>身分</td>
-									<td>會議名稱</td>
+									<td>國籍</td>
 									<td>開始時間</td>
 									<td>結束時間</td>
 									<td>備註</td>
@@ -42,10 +42,10 @@
 									<td>123</td>
 									<td>123</td>
 									<td>123</td>
+									<td>圖形識別</td>
 									<td>Pattern Recognition</td>
 									<td>林維暘</td>
 									<td>英語</td>
-									<td>123</td>
 									<td>123</td>
 								</tr>
 							</tbody>
@@ -53,7 +53,7 @@
 					</div>
 
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
-						<form action="{{url('stu_to_partner_school')}}" method="post">
+						<form action="{{url('prof_exchange')}}" method="post">
 							{{ csrf_field() }}
 							@include('../layouts/select')
 							<div class="form-group">
@@ -61,17 +61,18 @@
 								<input type="text" class="form-control" name="name" />
 							</div>
 							<div class="form-group">
-								<label for="sutLevel">身分</label>
-								<select name="sutLevel" id="sutLevel" class="form-control">
+								<label for="profLevel">身分</label>
+								<select name="profLevel" id="profLevel" class="form-control">
 									<option value="1">博士班</option>
 									<option value="2">碩士班</option>
 									<option value="3">學士班</option>
 								</select>
 							</div>
 							<div class="form-group">
-								<label for="nation">前往國家</label>
+								<label for="nation">國籍</label>
 								<input type="text" name="nation" class="form-control">
 							</div>
+							
 							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 								<label for="startDate">開始時間</label>
 								<input type="date" name="startDate" class="form-control">
@@ -95,7 +96,7 @@
 				            </button>
 				            <strong>不加入搜尋條件之選項留空即可</strong>
 				        </div>
-						<form action="{{url('stu_to_partner_school/search')}}">
+						<form action="{{url('foreign_prof_vist/search')}}">
 							{{ csrf_field() }}
 							@include('../layouts/select_search')
 							<div class="form-group">
@@ -103,8 +104,8 @@
 								<input type="text" class="form-control" name="name" />
 							</div>
 							<div class="form-group">
-								<label for="sutLevel">身分</label>
-								<select name="sutLevel" id="sutLevel" class="form-control">
+								<label for="profLevel">身分</label>
+								<select name="profLevel" id="profLevel" class="form-control">
 									<option value=""></option>
 									<option value="1">博士班</option>
 									<option value="2">碩士班</option>
@@ -112,7 +113,7 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label for="nation">前往國家</label>
+								<label for="nation">國籍</label>
 								<input type="text" name="nation" class="form-control">
 							</div>
 							<div class="form-group" style="margin-bottom: 0px">
@@ -135,7 +136,7 @@
 					</div>
 
 					<div class="tab-pane fade in col-md-12" id="upload" style="margin-top: 10px;">
-						<form action="{{url('stu_to_partner_school/upload')}}">
+						<form action="{{url('foreign_prof_vist/upload')}}">
 							<input type="file" class="" style="margin: 2px">
 							<button class="btn btn-primary" style="margin: 2px">上傳</button>								
 						</form>
