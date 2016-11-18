@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<h1 class="page-header">赴國外出席國際會議</h1>
+		<h1 class="page-header">其他出國研修情形</h1>
 	</div>
 </div>
 <div class="row">	
@@ -29,7 +29,6 @@
 									<td>系所部門</td>
 									<td>姓名</td>
 									<td>身分</td>
-									<td>前往國家</td>
 									<td>會議名稱</td>
 									<td>開始時間</td>
 									<td>結束時間</td>
@@ -43,7 +42,6 @@
 									<td>123</td>
 									<td>123</td>
 									<td>123</td>
-									<td>圖形識別</td>
 									<td>Pattern Recognition</td>
 									<td>林維暘</td>
 									<td>英語</td>
@@ -55,7 +53,7 @@
 					</div>
 
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
-						<form action="{{url('stu_attend_conf')}}" method="post">
+						<form action="{{url('stu_to_partner_school')}}" method="post">
 							{{ csrf_field() }}
 							@include('../layouts/select')
 							<div class="form-group">
@@ -73,10 +71,6 @@
 							<div class="form-group">
 								<label for="nation">前往國家</label>
 								<input type="text" name="nation" class="form-control">
-							</div>
-							<div class="form-group">
-								<label for="confName">會議名稱</label>
-								<textarea name="confName" id="confName" cols="30" rows="3" class="form-control"></textarea>
 							</div>
 							<div class="form-group col-md-6" style="padding-left:0">
 								<label for="startDate">開始時間</label>
@@ -101,7 +95,7 @@
 				            </button>
 				            <strong>不加入搜尋條件之選項留空即可</strong>
 				        </div>
-						<form action="{{url('stu_attend_conf/search')}}">
+						<form action="{{url('stu_to_partner_school/search')}}">
 							{{ csrf_field() }}
 							@include('../layouts/select_search')
 							<div class="form-group">
@@ -120,10 +114,6 @@
 							<div class="form-group">
 								<label for="nation">前往國家</label>
 								<input type="text" name="nation" class="form-control">
-							</div>
-							<div class="form-group">
-								<label for="confName">會議名稱</label>
-								<textarea name="confName" id="confName" cols="30" rows="3" class="form-control"></textarea>
 							</div>
 							<div class="form-group" style="margin-bottom: 0px">
 								<label >日期</label>
@@ -145,7 +135,7 @@
 					</div>
 
 					<div class="tab-pane fade in col-md-12" id="upload" style="margin-top: 10px;">
-						<form action="{{url('stu_attend_conf/upload')}}">
+						<form action="{{url('stu_to_partner_school/upload')}}">
 							<input type="file" class="" style="margin: 2px">
 							<button class="btn btn-primary" style="margin: 2px">上傳</button>								
 						</form>

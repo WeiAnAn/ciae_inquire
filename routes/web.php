@@ -49,6 +49,14 @@ Route::group(['middleware' => 'auth'],function(){
 		return view('stu/stu_attend_conf');
 	});
 
+	Route::get('/stu_to_partner_school',function(){
+		return view('stu/stu_to_partner_school');
+	});
+
+	Route::get('/stu_foreign_research',function(){
+		return view('stu/stu_foreign_research');
+	});
+
 	Route::get('/cooperation_proj',function(){
 		return view('cooperation_proj');
 	});
@@ -66,14 +74,9 @@ Route::group(['middleware' => 'auth'],function(){
 		return view('short_term_foreign_stu');
 	});
 	
-	Route::get('/stu_foreign_research',function(){
-		return view('stu_foreign_research');
-	});
+	
 	Route::get('/stu_from_partner_school',function(){
 		return view('stu_from_partner_school');
-	});
-	Route::get('/stu_to_partner_school',function(){
-		return view('stu_to_partner_school');
 	});
 	Route::get('/transnational_degree',function(){
 		return view('transnational_degree');
