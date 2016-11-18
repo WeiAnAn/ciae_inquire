@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<h1 class="page-header">修讀正式學位之外國學生</h1>
+		<h1 class="page-header">跨國學位</h1>
 	</div>
 </div>
 <div class="row">	
