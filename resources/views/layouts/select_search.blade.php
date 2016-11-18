@@ -1,7 +1,7 @@
 
 	<div class="form-group">
 		<label for="college">單位名稱</label>
-		<select name="college" id="college_search" onchange="change(value)" class="form-control">
+		<select name="college" id="college_search" onchange="change_search(value)" class="form-control">
 			<option value="0">所有單位</option>
 			<option value="1">文學院</option>
 			<option value="2">理學院</option>
@@ -41,7 +41,7 @@
 
 	<script>
 		
-		function change(value){
+		function change_search(value){
 			var college =[`<option value="0">所有部門</option>`,
 			`
 				<option value="0">文學院</option>
