@@ -33,6 +33,10 @@ Route::group(['middleware' => 'auth'],function(){
 		return view('prof/prof_attend_conference');
 	});
 
+	Route::get('/foreign_prof_vist',function(){
+		return view('prof/foreign_prof_vist');
+	});
+
 	Route::get('/prof_exchange',function(){
 		return view('prof/prof_exchange');
 	});
@@ -41,12 +45,14 @@ Route::group(['middleware' => 'auth'],function(){
 		return view('prof/prof_foreign_research');
 	});
 
+	Route::get('/stu_attend_conf',function(){
+		return view('stu/stu_attend_conf');
+	});
+
 	Route::get('/cooperation_proj',function(){
 		return view('cooperation_proj');
 	});
-	Route::get('/foreign_prof_vist',function(){
-		return view('foreign_prof_vist');
-	});
+	
 	Route::get('/foreign_stu',function(){
 		return view('foreign_stu');
 	});
@@ -59,9 +65,7 @@ Route::group(['middleware' => 'auth'],function(){
 	Route::get('/short_term_foreign_stu',function(){
 		return view('short_term_foreign_stu');
 	});
-	Route::get('/stu_attend_conf',function(){
-		return view('stu_attend_conf');
-	});
+	
 	Route::get('/stu_foreign_research',function(){
 		return view('stu_foreign_research');
 	});
