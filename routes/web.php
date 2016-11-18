@@ -84,6 +84,9 @@ Route::group(['middleware' => 'auth'],function(){
 		return view('other/cooperation_proj');
 	});
 	
+	Route::get('internationalize_activity', function(){
+		return view('other/internationalize_activity');
+	});
 	
 	
 
