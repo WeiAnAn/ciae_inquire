@@ -71,22 +71,18 @@ Route::group(['middleware' => 'auth'],function(){
 		return view('stu/foreign_stu');
 	});
 
-	Route::get('/cooperation_proj',function(){
-		return view('cooperation_proj');
-	});
 	
 	Route::get('/transnational_degree',function(){
 		return view('other/transnational_degree');
 	});
 
 	Route::get('/partner_school',function(){
-		return view('partner_school');
+		return view('other/partner_school');
 	});
-	
-	
-	
-	
-	
+
+	Route::get('/cooperation_proj',function(){
+		return view('other/cooperation_proj');
+	});
 	
 	
 	
