@@ -63,6 +63,10 @@ Route::group(['middleware' => 'auth'],function(){
 		return view('stu/stu_from_partner_school');
 	});
 
+	Route::get('/short_term_foreign_stu',function(){
+		return view('stu/short_term_foreign_stu');
+	});
+
 	Route::get('/cooperation_proj',function(){
 		return view('cooperation_proj');
 	});
@@ -76,9 +80,7 @@ Route::group(['middleware' => 'auth'],function(){
 	
 	
 	
-	Route::get('/short_term_foreign_stu',function(){
-		return view('short_term_foreign_stu');
-	});
+	
 	
 	
 	

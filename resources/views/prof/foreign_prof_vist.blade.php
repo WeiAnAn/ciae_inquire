@@ -75,11 +75,11 @@
 								<input type="text" name="nation" class="form-control">
 							</div>
 							
-							<div class="form-group col-md-6" style="padding-left:0">
+							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 								<label for="startDate">開始時間</label>
 								<input type="date" name="startDate" class="form-control">
 							</div>
-							<div class="form-group col-md-6" style="padding-right: 0">
+							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 								<label for="endDate">結束時間</label>
 								<input type="date" name="endDate" class="form-control">
 							</div>
@@ -99,7 +99,6 @@
 				            <strong>不加入搜尋條件之選項留空即可</strong>
 				        </div>
 						<form action="{{url('foreign_prof_vist/search')}}">
-							{{ csrf_field() }}
 							@include('../layouts/select_search')
 							<div class="form-group">
 								<label for="">姓名</label>
@@ -123,11 +122,11 @@
 							<div class="form-group" style="margin-bottom: 0px">
 								<label >日期</label>
 							</div>
-							<div class="form-group col-md-6" style="padding-left:0">
+							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 								<label for="startDate">從</label>
 								<input type="date" name="startDate" class="form-control">
 							</div>
-							<div class="form-group col-md-6" style="padding-right: 0">
+							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 								<label for="endDate">到</label>
 								<input type="date" name="endDate" class="form-control">
 							</div>

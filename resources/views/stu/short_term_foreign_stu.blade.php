@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<h1 class="page-header">本校教師赴國外交換</h1>
+		<h1 class="page-header">外籍學生至本校短期交流訪問</h1>
 	</div>
 </div>
 <div class="row">	
@@ -29,7 +29,7 @@
 									<td>系所部門</td>
 									<td>姓名</td>
 									<td>身分</td>
-									<td>前往國家</td>
+									<td>國籍</td>
 									<td>開始時間</td>
 									<td>結束時間</td>
 									<td>備註</td>
@@ -53,7 +53,7 @@
 					</div>
 
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
-						<form action="{{url('prof_exchange')}}" method="post">
+						<form action="{{url('short_term_foreign_stu')}}" method="post">
 							{{ csrf_field() }}
 							@include('../layouts/select')
 							<div class="form-group">
@@ -63,16 +63,14 @@
 							<div class="form-group">
 								<label for="profLevel">身分</label>
 								<select name="profLevel" id="profLevel" class="form-control">
-									<option value="1">教授</option>
-									<option value="2">副教授</option>
-									<option value="3">助理教授</option>
-									<option value="4">博士候選人</option>
-									<option value="5">研究生</option>
+									<option value="1">博士班</option>
+									<option value="2">碩士班</option>
+									<option value="3">學士班</option>
 								</select>
 							</div>
 							<div class="form-group">
-								<label for="nation">前往國家</label>
-								<textarea name="nation" id="nation" cols="30" rows="3" class="form-control"></textarea>
+								<label for="nation">國籍</label>
+								<input type="text" name="nation" class="form-control">
 							</div>
 							
 							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
@@ -98,7 +96,7 @@
 				            </button>
 				            <strong>不加入搜尋條件之選項留空即可</strong>
 				        </div>
-						<form action="{{url('prof_exchange/search')}}">
+						<form action="{{url('short_term_foreign_stu/search')}}">
 							@include('../layouts/select_search')
 							<div class="form-group">
 								<label for="">姓名</label>
@@ -108,25 +106,23 @@
 								<label for="profLevel">身分</label>
 								<select name="profLevel" id="profLevel" class="form-control">
 									<option value=""></option>
-									<option value="1">教授</option>
-									<option value="2">副教授</option>
-									<option value="3">助理教授</option>
-									<option value="4">博士候選人</option>
-									<option value="5">研究生</option>
+									<option value="1">博士班</option>
+									<option value="2">碩士班</option>
+									<option value="3">學士班</option>
 								</select>
 							</div>
 							<div class="form-group">
-								<label for="nation">前往國家</label>
-								<textarea name="nation" id="nation" cols="30" rows="3" class="form-control"></textarea>
+								<label for="nation">國籍</label>
+								<input type="text" name="nation" class="form-control">
 							</div>
 							<div class="form-group" style="margin-bottom: 0px">
 								<label >日期</label>
 							</div>
-							<div class="form-group col-md-6" style="padding-left:0">
+							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 								<label for="startDate">從</label>
 								<input type="date" name="startDate" class="form-control">
 							</div>
-							<div class="form-group col-md-6" style="padding-right: 0">
+							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 								<label for="endDate">到</label>
 								<input type="date" name="endDate" class="form-control">
 							</div>
@@ -139,7 +135,7 @@
 					</div>
 
 					<div class="tab-pane fade in col-md-12" id="upload" style="margin-top: 10px;">
-						<form action="{{url('prof_exchange/upload')}}">
+						<form action="{{url('short_term_foreign_stu/upload')}}">
 							<input type="file" class="" style="margin: 2px">
 							<button class="btn btn-primary" style="margin: 2px">上傳</button>								
 						</form>

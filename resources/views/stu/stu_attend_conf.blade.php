@@ -56,7 +56,6 @@
 
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
 						<form action="{{url('stu_attend_conf')}}" method="post">
-							{{ csrf_field() }}
 							@include('../layouts/select')
 							<div class="form-group">
 								<label for="">姓名</label>

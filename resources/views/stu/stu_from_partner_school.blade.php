@@ -53,7 +53,7 @@
 					</div>
 
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
-						<form action="{{url('prof_exchange')}}" method="post">
+						<form action="{{url('stu_from_partner_school')}}" method="post">
 							{{ csrf_field() }}
 							@include('../layouts/select')
 							<div class="form-group">
@@ -96,8 +96,7 @@
 				            </button>
 				            <strong>不加入搜尋條件之選項留空即可</strong>
 				        </div>
-						<form action="{{url('foreign_prof_vist/search')}}">
-							{{ csrf_field() }}
+						<form action="{{url('stu_from_partner_school/search')}}">
 							@include('../layouts/select_search')
 							<div class="form-group">
 								<label for="">姓名</label>
@@ -136,7 +135,7 @@
 					</div>
 
 					<div class="tab-pane fade in col-md-12" id="upload" style="margin-top: 10px;">
-						<form action="{{url('foreign_prof_vist/upload')}}">
+						<form action="{{url('stu_from_partner_school/upload')}}">
 							<input type="file" class="" style="margin: 2px">
 							<button class="btn btn-primary" style="margin: 2px">上傳</button>								
 						</form>

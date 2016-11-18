@@ -96,7 +96,6 @@
 				            <strong>不加入搜尋條件之選項留空即可</strong>
 				        </div>
 						<form action="{{url('stu_to_partner_school/search')}}">
-							{{ csrf_field() }}
 							@include('../layouts/select_search')
 							<div class="form-group">
 								<label for="">姓名</label>

@@ -75,7 +75,6 @@
 				            <strong>不加入搜尋條件之選項留空即可</strong>
 				        </div>
 						<form action="{{url('graduate_threshold/search')}}">
-							{{ csrf_field() }}
 							@include("../layouts/select_search")
 							<div class="form-group">
 								<label for="testName">語言測驗名稱</label>
