@@ -13,6 +13,10 @@ class CollegeData extends Model
         'college', 'dept', 'chtName',
     ];
 
-
+	public static function toChtName($college, $dept){
+        return CollegeData::where('college',$college)
+                          ->where('dept',$dept)->first();
+    }
+    
     public $timestamps = false;
 }

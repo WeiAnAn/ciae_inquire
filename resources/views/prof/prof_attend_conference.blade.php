@@ -21,7 +21,7 @@
                 </li>
             </ul>
 				<div class="tab-content">
-					<div class="tab-pane fade in active " id="show" style="margin-top: 10px">
+					<div class="tab-pane fade in active table-responsive" id="show" style="margin-top: 10px">
 						<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
@@ -41,9 +41,9 @@
 								@foreach ($Pattendconference as $data)
 								<tr>
 									<td>{{$data->college}}</td>
-									<td>{{$data->dept}}</td>
-									<td>{{$data->name}}</td>
-									<td>@if($data->profLevel==1)
+									<td class="text-nowrap">{{$data->dept}}</td>
+									<td class="text-nowrap">{{$data->name}}</td>
+									<td class="text-nowrap">@if($data->profLevel==1)
 									教授
 									@elseif($data->profLevel==2)
 									副教授
@@ -56,11 +56,11 @@
 									@endif
 									</td>
 									<td>{{$data->nation}}</td>
-									<td>{{$data->confName}}</td>
-									<td>{{$data->startDate}}</td>
-									<td>{{$data->endDate}}</td>
+									<td style="max-width: 300px">{{$data->confName}}</td>
+									<td class="text-nowrap">{{$data->startDate}}</td>
+									<td class="text-nowrap">{{$data->endDate}}</td>
 									<td>{{$data->comments}}</td>
-
+									<td></td>
 								</tr>
 								@endforeach
 							</tbody>
