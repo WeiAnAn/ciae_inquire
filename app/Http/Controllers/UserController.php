@@ -12,8 +12,7 @@ class UserController extends Controller
 	public function index(Request $request){
 		
 		$user = $request->user();
-		$collegeData = CollegeData::where('college',$user->college)
-						   ->where('dept',$user->dept)->first();
+		$collegeData = CollegeData::toChtName($user->college,$user->dept);
 		// $collegeData = $college[0];
 		$data = compact('collegeData');
 		return view('user/user',$data);
