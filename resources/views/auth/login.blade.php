@@ -33,7 +33,7 @@
 </head>
 
 <body>
-   
+
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
@@ -41,11 +41,7 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">國際化調查系統</h3>
                     </div>
-                   
                     <div class="panel-body">
-                        @if($errors->has('username'))
-                        <div class="alert alert-danger" role="alert" style="padding:7px">帳號密碼錯誤</div>
-                        @endif
                         <form role="form" method="post" action="{{ url('/login') }}">
                          {{ csrf_field() }}
                             <fieldset>

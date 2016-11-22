@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\CollegeData;
+use App\User;
+use App\CollegeData;
 
 
 class UserController extends Controller

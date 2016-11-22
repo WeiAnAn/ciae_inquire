@@ -39,21 +39,24 @@
 								</tr>
 								</thead>
 								<tbody>
+								@foreach($foreignLanguageClass as $data)
 								<tr>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
-									<td>圖形識別</td>
-									<td>Pattern Recognition</td>
-									<td>林維暘</td>
-									<td>英語</td>
-									<td>123</td>
-									<td>123</td>
+									<td>{{$data->college}}</td>
+									<td>{{$data->dept}}</td>
+									<td>{{$data->year}}</td>
+									<td>{{$data->semester}}</td>
+									<td>{{$data->chtName}}</td>
+									<td>{{$data->engName}}</td>
+									<td>{{$data->teacher}}</td>
+									<td>{{$data->language}}</td>
+									<td>{{$data->totalCount}}</td>
+									<td>{{$data->nationalCount}}</td>
 									<td>123</td>
 								</tr>
+								@endforeach
 							</tbody>
 						</table>
+						{{$foreignLanguageClass->links()}}
 					</div>
 
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">

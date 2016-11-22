@@ -37,21 +37,30 @@
 								</tr>
 								</thead>
 								<tbody>
+								@foreach($foreignreseach as $data)
 								<tr>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
-									<td>Pattern Recognition</td>
-									<td>林維暘</td>
-									<td>英語</td>
-									<td>123</td>
-									<td>123</td>
+									<td>{{$data->college}}</td>
+									<td>{{$data->dept}}</td>
+									<td>{{$data->name}}</td>
+									<td>@if ($data->stuLevel==1)
+									博士生
+									@elseif ($data->stuLevel==2)
+									碩士生
+									@else
+									學士生
+									@endif
+									</td>
+									<td>{{$data->nation}}</td>
+									<td>{{$data->startDate}}</td>
+									<td>{{$data->endDate}}</td>
+									<td>{{$data->comments}}</td>
+									<td>{{$data->college}}</td>
 								</tr>
+								@endforeach
 							</tbody>
 						</table>
 					</div>
-
+					{{ $foreignreseach->links() }}
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
 						<form action="{{url('stu_foreign_research')}}" method="post">
 							{{ csrf_field() }}

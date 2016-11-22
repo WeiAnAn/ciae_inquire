@@ -228,4 +228,6 @@ return [
 
     ],
 
+    'model' => 'Model\user',
+
 ];

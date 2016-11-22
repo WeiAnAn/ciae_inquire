@@ -38,21 +38,37 @@
 								</tr>
 								</thead>
 								<tbody>
+								@foreach ($Pattendconference as $data)
 								<tr>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
-									<td>圖形識別</td>
-									<td>Pattern Recognition</td>
-									<td>林維暘</td>
-									<td>英語</td>
-									<td>123</td>
-									<td>123</td>
+									<td>{{$data->college}}</td>
+									<td>{{$data->dept}}</td>
+									<td>{{$data->name}}</td>
+									<td>@if($data->profLevel==1)
+									教授
+									@elseif($data->profLevel==2)
+									副教授
+									@elseif($data->profLevel==3)
+									助理教授
+									@elseif($data->profLevel==4)
+									準博士生
+									@else($data->profLevel==5)
+									研究生
+									@endif
+									</td>
+									<td>{{$data->nation}}</td>
+									<td>{{$data->confName}}</td>
+									<td>{{$data->startDate}}</td>
+									<td>{{$data->endDate}}</td>
+									<td>{{$data->comments}}</td>
+
 								</tr>
+								@endforeach
 							</tbody>
 						</table>
 					</div>
+
+					{{ $Pattendconference->links() }}
+
 
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
 						<form action="{{url('prof_attend_conference')}}" method="post">

@@ -34,17 +34,20 @@
 								</tr>
 								</thead>
 								<tbody>
+								@foreach ($graduateThreshold as $data)
 								<tr>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
+									<td>{{$data->college}}</td>
+									<td>{{$data->dept}}</td>
+									<td>{{$data->testName}}</td>
+									<td>{{$data->testGrade}}</td>
+									<td>{{$data->comments}}</td>
+									<td></td>
 								</tr>
+								@endforeach
 							</tbody>
 						</table>
 					</div>
+					{{ $graduateThreshold->links()}}
 
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
 						<form action="{{url('graduate_threshold')}}" method="post">

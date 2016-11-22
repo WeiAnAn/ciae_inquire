@@ -37,20 +37,25 @@
 								</tr>
 								</thead>
 								<tbody>
+								@foreach ($internationalactivity as $data)
 								<tr>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
-									<td>圖形識別</td>
-									<td>Pattern Recognition</td>
-									<td>林維暘</td>
-									<td>英語</td>
-									<td>123</td>
+									<td>{{$data->college}}</td>
+									<td>{{$data->dept}}</td>
+									<td>{{$data->activityName}}</td>
+									<td>{{$data->place}}</td>
+									<td>{{$data->host}}</td>
+									<td>{{$data->guest}}</td>
+									<td>{{$data->startDate}}</td>
+									<td>{{$data->endDate}}</td>
+									<td></td>
+
 								</tr>
+								@endforeach
 							</tbody>
 						</table>
 					</div>
+
+					{{ $internationalactivity->links() }}
 
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
 						<form action="{{url('internationalize_activity')}}" method="post">

@@ -1,6 +1,7 @@
 @extends('../layouts/master')
 
 @section('content')
+
 <div class="row">
 	<div class="col-md-12">
 		<h1 class="page-header">赴國外出席國際會議</h1>
@@ -38,22 +39,30 @@
 								</tr>
 								</thead>
 								<tbody>
+								@foreach ($conf as $data)
 								<tr>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
-									<td>圖形識別</td>
-									<td>Pattern Recognition</td>
-									<td>林維暘</td>
-									<td>英語</td>
-									<td>123</td>
-									<td>123</td>
+									<td>{{$data->college}}</td>
+									<td>{{$data->dept}}</td>
+									<td>{{$data->name}}</td>
+									<td>@if ($data->stuLevel==1)
+									博士生
+									@elseif ($data->stuLevel==2)
+									碩士生
+									@else
+									學士生
+									@endif</td>
+									<td>{{$data->nation}}</td>
+									<td>{{$data->confName}}</td>
+									<td>{{$data->startDate}}</td>
+									<td>{{$data->endDate}}</td>
+									<td>{{$data->comments}}</td>
+									<td>{{$data->dept}}</td>								
 								</tr>
+								@endforeach
 							</tbody>
 						</table>
 					</div>
-
+					{{ $conf->links() }}
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
 						<form action="{{url('stu_attend_conf')}}" method="post">
 							@include('../layouts/select')
