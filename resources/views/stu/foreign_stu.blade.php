@@ -39,23 +39,31 @@
 								</tr>
 								</thead>
 								<tbody>
+								@foreach($foreignStu as $data)
 								<tr>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
-									<td>圖形識別</td>
-									<td>Pattern Recognition</td>
-									<td>林維暘</td>
-									<td>英語</td>
-									<td>123</td>
+									<td>{{$data->college}}</td>
+									<td>{{$data->dept}}</td>
+									<td>{{$data->stuLevel}}</td>
+									<td>{{$data->chtName}}</td>
+									<td>{{$data->engName}}</td>									
+									<td>@if ($data->stuID==1)
+									博士生
+									@elseif ($data->stuID==2)
+									碩士生
+									@else
+									學士生
+									@endif
+									</td>
+									<td>{{$data->nation}}</td>
+									<td>{{$data->startDate}}</td>
+									<td>{{$data->endDate}}</td>
+									<td>{{$data->comments}}</td>
 								</tr>
+								@endforeach
 							</tbody>
 						</table>
 					</div>
-
+					{{ $foreignStu->links() }}
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
 						<form action="{{url('foreign_stu')}}" method="post">
 							{{ csrf_field() }}

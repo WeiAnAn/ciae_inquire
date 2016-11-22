@@ -30,6 +30,7 @@
 									<td>主持人</td>
 									<td>合作機構</td>
 									<td>計畫名稱</td>
+									<td>計畫內容</td>
 									<td>開始時間</td>
 									<td>結束時間</td>
 									<td>備註</td>
@@ -37,20 +38,24 @@
 								</tr>
 								</thead>
 								<tbody>
+								@foreach ($cooperationproj as $data)
 								<tr>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
-									<td>圖形識別</td>
-									<td>Pattern Recognition</td>
-									<td>林維暘</td>
-									<td>英語</td>
-									<td>123</td>
+									<td>{{$data->college}}</td>
+									<td>{{$data->dept}}</td>
+									<td>{{$data->name}}</td>
+									<td>{{$data->projOrg}}</td>
+									<td>{{$data->projName}}</td>
+									<td>{{$data->projContent}}</td>
+									<td>{{$data->startDate}}</td>
+									<td>{{$data->endDate}}</td>
+									<td>{{$data->comments}}</td>
+									<td></td>
 								</tr>
+								@endforeach
 							</tbody>
 						</table>
 					</div>
+					{{ $cooperationproj->links() }}
 
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
 						<form action="{{url('cooperation_proj')}}" method="post">

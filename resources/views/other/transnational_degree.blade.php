@@ -40,24 +40,26 @@
 								</tr>
 								</thead>
 								<tbody>
+								@foreach($transnational as $data)
 								<tr>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
-									<td>123</td>
-									<td>圖形識別</td>
-									<td>Pattern Recognition</td>
-									<td>林維暘</td>
-									<td>英語</td>
-									<td>123</td>
+									<td>{{$data->college}}</td>
+									<td>{{$data->dept}}</td>
+									<td>{{$data->nation}}</td>
+									<td>{{$data->chtName}}</td>
+									<td>{{$data->engName}}</td>
+									<td>{{$data->bachelor}}</td>
+									<td>{{$data->master}}</td>
+									<td>{{$data->PHD}}</td>
+									<td>{{$data->classMode}}</td>
+									<td>{{$data->degreeMode}}</td>
+									<td>{{$data->comments}}</td>
+									<td></td>								
 								</tr>
+								@endforeach
 							</tbody>
 						</table>
 					</div>
-
+					{{ $transnational->links() }}
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
 						<form action="{{url('transnational_degree')}}" method="post">
 							{{ csrf_field() }}
