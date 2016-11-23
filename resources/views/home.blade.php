@@ -10,7 +10,7 @@
 	<div class="col-md-6">
 		<div class="list-group">
 			<li class="list-group-item list-group-item-success">
-				基本資料
+				基本資料 
 			</li>
 			<a href="{{URL('/user')}}" class="list-group-item">單位資料修改</a>
 			<a href="{{URL('/graduate_threshold')}}" class="list-group-item">英檢畢業門檻</a>
