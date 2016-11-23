@@ -36,8 +36,8 @@
 								<tbody>
 								@foreach ($graduateThreshold as $data)
 								<tr>
-									<td>{{$data->college}}</td>
-									<td>{{$data->chtName}}</td>
+									<td>{{$data->chtCollege}}</td>
+									<td>{{$data->chtDept}}</td>
 									<td>{{$data->testName}}</td>
 									<td>{{$data->testGrade}}</td>
 									<td>{{$data->comments}}</td>
