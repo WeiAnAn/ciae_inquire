@@ -36,18 +36,34 @@
 								<tbody>
 								@foreach ($graduateThreshold as $data)
 								<tr>
-									<td>{{$data->chtCollege}}</td>
-									<td>{{$data->chtDept}}</td>
-									<td>{{$data->testName}}</td>
+									<td class="text-nowrap">{{$data->chtCollege}}</td>
+									<td class="text-nowrap">{{$data->chtDept}}</td>
+									<td class="text-nowrap">{{$data->testName}}</td>
 									<td>{{$data->testGrade}}</td>
 									<td>{{$data->comments}}</td>
-									<td></td>
+									<td class="text-nowrap">
+										@if((Auth::user()->permission < 2 )|| 
+											(Auth::user()->permission == 2 && 
+											Auth::user()->college == $data->college) ||
+											(Auth::user()->permission == 3 &&
+											Auth::user()->college == $data->college &&
+											Auth::user()->dept == $data->dept))
+										<a href="{{url('graduate_threshold',$data->id)}}"
+											class="glyphicon glyphicon-pencil	
+											btn btn-success btn-xs"></a>
+										<form action="{{url('graduate_threshold',$data->id)}}"
+											method="delete" style="display: inline;">
+											<button class="glyphicon glyphicon-trash	
+												btn btn-danger btn-xs"></button>
+										</form>
+										@endif
+									</td>
 								</tr>
 								@endforeach
 							</tbody>
 						</table>
+						{{ $graduateThreshold->links()}}
 					</div>
-					{{ $graduateThreshold->links()}}
 
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
 						<form action="{{url('graduate_threshold')}}" method="post">

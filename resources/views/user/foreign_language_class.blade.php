@@ -51,7 +51,23 @@
 									<td>{{$data->language}}</td>
 									<td>{{$data->totalCount}}</td>
 									<td>{{$data->nationalCount}}</td>
-									<td>123</td>
+									<td>
+										@if((Auth::user()->permission < 2 )|| 
+											(Auth::user()->permission == 2 && 
+											Auth::user()->college == $data->college) ||
+											(Auth::user()->permission == 3 &&
+											Auth::user()->college == $data->college &&
+											Auth::user()->dept == $data->dept))
+										<a href="{{url('foreign_language_class',$data->id)}}"
+											class="glyphicon glyphicon-pencil	
+											btn btn-success btn-xs"></a>
+										<form action="{{url('foreign_language_class',$data->id)}}"
+											method="delete" style="display: inline;">
+											<button class="glyphicon glyphicon-trash	
+												btn btn-danger btn-xs"></button>
+										</form>
+										@endif
+									</td>
 								</tr>
 								@endforeach
 							</tbody>
