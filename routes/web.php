@@ -31,12 +31,11 @@ Route::group(['middleware' => 'auth'],function(){
 	//教師、研究員專區
 
 	Route::get('/prof_attend_conference',['uses'=>'prof\ProfAttendConferenceController@index']);
-	Route::post('prof_attend_conference',['uses' =>'prof\ProfAttendConferenceController@insert']);
-	
+
 	Route::get('/foreign_prof_vist',['uses'=>'prof\ForeignProfVistController@index']);
 
 	Route::get('/prof_exchange',['uses'=>'prof\ProfExchangeController@index']);
-	
+
 	Route::get('/prof_foreign_research',['uses'=>'prof\ProfForeignResearchController@index']);
 
 	//學生專區
