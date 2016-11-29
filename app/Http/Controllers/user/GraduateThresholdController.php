@@ -5,6 +5,7 @@ namespace App\Http\Controllers\user;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\GraduateThreshold;
+use Illuminate\Support\Facades\Auth;
 
 class GraduateThresholdController extends Controller
 {
@@ -15,9 +16,34 @@ class GraduateThresholdController extends Controller
     		$join->on('graduate_threshold.college','college_data.college');
     		$join->on('graduate_threshold.dept','college_data.dept');
     	})->paginate(20);
-    	
-    	$data=compact('graduateThreshold');
+        $user = Auth::user();
+
+    	$data=compact('graduateThreshold','user');
     	return view ('user/graduate_threshold',$data);
 
+    }
+
+    public function edit($id, Request $request){
+        $graduateThreshold = GraduateThreshold::find($id);
+        $user = Auth::user();
+        if(($user->permission < 2 )|| 
+            ($user->permission == 2 && $user->college == $graduateThreshold->college) ||
+            ($user->permission == 3 && $user->college == $graduateThreshold->college && 
+            $user->dept == $graduateThreshold->dept)){
+            
+            return view('user/graduate_threshold_edit',$graduateThreshold);
+        }
+        return redirect('graduate_threshold');
+    }
+
+    public function update($id,Request $request){
+        $graduateThreshold = GraduateThreshold::find($request->id);
+        $this->validate($request,[
+            'testName' => 'required|max:200',
+            'testGrade' => 'required|max:200',
+            'comments' => 'max:500',
+            ]);
+        $graduateThreshold->update($request->all());
+        return redirect('graduate_threshold');
     }
 }
