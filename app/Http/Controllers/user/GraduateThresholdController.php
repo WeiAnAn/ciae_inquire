@@ -51,6 +51,32 @@ class GraduateThresholdController extends Controller
         $graduateThreshold->delete();
         return redirect('graduate_threshold');
     }
+    public function search(Request $request){
+        $graduateThreshold = GraduateThreshold::join('college_data',function($join){
+                $join->on('graduate_threshold.college','college_data.college');
+                $join->on('graduate_threshold.dept','college_data.dept');
+            });
+        if($request->college != 0)
+            $graduateThreshold = $graduateThreshold
+                ->where('graduate_threshold.college',$request->college);
+        if($request->dept != 0)
+            $graduateThreshold = $graduateThreshold
+                ->where('graduate_threshold.dept',$request->dept);
+        if($request->testName != "")
+            $graduateThreshold = $graduateThreshold
+                ->where('testName',"like","%$request->testName%");
+        if($request->testGrade != "")
+            $graduateThreshold = $graduateThreshold
+                ->where('testGrade',"like","%$request->testGrade%");
+        if($request->comments != "")
+            $graduateThreshold = $graduateThreshold
+                ->where('comments',"like","%$request->comments%");
+                
+        $graduateThreshold = $graduateThreshold->paginate(20);
+        $user = Auth::user();
+        $data = compact('graduateThreshold','user');
+        return view('user/graduate_threshold',$data);
+    }
     public function permission(GraduateThreshold $graduateThreshold){
         $user = Auth::user();
         if(($user->permission < 2 )|| 
@@ -60,4 +86,5 @@ class GraduateThresholdController extends Controller
             return true;
         return false;
     }
+
 }

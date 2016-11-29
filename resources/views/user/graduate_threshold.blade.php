@@ -3,7 +3,9 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<h1 class="page-header">英檢畢業門檻</h1>
+		<a href="{{url('graduate_threshold')}}" style="color: black">
+			<h1 class="page-header">英檢畢業門檻</h1>
+		</a>
 	</div>
 </div>
 <div class="row">	
@@ -42,12 +44,12 @@
 									<td>{{$data->testGrade}}</td>
 									<td>{{$data->comments}}</td>
 									<td class="text-nowrap">
-										@if((Auth::user()->permission < 2 )|| 
-											(Auth::user()->permission == 2 && 
-											Auth::user()->college == $data->college) ||
-											(Auth::user()->permission == 3 &&
-											Auth::user()->college == $data->college &&
-											Auth::user()->dept == $data->dept))
+										@if(($user->permission < 2 )|| 
+											($user->permission == 2 && 
+											$user->college == $data->college) ||
+											($user->permission == 3 &&
+											$user->college == $data->college &&
+											$user->dept == $data->dept))
 										<a href="{{url('graduate_threshold',$data->id)}}"
 											class="glyphicon glyphicon-pencil	
 											btn btn-success btn-xs"></a>
@@ -96,7 +98,7 @@
 				            </button>
 				            <strong>不加入搜尋條件之選項留空即可</strong>
 				        </div>
-						<form action="{{url('graduate_threshold/search')}}">
+						<form action="{{url('graduate_threshold/search')}}" method="get">
 							@include("../layouts/select_search")
 							<div class="form-group">
 								<label for="testName">語言測驗名稱</label>
