@@ -24,6 +24,7 @@ Route::group(['middleware' => 'auth'],function(){
 	Route::get('/graduate_threshold',['uses'=>'user\GraduateThresholdController@index']);
 	Route::get('/graduate_threshold/{id}',['uses'=>'user\GraduateThresholdController@edit']);
 	Route::patch('/graduate_threshold/{id}',['uses'=>'user\GraduateThresholdController@update']);
+	Route::delete('/graduate_threshold/{id}',['uses'=>'user\GraduateThresholdController@delete']);
 
 	Route::get('/foreign_language_class',['uses'=>'user\ForeignLanguageClassController@index']);
 	Route::post('/foreign_language_class',['uses' => 'ForeignLanguageClassController@insert']);

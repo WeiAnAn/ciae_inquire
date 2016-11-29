@@ -35,7 +35,7 @@
 								</thead>
 								<tbody>
 								@foreach ($graduateThreshold as $data)
-								<tr>
+								<tr id="{{$data->id}}">
 									<td class="text-nowrap">{{$data->chtCollege}}</td>
 									<td class="text-nowrap">{{$data->chtDept}}</td>
 									<td class="text-nowrap">{{$data->testName}}</td>
@@ -52,9 +52,12 @@
 											class="glyphicon glyphicon-pencil	
 											btn btn-success btn-xs"></a>
 										<form action="{{url('graduate_threshold',$data->id)}}"
-											method="delete" style="display: inline;">
+											method="post" style="display: inline;">
+											{{ method_field('DELETE') }}
+                        					{{ csrf_field() }}
 											<button class="glyphicon glyphicon-trash	
-												btn btn-danger btn-xs"></button>
+												btn btn-danger btn-xs" 
+												onclick="clickDel(event)"></button>
 										</form>
 										@endif
 									</td>
