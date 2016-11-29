@@ -38,6 +38,7 @@
                        
 
     					<form role="form" action="{{url('/user')}}" method="post">
+                        {{ method_field('PATCH') }}
                         {{ csrf_field() }}
                             <input type="text" hidden name="id" value="{{Auth::user()->id}}">
 
