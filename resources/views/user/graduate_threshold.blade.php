@@ -57,7 +57,7 @@
 											method="post" style="display: inline;">
 											{{ method_field('DELETE') }}
                         					{{ csrf_field() }}
-											<button class="glyphicon glyphicon-trash	
+											<button class="glyphicon glyphicon-trash
 												btn btn-danger btn-xs" 
 												onclick="clickDel(event)"></button>
 										</form>
