@@ -21,7 +21,13 @@
                 </li>
             </ul>
 				<div class="tab-content">
-					<div class="tab-pane fade in active table-responsive" id="show" style="margin-top: 10px">
+					@if(count($errors)>0)
+						<div class="tab-pane fade in table-responsive" id="show" 
+							style="margin-top: 10px">
+					@else
+						<div class="tab-pane fade in active table-responsive" id="show" 
+							style="margin-top: 10px">
+					@endif
 						<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
@@ -65,12 +71,17 @@
 								@endforeach
 							</tbody>
 						</table>
+						{{ $Pattendconference->links() }}
 					</div>
 
-					{{ $Pattendconference->links() }}
 
-
-					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
+					@if(count($errors)>0)
+						<div class="tab-pane fade in col-md-12 active " id="insert" 
+							style="margin-top: 10px">
+					@else
+						<div class="tab-pane fade in col-md-12 " id="insert" 
+							style="margin-top: 10px">
+					@endif
 						<form action="{{url('prof_attend_conference')}}" method="post">
 							{{ csrf_field() }}
 							@include('../layouts/select')
