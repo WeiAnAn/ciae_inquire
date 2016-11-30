@@ -10,7 +10,10 @@ class ForeignStuController extends Controller
 {
     //
     public function index(){
-    	$foreignStu = ForeignStu::paginate(20);
+    	$foreignStu = ForeignStu::join('college_data',function($join){
+    		$join->on('foreign_stu.college','college_data.college');
+    		$join->on('foreign_stu.dept','college_data.dept');
+    		})->paginate(20);
     	$data = compact('foreignStu');
     	return view ('stu/foreign_stu',$data);
 

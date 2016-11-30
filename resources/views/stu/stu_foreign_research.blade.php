@@ -39,8 +39,8 @@
 								<tbody>
 								@foreach($foreignreseach as $data)
 								<tr>
-									<td>{{$data->college}}</td>
-									<td>{{$data->dept}}</td>
+									<td>{{$data->chtCollege}}</td>
+									<td>{{$data->chtDept}}</td>
 									<td>{{$data->name}}</td>
 									<td>@if ($data->stuLevel==1)
 									博士生

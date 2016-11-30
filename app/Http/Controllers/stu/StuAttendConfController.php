@@ -8,8 +8,10 @@ class StuAttendConfController extends Controller
 {
     //
     public function index (){
-    	$conf = StuAttendConf::paginate(20);
-
+    	$conf = StuAttendConf::join('college_data',function($join){
+    		$join->on('stu_attend_conf.college','college_data.college');
+    		$join->on('stu_attend_conf.dept','college_data.dept');
+    		})->paginate(20);
     	$data=compact('conf');
     	return view ('stu/stu_attend_conf',$data);
 

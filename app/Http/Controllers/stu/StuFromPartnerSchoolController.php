@@ -9,7 +9,10 @@ class StuFromPartnerSchoolController extends Controller
 {
     //
     public function index(){
-		$frompartnerdata = StuFromPartnerSchool::paginate(20);
+		$frompartnerdata = StuFromPartnerSchool::join('college_data',function($join){
+    		$join->on('stu_from_partner_school.college','college_data.college');
+    		$join->on('stu_from_partner_school.dept','college_data.dept');
+    		})->paginate(20);
 		$data = compact('frompartnerdata');
 		return view('stu/stu_from_partner_school',$data);
 	}

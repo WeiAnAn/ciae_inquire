@@ -41,12 +41,12 @@
 								<tbody>
 								@foreach($foreignStu as $data)
 								<tr>
-									<td>{{$data->college}}</td>
-									<td>{{$data->dept}}</td>
-									<td>{{$data->stuLevel}}</td>
-									<td>{{$data->chtName}}</td>
-									<td>{{$data->engName}}</td>									
-									<td>@if ($data->stuID==1)
+								<td class="text-nowrap">{{$data->chtCollege}}</td>
+								<td class="text-nowrap">{{$data->chtDept}}</td>
+								<td class="text-nowrap">{{$data->stuLevel}}</td>
+								<td class="text-nowrap">{{$data->chtName}}</td>
+								<td class="text-nowrap">{{$data->engName}}</td>									
+									<td class="text-nowrap">@if ($data->stuID==1)
 									博士生
 									@elseif ($data->stuID==2)
 									碩士生
@@ -54,10 +54,10 @@
 									學士生
 									@endif
 									</td>
-									<td>{{$data->nation}}</td>
-									<td>{{$data->startDate}}</td>
-									<td>{{$data->endDate}}</td>
-									<td>{{$data->comments}}</td>
+								<td class="text-nowrap">{{$data->nation}}</td>
+								<td class="text-nowrap">{{$data->startDate}}</td>
+								<td class="text-nowrap">{{$data->endDate}}</td>
+								<td class="text-nowrap">{{$data->comments}}</td>
 								</tr>
 								@endforeach
 							</tbody>
