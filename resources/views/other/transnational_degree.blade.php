@@ -42,8 +42,8 @@
 								<tbody>
 								@foreach($transnational as $data)
 								<tr>
-									<td>{{$data->college}}</td>
-									<td>{{$data->dept}}</td>
+									<td>{{$data->chtCollege}}</td>
+									<td>{{$data->chtDept}}</td>
 									<td>{{$data->nation}}</td>
 									<td>{{$data->chtName}}</td>
 									<td>{{$data->engName}}</td>
