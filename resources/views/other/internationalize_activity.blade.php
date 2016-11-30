@@ -39,8 +39,8 @@
 								<tbody>
 								@foreach ($internationalactivity as $data)
 								<tr>
-									<td>{{$data->college}}</td>
-									<td>{{$data->dept}}</td>
+									<td>{{$data->chtCollege}}</td>
+									<td>{{$data->chtDept}}</td>
 									<td>{{$data->activityName}}</td>
 									<td>{{$data->place}}</td>
 									<td>{{$data->host}}</td>

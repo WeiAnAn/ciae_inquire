@@ -39,15 +39,15 @@
 								<tbody>
 								@foreach ($partner as $data)
 								<tr>
-									<td>{{$data->college}}</td>
-									<td>{{$data->dept}}</td>
+									<td>{{$data->chtCollege}}</td>
+									<td>{{$data->chtDept}}</td>
 									<td>{{$data->nation}}</td>
 									<td>{{$data->chtName}}</td>
 									<td>{{$data->enName}}</td>
 									<td>{{$data->startDate}}</td>
 									<td>{{$data->endDate}}</td>
 									<td>{{$data->comments}}</td>
-									<td>{{$data->college}}</td>
+									<td>{{$data->chtCollege}}</td>
 								</tr>
 								@endforeach
 							</tbody>
