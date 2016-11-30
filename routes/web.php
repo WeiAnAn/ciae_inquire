@@ -23,7 +23,7 @@ Route::group(['middleware' => 'auth'],function(){
 	Route::patch('/user',['uses'=>'UserController@update']);
 	Route::get('/user',['uses'=>'UserController@index']);
 
-		//英檢畢業門檻
+		//英檢畢業門檻 test
 	
 	Route::get('/graduate_threshold',['uses'=>'user\GraduateThresholdController@index']);
 	Route::post('/graduate_threshold',['uses'=>'user\GraduateThresholdController@insert']);
