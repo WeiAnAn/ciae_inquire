@@ -64,7 +64,7 @@ class GraduateThresholdController extends Controller
         if($request->dept != 0)
             $graduateThreshold = $graduateThreshold
                 ->where('graduate_threshold.dept',$request->dept);
-        if($request->testName != "")
+        if($request->semester != "")
             $graduateThreshold = $graduateThreshold
                 ->where('testName',"like","%$request->testName%");
         if($request->testGrade != "")

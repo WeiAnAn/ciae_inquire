@@ -40,7 +40,7 @@
 								</thead>
 								<tbody>
 								@foreach($foreignLanguageClass as $data)
-								<tr>
+								<tr id="{{$data->id}}">
 									<td class="text-nowrap">{{$data->chtCollege}}</td>
 									<td class="text-nowrap">{{$data->chtDept}}</td>
 									<td>{{$data->year}}</td>
@@ -52,17 +52,18 @@
 									<td>{{$data->totalCount}}</td>
 									<td>{{$data->nationalCount}}</td>
 									<td class="text-nowrap">
-										@if((Auth::user()->permission < 2 )|| 
-											(Auth::user()->permission == 2 && 
-											Auth::user()->college == $data->college) ||
-											(Auth::user()->permission == 3 &&
-											Auth::user()->college == $data->college &&
-											Auth::user()->dept == $data->dept))
+										@if(($user->permission < 2 )|| 
+											($user->permission == 2 && 
+											$user->college == $data->college) ||
+											($user->permission == 3 &&
+											$user->college == $data->college &&
+											$user->dept == $data->dept))
 										<a href="{{url('foreign_language_class',$data->id)}}"
-											class="glyphicon glyphicon-pencil	
-											btn btn-success btn-xs"></a>
+									class="glyphicon glyphicon-pencil btn btn-success btn-xs"></a>
 										<form action="{{url('foreign_language_class',$data->id)}}"
-											method="delete" style="display: inline;">
+											method="post" style="display: inline;">
+											{{ method_field('DELETE') }}
+                        					{{ csrf_field() }}
 											<button class="glyphicon glyphicon-trash	
 												btn btn-danger btn-xs"></button>
 										</form>
@@ -141,7 +142,7 @@
 							</div>
 							<div class="form-group">
 								<label for="engName">課程英文名稱</label>
-								<input type="text" name="teacher" class="form-control">
+								<input type="text" name="engName" class="form-control">
 							</div>
 							<div class="form-group">
 								<label for="teacher">授課教師</label>
@@ -150,7 +151,7 @@
 							<div class="form-group">
 								<label for="totalCount">總人數</label>
 								<input type="number" name="totalCount" class="form-control">
-							</div>
+							</div>							
 							<div class="form-group">
 								<label for="nationalCount">外籍生人數</label>
 								<input type="number" name="nationalCount" class="form-control">
