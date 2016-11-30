@@ -15,7 +15,8 @@ class GraduateThresholdController extends Controller
     	$graduateThreshold = GraduateThreshold::join('college_data',function($join){
     		$join->on('graduate_threshold.college','college_data.college');
     		$join->on('graduate_threshold.dept','college_data.dept');
-    	})->paginate(20);
+    	})->orderBy('id','desc')
+            ->paginate(20);
         $user = Auth::user();
 
     	$data=compact('graduateThreshold','user');
@@ -72,7 +73,8 @@ class GraduateThresholdController extends Controller
         if($request->comments != "")
             $graduateThreshold = $graduateThreshold
                 ->where('comments',"like","%$request->comments%");
-        $graduateThreshold = $graduateThreshold->paginate(20);
+        $graduateThreshold = $graduateThreshold->orderBy('id','desc')
+            ->paginate(20);
         $user = Auth::user();
         $data = compact('graduateThreshold','user');
         return view('user/graduate_threshold',$data);
