@@ -64,9 +64,10 @@
 								@endforeach
 							</tbody>
 						</table>
-					</div>
-					{{ $Pforeignresearch ->links()}}
+						{{ $Pforeignresearch ->links()}}
 
+					</div>
+					
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
 						<form action="{{url('prof_foreign_research')}}" method="post">
 							{{ csrf_field() }}

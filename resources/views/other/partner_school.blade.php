@@ -52,9 +52,10 @@
 								@endforeach
 							</tbody>
 						</table>
-					</div>
+					
 					{{ $partner->links() }}
-
+	
+					</div>
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
 						<form action="{{url('partner_school')}}" method="post">
 							{{ csrf_field() }}

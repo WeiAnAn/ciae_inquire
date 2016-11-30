@@ -64,8 +64,9 @@
 
 							</tbody>
 						</table>
+					
+					{{ $frompartnerdata->links() }}	
 					</div>
-					{{ $frompartnerdata->links() }}
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
 						<form action="{{url('stu_from_partner_school')}}" method="post">
 							{{ csrf_field() }}

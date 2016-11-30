@@ -61,8 +61,9 @@
 								@endforeach
 							</tbody>
 						</table>
+					{{ $conf->links() }}	
 					</div>
-					{{ $conf->links() }}
+					
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
 						<form action="{{url('stu_attend_conf')}}" method="post">
 							@include('../layouts/select')

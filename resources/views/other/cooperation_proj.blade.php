@@ -54,8 +54,9 @@
 								@endforeach
 							</tbody>
 						</table>
+					{{ $cooperationproj->links() }}	
 					</div>
-					{{ $cooperationproj->links() }}
+					
 
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
 						<form action="{{url('cooperation_proj')}}" method="post">

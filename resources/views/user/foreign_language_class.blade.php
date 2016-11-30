@@ -41,17 +41,17 @@
 								<tbody>
 								@foreach($foreignLanguageClass as $data)
 								<tr>
-									<td>{{$data->college}}</td>
-									<td>{{$data->dept}}</td>
+									<td class="text-nowrap">{{$data->chtCollege}}</td>
+									<td class="text-nowrap">{{$data->chtDept}}</td>
 									<td>{{$data->year}}</td>
 									<td>{{$data->semester}}</td>
-									<td>{{$data->chtName}}</td>
+									<td class="text-nowrap">{{$data->chtName}}</td>
 									<td>{{$data->engName}}</td>
-									<td>{{$data->teacher}}</td>
-									<td>{{$data->language}}</td>
+									<td class="text-nowrap">{{$data->teacher}}</td>
+									<td class="text-nowrap">{{$data->language}}</td>
 									<td>{{$data->totalCount}}</td>
 									<td>{{$data->nationalCount}}</td>
-									<td>
+									<td class="text-nowrap">
 										@if((Auth::user()->permission < 2 )|| 
 											(Auth::user()->permission == 2 && 
 											Auth::user()->college == $data->college) ||

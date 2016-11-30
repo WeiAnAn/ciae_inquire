@@ -62,8 +62,9 @@
 								@endforeach
 							</tbody>
 						</table>
+						{{ $foreignPvist -> links()}}
 					</div>
-					{{ $foreignPvist -> links()}}
+					
 
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
 						<form action="{{url('prof_exchange')}}" method="post">
