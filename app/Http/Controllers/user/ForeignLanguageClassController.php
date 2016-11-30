@@ -57,15 +57,29 @@ class ForeignLanguageClassController extends Controller
         if($request->dept != 0)
             $foreignLanguageClass = $foreignLanguageClass
                 ->where('foreign_language_class.dept',$request->dept);
-        if($request->testName != "")
+        if($request->year != "")
             $foreignLanguageClass = $foreignLanguageClass
-                ->where('testName',"like","%$request->testName%");
-        if($request->testGrade != "")
+                ->where('foreign_language_class.year',$request->year);
+        if($request->semester != "")
             $foreignLanguageClass = $foreignLanguageClass
-                ->where('testGrade',"like","%$request->testGrade%");
-        if($request->comments != "")
+                ->where('foreign_language_class.semester',$request->semester);
+        if($request->chtName != "")
             $foreignLanguageClass = $foreignLanguageClass
-                ->where('comments',"like","%$request->comments%");
+                ->where('chtName',"like","%$request->chtName%");
+        if($request->engName != "")
+            $foreignLanguageClass = $foreignLanguageClass
+                ->where('engName',"like","%$request->engName%");
+        if($request->teacher != "")
+            $foreignLanguageClass = $foreignLanguageClass
+                ->where('teacher',"like","%$request->teacher%");
+        if($request->totalCount !="")
+            $foreignLanguageClass = $foreignLanguageClass
+                ->where('foreign_language_class.totalCount',$request->totalCount);
+        if($request->nationalCount !="")
+            $foreignLanguageClass = $foreignLanguageClass
+                ->where('foreign_language_class.nationalCount',$request->nationalCount);        
+
+
         $foreignLanguageClass = $foreignLanguageClass->orderBy('id','desc')
             ->paginate(20);
         $user = Auth::user();
