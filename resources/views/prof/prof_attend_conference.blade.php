@@ -11,15 +11,22 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 			<ul class="nav nav-tabs">
-                <li class="active"><a href="#show" data-toggle="tab">檢視</a>
-                </li>
-                <li><a href="#insert" data-toggle="tab">新增</a>
-                </li>
-                <li><a href="#search" data-toggle="tab">進階搜尋</a>
-                </li>
-                <li><a href="#upload" data-toggle="tab">批次上傳</a>
-                </li>
-            </ul>
+				@if(count($errors)>0)
+	                <li><a href="#show" data-toggle="tab">檢視</a>
+	                </li>
+	                <li class="active"><a href="#insert" data-toggle="tab">新增</a>
+	                </li>
+				@else
+	                <li class="active"><a href="#show" data-toggle="tab">檢視</a>
+	                </li>
+	                <li><a href="#insert" data-toggle="tab">新增</a>
+	                </li>
+	            @endif    
+	                <li><a href="#search" data-toggle="tab">進階搜尋</a>
+	                </li>
+	                <li><a href="#upload" data-toggle="tab">批次上傳</a>
+	                </li>
+	        </ul>
 				<div class="tab-content">
 					@if(count($errors)>0)
 						<div class="tab-pane fade in table-responsive" id="show" 
@@ -85,40 +92,56 @@
 						<form action="{{url('prof_attend_conference')}}" method="post">
 							{{ csrf_field() }}
 							@include('../layouts/select')
-							<div class="form-group">
-								<label for="">姓名</label>
-								<input type="text" class="form-control" name="name" />
-							</div>
-							<div class="form-group">
-								<label for="profLevel">身分</label>
-								<select name="profLevel" id="profLevel" class="form-control">
-									<option value="1">教授</option>
-									<option value="2">副教授</option>
-									<option value="3">助理教授</option>
-									<option value="4">博士候選人</option>
-									<option value="5">研究生</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label for="nation">前往國家</label>
-								<input type="text" name="nation" class="form-control">
-							</div>
-							<div class="form-group">
-								<label for="confName">會議名稱</label>
-								<textarea name="confName" id="confName" cols="30" rows="3" class="form-control"></textarea>
-							</div>
-							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
-								<label for="startDate">開始時間</label>
-								<input type="date" name="startDate" class="form-control">
-							</div>
-							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
-								<label for="endDate">結束時間</label>
-								<input type="date" name="endDate" class="form-control">
-							</div>
-							<div class="form-group">
-								<label for="comments">備註</label>
-								<textarea name="comments" id="comments" cols="30" rows="3" class="form-control"></textarea>
-							</div>
+							@if($errors->has('name'))
+                                <p class="text-danger">{{$errors->first('name')}}</p>
+                            @endif
+								<div class="form-group">
+									<label for="">姓名</label>
+									<input type="text" class="form-control" name="name" />
+								</div>
+								<div class="form-group">
+									<label for="profLevel">身分</label>
+									<select name="profLevel" id="profLevel" class="form-control">
+										<option value="1">教授</option>
+										<option value="2">副教授</option>
+										<option value="3">助理教授</option>
+										<option value="4">博士候選人</option>
+										<option value="5">研究生</option>
+									</select>
+								</div>
+							@if($errors->has('nation'))
+                                <p class="text-danger">{{$errors->first('nation')}}</p>
+                            @endif
+								<div class="form-group">
+									<label for="nation">前往國家</label>
+									<input type="text" name="nation" class="form-control">
+								</div>
+							@if($errors->has('confName'))
+                                <p class="text-danger">{{$errors->first('confName')}}</p>
+                            @endif
+								<div class="form-group">
+									<label for="confName">會議名稱</label>
+									<textarea name="confName" id="confName" cols="30" rows="3" class="form-control"></textarea>
+								</div>
+							@if($errors->has('startDate')||$errors->has('endDate'))
+                                <p class="text-danger">{{ $errors->first('startDate')}}</p>                      
+                                <p class="text-danger">{{ $errors->first('endDate')}}</p>
+                            @endif
+								<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
+									<label for="startDate">開始時間</label>
+									<input type="date" name="startDate" class="form-control">
+								</div>
+								<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
+									<label for="endDate">結束時間</label>
+									<input type="date" name="endDate" class="form-control">
+								</div>
+							@if($errors->has('comments'))
+                                <p class="text-danger">{{ $errors->first('comments')}}</p>
+                            @endif
+								<div class="form-group">
+									<label for="comments">備註</label>
+									<textarea name="comments" id="comments" cols="30" rows="3" class="form-control"></textarea>
+								</div>
 							<button class="btn btn-success">新增</button>
 						</form>
 					</div>
