@@ -58,8 +58,9 @@
 								@endforeach
 							</tbody>
 						</table>
+					
+					{{ $transnational->links() }}	
 					</div>
-					{{ $transnational->links() }}
 					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
 						<form action="{{url('transnational_degree')}}" method="post">
 							{{ csrf_field() }}

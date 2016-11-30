@@ -29,7 +29,11 @@ Route::group(['middleware' => 'auth'],function(){
 
 	Route::get('/foreign_language_class',['uses'=>'user\ForeignLanguageClassController@index']);
 	Route::post('/foreign_language_class',['uses' => 'ForeignLanguageClassController@insert']);
-	Route::get('/foreign_language_class/search',['uses' => 'ForeignLanguageClassController@search']);
+	Route::get('/foreign_language_class/search',['uses' => 'user\ForeignLanguageClassController@search']);
+	Route::get('/graduate_threshold/{id}',['uses'=>'user\GraduateThresholdController@edit']);
+	Route::patch('/graduate_threshold/{id}',['uses'=>'user\GraduateThresholdController@update']);
+	Route::delete('/graduate_threshold/{id}',['uses'=>'user\GraduateThresholdController@delete']);
+
 	// Route::delete('foreign_language_class/{id}',function(){return view()})
 
 	//教師、研究員專區
