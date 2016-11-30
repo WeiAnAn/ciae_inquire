@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<h1 class="page-header">本校教師赴國外交換</h1>
+		<h1 class="page-header">外籍學者蒞校訪問</h1>
 	</div>
 </div>
 <div class="row">	
