@@ -61,19 +61,6 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="{{asset('js/sb-admin-2.js')}}"></script>
-    <script>
-        function sort(id){
-            var sortBy = "{{Request::get('sortBy')}}";
-            var orderBy = "{{Request::get('orderBy')}}";
-            if( sortBy == id && orderBy == "desc"){
-                location.href = "{{url()->current()}}"+
-                    "?sortBy="+id+"&orderBy=asc";
-            }else{
-                location.href = "{{url()->current()}}"+
-                    "?sortBy="+id+"&orderBy=desc";
-            }
-        }
-    </script>
 
 </body>
 

@@ -58,7 +58,13 @@ class GraduateThresholdController extends Controller
         return redirect('graduate_threshold');
     }
     public function search(Request $request){
-
+        $sortBy = 'id';
+        $orderBy = "desc";
+        if($request->sortBy != null)
+            $sortBy = $request->sortBy;
+        if($request->orderBy != null)
+            $orderBy = $request->orderBy;
+        
         $graduateThreshold = GraduateThreshold::join('college_data',function($join){
                 $join->on('graduate_threshold.college','college_data.college');
                 $join->on('graduate_threshold.dept','college_data.dept');
@@ -78,7 +84,7 @@ class GraduateThresholdController extends Controller
         if($request->comments != "")
             $graduateThreshold = $graduateThreshold
                 ->where('comments',"like","%$request->comments%");
-        $graduateThreshold = $graduateThreshold->orderBy('id','desc')
+        $graduateThreshold = $graduateThreshold->orderBy($sortBy,$orderBy)
             ->paginate(20);
         $user = Auth::user();
         $data = compact('graduateThreshold','user');

@@ -14,7 +14,36 @@ function clickDel(event){
         event.preventDefault();
     }
 }
-
+function sort(id){
+    var query = {}
+    if(location.search != "")
+        query = explodeQuery(location.search);
+    console.log(query);
+    if(query.sortBy == id && query.orderBy == "desc")
+        query.orderBy = "asc";
+    else{
+        query.orderBy = "desc";
+        query.sortBy = id;
+    }
+    
+    var url = "?";
+    for(var key in query){
+        url += `${key}=${query[key]}&`;
+    }
+    url = url.slice(0,-1);
+    location.assign(url);
+}
+function explodeQuery(query){
+    console.log(query);
+    query = query.slice(1);
+    var result = {};
+    var array = query.split("&");
+    array.forEach(function(element){
+        var temp = element.split("=");
+        result[temp[0]] = temp[1];
+    });
+    return result;
+}
 //Loads the correct sidebar on window load,
 //collapses the sidebar on window resize.
 // Sets the min-height of #page-wrapper to window size
