@@ -23,7 +23,7 @@ Route::group(['middleware' => 'auth'],function(){
 	Route::patch('/user',['uses'=>'UserController@update']);
 	Route::get('/user',['uses'=>'UserController@index']);
 
-		//英檢畢業門檻 test
+		//英檢畢業門檻
 	
 	Route::get('/graduate_threshold',['uses'=>'user\GraduateThresholdController@index']);
 	Route::post('/graduate_threshold',['uses'=>'user\GraduateThresholdController@insert']);
@@ -37,9 +37,9 @@ Route::group(['middleware' => 'auth'],function(){
 	Route::get('/foreign_language_class',['uses'=>'user\ForeignLanguageClassController@index']);
 	Route::post('/foreign_language_class',['uses'=>'user\ForeignLanguageClassController@insert']);
 	Route::get('/foreign_language_class/search',['uses' => 'user\ForeignLanguageClassController@search']);
-	Route::get('/graduate_threshold/{id}',['uses'=>'user\GraduateThresholdController@edit']);
-	Route::patch('/graduate_threshold/{id}',['uses'=>'user\GraduateThresholdController@update']);
-	Route::delete('/graduate_threshold/{id}',['uses'=>'user\GraduateThresholdController@delete']);
+	Route::get('/graduate_threshold/{id}',['uses'=>'user\ForeignLanguageClassController@edit']);
+	Route::patch('/graduate_threshold/{id}',['uses'=>'user\ForeignLanguageClassController@update']);
+	Route::delete('/graduate_threshold/{id}',['uses'=>'user\ForeignLanguageClassController@delete']);
 
 	// Route::delete('foreign_language_class/{id}',function(){return view()})
 
@@ -48,22 +48,42 @@ Route::group(['middleware' => 'auth'],function(){
 		//本校教師赴國外出席國際會議
 
 	Route::get('/prof_attend_conference',['uses'=>'prof\ProfAttendConferenceController@index']);
-	Route::post('/prof_attend_conference',['uses'=>'prof\ProfAttendConferenceController@insert']);
+	Route::post('/prof_attend_conference',['uses'=>'prof\ProfAttendConferenceController@insert']);	
+	Route::get('/prof_attend_conference/search',['uses' => 'prof\ProfAttendConferenceController@search']);
+	Route::get('/prof_attend_conference/{id}',['uses'=>'prof\ProfAttendConferenceController@edit']);
+	Route::patch('/prof_attend_conference/{id}',['uses'=>'prof\ProfAttendConferenceController@update']);
+	Route::delete('/prof_attend_conference/{id}',['uses'=>'prof\ProfAttendConferenceController@delete']);
+
 	
 		//本校教師赴國外交換
 
 	Route::get('/prof_exchange',['uses'=>'prof\ProfExchangeController@index']);
 	Route::post('/prof_exchange',['uses'=>'prof\ProfExchangeController@insert']);
+	Route::get('/prof_exchange/search',['uses' => 'prof\ProfExchangeController@search']);
+	Route::get('/prof_exchange/{id}',['uses'=>'prof\ProfExchangeController@edit']);
+	Route::patch('/prof_exchange/{id}',['uses'=>'prof\ProfExchangeController@update']);
+	Route::delete('/prof_exchange/{id}',['uses'=>'prof\ProfExchangeController@delete']);
+
 
 		//本校教師赴國外交換
 
 	Route::get('/prof_foreign_research',['uses'=>'prof\ProfForeignResearchController@index']);
 	Route::post('/prof_foreign_research',['uses'=>'prof\ProfForeignResearchController@insert']);
+	Route::get('/prof_foreign_research/search',['uses' => 'prof\ProfForeignResearchController@search']);
+	Route::get('/prof_foreign_research/{id}',['uses'=>'prof\ProfForeignResearchController@edit']);
+	Route::patch('/prof_foreign_research/{id}',['uses'=>'prof\ProfForeignResearchController@update']);
+	Route::delete('/prof_foreign_research/{id}',['uses'=>'prof\ProfForeignResearchController@delete']);
+
 
 		//外籍學者蒞校訪問
 
 	Route::get('/foreign_prof_vist',['uses'=>'prof\ForeignProfVistController@index']);
 	Route::post('/foreign_prof_vist',['uses'=>'prof\ForeignProfVistController@insert']);
+	Route::get('/foreign_prof_vist/search',['uses' => 'prof\ForeignProfVistController@search']);
+	Route::get('/foreign_prof_vist/{id}',['uses'=>'prof\ForeignProfVistController@edit']);
+	Route::patch('/foreign_prof_vist/{id}',['uses'=>'prof\ForeignProfVistController@update']);
+	Route::delete('/foreign_prof_vist/{id}',['uses'=>'prof\ForeignProfVistController@delete']);
+
 
 
 	//學生專區

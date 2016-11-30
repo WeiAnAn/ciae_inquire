@@ -69,6 +69,8 @@ class GraduateThresholdController extends Controller
                 $join->on('graduate_threshold.college','college_data.college');
                 $join->on('graduate_threshold.dept','college_data.dept');
             });
+        
+
         if($request->college != 0)
             $graduateThreshold = $graduateThreshold
                 ->where('graduate_threshold.college',$request->college);
@@ -89,6 +91,9 @@ class GraduateThresholdController extends Controller
         $user = Auth::user();
         $data = compact('graduateThreshold','user');
         return view('user/graduate_threshold',$data);
+
+
+
     }
     public function permission(GraduateThreshold $graduateThreshold){
         $user = Auth::user();

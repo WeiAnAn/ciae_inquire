@@ -53,8 +53,8 @@
 								<tbody>
 								@foreach ($Pattendconference as $data)
 								<tr>
-									<td>{{$data->college}}</td>
-									<td class="text-nowrap">{{$data->dept}}</td>
+									<td class="text-nowrap">{{$data->chtCollege}}</td>
+									<td class="text-nowrap">{{$data->chtDept}}</td>
 									<td class="text-nowrap">{{$data->name}}</td>
 									<td class="text-nowrap">@if($data->profLevel==1)
 									教授
@@ -68,10 +68,10 @@
 									研究生
 									@endif
 									</td>
-									<td>{{$data->nation}}</td>
+									<td class="text-nowrap">{{$data->nation}}</td>
 									<td style="max-width: 300px">{{$data->confName}}</td>
-									<td class="text-nowrap">{{$data->startDate}}</td>
-									<td class="text-nowrap">{{$data->endDate}}</td>
+									<td>{{$data->startDate}}</td>
+									<td>{{$data->endDate}}</td>
 									<td>{{$data->comments}}</td>
 									<td></td>
 								</tr>
