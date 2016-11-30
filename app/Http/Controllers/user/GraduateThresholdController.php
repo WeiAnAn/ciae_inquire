@@ -23,7 +23,6 @@ class GraduateThresholdController extends Controller
     	})->orderBy($sortBy,$orderBy)
             ->paginate(20);
         $user = Auth::user();
-
     	$data=compact('graduateThreshold','user');
     	return view ('user/graduate_threshold',$data);
 
@@ -88,6 +87,8 @@ class GraduateThresholdController extends Controller
                 ->where('comments',"like","%$request->comments%");
         $graduateThreshold = $graduateThreshold->orderBy($sortBy,$orderBy)
             ->paginate(20);
+        $graduateThreshold->appends($request->except('page'));
+        
         $user = Auth::user();
         $data = compact('graduateThreshold','user');
         return view('user/graduate_threshold',$data);
