@@ -227,6 +227,7 @@
 
 			document.getElementById('college').value = value.college;
 			document.getElementById('college').attributes.setNamedItem(document.createAttribute('disabled'));
+			change(value.college);
 			if(value.dept != '0'){
 				document.getElementById('dept').value = value.dept;
 				document.getElementById('dept').attributes.setNamedItem(document.createAttribute('disabled'));
