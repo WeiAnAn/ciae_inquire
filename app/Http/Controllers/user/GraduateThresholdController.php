@@ -10,12 +10,17 @@ use Illuminate\Support\Facades\Auth;
 class GraduateThresholdController extends Controller
 {
     //
-    public function index(){
-
+    public function index(Request $request){
+        $sortBy = 'id';
+        $orderBy = "desc";
+        if($request->sortBy != null)
+            $sortBy = $request->sortBy;
+        if($request->orderBy != null)
+            $orderBy = $request->orderBy;
     	$graduateThreshold = GraduateThreshold::join('college_data',function($join){
     		$join->on('graduate_threshold.college','college_data.college');
     		$join->on('graduate_threshold.dept','college_data.dept');
-    	})->orderBy('id','desc')
+    	})->orderBy($sortBy,$orderBy)
             ->paginate(20);
         $user = Auth::user();
 

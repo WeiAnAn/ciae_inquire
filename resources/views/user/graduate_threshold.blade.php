@@ -27,11 +27,11 @@
 						<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
-									<td>單位</td>
-									<td>系所部門</td>
-									<td>語言測驗名稱</td>
-									<td>等級或分數</td>
-									<td>備註</td>
+									<td id="graduate_threshold.college" onclick="sort(id)">單位</td>
+									<td id="graduate_threshold.dept" onclick="sort(id)">系所部門</td>
+									<td id="testName" onclick="sort(id)">語言測驗名稱</td>
+									<td id="testGrade" onclick="sort(id)">等級或分數</td>
+									<td id="comments" onclick="sort(id)">備註</td>
 									<td>管理</td>
 								</tr>
 								</thead>
@@ -128,4 +128,5 @@
 		</div>
 	</div>
 </div>
+
 @endsection
