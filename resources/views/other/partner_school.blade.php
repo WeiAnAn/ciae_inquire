@@ -47,7 +47,22 @@
 									<td>{{$data->startDate}}</td>
 									<td>{{$data->endDate}}</td>
 									<td>{{$data->comments}}</td>
-									<td>{{$data->chtCollege}}</td>
+									<td>
+										@can('permission',$data)
+										<a href="{{url('partner_school',$data->id)}}"
+											class="glyphicon glyphicon-pencil	
+											btn btn-success btn-xs"></a>
+										<form 
+											action="{{url('partner_school',$data->id)}}"
+											method="post" style="display: inline;">
+											{{ method_field('DELETE') }}
+                        					{{ csrf_field() }}
+											<button class="glyphicon glyphicon-trash
+												btn btn-danger btn-xs" 
+												onclick="clickDel(event)"></button>
+										</form>
+										@endcan
+									</td>
 								</tr>
 								@endforeach
 							</tbody>

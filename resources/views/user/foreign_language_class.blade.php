@@ -52,12 +52,7 @@
 									<td>{{$data->totalCount}}</td>
 									<td>{{$data->nationalCount}}</td>
 									<td class="text-nowrap">
-										@if(($user->permission < 2 )|| 
-											($user->permission == 2 && 
-											$user->college == $data->college) ||
-											($user->permission == 3 &&
-											$user->college == $data->college &&
-											$user->dept == $data->dept))
+										@can('permission',$data)
 										<a href="{{url('foreign_language_class',$data->id)}}"
 									class="glyphicon glyphicon-pencil btn btn-success btn-xs"></a>
 										<form action="{{url('foreign_language_class',$data->id)}}"
@@ -67,7 +62,7 @@
 											<button class="glyphicon glyphicon-trash	
 												btn btn-danger btn-xs"></button>
 										</form>
-										@endif
+										@endcan
 									</td>
 								</tr>
 								@endforeach
