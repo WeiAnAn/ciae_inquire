@@ -28,7 +28,7 @@ class ProfAttendConferenceController extends Controller
     	return view ('prof/prof_attend_conference',$data);
     }
     public function insert(Request $request){
-    	//validate 暫無失敗訊息
+    	
     	$this->validate($request,[
     		'college'=>'required|max:11',
     		'dept'=>'required|max:11',
@@ -43,6 +43,7 @@ class ProfAttendConferenceController extends Controller
 
     	profAttendConference::create($request->all());
 
+        return redirect('prof_attend_conference')->with('success','新增成功'); //view中未新增顯示成功功能
     	/*
     	profAttendConference::create([
     		'college'=>$request['college'],
@@ -68,7 +69,6 @@ class ProfAttendConferenceController extends Controller
 		$prof_attend_conference->comments=$request['comments'];
 		$prof_attend_conference->save();		
 		*/
-		return redirect('prof_attend_conference')->with('success','新增成功'); //view中未新增顯示成功功能
 		
     }
 

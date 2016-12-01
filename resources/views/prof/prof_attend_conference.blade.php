@@ -100,6 +100,7 @@
 						{{ $Pattendconference->links() }}
 					</div>
 
+					<!--insert 功能-->
 
 					@if(count($errors)>0)
 						<div class="tab-pane fade in col-md-12 active " id="insert" 
@@ -116,7 +117,7 @@
                             @endif
 								<div class="form-group">
 									<label for="">姓名</label>
-									<input type="text" class="form-control" name="name" />
+									<input type="text" class="form-control" name="name" value="{{old('name')}}" />
 								</div>
 								<div class="form-group">
 									<label for="profLevel">身分</label>
@@ -133,33 +134,33 @@
                             @endif
 								<div class="form-group">
 									<label for="nation">前往國家</label>
-									<input type="text" name="nation" class="form-control">
+									<input type="text" name="nation" class="form-control" value="{{old('nation')}}">
 								</div>
 							@if($errors->has('confName'))
                                 <p class="text-danger">{{$errors->first('confName')}}</p>
                             @endif
 								<div class="form-group">
 									<label for="confName">會議名稱</label>
-									<textarea name="confName" id="confName" cols="30" rows="3" class="form-control"></textarea>
+									<textarea name="confName" id="confName" cols="30" rows="3" class="form-control">{{old('confName')}}</textarea>
 								</div>
 							@if($errors->has('startDate')||$errors->has('endDate'))
-                                <p class="text-danger">{{ $errors->first('startDate')}}</p>                      
-                                <p class="text-danger">{{ $errors->first('endDate')}}</p>
+                                <p class="text-danger col-md-6">{{ $errors->first('startDate')}}</p>                      
+                                <p class="text-danger col-md-6">{{ $errors->first('endDate')}}</p>
                             @endif
 								<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 									<label for="startDate">開始時間</label>
-									<input type="date" name="startDate" class="form-control">
+									<input type="date" name="startDate" class="form-control" value="{{old('startDate')}}">
 								</div>
 								<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 									<label for="endDate">結束時間</label>
-									<input type="date" name="endDate" class="form-control">
+									<input type="date" name="endDate" class="form-control" value="{{old('endDate')}}" >
 								</div>
 							@if($errors->has('comments'))
                                 <p class="text-danger">{{ $errors->first('comments')}}</p>
                             @endif
 								<div class="form-group">
 									<label for="comments">備註</label>
-									<textarea name="comments" id="comments" cols="30" rows="3" class="form-control"></textarea>
+									<textarea name="comments" id="comments" cols="30" rows="3" class="form-control">{{old('comments')}}</textarea>
 								</div>
 							<button class="btn btn-success">新增</button>
 						</form>
