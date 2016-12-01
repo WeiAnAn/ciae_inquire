@@ -47,7 +47,22 @@
 									<td>{{$data->guest}}</td>
 									<td>{{$data->startDate}}</td>
 									<td>{{$data->endDate}}</td>
-									<td></td>
+									<td>
+										@can('permission',$data)
+										<a href="{{url('internationalize_activity',$data->id)}}"
+											class="glyphicon glyphicon-pencil	
+											btn btn-success btn-xs"></a>
+										<form 
+											action="{{url('internationalize_activity',$data->id)}}"
+											method="post" style="display: inline;">
+											{{ method_field('DELETE') }}
+                        					{{ csrf_field() }}
+											<button class="glyphicon glyphicon-trash
+												btn btn-danger btn-xs" 
+												onclick="clickDel(event)"></button>
+										</form>
+										@endcan
+									</td>
 
 								</tr>
 								@endforeach

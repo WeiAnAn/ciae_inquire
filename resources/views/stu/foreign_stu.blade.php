@@ -59,22 +59,18 @@
 								<td >{{$data->endDate}}</td>
 								<td >{{$data->comments}}</td>
 								<td>
-										@if(($user->permission < 2 )|| 
-											($user->permission == 2 && 
-											$user->college == $data->college) ||
-											($user->permission == 3 &&
-											$user->college == $data->college &&
-											$user->dept == $data->dept))
-										<a href="{{url('foreign_stu',$data->id)}}"
-									class="glyphicon glyphicon-pencil btn btn-success btn-xs"></a>
-										<form action="{{url('foreign_stu',$data->id)}}"
-											method="post" style="display: inline;">
-											{{ method_field('DELETE') }}
-                        					{{ csrf_field() }}
-											<button class="glyphicon glyphicon-trash	
-												btn btn-danger btn-xs"></button>
-										</form>
-										@endif
+									@can('permission',$data)
+									<a href="{{url('foreign_stu',$data->id)}}"
+										class="glyphicon glyphicon-pencil btn 
+											btn-success btn-xs"></a>
+									<form action="{{url('foreign_stu',$data->id)}}"
+										method="post" style="display: inline;">
+										{{ method_field('DELETE') }}
+                    					{{ csrf_field() }}
+										<button class="glyphicon glyphicon-trash	
+											btn btn-danger btn-xs"></button>
+									</form>
+									@endcan
 								</td>
 								</tr>
 								@endforeach

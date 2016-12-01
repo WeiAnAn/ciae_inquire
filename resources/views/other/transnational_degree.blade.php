@@ -53,7 +53,22 @@
 									<td>{{$data->classMode}}</td>
 									<td>{{$data->degreeMode}}</td>
 									<td>{{$data->comments}}</td>
-									<td></td>								
+									<td>
+										@can('permission',$data)
+										<a href="{{url('transnational_degree',$data->id)}}"
+											class="glyphicon glyphicon-pencil	
+											btn btn-success btn-xs"></a>
+										<form 
+											action="{{url('transnational_degree',$data->id)}}"
+											method="post" style="display: inline;">
+											{{ method_field('DELETE') }}
+                        					{{ csrf_field() }}
+											<button class="glyphicon glyphicon-trash
+												btn btn-danger btn-xs" 
+												onclick="clickDel(event)"></button>
+										</form>
+										@endcan
+									</td>								
 								</tr>
 								@endforeach
 							</tbody>
