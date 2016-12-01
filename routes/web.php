@@ -92,22 +92,37 @@ Route::group(['middleware' => 'auth'],function(){
 
 	Route::get('/stu_attend_conf',['uses'=>'stu\StuAttendConfController@index']);
 	Route::post('/stu_attend_conf',['uses'=>'stu\StuAttendConfController@insert']);
+	Route::get('/stu_attend_conf/search',['uses' => 'stu\StuAttendConfController@search']);
+	Route::get('/stu_attend_conf/{id}',['uses'=>'stu\StuAttendConfController@edit']);
+	Route::patch('/stu_attend_conf/{id}',['uses'=>'stu\StuAttendConfController@update']);
+	Route::delete('/stu_attend_conf/{id}',['uses'=>'stu\StuAttendConfController@delete']);
 
 		//出國赴姊妹校交換計畫
 
 	Route::get('/stu_to_partner_school',['uses'=>'stu\StuToPartnerSchoolController@index']);
 	Route::post('/stu_to_partner_school',['uses'=>'stu\StuToPartnerSchoolController@insert']);
+	Route::get('/stu_to_partner_school/search',['uses' => 'stu\StuToPartnerSchoolController@search']);
+	Route::get('/stu_to_partner_school/{id}',['uses'=>'stu\StuToPartnerSchoolController@edit']);
+	Route::patch('/stu_to_partner_school/{id}',['uses'=>'stu\StuToPartnerSchoolController@update']);
+	Route::delete('/stu_to_partner_school/{id}',['uses'=>'stu\StuToPartnerSchoolController@delete']);
 
 		//其他出國研修情形
 
 	Route::get('/stu_foreign_research',['uses'=>'stu\StuForeignResearchController@index']);
 	Route::post('/stu_foreign_research',['uses'=>'stu\StuForeignResearchController@insert']);
+	Route::get('/stu_foreign_research/search',['uses' => 'stu\StuForeignResearchController@search']);
+	Route::get('/stu_foreign_research/{id}',['uses'=>'stu\StuForeignResearchController@edit']);
+	Route::patch('/stu_foreign_research/{id}',['uses'=>'stu\StuForeignResearchController@update']);
+	Route::delete('/stu_foreign_research/{id}',['uses'=>'stu\StuForeignResearchController@delete']);
 
 		//姊妹校學生至本校參加交換計畫
 
 	Route::get('/stu_from_partner_school',['uses'=>'stu\StuFromPartnerSchoolController@index']);
 	Route::post('/stu_from_partner_school',['uses'=>'stu\StuFromPartnerSchoolController@insert']);
-
+	Route::get('/stu_from_partner_school/search',['uses' => 'stu\StuFromPartnerSchoolController@search']);
+	Route::get('/stu_from_partner_school/{id}',['uses'=>'stu\StuFromPartnerSchoolController@edit']);
+	Route::patch('/stu_from_partner_school/{id}',['uses'=>'stu\StuFromPartnerSchoolController@update']);
+	Route::delete('/stu_from_partner_school/{id}',['uses'=>'stu\StuFromPartnerSchoolController@delete']);
 	/*Route::get('/stu_from_partner_school',function(){
 		$data=['name'=>'asd'];
 		return view('stu/stu_from_partner_school',$data);
@@ -117,11 +132,19 @@ Route::group(['middleware' => 'auth'],function(){
 
 	Route::get('/short_term_foreign_stu',['uses'=>'stu\ShortTermForeignStuController@index']);
 	Route::post('/short_term_foreign_stu',['uses'=>'stu\ShortTermForeignStuController@insert']);
+	Route::get('/short_term_foreign_stu/search',['uses' => 'stu\ShortTermForeignStuController@search']);
+	Route::get('/short_term_foreign_stu/{id}',['uses'=>'stu\ShortTermForeignStuController@edit']);
+	Route::patch('/short_term_foreign_stu/{id}',['uses'=>'stu\ShortTermForeignStuController@update']);
+	Route::delete('/short_term_foreign_stu/{id}',['uses'=>'stu\ShortTermForeignStuController@delete']);
 
 		//修讀正式學位之外國學生
 
 	Route::get('/foreign_stu',['uses'=>'stu\ForeignStuController@index']);
 	Route::post('/foreign_stu',['uses'=>'stu\ForeignStuController@insert']);
+	Route::get('/foreign_stu/search',['uses' => 'stu\ForeignStuController@search']);
+	Route::get('/foreign_stu/{id}',['uses'=>'stu\ForeignStuController@edit']);
+	Route::patch('/foreign_stu/{id}',['uses'=>'stu\ForeignStuController@update']);
+	Route::delete('/foreign_stu/{id}',['uses'=>'stu\ForeignStuController@delete']);
 
 	//其他國際交流活動
 	
@@ -129,21 +152,37 @@ Route::group(['middleware' => 'auth'],function(){
 
 	Route::get('/transnational_degree',['uses'=>'other\TransnationalDegreeController@index']);
 	Route::post('/transnational_degree',['uses'=>'other\TransnationalDegreeController@insert']);
+	Route::get('/transnational_degree/search',['uses' => 'other\TransnationalDegreeController@search']);
+	Route::get('/transnational_degree/{id}',['uses'=>'other\TransnationalDegreeController@edit']);
+	Route::patch('/transnational_degree/{id}',['uses'=>'other\TransnationalDegreeController@update']);
+	Route::delete('/transnational_degree/{id}',['uses'=>'other\TransnationalDegreeController@delete']);
 
 		//姊妹校締約情形
 
 	Route::get('/partner_school',['uses'=>'other\PartnerSchoolController@index']);
 	Route::post('/partner_school',['uses'=>'other\PartnerSchoolController@insert']);
+	Route::get('/partner_school/search',['uses' => 'other\PartnerSchoolController@search']);
+	Route::get('/partner_school/{id}',['uses'=>'other\PartnerSchoolController@edit']);
+	Route::patch('/partner_school/{id}',['uses'=>'other\PartnerSchoolController@update']);
+	Route::delete('/partner_school/{id}',['uses'=>'other\PartnerSchoolController@delete']);
 
 		//國際合作交流計畫
 
 	Route::get('/cooperation_proj',['uses'=>'other\CooperationProjController@index']);
 	Route::post('/cooperation_proj',['uses'=>'other\CooperationProjController@insert']);
+	Route::get('/cooperation_proj/search',['uses' => 'other\CooperationProjController@search']);
+	Route::get('/cooperation_proj/{id}',['uses'=>'other\CooperationProjController@edit']);
+	Route::patch('/cooperation_proj/{id}',['uses'=>'other\CooperationProjController@update']);
+	Route::delete('/cooperation_proj/{id}',['uses'=>'other\CooperationProjController@delete']);
 
 		//國際化活動
 	
 	Route::get('internationalize_activity',['uses'=>'other\InternationalizeActivityController@index']);
 	Route::post('internationalize_activity',['uses'=>'other\InternationalizeActivityController@insert']);
+	Route::get('/internationalize_activity/search',['uses' => 'other\InternationalizeActivityController@search']);
+	Route::get('/internationalize_activity/{id}',['uses'=>'other\InternationalizeActivityController@edit']);
+	Route::patch('/internationalize_activity/{id}',['uses'=>'other\InternationalizeActivityController@update']);
+	Route::delete('/internationalize_activity/{id}',['uses'=>'other\InternationalizeActivityController@delete']);
 	
 	
 
