@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ForeignLanguageClass;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ForeignLanguageClassController extends Controller
 {
@@ -21,27 +22,38 @@ class ForeignLanguageClassController extends Controller
 
     	return view('user/foreign_language_class',$data);
     }
-/*
+
     public function edit($id){
     	$foreignLanguageClass = ForeignLanguageClass::find($id);
-        if($this->permission($foreignLanguageClass))        {
-            return view('user/graduate_threshold_edit',$foreignLanguageClass);
+        if(Gate::allows('permission',$foreignLanguageClass)){
+            return view('user/foreign_language_class_edit',$foreignLanguageClass);
         }
         return redirect('foreign_language_class');
 
 
     }
-*/
+
     public function update($id , Request $request){
     	$foreignLanguageClass = ForeignLanguageClass::find($id);
-        if(!$this->permission($foreignLanguageClass))
-            return redirect('graduate_threshold');
+        if(!Gate::allows('permission',$foreignLanguageClass))
+            return redirect('foreign_language_class');
         $this->validate($request,[
-            'testName' => 'required|max:200',
-            'testGrade' => 'required|max:200',
-            'comments' => 'max:500',
+            'year' => 'required',
+            'chtName' => 'required|max:50',
+            'engName' => 'required|max:200',
+            'teacher' => 'required|max:20',
+            'language' => 'required|max:20',
+            'totalCount' => 'required',
+            'nationalCount' => 'required',
             ]);
         $foreignLanguageClass->update($request->all());
+        return redirect('foreign_language_class');
+    }
+    public function delete($id){
+        $foreignLanguageClass = ForeignLanguageClass::find($id);
+        if(!Gate::allows('permission',$foreignLanguageClass))
+            return redirect('foreign_language_class');
+        $foreignLanguageClass->delete();
         return redirect('foreign_language_class');
     }
 
