@@ -103,10 +103,15 @@ class ProfAttendConferenceController extends Controller
         if($request->confName != "")
             $Pattendconference = $Pattendconference
                 ->where('confName',"like","%$request->confName%");
-
         if($request->comments != "")
             $Pattendconference = $Pattendconference
                 ->where('comments',"like","%$request->comments%");
+        if($request->startDate != "")
+            $Pattendconference = $Pattendconference
+                ->where('startDate','>',"$request->startDate");
+        if($request->endDate != "")
+            $Pattendconference = $Pattendconference
+                ->where('endDate','<',"$request->endDate");
 
         $Pattendconference = $Pattendconference->orderBy($sortBy,$orderBy)
             ->paginate(20);
