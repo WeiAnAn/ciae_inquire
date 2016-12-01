@@ -43,10 +43,10 @@
 
 								@foreach($frompartnerdata as $data)
 								<tr>
-									<td>{{$data->chtCollege}}</td>
+									<td class="text-nowrap">{{$data->chtCollege}}</td>
 									<td>{{$data->chtDept}}</td>
-									<td>{{$data->name}}</td>
-									<td>@if ($data->stuLevel==1)
+									<td class="text-nowrap">{{$data->name}}</td>
+									<td class="text-nowrap">@if ($data->stuLevel==1)
 									博士生
 									@elseif ($data->stuLevel==2)
 									碩士生
@@ -58,7 +58,24 @@
 									<td>{{$data->startDate}}</td>
 									<td>{{$data->endDate}}</td>
 									<td>{{$data->comments}}</td>
-									<td>{{$data->college}}</td>
+									<td class="text-nowrap">
+										@if(($user->permission < 2 )|| 
+											($user->permission == 2 && 
+											$user->college == $data->college) ||
+											($user->permission == 3 &&
+											$user->college == $data->college &&
+											$user->dept == $data->dept))
+										<a href="{{url('stu_from_partner_school',$data->id)}}"
+									class="glyphicon glyphicon-pencil btn btn-success btn-xs"></a>
+										<form action="{{url('stu_from_partner_school',$data->id)}}"
+											method="post" style="display: inline;">
+											{{ method_field('DELETE') }}
+                        					{{ csrf_field() }}
+											<button class="glyphicon glyphicon-trash	
+												btn btn-danger btn-xs"></button>
+										</form>
+										@endif
+									</td>
 								</tr>
 								@endforeach
 
@@ -76,8 +93,8 @@
 								<input type="text" class="form-control" name="name" />
 							</div>
 							<div class="form-group">
-								<label for="profLevel">身分</label>
-								<select name="profLevel" id="profLevel" class="form-control">
+								<label for="stuLevel">身分</label>
+								<select name="stuLevel" id="stuLevel" class="form-control">
 									<option value="1">博士班</option>
 									<option value="2">碩士班</option>
 									<option value="3">學士班</option>
@@ -118,8 +135,8 @@
 								<input type="text" class="form-control" name="name" />
 							</div>
 							<div class="form-group">
-								<label for="profLevel">身分</label>
-								<select name="profLevel" id="profLevel" class="form-control">
+								<label for="stuLevel">身分</label>
+								<select name="stuLevel" id="stuLevel" class="form-control">
 									<option value=""></option>
 									<option value="1">博士班</option>
 									<option value="2">碩士班</option>

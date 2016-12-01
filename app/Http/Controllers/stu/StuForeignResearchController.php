@@ -55,8 +55,13 @@ class StuForeignResearchController extends Controller
                 ->where('stuLevel', $request->stuLevel);                
         if($request->nation != "")
             $foreignreseach = $foreignreseach
-                ->where('nation',"like","%$request->nation%");  
-
+                ->where('nation',"like","%$request->nation%");
+        if($request->startDate != "")
+            $foreignreseach = $foreignreseach
+                ->where('startDate','>',"$request->startDate");
+        if($request->endDate != "")
+            $foreignreseach = $foreignreseach
+                ->where('endDate','<',"$request->endDate");
         if($request->comments != "")
             $foreignreseach = $foreignreseach
                 ->where('comments',"like","%$request->comments%");

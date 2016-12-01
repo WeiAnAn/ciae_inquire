@@ -42,11 +42,11 @@
 								@foreach($foreignStu as $data)
 								<tr>
 								<td class="text-nowrap">{{$data->chtCollege}}</td>
-								<td class="text-nowrap">{{$data->chtDept}}</td>
-								<td class="text-nowrap">{{$data->stuLevel}}</td>
-								<td class="text-nowrap">{{$data->chtName}}</td>
-								<td class="text-nowrap">{{$data->engName}}</td>									
-									<td class="text-nowrap">@if ($data->stuID==1)
+								<td >{{$data->chtDept}}</td>
+								<td class="text-nowrap">{{$data->stuID}}</td>
+								<td >{{$data->chtName}}</td>
+								<td >{{$data->engName}}</td>									
+									<td class="text-nowrap">@if ($data->stuLevel==1)
 									博士生
 									@elseif ($data->stuID==2)
 									碩士生
@@ -55,9 +55,27 @@
 									@endif
 									</td>
 								<td class="text-nowrap">{{$data->nation}}</td>
-								<td class="text-nowrap">{{$data->startDate}}</td>
-								<td class="text-nowrap">{{$data->endDate}}</td>
-								<td class="text-nowrap">{{$data->comments}}</td>
+								<td >{{$data->startDate}}</td>
+								<td >{{$data->endDate}}</td>
+								<td >{{$data->comments}}</td>
+								<td>
+										@if(($user->permission < 2 )|| 
+											($user->permission == 2 && 
+											$user->college == $data->college) ||
+											($user->permission == 3 &&
+											$user->college == $data->college &&
+											$user->dept == $data->dept))
+										<a href="{{url('foreign_stu',$data->id)}}"
+									class="glyphicon glyphicon-pencil btn btn-success btn-xs"></a>
+										<form action="{{url('foreign_stu',$data->id)}}"
+											method="post" style="display: inline;">
+											{{ method_field('DELETE') }}
+                        					{{ csrf_field() }}
+											<button class="glyphicon glyphicon-trash	
+												btn btn-danger btn-xs"></button>
+										</form>
+										@endif
+								</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -82,8 +100,8 @@
 								<input type="text" class="form-control" name="engName" />
 							</div>
 							<div class="form-group">
-								<label for="profLevel">身分</label>
-								<select name="profLevel" id="profLevel" class="form-control">
+								<label for="stuLevel">身分</label>
+								<select name="stuLevel" id="stuLevel" class="form-control">
 									<option value="1">博士班</option>
 									<option value="2">碩士班</option>
 									<option value="3">學士班</option>
@@ -132,8 +150,8 @@
 								<input type="text" class="form-control" name="engName" />
 							</div>
 							<div class="form-group">
-								<label for="profLevel">身分</label>
-								<select name="profLevel" id="profLevel" class="form-control">
+								<label for="stuLevel">身分</label>
+								<select name="stuLevel" id="stuLevel" class="form-control">
 									<option value=""></option>
 									<option value="1">博士班</option>
 									<option value="2">碩士班</option>

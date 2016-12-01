@@ -54,8 +54,13 @@ class StuToPartnerSchoolController extends Controller
                 ->where('stuLevel', $request->stuLevel);                
         if($request->nation != "")
             $topartnerdata = $topartnerdata
-                ->where('nation',"like","%$request->nation%");  
-
+                ->where('nation',"like","%$request->nation%");
+        if($request->startDate != "")
+            $topartnerdata = $topartnerdata
+                ->where('startDate','>',"$request->startDate");
+        if($request->endDate != "")
+            $topartnerdata = $topartnerdata
+                ->where('endDate','<',"$request->endDate");
         if($request->comments != "")
             $topartnerdata = $topartnerdata
                 ->where('comments',"like","%$request->comments%");
