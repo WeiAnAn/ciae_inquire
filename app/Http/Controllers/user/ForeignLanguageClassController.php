@@ -82,6 +82,7 @@ class ForeignLanguageClassController extends Controller
 
         $foreignLanguageClass = $foreignLanguageClass->orderBy('id','desc')
             ->paginate(20);
+        $foreignLanguageClass->appends($request->except('page'));  
         $user = Auth::user();
         $data = compact('foreignLanguageClass','user');
         return view('user/foreign_language_class',$data);

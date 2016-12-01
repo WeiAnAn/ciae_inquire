@@ -110,6 +110,7 @@ class ProfAttendConferenceController extends Controller
 
         $Pattendconference = $Pattendconference->orderBy($sortBy,$orderBy)
             ->paginate(20);
+        $Pattendconference->appends($request->except('page'));    
         $user = Auth::user();
         $data = compact('Pattendconference','user');
         return view('prof/prof_attend_conference',$data);
