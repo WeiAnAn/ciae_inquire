@@ -1,7 +1,7 @@
 
 	<div class="form-group">
 		<label for="college">單位名稱</label>
-		<select name="college" id="college" onchange="change(value)" class="form-control">
+		<select name="college" id="college_option" onchange="change(value)" class="form-control">
 			<option value="1">文學院</option>
 			<option value="2">理學院</option>
 			<option value="3">社科院</option>
@@ -31,7 +31,7 @@
 	</div>
 	<div class="form-group">
 		<label for="dept">系所部門</label>
-		<select name="dept" id="dept" class="form-control" >
+		<select name="dept" id="dept_option" class="form-control" >
 			<option value="0">文學院</option>
 			<option value="10">中文系/中文所</option>
 			<option value="15">外文系/外文所/英語教學研究所</option>
@@ -219,18 +219,19 @@
 				<option value="0">語言中心</option>
 			`];
 
-			document.getElementById('dept').innerHTML = college[value];
+			document.getElementById('dept_option').innerHTML = college[value];
 		}
 
 		function lock(value){
 			var disabled = document.createAttribute('disabled');
 
-			document.getElementById('college').value = value.college;
-			document.getElementById('college').attributes.setNamedItem(document.createAttribute('disabled'));
+			document.getElementById('college_option').value = value.college;
+			document.getElementById('college_option').attributes.
+				setNamedItem(document.createAttribute('disabled'));
 			change(value.college);
 			if(value.dept != '0'){
-				document.getElementById('dept').value = value.dept;
-				document.getElementById('dept').attributes.setNamedItem(document.createAttribute('disabled'));
+				document.getElementById('dept_option').value = value.dept;
+				document.getElementById('dept_option').attributes.setNamedItem(document.createAttribute('disabled'));
 
 			}
 		}
