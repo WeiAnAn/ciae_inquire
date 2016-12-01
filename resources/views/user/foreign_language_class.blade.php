@@ -60,7 +60,8 @@
 											{{ method_field('DELETE') }}
                         					{{ csrf_field() }}
 											<button class="glyphicon glyphicon-trash	
-												btn btn-danger btn-xs"></button>
+												btn btn-danger btn-xs"
+												onclick="clickDel(event)"></button>
 										</form>
 										@endcan
 									</td>
@@ -92,11 +93,15 @@
 							</div>
 							<div class="form-group">
 								<label for="engName">課程英文名稱</label>
-								<input type="text" name="teacher" class="form-control">
+								<input type="text" name="engName" class="form-control">
 							</div>
 							<div class="form-group">
 								<label for="teacher">授課教師</label>
 								<input type="text" name="teacher" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="language">授課語言</label>
+								<input type="text" name="language" class="form-control">
 							</div>
 							<div class="form-group">
 								<label for="totalCount">總人數</label>
