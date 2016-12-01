@@ -5,13 +5,67 @@ namespace App\Http\Controllers\prof;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ProfForeignResearch;
+use Illuminate\Support\Facades\Auth;
+
 class ProfForeignResearchController extends Controller
 {
     //
-    public function index(){
+    public function index(Request $request){
+    	$sortBy = 'id';
+        $orderBy = "desc";
+        if($request->sortBy != null)
+            $sortBy = $request->sortBy;
+        if($request->orderBy != null)
+            $orderBy = $request->orderBy;
 
-    	$Pforeignresearch=ProfForeignResearch::paginate(20);
-    	$data=compact('Pforeignresearch');
+    	$Pforeignresearch=ProfForeignResearch::join('college_data',function($join){
+            $join->on('prof_foreign_research.college','college_data.college');
+            $join->on('prof_foreign_research.dept','college_data.dept');
+        })->orderBy($sortBy,$orderBy)
+            ->paginate(20);
+        $user = Auth::user();
+    	$data=compact('Pforeignresearch','user');
     	return view ('prof/prof_foreign_research',$data);
+    }
+
+    public function search (Request $request){
+
+    	$sortBy = 'id';
+        $orderBy = "desc";
+        if($request->sortBy != null)
+            $sortBy = $request->sortBy;
+        if($request->orderBy != null)
+            $orderBy = $request->orderBy;
+        
+        $Pforeignresearch = ProfForeignResearch::join('college_data',function($join){
+                $join->on('prof_foreign_research.college','college_data.college');
+                $join->on('prof_foreign_research.dept','college_data.dept');
+            });
+        if($request->college != 0)
+            $Pforeignresearch = $Pforeignresearch
+                ->where('prof_foreign_research.college',$request->college);
+        if($request->dept != 0)
+            $Pforeignresearch = $Pforeignresearch
+                ->where('prof_foreign_research.dept',$request->dept);
+        if($request->name != "")
+            $Pforeignresearch = $Pforeignresearch
+                ->where('name',"like","%$request->name%");        
+        if($request->profLevel != "")
+            $Pforeignresearch = $Pforeignresearch
+                ->where('profLevel', $request->profLevel);                
+        if($request->nation != "")
+            $Pforeignresearch = $Pforeignresearch
+                ->where('nation',"like","%$request->nation%");
+
+        if($request->comments != "")
+            $Pforeignresearch = $Pforeignresearch
+                ->where('comments',"like","%$request->comments%");
+
+        $Pforeignresearch = $Pforeignresearch->orderBy($sortBy,$orderBy)
+            ->paginate(20);
+        $Pforeignresearch->appends($request->except('page'));    
+        $user = Auth::user();
+        $data = compact('Pforeignresearch','user');
+        return view('prof/prof_foreign_research',$data);
     }
 }

@@ -39,10 +39,10 @@
 								<tbody>
 								@foreach ($Pforeignresearch as $data)
 								<tr>
-									<td>{{$data->college}}</td>
-									<td>{{$data->dept}}</td>
-									<td>{{$data->name}}</td>
-									<td>@if($data->profLevel==1)
+									<td class='text-nowrap'>{{$data->chtCollege}}</td>
+									<td>{{$data->chtDept}}</td>
+									<td class='text-nowrap'>{{$data->name}}</td>
+									<td class='text-nowrap'>@if($data->profLevel==1)
 									教授
 									@elseif($data->profLevel==2)
 									副教授
@@ -58,7 +58,26 @@
 									<td>{{$data->startDate}}</td>
 									<td>{{$data->endDate}}</td>
 									<td>{{$data->comments}}</td>
-									<td></td>
+									<td class="text-nowrap">
+										@if(($user->permission < 2 )|| 
+											($user->permission == 2 && 
+											$user->college == $data->college) ||
+											($user->permission == 3 &&
+											$user->college == $data->college &&
+											$user->dept == $data->dept))
+										<a href="{{url('prf_foreign_research',$data->id)}}"
+											class="glyphicon glyphicon-pencil	
+											btn btn-success btn-xs"></a>
+										<form action="{{url('prf_foreign_research',$data->id)}}"
+											method="post" style="display: inline;">
+											{{ method_field('DELETE') }}
+                        					{{ csrf_field() }}
+											<button class="glyphicon glyphicon-trash
+												btn btn-danger btn-xs" 
+												onclick="clickDel(event)"></button>
+										</form>
+										@endif
+									</td>
 
 								</tr>
 								@endforeach
