@@ -27,6 +27,14 @@
 	                <li><a href="#upload" data-toggle="tab">批次上傳</a>
 	                </li>
 	        </ul>
+	      		@if(session('success'))
+			        <div class="alert alert-success alert-dismissible" role="alert">
+			            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			                <span aria-hidden="true">&times;</span>
+			            </button>
+			            <strong> {{ session('success') }}</strong>
+			        </div>
+		        @endif
 				<div class="tab-content">
 					@if(count($errors)>0)
 						<div class="tab-pane fade in table-responsive" id="show" 
