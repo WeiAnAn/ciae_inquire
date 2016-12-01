@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\GraduateThreshold;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class GraduateThresholdController extends Controller
 {
@@ -30,15 +31,14 @@ class GraduateThresholdController extends Controller
 
     public function edit($id){
         $graduateThreshold = GraduateThreshold::find($id);
-        if($this->permission($graduateThreshold)){
+        if(Gate::allows('permission',$graduateThreshold))
             return view('user/graduate_threshold_edit',$graduateThreshold);
-        }
         return redirect('graduate_threshold');
     }
 
     public function update($id,Request $request){
         $graduateThreshold = GraduateThreshold::find($id);
-        if(!$this->permission($graduateThreshold))
+        if(!Gate::allows('permission',$graduateThreshold))
             return redirect('graduate_threshold');
         $this->validate($request,[
             'testName' => 'required|max:200',
@@ -51,7 +51,7 @@ class GraduateThresholdController extends Controller
 
     public function delete($id){
         $graduateThreshold = GraduateThreshold::find($id);
-        if(!$this->permission($graduateThreshold))
+        if(!Gate::allows('permission',$graduateThreshold))
             return redirect('graduate_threshold');
         $graduateThreshold->delete();
         return redirect('graduate_threshold');
@@ -97,14 +97,4 @@ class GraduateThresholdController extends Controller
 
 
     }
-    public function permission(GraduateThreshold $graduateThreshold){
-        $user = Auth::user();
-        if(($user->permission < 2 )|| 
-            ($user->permission == 2 && $user->college == $graduateThreshold->college) ||
-            ($user->permission == 3 && $user->college == $graduateThreshold->college && 
-            $user->dept == $graduateThreshold->dept))
-            return true;
-        return false;
-    }
-
 }
