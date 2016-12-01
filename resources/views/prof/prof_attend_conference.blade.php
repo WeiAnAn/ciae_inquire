@@ -82,12 +82,7 @@
 									<td>{{$data->endDate}}</td>
 									<td>{{$data->comments}}</td>
 									<td >
-										@if(($user->permission < 2 )|| 
-											($user->permission == 2 && 
-											$user->college == $data->college) ||
-											($user->permission == 3 &&
-											$user->college == $data->college &&
-											$user->dept == $data->dept))
+										@can('permission',$data)
 										<a href="{{url('prof_attend_conference',$data->id)}}"
 											class="glyphicon glyphicon-pencil	
 											btn btn-success btn-xs"></a>
@@ -99,7 +94,7 @@
 												btn btn-danger btn-xs" 
 												onclick="clickDel(event)"></button>
 										</form>
-										@endif
+										@endcan
 									</td>
 								</tr>
 								@endforeach
