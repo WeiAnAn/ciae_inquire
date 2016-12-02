@@ -25,16 +25,18 @@
 						<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
-									<td>單位</td>
-									<td>系所部門</td>
-									<td>學年</td>
-									<td>學期</td>
-									<td>中文名稱</td>
-									<td>英文名稱</td>
-									<td>教師</td>
-									<td>授課語言</td>
-									<td>修課總人數</td>
-									<td>國際生人數</td>
+									<td id="foreign_language_class.college"
+										onclick="sort(id)">單位</td>
+									<td id="foreign_language_class.dept"
+										onclick="sort(id)">系所部門</td>
+									<td id="year" onclick="sort(id)">學年</td>
+									<td id="semester" onclick="sort(id)">學期</td>
+									<td id="chtName" onclick="sort(id)">中文名稱</td>
+									<td id="engName" onclick="sort(id)">英文名稱</td>
+									<td id="teacher" onclick="sort(id)">教師</td>
+									<td id="language" onclick="sort(id)">授課語言</td>
+									<td id="totalCount" onclick="sort(id)">修課總人數</td>
+									<td id="nationalCount" onclick="sort(id)">國際生人數</td>
 									<td>管理</td>
 								</tr>
 								</thead>

@@ -11,12 +11,20 @@ use Illuminate\Support\Facades\Gate;
 class ForeignLanguageClassController extends Controller
 {
     //
-    public function index(){
+    public function index(Request $request){
+        $sortBy = 'id';
+        $orderBy = "desc";
+        if($request->sortBy != null)
+            $sortBy = $request->sortBy;
+        if($request->orderBy != null)
+            $orderBy = $request->orderBy;
 
     	$foreignLanguageClass = ForeignLanguageClass::join('college_data',function($join){
     		$join->on('foreign_language_class.college','college_data.college');
     		$join->on('foreign_language_class.dept','college_data.dept');
-    	})->paginate(20);
+    	})->orderBy($sortBy,$orderBy)
+            ->paginate(20);
+            
     	$user = Auth::user();
     	$data = compact('foreignLanguageClass','user');
 
@@ -29,8 +37,6 @@ class ForeignLanguageClassController extends Controller
             return view('user/foreign_language_class_edit',$foreignLanguageClass);
         }
         return redirect('foreign_language_class');
-
-
     }
 
     public function update($id , Request $request){
@@ -58,6 +64,12 @@ class ForeignLanguageClassController extends Controller
     }
 
     public function search(Request $request){
+        $sortBy = 'id';
+        $orderBy = "desc";
+        if($request->sortBy != null)
+            $sortBy = $request->sortBy;
+        if($request->orderBy != null)
+            $orderBy = $request->orderBy;
 
         $foreignLanguageClass = ForeignLanguageClass::join('college_data',function($join){
     		$join->on('foreign_language_class.college','college_data.college');
@@ -92,7 +104,7 @@ class ForeignLanguageClassController extends Controller
                 ->where('foreign_language_class.nationalCount',$request->nationalCount);        
 
 
-        $foreignLanguageClass = $foreignLanguageClass->orderBy('id','desc')
+        $foreignLanguageClass = $foreignLanguageClass->orderBy($sortBy,$orderBy)
             ->paginate(20);
         $foreignLanguageClass->appends($request->except('page'));  
         $user = Auth::user();
