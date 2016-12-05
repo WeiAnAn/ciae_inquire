@@ -11,17 +11,38 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 			<ul class="nav nav-tabs">
-                <li class="active"><a href="#show" data-toggle="tab">檢視</a>
-                </li>
-                <li><a href="#insert" data-toggle="tab">新增</a>
-                </li>
+                @if(count($errors)>0)
+	                <li><a href="#show" data-toggle="tab">檢視</a>
+	                </li>
+	                <li class="active"><a href="#insert" data-toggle="tab">新增</a>
+	                </li>
+				@else
+	                <li class="active"><a href="#show" data-toggle="tab">檢視</a>
+	                </li>
+	                <li><a href="#insert" data-toggle="tab">新增</a>
+	                </li>
+	            @endif    
                 <li><a href="#search" data-toggle="tab">進階搜尋</a>
                 </li>
                 <li><a href="#upload" data-toggle="tab">批次上傳</a>
                 </li>
             </ul>
+            	@if(session('success'))
+			        <div class="alert alert-success alert-dismissible" role="alert">
+			            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			                <span aria-hidden="true">&times;</span>
+			            </button>
+			            <strong> {{ session('success') }}</strong>
+			        </div>
+		        @endif
 				<div class="tab-content">
-					<div class="tab-pane fade in active " id="show" style="margin-top: 10px">
+					@if(count($errors)>0)
+						<div class="tab-pane fade in table-responsive" id="show" 
+							style="margin-top: 10px">
+					@else
+						<div class="tab-pane fade in active table-responsive" id="show" 
+							style="margin-top: 10px">
+					@endif
 						<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
@@ -79,10 +100,17 @@
 						</table>
 						{{ $foreignPvist -> links()}}
 					</div>
-					
 
-					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
-						<form action="{{url('prof_exchange')}}" method="post">
+					<!--insert page-->
+
+					@if(count($errors)>0)
+						<div class="tab-pane fade in col-md-12 active " id="insert" 
+							style="margin-top: 10px">
+					@else
+						<div class="tab-pane fade in col-md-12 " id="insert" 
+							style="margin-top: 10px">
+					@endif
+						<form action="{{url('foreign_prof_vist')}}" method="post">
 							{{ csrf_field() }}
 							@include('../layouts/select')
 							<div class="form-group">
