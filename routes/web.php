@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth'],function(){
 	Route::get('/graduate_threshold',['uses'=>'user\GraduateThresholdController@index']);
 	Route::post('/graduate_threshold',['uses'=>'user\GraduateThresholdController@insert']);
 	Route::get('/graduate_threshold/search',['uses'=>'user\GraduateThresholdController@search']);
+	Route::post('/graduate_threshold/upload',['uses'=>'user\GraduateThresholdController@upload']);
 	Route::get('/graduate_threshold/{id}',['uses'=>'user\GraduateThresholdController@edit']);
 	Route::patch('/graduate_threshold/{id}',['uses'=>'user\GraduateThresholdController@update']);
 	Route::delete('/graduate_threshold/{id}',['uses'=>'user\GraduateThresholdController@delete']);
