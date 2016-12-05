@@ -9,7 +9,7 @@ class ForeignProfVist extends Model
     //
     protected $table ='foreign_prof_vist';
     protected $fillable=['college','dept','name',
-    					'proLevel','nation',
+    					'profLevel','nation',
     					'startDate','endDate','comments'];
     public $timestamps=false;
 }

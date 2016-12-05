@@ -9,7 +9,7 @@ class ProfExchange extends Model
     //
     protected $table ='prof_exchange';
     protected $fillable=['college','dept','name',
-    					'proLevel','nation',
+    					'profLevel','nation',
     					'startDate','endDate','comments'];
     public $timestamps=false;
 }
