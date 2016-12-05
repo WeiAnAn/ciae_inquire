@@ -147,7 +147,7 @@
 								<input type="radio" name="bachelor" value="0" class="radio-inline">無授予
 							</div>
 							<div class="form-group">
-								<label for="bachelor">碩士</label>
+								<label for="master">碩士</label>
 								<input type="radio" name="master" value="1" class="radio-inline">有授予
 								<input type="radio" name="master" value="0" class="radio-inline">無授予
 							</div>

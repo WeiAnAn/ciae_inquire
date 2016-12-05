@@ -11,6 +11,13 @@ class TransnationalDegreeController extends Controller
 {
     //
     public function index (Request $request){
+    	$sortBy = 'id';
+        $orderBy = "desc";
+        if($request->sortBy != null)
+            $sortBy = $request->sortBy;
+        if($request->orderBy != null)
+            $orderBy = $request->orderBy;
+        
     	$transnational = TransnationalDegree::join('college_data',function($join){
     		$join->on('transnational_degree.college','college_data.college');
     		$join->on('transnational_degree.dept','college_data.dept');
