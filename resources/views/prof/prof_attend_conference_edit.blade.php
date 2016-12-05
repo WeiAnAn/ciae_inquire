@@ -20,7 +20,7 @@
 					</div>
 					<div class="form-group">
 						<label for="profLevel">身分</label>
-						<select name="profLevel" id="profLevel" class="form-control">
+						<select name="profLevel" id="profLevel" class="form-control" >
 							<option value="1">教授</option>
 							<option value="2">副教授</option>
 							<option value="3">助理教授</option>
@@ -62,6 +62,6 @@
 	</div>
 </div>
 <script>
-	document.getElementById('confName').value = {{$confName}};
+	document.getElementById('profLevel').value = {{$profLevel}};
 </script>
 @endsection
