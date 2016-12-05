@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ProfAttendConference;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ProfAttendConferenceController extends Controller
 {
@@ -120,4 +121,31 @@ class ProfAttendConferenceController extends Controller
         $data = compact('Pattendconference','user');
         return view('prof/prof_attend_conference',$data);
     }
+
+    public function edit($id){
+        $Pattendconference = ProfAttendConference::find($id);
+        if(Gate::allows('permission',$Pattendconference))
+            return view('prof/prof_attend_conference_edit',$Pattendconference);
+        return redirect('prof_attend_conference');
+    }
+
+    public function update($id,Request $request){
+        $Pattendconference = ProfAttendConference::find($id);
+        if(!Gate::allows('permission',$Pattendconference))
+            return redirect('prof_attend_conference');
+        $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:20',
+            'profLevel'=>'required|max:11',
+            'nation'=>'required|max:20',
+            'confName'=>'required|max:200',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+            ]);
+        $Pattendconference->update($request->all());
+        return redirect('prof_attend_conference');
+    }
+
 }
