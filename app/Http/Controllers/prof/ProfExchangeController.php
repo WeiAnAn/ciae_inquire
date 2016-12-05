@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class ProfExchangeController extends Controller
 {
     //
-     public function index(Request $request){
+    public function index(Request $request){
      	$sortBy = 'id';
         $orderBy = "desc";
         if($request->sortBy != null)
@@ -27,6 +27,25 @@ class ProfExchangeController extends Controller
     	$data=compact('Pexchange','user');
     	return view ('prof/prof_exchange',$data);
     }
+
+    public function insert(Request $request){
+        
+        $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:20',
+            'profLevel'=>'required|max:11',
+            'nation'=>'required|max:20',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+            ]);
+
+        profExchange::create($request->all());
+
+        return redirect('prof_exchange')->with('success','新增成功');
+    }
+
     public function search (Request $request){
 
     	$sortBy = 'id';

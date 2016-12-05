@@ -28,6 +28,24 @@ class ProfForeignResearchController extends Controller
     	return view ('prof/prof_foreign_research',$data);
     }
 
+    public function insert(Request $request){
+        
+        $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:20',
+            'profLevel'=>'required|max:11',
+            'nation'=>'required|max:20',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+            ]);
+
+        ProfForeignResearch::create($request->all());
+
+        return redirect('prof_foreign_research')->with('success','新增成功');
+    }
+
     public function search (Request $request){
 
     	$sortBy = 'id';

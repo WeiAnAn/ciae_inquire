@@ -28,6 +28,24 @@ class ForeignProfVistController extends Controller
     	return view ('prof/foreign_prof_vist',$data);
     }
 
+    public function insert(Request $request){
+        
+        $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:50',
+            'profLevel'=>'required|max:11',
+            'nation'=>'required|max:20',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+            ]);
+
+        ForeignProfVist::create($request->all());
+
+        return redirect('Foreign_Prof_Vist')->with('success','新增成功');
+    }
+
     public function search (Request $request){
 
     	$sortBy = 'id';
