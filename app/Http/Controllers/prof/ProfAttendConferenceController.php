@@ -121,5 +121,6 @@ class ProfAttendConferenceController extends Controller
         $Pattendconference->update($request->all());
         return redirect('prof_attend_conference');
     }
+    
 
 }
