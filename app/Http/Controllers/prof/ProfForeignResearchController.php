@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ProfForeignResearch;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ProfForeignResearchController extends Controller
 {
@@ -90,5 +91,12 @@ class ProfForeignResearchController extends Controller
         $user = Auth::user();
         $data = compact('Pforeignresearch','user');
         return view('prof/prof_foreign_research',$data);
+    }
+      public function delete($id){
+        $Pforeignresearch = ProfForeignResearch::find($id);
+        if(!Gate::allows('permission',$Pforeignresearch))
+            return redirect('prof_foreign_researc');
+        $Pforeignresearch->delete();
+        return redirect('prof_foreign_research');
     }
 }

@@ -81,10 +81,10 @@
 									<td>{{$data->comments}}</td>
 									<td class="text-nowrap">
 										@can('permission',$data)
-										<a href="{{url('prf_foreign_research',$data->id)}}"
+										<a href="{{url('prof_foreign_research',$data->id)}}"
 											class="glyphicon glyphicon-pencil	
 											btn btn-success btn-xs"></a>
-										<form action="{{url('prf_foreign_research',$data->id)}}"
+										<form action="{{url('prof_foreign_research',$data->id)}}"
 											method="post" style="display: inline;">
 											{{ method_field('DELETE') }}
                         					{{ csrf_field() }}
