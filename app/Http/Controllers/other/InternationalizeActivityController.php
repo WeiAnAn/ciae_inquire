@@ -27,6 +27,25 @@ class InternationalizeActivityController extends Controller
 
     	return view ('other/internationalize_activity',$data);
     }
+
+    public function insert(Request $request){
+        
+        $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'activityName'=>'required|max:200',
+            'place'=>'required|max:200',
+            'host'=>'required|max:200',
+            'guest'=>'required|max:200',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            ]);
+
+        internationalactivity::create($request->all());
+
+        return redirect('internationalize_activity')->with('success','新增成功');
+    }
+
     public function search (Request $request){
     	$sortBy = 'id';
         $orderBy = "desc";

@@ -27,6 +27,24 @@ class ShortTermForeignStuController extends Controller
 		return view('stu/short_term_foreign_stu',$data);
 	}
 
+    public function insert(Request $request){
+        
+        $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:50',
+            'stuLevel'=>'required|max:11',
+            'nation'=>'required|max:50',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+            ]);
+
+        ShortTermForeignStu::create($request->all());
+
+        return redirect('short_term_foreign_stu')->with('success','新增成功');
+    }
+
 	public function search (Request $request){
 
     	$sortBy = 'id';
