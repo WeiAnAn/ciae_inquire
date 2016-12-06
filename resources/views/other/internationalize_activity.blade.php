@@ -149,7 +149,7 @@
 							</div>
 							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 								<label for="endDate">結束時間</label>
-								<input type="date" name="endDate" class="form-control" value="{{old('endDate')}}>
+								<input type="date" name="endDate" class="form-control" value="{{old('endDate')}}">
 							</div>
 							<button class="btn btn-success">新增</button>
 						</form>
