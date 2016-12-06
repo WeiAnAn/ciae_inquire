@@ -189,7 +189,9 @@ class ForeignLanguageClassController extends Controller
                         default:
                             break;
                     }
-                }
+
+                } 
+                    
                 $validator = Validator::make($item,[
                     'college' => 'required',
                 ]);

@@ -160,4 +160,8 @@ class GraduateThresholdController extends Controller
         return redirect('graduate_threshold');
     }
     
+     public function example(Request $request){
+        return response()->download(public_path().'/Excel_example/user/graduate_threshold.xlsx',"英檢畢業門檻.xlsx");
+    }
+    
 }

@@ -158,7 +158,9 @@
                         	<div id="file_error"></div>
 							<input type="file" id="file" class="" style="margin: 2px" name="file">
 							<button class="btn btn-primary" style="margin: 2px"
-								onclick="checkFile(event)">上傳</button>								
+								onclick="checkFile(event)">上傳</button>
+							<a class="btn btn-success" href="{{url('graduate_threshold/example')}}">範例檔案</a>
+							<a class="btn btn-success" href="{{url('example')}}">系所對照表</a>								
 						</form>
 					</div>
 
