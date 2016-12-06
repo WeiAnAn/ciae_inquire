@@ -123,7 +123,7 @@
 							</div>
 							<div class="form-group">
 								<label for="profLevel">身分</label>
-								<select name="profLevel" id="profLevel" class="form-control">
+								<select name="profLevel" id="profLevel_option" class="form-control">
 									<option value="1">教授</option>
 									<option value="2">副教授</option>
 									<option value="3">助理教授</option>
@@ -179,7 +179,7 @@
 							</div>
 							<div class="form-group">
 								<label for="profLevel">身分</label>
-								<select name="profLevel" id="profLevel" class="form-control">
+								<select name="profLevel" class="form-control">
 									<option value=""></option>
 									<option value="1">教授</option>
 									<option value="2">副教授</option>
@@ -223,4 +223,9 @@
 		</div>
 	</div>
 </div>
+@if(count($errors)>0)
+	<script>
+		document.getElementById('profLevel_option').value ={{old('profLevel')}};
+	</script>
+@endif
 @endsection
