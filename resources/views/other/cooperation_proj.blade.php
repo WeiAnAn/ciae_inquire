@@ -11,15 +11,30 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 			<ul class="nav nav-tabs">
-                <li class="active"><a href="#show" data-toggle="tab">檢視</a>
-                </li>
-                <li><a href="#insert" data-toggle="tab">新增</a>
-                </li>
+                @if(count($errors)>0)
+	                <li><a href="#show" data-toggle="tab">檢視</a>
+	                </li>
+	                <li class="active"><a href="#insert" data-toggle="tab">新增</a>
+	                </li>
+				@else
+	                <li class="active"><a href="#show" data-toggle="tab">檢視</a>
+	                </li>
+	                <li><a href="#insert" data-toggle="tab">新增</a>
+	                </li>
+	            @endif    
                 <li><a href="#search" data-toggle="tab">進階搜尋</a>
                 </li>
                 <li><a href="#upload" data-toggle="tab">批次上傳</a>
                 </li>
             </ul>
+            	@if(session('success'))
+			        <div class="alert alert-success alert-dismissible" role="alert">
+			            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			                <span aria-hidden="true">&times;</span>
+			            </button>
+			            <strong> {{ session('success') }}</strong>
+			        </div>
+		        @endif
 				<div class="tab-content">
 					<div class="tab-pane fade in active " id="show" style="margin-top: 10px">
 						<table width="100%" class="table table-striped table-bordered table-hover">
@@ -68,38 +83,66 @@
 								@endforeach
 							</tbody>
 						</table>
-					{{ $cooperationproj->links() }}	
+						{{ $cooperationproj->links() }}
 					</div>
-					
 
-					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
+					<!--insert page-->
+
+					@if(count($errors)>0)
+						<div class="tab-pane fade in col-md-12 active " id="insert" 
+							style="margin-top: 10px">
+					@else
+						<div class="tab-pane fade in col-md-12 " id="insert" 
+							style="margin-top: 10px">
+					@endif
 						<form action="{{url('cooperation_proj')}}" method="post">
 							{{ csrf_field() }}
 							@include('../layouts/select')
+							
+							@if($errors->has('name'))
+                                <p class="text-danger">{{$errors->first('name')}}</p>
+                            @endif
 							<div class="form-group">
 								<label for="">主持人</label>
-								<input type="text" class="form-control" name="name" />
-							</div>
-							<div class="form-group">
-								<label for="projOrg">合作機構</label>
-								<textarea name="projOrg" id="projOrg" cols="30" rows="3" class="form-control"></textarea>
-							</div>
-							<div class="form-group">
-								<label for="projName">計畫名稱</label>
-								<textarea name="projName" id="projName" cols="30" rows="3" class="form-control"></textarea>
+								<input type="text" class="form-control" name="name" value="{{old('name')}}" />
 							</div>
 							
+							@if($errors->has('projOrg'))
+                                <p class="text-danger">{{$errors->first('projOrg')}}</p>
+                            @endif
+							<div class="form-group">
+								<label for="projOrg">合作機構</label>
+								<textarea name="projOrg" id="projOrg" cols="30" rows="3" class="form-control">{{old('name')}}</textarea>
+							</div>
+
+							@if($errors->has('projName'))
+                                <p class="text-danger">{{$errors->first('projName')}}</p>
+                            @endif
+							<div class="form-group">
+								<label for="projName">計畫名稱</label>
+								<textarea name="projName" id="projName" cols="30" rows="3" class="form-control">{{old('projName')}}</textarea>
+							</div>
+							
+
+							@if($errors->has('startDate')||$errors->has('endDate'))
+                                <p class="text-danger col-md-6">{{ $errors->first('startDate')}}</p>                      
+                                <p class="text-danger col-md-6">{{ $errors->first('endDate')}}</p>
+                            @endif
 							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 								<label for="startDate">開始時間</label>
-								<input type="date" name="startDate" class="form-control">
+								<input type="date" name="startDate" class="form-control" value="{{old('startDate')}}">
 							</div>
 							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 								<label for="endDate">結束時間</label>
-								<input type="date" name="endDate" class="form-control">
+								<input type="date" name="endDate" class="form-control" value="{{old('endDate')}}">
 							</div>
+							
+							@if($errors->has('comments'))
+                                <p class="text-danger">{{$errors->first('comments')}}</p>
+                            @endif
 							<div class="form-group">
 								<label for="comments">備註</label>
-								<textarea name="comments" id="comments" cols="30" rows="3" class="form-control"></textarea>
+								<textarea name="comments" id="comments" cols="30" rows="3" class="form-control">{{old('comments')}}</textarea>
 							</div>
 							<button class="btn btn-success">新增</button>
 						</form>
