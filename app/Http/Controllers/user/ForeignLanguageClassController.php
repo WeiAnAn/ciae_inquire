@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\ForeignLanguageClass;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Excel;
+use Validator;
 
 class ForeignLanguageClassController extends Controller
 {
@@ -24,9 +26,11 @@ class ForeignLanguageClassController extends Controller
     		$join->on('foreign_language_class.dept','college_data.dept');
     	})->orderBy($sortBy,$orderBy)
             ->paginate(20);
-            
+        
+        $foreignLanguageClass->appends($request->except('page'));    
     	$user = Auth::user();
     	$data = compact('foreignLanguageClass','user');
+
 
     	return view('user/foreign_language_class',$data);
     }
@@ -133,5 +137,97 @@ class ForeignLanguageClassController extends Controller
         $data = compact('foreignLanguageClass','user');
         return view('user/foreign_language_class',$data);
     }
-    
+
+     public function insert(Request $request){
+        
+        $this->validate($request,[
+        
+            'college'=>'required|max:200',
+            'dept'=>'required|max:200',
+            'year'=>'required|max:200',
+            'semester'=>'required|max:200',
+            'chtName'=>'required|max:200',
+            'engName'=>'required|max:200',
+            'teacher'=>'required|max:200',
+            'language'=>'required|max:200',
+            'totalCount'=>'required|max:200',
+            'nationalCount'=>'required|max:200',
+
+            ]);
+
+        ForeignLanguageClass::create($request->all());
+
+        return redirect('foreign_language_class')->with('success','新增成功');
+    }
+
+    public function upload(Request $request){
+        Excel::load($request->file('file'),function($reader){
+            $array = $reader->toArray();
+            $newArray = [];
+            foreach ($array as $item) {
+                foreach ($item as $key => $value) {
+
+                    switch ($key) {
+                        case '單位名稱':
+                            $item['college'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '系所部門':
+                            $item['dept'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '學年':
+                            $item['year'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '學期':
+                            $item['semester'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '課程中文名稱':
+                            $item['chtName'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '課程英文名稱':
+                            $item['engName'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '授課教師':
+                            $item['teacher'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '授課語言':
+                            $item['language'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '總人數':
+                            $item['totalCount'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '外籍生人數':
+                            $item['nationalCount'] = $value;
+                            unset($item[$key]);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                $validator = Validator::make($item,[
+                    'college' => 'required',
+                ]);
+                if($validator->fails()){
+                    return redirect('foreign_language_class')
+                        ->withErrors($validator,"upload");
+                }
+                array_push($newArray,$item);
+            }
+            ForeignLanguageClass::insert($newArray);
+        });
+        return redirect('foreign_language_class');
+    }
+
+    public function example(Request $request){
+        return response()->download(public_path().'/Excel_example/user/foreign_language_class.xlsx',"全外語授課之課程.xlsx");
+    }
+
 }
