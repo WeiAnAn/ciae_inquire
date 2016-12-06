@@ -26,6 +26,8 @@ class GraduateThresholdController extends Controller
     	})->orderBy($sortBy,$orderBy)
             ->paginate(20);
         $user = Auth::user();
+        
+        $graduateThreshold->appends($request->except('page'));
     	$data=compact('graduateThreshold','user');
     	return view ('user/graduate_threshold',$data);
 
@@ -127,8 +129,6 @@ class GraduateThresholdController extends Controller
                         default:
                             break;
                     }
-                    dd($key);
-
                 }
                 $validator = Validator::make($item,[
                     'college' => 'required',
