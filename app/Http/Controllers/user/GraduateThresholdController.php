@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\GraduateThreshold;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Maatwebsite\Excel\Facades\Excel;
+use Validator;
 
 class GraduateThresholdController extends Controller
 {
@@ -93,9 +95,37 @@ class GraduateThresholdController extends Controller
         $user = Auth::user();
         $data = compact('graduateThreshold','user');
         return view('user/graduate_threshold',$data);
-
-
-
+    }
+    public function upload(Request $request){
+        Excel::load($request->file('file'),function($reader){
+            $array = $reader->toArray();
+            $newArray = [];
+            foreach ($array as $item) {
+                foreach ($item as $key => $value) {
+                    switch ($key) {
+                        case 'testname':
+                            $item['testName'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case 'testgrade':
+                            $item['testGrade'] = $value;
+                            unset($item[$key]);
+                        default:
+                            break;
+                    }
+                }
+                $validator = Validator::make($item,[
+                    'college' => 'required',
+                ]);
+                if($validator->fails()){
+                    return redirect('graduate_threshold')
+                        ->withErrors($validator,"upload");
+                }
+                array_push($newArray,$item);
+            }
+            GraduateThreshold::insert($newArray);
+        });
+        return redirect('graduate_threshold');
     }
     public function insert(Request $request){
         

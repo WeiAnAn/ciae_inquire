@@ -44,6 +44,22 @@ function explodeQuery(query){
     });
     return result;
 }
+function checkFile(event){
+    var fileName = document.getElementById('file').value.split(/(\\|\/)/g).pop();
+    console.log(fileName);
+    var test = /(.xls$|.xlsx$)/;
+    if(!test.test(fileName)){
+        event.preventDefault();
+        document.getElementById('file_error').innerHTML = `
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>檔案格式錯誤</strong>
+            </div>
+        `
+    }
+}
 //Loads the correct sidebar on window load,
 //collapses the sidebar on window resize.
 // Sets the min-height of #page-wrapper to window size

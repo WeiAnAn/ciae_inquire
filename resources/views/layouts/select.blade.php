@@ -244,6 +244,12 @@
 			}
 			);	
 		@endif
+		@if(count($errors)>0)
+			document.getElementById('college_option').value = {{old('college')}};
+			change({{old('college')}});
+			document.getElementById('dept_option').value = {{old('dept')}};
+		@endif
 	</script>
+
 </body>
 </html>
