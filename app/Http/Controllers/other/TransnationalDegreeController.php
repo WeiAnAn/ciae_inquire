@@ -27,6 +27,28 @@ class TransnationalDegreeController extends Controller
     	return view ('other/transnational_degree',$data);
     }
 
+    public function insert(Request $request){
+        
+        $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:11',
+            'nation'=>'required|max:20',
+            'chtName'=>'required|max:200',
+            'engName'=>'required|max:200',
+            'bachelor'=>'required|max:11',
+            'master'=>'required|max:11',
+            'PHD'=>'required|max:11',
+            'classMode'=>'required|max:200',
+            'degreeMode'=>'required|max:200',
+            'comments'=>'max:500',
+            ]);
+
+        transnationalDegree::create($request->all());
+
+        return redirect('transnational_degree')->with('success','新增成功');
+    }
+
     public function search (Request $request){
     	$sortBy = 'id';
         $orderBy = "desc";

@@ -97,6 +97,6 @@ class ProfForeignResearchController extends Controller
         if(!Gate::allows('permission',$Pforeignresearch))
             return redirect('prof_foreign_researc');
         $Pforeignresearch->delete();
-        return redirect('prof_foreign_researc');
+        return redirect('prof_foreign_research');
     }
 }

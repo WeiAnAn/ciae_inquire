@@ -31,6 +31,28 @@ class ForeignLanguageClassController extends Controller
     	return view('user/foreign_language_class',$data);
     }
 
+    public function insert(Request $request){
+        
+        $this->validate($request,[
+        
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'year'=>'required|max:5',
+            'semester'=>'required|max:1',
+            'chtName'=>'required|max:50',
+            'engName'=>'required|max:50',
+            'teacher'=>'required|max:20',
+            'language'=>'required|max:20',
+            'totalCount'=>'required|max:11',
+            'nationalCount'=>'required|max:11',
+
+            ]);
+
+        ForeignLanguageClass::create($request->all());
+
+        return redirect('foreign_language_class')->with('success','新增成功');
+    }
+
     public function edit($id){
     	$foreignLanguageClass = ForeignLanguageClass::find($id);
         if(Gate::allows('permission',$foreignLanguageClass)){
@@ -111,25 +133,5 @@ class ForeignLanguageClassController extends Controller
         $data = compact('foreignLanguageClass','user');
         return view('user/foreign_language_class',$data);
     }
-     public function insert(Request $request){
-        
-        $this->validate($request,[
-        
-            'college'=>'required|max:200',
-            'dept'=>'required|max:200',
-            'year'=>'required|max:200',
-            'semester'=>'required|max:200',
-            'chtName'=>'required|max:200',
-            'engName'=>'required|max:200',
-            'teacher'=>'required|max:200',
-            'language'=>'required|max:200',
-            'totalCount'=>'required|max:200',
-            'nationalCount'=>'required|max:200',
-
-            ]);
-
-        ForeignLanguageClass::create($request->all());
-
-        return redirect('foreign_language_class')->with('success','新增成功');
-    }
+    
 }

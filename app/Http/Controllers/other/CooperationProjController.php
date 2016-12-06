@@ -27,6 +27,25 @@ class CooperationProjController extends Controller
     	return view ('other/cooperation_proj',$data);
     }
 
+    public function insert(Request $request){
+        
+        $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:10',
+            'projName'=>'required|max:200',
+            'projOrg'=>'required|max:200',
+            'projContent'=>'max:200',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+            ]);
+
+        cooperationproj::create($request->all());
+
+        return redirect('cooperation_proj')->with('success','新增成功');
+    }
+
     public function search (Request $request){
     	$sortBy = 'id';
         $orderBy = "desc";

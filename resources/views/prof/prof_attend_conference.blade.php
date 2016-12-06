@@ -27,15 +27,7 @@
 	                <li><a href="#upload" data-toggle="tab">批次上傳</a>
 	                </li>
 	        </ul>
-	      		@if(session('success'))
-			        <div class="alert alert-success alert-dismissible" role="alert">
-			            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			                <span aria-hidden="true">&times;</span>
-			            </button>
-			            <strong> {{ session('success') }}</strong>
-			        </div>
-		        @endif
-				<div class="tab-content">
+	      		<div class="tab-content">
 					@if(count($errors)>0)
 						<div class="tab-pane fade in table-responsive" id="show" 
 							style="margin-top: 10px">
@@ -43,6 +35,14 @@
 						<div class="tab-pane fade in active table-responsive" id="show" 
 							style="margin-top: 10px">
 					@endif
+						@if(session('success'))
+				        <div class="alert alert-success alert-dismissible" role="alert">
+				            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				                <span aria-hidden="true">&times;</span>
+				            </button>
+				            <strong> {{ session('success') }}</strong>
+				        </div>
+			        	@endif
 						<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>

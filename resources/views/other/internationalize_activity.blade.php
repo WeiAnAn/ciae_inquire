@@ -11,17 +11,39 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 			<ul class="nav nav-tabs">
-                <li class="active"><a href="#show" data-toggle="tab">檢視</a>
-                </li>
-                <li><a href="#insert" data-toggle="tab">新增</a>
-                </li>
+                @if(count($errors)>0)
+	                <li><a href="#show" data-toggle="tab">檢視</a>
+	                </li>
+	                <li class="active"><a href="#insert" data-toggle="tab">新增</a>
+	                </li>
+				@else
+	                <li class="active"><a href="#show" data-toggle="tab">檢視</a>
+	                </li>
+	                <li><a href="#insert" data-toggle="tab">新增</a>
+	                </li>
+	            @endif    
                 <li><a href="#search" data-toggle="tab">進階搜尋</a>
                 </li>
                 <li><a href="#upload" data-toggle="tab">批次上傳</a>
                 </li>
             </ul>
+            	
 				<div class="tab-content">
-					<div class="tab-pane fade in active " id="show" style="margin-top: 10px">
+					@if(count($errors)>0)
+						<div class="tab-pane fade in table-responsive" id="show" 
+							style="margin-top: 10px">
+					@else
+						<div class="tab-pane fade in active table-responsive" id="show" 
+							style="margin-top: 10px">
+					@endif
+						@if(session('success'))
+				        <div class="alert alert-success alert-dismissible" role="alert">
+				            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				                <span aria-hidden="true">&times;</span>
+				            </button>
+				            <strong> {{ session('success') }}</strong>
+				        </div>
+			        	@endif
 						<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
@@ -72,35 +94,62 @@
 					{{ $internationalactivity->links() }}	
 					</div>
 
+					<!--insert page-->
 
-					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
+					@if(count($errors)>0)
+						<div class="tab-pane fade in col-md-12 active " id="insert" 
+							style="margin-top: 10px">
+					@else
+						<div class="tab-pane fade in col-md-12 " id="insert" 
+							style="margin-top: 10px">
+					@endif
 						<form action="{{url('internationalize_activity')}}" method="post">
 							{{ csrf_field() }}
 							@include('../layouts/select')
+
+							@if($errors->has('activityName'))
+                                <p class="text-danger">{{$errors->first('activityName')}}</p>
+                            @endif
 							<div class="form-group">
 								<label for="activityName">活動性質</label>
-								<input type="text" class="form-control" name="activityName" />
+								<input type="text" class="form-control" name="activityName" value="{{old('activityName')}}" />
 							</div>
+
+							@if($errors->has('place'))
+                                <p class="text-danger">{{$errors->first('place')}}</p>
+                            @endif
 							<div class="form-group">
 								<label for="place">地點</label>
-								<input type="text" class="form-control" name="place" />
+								<input type="text" class="form-control" name="place" value="{{old('place')}}" />
 							</div>
+
+							@if($errors->has('host'))
+                                <p class="text-danger">{{$errors->first('host')}}</p>
+                            @endif
 							<div class="form-group">
 								<label for="host">主辦</label>
-								<textarea name="host" id="host" cols="30" rows="3" class="form-control"></textarea>
+								<textarea name="host" id="host" cols="30" rows="3" class="form-control">{{old('host')}}</textarea>
 							</div>
+
+							@if($errors->has('guest'))
+                                <p class="text-danger">{{$errors->first('guest')}}</p>
+                            @endif
 							<div class="form-group">
 								<label for="guest">外賓</label>
-								<textarea name="guest" id="guest" cols="30" rows="3" class="form-control"></textarea>
+								<textarea name="guest" id="guest" cols="30" rows="3" class="form-control">{{old('guest')}}</textarea>
 							</div>
 							
+							@if($errors->has('startDate')||$errors->has('endDate'))
+                                <p class="text-danger col-md-6">{{ $errors->first('startDate')}}</p>                      
+                                <p class="text-danger col-md-6">{{ $errors->first('endDate')}}</p>
+                            @endif
 							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 								<label for="startDate">開始時間</label>
-								<input type="date" name="startDate" class="form-control">
+								<input type="date" name="startDate" class="form-control" value="{{old('startDate')}}">
 							</div>
 							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 								<label for="endDate">結束時間</label>
-								<input type="date" name="endDate" class="form-control">
+								<input type="date" name="endDate" class="form-control" value="{{old('endDate')}}">
 							</div>
 							<button class="btn btn-success">新增</button>
 						</form>

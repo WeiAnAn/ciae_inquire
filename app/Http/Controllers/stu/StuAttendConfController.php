@@ -25,8 +25,27 @@ class StuAttendConfController extends Controller
     	$user = Auth::user();
     	$data=compact('conf','user');
     	return view ('stu/stu_attend_conf',$data);
-
     	}
+
+    public function insert(Request $request){
+            
+            $this->validate($request,[
+                'college'=>'required|max:11',
+                'dept'=>'required|max:11',
+                'name'=>'required|max:20',
+                'stuLevel'=>'required|max:11',
+                'nation'=>'required|max:20',
+                'confName'=>'required|max:200',
+                'startDate'=>'required',
+                'endDate'=>'required',
+                'comments'=>'max:500',
+                ]);
+
+            StuAttendConf::create($request->all());
+
+            return redirect('stu_attend_conf')->with('success','新增成功');
+        }
+
     public function search (Request $request){
 
     	$sortBy = 'id';

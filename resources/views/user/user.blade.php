@@ -35,44 +35,66 @@
                             <input type="text" class="form-control" name="username" 
                             disabled value="{{$collegeData->chtName}}">
                         </div>
-                       
+                        
+                        <!--change page-->
 
     					<form role="form" action="{{url('/user')}}" method="post">
                         {{ method_field('PATCH') }}
                         {{ csrf_field() }}
                             <input type="text" hidden name="id" value="{{Auth::user()->id}}">
 
+                            @if($errors->has('password'))
+                                <p class="text-danger">{{ $errors->first('password') }}</p>
+                            @endif
                             <div class="form-group">
                                 <label for="username" >密碼</label>
                                 <input type="password" class="form-control" name="password">
-                                @if($errors->has('password'))
-                                <p class="text-danger">{{ $errors->first('password') }}</p>
-                                @endif
+                                
                             </div>
                             <div class="form-group">
                                 <label for="username" >確認密碼</label>
                                 <input type="password" class="form-control" name="password_confirmation">
                             </div>
+
+                            @if($errors->has('chtName'))
+                                <p class="text-danger">{{ $errors->first('chtName') }}</p>
+                            @endif
                             <div class="form-group">
                                 <label for="">中文名稱</label>
                                 <input type="text" class="form-control" name="chtName" 
                                 value="{{Auth::user()->chtName}}">
                             </div>
+
+                            @if($errors->has('engName'))
+                                <p class="text-danger">{{ $errors->first('engName') }}</p>
+                            @endif
                             <div class="form-group">
                                 <label for="engName">英文名稱</label>
                                 <input type="text" class="form-control" name="engName"
                                 value="{{Auth::user()->engName}}">
                             </div>
+
+                             @if($errors->has('contactPeople'))
+                                <p class="text-danger">{{ $errors->first('contactPeople')}}</p>
+                            @endif
                             <div class="form-group">
                                 <label for="">聯絡人</label>
                                 <input type="text" class="form-control" name="contactPeople"
                                 value="{{Auth::user()->contactPeople}}">
                             </div>
+
+                             @if($errors->has('phone'))
+                                <p class="text-danger">{{ $errors->first('phone') }}</p>
+                            @endif
                             <div class="form-group">
                                 <label for="">電話</label>
                                 <input type="text" class="form-control" name="phone"
                                 value="{{Auth::user()->phone}}">
                             </div>
+
+                             @if($errors->has('email'))
+                                <p class="text-danger">{{ $errors->first('email') }}</p>
+                            @endif
                             <div class="form-group">
                                 <label for="">email</label>
                                 <input type="email" class="form-control" name="email"

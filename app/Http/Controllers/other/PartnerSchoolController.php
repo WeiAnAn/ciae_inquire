@@ -28,6 +28,24 @@ class PartnerSchoolController extends Controller
     	return view ('other/partner_school',$data);
     }
 
+    public function insert(Request $request){
+        
+        $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'nation'=>'required|max:20',
+            'chtName'=>'required|max:50',
+            'engName'=>'required|max:80',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+            ]);
+
+        internationalactivity::create($request->all());
+
+        return redirect('internationalize_activity')->with('success','新增成功');
+    }
+
     public function search (Request $request){
     	$sortBy = 'id';
         $orderBy = "desc";

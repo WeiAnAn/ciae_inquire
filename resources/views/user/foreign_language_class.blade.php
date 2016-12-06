@@ -11,17 +11,38 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 			<ul class="nav nav-tabs">
-                <li class="active"><a href="#show" data-toggle="tab">檢視</a>
-                </li>
-                <li><a href="#insert" data-toggle="tab">新增</a>
-                </li>
+               @if(count($errors)>0)
+	                <li><a href="#show" data-toggle="tab">檢視</a>
+	                </li>
+	                <li class="active"><a href="#insert" data-toggle="tab">新增</a>
+	                </li>
+				@else
+	                <li class="active"><a href="#show" data-toggle="tab">檢視</a>
+	                </li>
+	                <li><a href="#insert" data-toggle="tab">新增</a>
+	                </li>
+	            @endif    
                 <li><a href="#search" data-toggle="tab">進階搜尋</a>
                 </li>
                 <li><a href="#upload" data-toggle="tab">批次上傳</a>
                 </li>
             </ul>
-				<div class="tab-content">
-					<div class="tab-pane fade in active " id="show" style="margin-top: 10px">
+            	<div class="tab-content">
+					@if(count($errors)>0)
+						<div class="tab-pane fade in table-responsive" id="show" 
+							style="margin-top: 10px">
+					@else
+						<div class="tab-pane fade in active table-responsive" id="show" 
+							style="margin-top: 10px">
+					@endif
+						@if(session('success'))
+				        <div class="alert alert-success alert-dismissible" role="alert">
+				            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				                <span aria-hidden="true">&times;</span>
+				            </button>
+				            <strong> {{ session('success') }}</strong>
+				        </div>
+			        	@endif
 						<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
@@ -74,14 +95,27 @@
 						{{$foreignLanguageClass->links()}}
 					</div>
 
-					<div class="tab-pane fade in col-md-12" id="insert" style="margin-top: 10px">
+					<!--insert page-->
+
+					@if(count($errors)>0)
+						<div class="tab-pane fade in col-md-12 active " id="insert" 
+							style="margin-top: 10px">
+					@else
+						<div class="tab-pane fade in col-md-12 " id="insert" 
+							style="margin-top: 10px">
+					@endif
 						<form action="{{url('/foreign_language_class')}}" method="post">
                         	{{ csrf_field() }}
 							@include('../layouts/select')
+
+							@if($errors->has('year'))
+                                <p class="text-danger">{{$errors->first('year')}}</p>
+                            @endif
 							<div class="form-group">
 								<label for="">學年</label>
-								<input type="number" name="year" class="form-control" value="105">
+								<input type="number" name="year" class="form-control" value="{{old('year')}}" >
 							</div>
+
 							<div class="form-group">
 								<label for="semester">學期</label>
 								<select name="semester" id="semester" class="form-control">
@@ -89,29 +123,53 @@
 									<option value="2">下學期</option>
 								</select>
 							</div>
+
+							@if($errors->has('chtName'))
+                                <p class="text-danger">{{$errors->first('chtName')}}</p>
+                            @endif
 							<div class="form-group">
 								<label for="">課程中文名稱</label>
-								<input type="text"  name="chtName" class="form-control"></input>
+								<input type="text"  name="chtName" class="form-control" value="{{old('chtName')}}"></input>
 							</div>
+
+							@if($errors->has('engName'))
+                                <p class="text-danger">{{$errors->first('engName')}}</p>
+                            @endif
 							<div class="form-group">
 								<label for="engName">課程英文名稱</label>
-								<input type="text" name="engName" class="form-control">
+								<input type="text" name="engName" class="form-control" value="{{old('engName')}}">
 							</div>
+
+							@if($errors->has('teacher'))
+                                <p class="text-danger">{{$errors->first('teacher')}}</p>
+                            @endif
 							<div class="form-group">
 								<label for="teacher">授課教師</label>
-								<input type="text" name="teacher" class="form-control">
+								<input type="text" name="teacher" class="form-control" value="{{old('teacher')}}">
 							</div>
+
+							@if($errors->has('language'))
+                                <p class="text-danger">{{$errors->first('language')}}</p>
+                            @endif
 							<div class="form-group">
 								<label for="language">授課語言</label>
-								<input type="text" name="language" class="form-control">
+								<input type="text" name="language" class="form-control" value="{{old('language')}}">
 							</div>
+
+							@if($errors->has('totalCount'))
+                                <p class="text-danger">{{$errors->first('totalCount')}}</p>
+                            @endif
 							<div class="form-group">
 								<label for="totalCount">總人數</label>
-								<input type="number" name="totalCount" class="form-control" value="0">
+								<input type="number" name="totalCount" class="form-control" value="{{old('totalCount')}}">
 							</div>
+
+							@if($errors->has('nationalCount'))
+                                <p class="text-danger">{{$errors->first('nationalCount')}}</p>
+                            @endif
 							<div class="form-group">
 								<label for="nationalCount">外籍生人數</label>
-								<input type="number" name="nationalCount" class="form-control" value="0">
+								<input type="number" name="nationalCount" class="form-control" value="{{old('nationalCount')}}">
 							</div>
 							<button class="btn btn-success">新增</button>
 						</form>

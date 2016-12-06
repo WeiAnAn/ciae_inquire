@@ -28,6 +28,27 @@ class ForeignStuController extends Controller
 
     }
 
+    public function insert(Request $request){
+        
+        $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'chtName'=>'required|max:50',
+            'engName'=>'required|max:50',
+            'stuID'=>'required|max:15',
+            'stuLevel'=>'required|max:11',
+            'nation'=>'required|max:50',
+            'engNation'=>'required|max:50',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+            ]);
+
+        ForeignStu::create($request->all());
+
+        return redirect('foreign_stu')->with('success','新增成功');
+    }
+
     public function search (Request $request){
 
     	$sortBy = 'id';
