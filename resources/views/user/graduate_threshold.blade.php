@@ -114,8 +114,10 @@
 					<div class="tab-pane fade in col-md-12" id="upload" style="margin-top: 10px;">
 						<form action="{{url('graduate_threshold/upload')}}" method="post" enctype="multipart/form-data">
                         	{{ csrf_field() }}
-							<input type="file" class="" style="margin: 2px" name="file">
-							<button class="btn btn-primary" style="margin: 2px">上傳</button>								
+                        	<div id="file_error"></div>
+							<input type="file" id="file" class="" style="margin: 2px" name="file">
+							<button class="btn btn-primary" style="margin: 2px"
+								onclick="checkFile(event)">上傳</button>								
 						</form>
 					</div>
 

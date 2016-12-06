@@ -97,7 +97,25 @@ class GraduateThresholdController extends Controller
     }
     public function upload(Request $request){
         Excel::load($request->file('file'),function($reader){
-            dd($reader->get());
+            $array = $reader->toArray();
+            foreach ($array as $item) {
+                foreach ($item as $key => $value) {
+                    switch ($key) {
+                        case 'testname':
+                            $item['testName'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case 'testgrade':
+                            $item['testGrade'] = $value;
+                            unset($item[$key]);
+                        default:
+                            # code...
+                            break;
+                    }
+                }
+            GraduateThreshold::insert($item);
+            }
         });
+        return redirect('graduate_threshold');
     }
 }
