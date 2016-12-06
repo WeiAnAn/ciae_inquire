@@ -102,17 +102,33 @@ class GraduateThresholdController extends Controller
             $newArray = [];
             foreach ($array as $item) {
                 foreach ($item as $key => $value) {
+
                     switch ($key) {
-                        case 'testname':
+                        case '單位名稱':
+                            $item['college'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '系所部門':
+                            $item['dept'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '語言測驗名稱':
                             $item['testName'] = $value;
                             unset($item[$key]);
                             break;
-                        case 'testgrade':
+                        case '等級或分數':
                             $item['testGrade'] = $value;
                             unset($item[$key]);
+                            break;
+                        case '備註':
+                            $item['comments'] = $value;
+                            unset($item[$key]);
+                            break;
                         default:
                             break;
                     }
+                    dd($key);
+
                 }
                 $validator = Validator::make($item,[
                     'college' => 'required',

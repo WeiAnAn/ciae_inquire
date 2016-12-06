@@ -38,6 +38,7 @@ Route::group(['middleware' => 'auth'],function(){
 	Route::get('/foreign_language_class',['uses'=>'user\ForeignLanguageClassController@index']);
 	Route::post('/foreign_language_class',['uses'=>'user\ForeignLanguageClassController@insert']);
 	Route::get('/foreign_language_class/search',['uses' => 'user\ForeignLanguageClassController@search']);
+	Route::post('/foreign_language_class/upload',['uses'=>'user\ForeignLanguageClassController@upload']);
 	Route::get('/foreign_language_class/{id}',['uses'=>'user\ForeignLanguageClassController@edit']);
 	Route::patch('/foreign_language_class/{id}',['uses'=>'user\ForeignLanguageClassController@update']);
 	Route::delete('/foreign_language_class/{id}',['uses'=>'user\ForeignLanguageClassController@delete']);
