@@ -10,7 +10,7 @@ class StuAttendConf extends Model
     protected $table ='stu_attend_conf';
     protected $fillable=['college','dept','name',
     					'stuLevel','nation','confName',
-    					'startData','endData','comments'];
+    					'startDate','endDate','comments'];
     public $timestamps=false;
 
 }
