@@ -93,11 +93,34 @@ class ProfExchangeController extends Controller
         return view('prof/prof_exchange',$data);
     }
     public function delete($id){
-        $profExchange=ProfExchange::find($id);
-        if(!Gate::allows('permission',$profExchange))
+        $Pexchange=ProfExchange::find($id);
+        if(!Gate::allows('permission',$Pexchange))
             return redirect('prof_exchange');
-        $profExchange->delete();
+        $Pexchange->delete();
         return redirect('prof_exchange');
+    }
+    public function edit($id){
+        $Pexchange = ProfExchange::find($id);
+        if(Gate::allows('permission',$Pexchange))
+            return view('prof/prof_exchange_edit',$Pexchange);
+        return redirect('prof_exchange');
+    }
+    public function update($id,Request $request){
+        $Pexchange = ProfExchange::find($id);
+        if(!Gate::allows('permission',$Pexchange))
+            return redirect('prof_exchange');
+        $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:20',
+            'profLevel'=>'required|max:11',
+            'nation'=>'required|max:20',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+            ]);
+        $Pexchange->update($request->all());
+        return redirect('prof_exchange')->with('success','更新成功');
     }
    
 }
