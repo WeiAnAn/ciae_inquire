@@ -119,7 +119,7 @@
 
 							<div class="form-group">
 								<label for="stuLevel">身分</label>
-								<select name="stuLevel" id="stuLevel" class="form-control">
+								<select name="stuLevel" id="stuLevel_option" class="form-control">
 									<option value="1">博士班</option>
 									<option value="2">碩士班</option>
 									<option value="3">學士班</option>
@@ -173,7 +173,7 @@
 							</div>
 							<div class="form-group">
 								<label for="stuLevel">身分</label>
-								<select name="stuLevel" id="stuLevel" class="form-control">
+								<select name="stuLevel" class="form-control">
 									<option value=""></option>
 									<option value="1">博士班</option>
 									<option value="2">碩士班</option>
@@ -215,4 +215,9 @@
 		</div>
 	</div>
 </div>
+@if(count($errors)>0)
+	<script>
+		document.getElementById('stuLevel_option').value ={{old('stuLevel')}};
+	</script>
+@endif
 @endsection
