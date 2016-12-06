@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\PartnerSchool;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Gate;
 class PartnerSchoolController extends Controller
 {
     //
@@ -22,6 +22,7 @@ class PartnerSchoolController extends Controller
     		$join->on('partner_school.college','college_data.college');
     		$join->on('partner_school.dept','college_data.dept');
     		})->paginate(20);
+        $partner->appends($request->except('page')); 
     	$user=Auth::user();
     	$data=compact('partner','user');
 
@@ -91,4 +92,11 @@ class PartnerSchoolController extends Controller
         $data = compact('partner','user');
         return view('other/partner_school',$data);
     }
+      public function delete($id){
+        $partner = PartnerSchool::find($id);
+        if(!Gate::allows('permission',$partner))
+            return redirect('partner_school');
+        $partner->delete();
+        return redirect('partner_school');
+        }   
 }

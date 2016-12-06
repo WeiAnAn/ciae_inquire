@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\CooperationProj;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class CooperationProjController extends Controller
 {
@@ -22,6 +23,7 @@ class CooperationProjController extends Controller
     		$join->on('cooperation_proj.college','college_data.college');
     		$join->on('cooperation_proj.dept','college_data.dept');
     		})->paginate(20);
+        $cooperationproj->appends($request->except('page')); 
     	$user=Auth::user();
     	$data=compact('cooperationproj','user');
     	return view ('other/cooperation_proj',$data);
@@ -94,4 +96,11 @@ class CooperationProjController extends Controller
 
 
     }
+       public function delete($id){
+        $cooperationproj = CooperationProj::find($id);
+        if(!Gate::allows('permission',$cooperationproj))
+            return redirect('cooperation_proj');
+        $cooperationproj->delete();
+        return redirect('cooperation_proj');
+        }   
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\TransnationalDegree;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class TransnationalDegreeController extends Controller
 {
@@ -22,6 +23,7 @@ class TransnationalDegreeController extends Controller
     		$join->on('transnational_degree.college','college_data.college');
     		$join->on('transnational_degree.dept','college_data.dept');
     		})->paginate(20);
+        $transnational->appends($request->except('page'));   
     	$user = Auth::user();
     	$data = compact('transnational','user');
     	return view ('other/transnational_degree',$data);
@@ -103,4 +105,11 @@ class TransnationalDegreeController extends Controller
         $data = compact('transnational','user');
         return view('other/transnational_degree',$data);
     }
+    public function delete($id){
+        $transnational = TransnationalDegree::find($id);
+        if(!Gate::allows('permission',$transnational))
+            return redirect('transnational_degree');
+        $transnational->delete();
+        return redirect('transnational_degree');
+        }   
 }

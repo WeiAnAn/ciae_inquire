@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ShortTermForeignStu;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ShortTermForeignStuController extends Controller
 {
@@ -22,6 +23,7 @@ class ShortTermForeignStuController extends Controller
     		$join->on('short_term_foreign_stu.college','college_data.college');
     		$join->on('short_term_foreign_stu.dept','college_data.dept');
     		})->paginate(20);
+        $shortterm->appends($request->except('page'));  
 		$user = Auth::user();
 		$data = compact('shortterm','user');
 		return view('stu/short_term_foreign_stu',$data);
@@ -89,5 +91,12 @@ class ShortTermForeignStuController extends Controller
         $user = Auth::user();
         $data = compact('shortterm','user');
         return view('stu/short_term_foreign_stu',$data);
-    }			
+    }
+    public function delete($id){
+        $shortterm = ShortTermForeignStu::find($id);
+        if(!Gate::allows('permission',$shortterm))
+            return redirect('short_term_foreign_stu');
+        $shortterm->delete();
+        return redirect('short_term_foreign_stu');
+        } 			
 }

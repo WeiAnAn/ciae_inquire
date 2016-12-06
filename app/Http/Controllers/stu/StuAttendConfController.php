@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\StuAttendConf;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class StuAttendConfController extends Controller
 {
@@ -94,4 +95,11 @@ class StuAttendConfController extends Controller
         $data = compact('conf','user');
         return view('stu/stu_attend_conf',$data);
     }	
+     public function delete($id){
+        $conf = StuAttendConf::find($id);
+        if(!Gate::allows('permission',$conf))
+            return redirect('stu_attend_conf');
+        $conf->delete();
+        return redirect('stu_attend_conf');
+    }
 }

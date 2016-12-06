@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\InternationalizeActivity;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class InternationalizeActivityController extends Controller
 {
@@ -22,6 +23,7 @@ class InternationalizeActivityController extends Controller
     		$join->on('internationalize_activity.college','college_data.college');
     		$join->on('internationalize_activity.dept','college_data.dept');
     		})->paginate(20);
+        $internationalactivity->appends($request->except('page')); 
     	$user= Auth::user();
     	$data=compact('internationalactivity','user');
 
@@ -91,4 +93,11 @@ class InternationalizeActivityController extends Controller
         $data = compact('internationalactivity','user');
         return view('other/internationalize_activity',$data);
     }
+     public function delete($id){
+        $internationalactivity = InternationalizeActivity::find($id);
+        if(!Gate::allows('permission',$internationalactivity))
+            return redirect('internationalize_activity');
+        $internationalactivity->delete();
+        return redirect('internationalize_activity');
+        }   
 }

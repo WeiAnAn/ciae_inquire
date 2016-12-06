@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\StuToPartnerSchool;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class StuToPartnerSchoolController extends Controller
 {
@@ -89,5 +90,12 @@ class StuToPartnerSchoolController extends Controller
         $user = Auth::user();
         $data = compact('topartnerdata','user');
         return view('stu/stu_to_partner_school',$data);
-    }		
+    }
+     public function delete($id){
+        $topartnerdata = StuToPartnerSchool::find($id);
+        if(!Gate::allows('permission',$topartnerdata))
+            return redirect('stu_to_partner_school');
+        $topartnerdata->delete();
+        return redirect('stu_to_partner_school');
+        }		
 }

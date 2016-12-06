@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\StuForeignResearch;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 
 class StuForeignResearchController extends Controller
@@ -23,6 +24,7 @@ class StuForeignResearchController extends Controller
     		$join->on('stu_foreign_research.college','college_data.college');
     		$join->on('stu_foreign_research.dept','college_data.dept');
     		})->paginate(20);
+        $foreignreseach->appends($request->except('page'));    
 
     	$user = Auth::user();
 		$data = compact('foreignreseach','user');
@@ -91,5 +93,12 @@ class StuForeignResearchController extends Controller
         $user = Auth::user();
         $data = compact('foreignreseach','user');
         return view('stu/stu_foreign_research',$data);
-    }			
+    }
+     public function delete($id){
+        $foreignreseach = StuForeignResearch::find($id);
+        if(!Gate::allows('permission',$foreignreseach))
+            return redirect('stu_foreign_research');
+        $foreignreseach->delete();
+        return redirect('stu_foreign_research');
+        }       			
 }

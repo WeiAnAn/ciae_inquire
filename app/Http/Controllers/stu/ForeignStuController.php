@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ForeignStu;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ForeignStuController extends Controller
 {
@@ -22,6 +23,7 @@ class ForeignStuController extends Controller
     		$join->on('foreign_stu.college','college_data.college');
     		$join->on('foreign_stu.dept','college_data.dept');
     		})->paginate(20);
+        $foreignStu->appends($request->except('page'));  
     	$user=Auth::user();
     	$data = compact('foreignStu','user');
     	return view ('stu/foreign_stu',$data);
@@ -99,5 +101,12 @@ class ForeignStuController extends Controller
         $user = Auth::user();
         $data = compact('foreignStu','user');
         return view('stu/foreign_stu',$data);
-    }			
+    }
+        public function delete($id){
+        $foreignStu = ForeignStu::find($id);
+        if(!Gate::allows('permission',$foreignStu))
+            return redirect('foreign_stu');
+        $foreignStu->delete();
+        return redirect('foreign_stu');
+        }   			
 }
