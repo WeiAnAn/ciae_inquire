@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ForeignProfVist;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ForeignProfVistController extends Controller
 {
@@ -43,7 +44,7 @@ class ForeignProfVistController extends Controller
 
         ForeignProfVist::create($request->all());
 
-        return redirect('Foreign_Prof_Vist')->with('success','新增成功');
+        return redirect('foreign_prof_vist')->with('success','新增成功');
     }
 
     public function search (Request $request){
@@ -90,5 +91,12 @@ class ForeignProfVistController extends Controller
         $user = Auth::user();
         $data = compact('foreignPvist','user');
         return view('prof/foreign_prof_vist',$data);
+    }
+    public function delete($id){
+        $foreignPvist = ForeignProfVist::find($id);
+        if(!Gate::allows('permission',$foreignPvist))
+            return redirect('foreign_prof_vist');
+        $foreignPvist->delete();
+        return redirect('foreign_prof_vist');
     }
 }

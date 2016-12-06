@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ProfExchange;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ProfExchangeController extends Controller
 {
@@ -91,4 +92,12 @@ class ProfExchangeController extends Controller
         $data = compact('Pexchange','user');
         return view('prof/prof_exchange',$data);
     }
+    public function delete($id){
+        $profExchange=ProfExchange::find($id);
+        if(!Gate::allows('permission',$profExchange))
+            return redirect('prof_exchange');
+        $profExchange->delete();
+        return redirect('prof_exchange');
+    }
+   
 }
