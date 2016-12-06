@@ -33,6 +33,22 @@ class GraduateThresholdController extends Controller
 
     }
 
+    public function insert(Request $request){
+        
+        $this->validate($request,[
+        
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'testName'=>'required|max:200',
+            'testGrade'=>'required|max:200',
+            'comments'=>'max:500',
+            ]);
+
+        GraduateThreshold::create($request->all());
+
+        return redirect('graduate_threshold')->with('success','新增成功');
+    }
+
     public function edit($id){
         $graduateThreshold = GraduateThreshold::find($id);
         if(Gate::allows('permission',$graduateThreshold))
@@ -143,19 +159,5 @@ class GraduateThresholdController extends Controller
         });
         return redirect('graduate_threshold');
     }
-    public function insert(Request $request){
-        
-        $this->validate($request,[
-        
-            'college'=>'required|max:200',
-            'dept'=>'required|max:200',
-            'testName'=>'required|max:200',
-            'testGrade'=>'required|max:200',
-            'comments'=>'max:500',
-            ]);
-
-        GraduateThreshold::create($request->all());
-
-        return redirect('graduate_threshold')->with('success','新增成功');
-    }
+    
 }
