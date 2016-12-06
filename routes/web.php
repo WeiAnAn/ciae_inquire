@@ -39,6 +39,7 @@ Route::group(['middleware' => 'auth'],function(){
 	Route::post('/foreign_language_class',['uses'=>'user\ForeignLanguageClassController@insert']);
 	Route::get('/foreign_language_class/search',['uses' => 'user\ForeignLanguageClassController@search']);
 	Route::post('/foreign_language_class/upload',['uses'=>'user\ForeignLanguageClassController@upload']);
+	Route::get('/foreign_language_class/example',['uses'=>'user\ForeignLanguageClassController@example']);
 	Route::get('/foreign_language_class/{id}',['uses'=>'user\ForeignLanguageClassController@edit']);
 	Route::patch('/foreign_language_class/{id}',['uses'=>'user\ForeignLanguageClassController@update']);
 	Route::delete('/foreign_language_class/{id}',['uses'=>'user\ForeignLanguageClassController@delete']);
@@ -186,6 +187,9 @@ Route::group(['middleware' => 'auth'],function(){
 	Route::patch('/internationalize_activity/{id}',['uses'=>'other\InternationalizeActivityController@update']);
 	Route::delete('/internationalize_activity/{id}',['uses'=>'other\InternationalizeActivityController@delete']);
 	
+	Route::get('/example',function(){
+        return response()->download(public_path().'/Excel_example/college_data.xlsx',"系所對照表.xlsx");
+	});
 	
 
 });
