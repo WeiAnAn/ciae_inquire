@@ -119,7 +119,7 @@ class ProfAttendConferenceController extends Controller
             'comments'=>'max:500',
             ]);
         $Pattendconference->update($request->all());
-        return redirect('prof_attend_conference');
+        return redirect('prof_attend_conference')->with('success','更新成功');
     }
     public function delete($id){
         $Pattendconference = ProfAttendConference::find($id);
