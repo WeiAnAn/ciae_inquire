@@ -13,3 +13,4 @@ class ProfAttendConference extends Model
     					'startDate','endDate','comments'];
     public $timestamps=false;
 }
+?>

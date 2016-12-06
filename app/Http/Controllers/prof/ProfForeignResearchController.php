@@ -95,8 +95,33 @@ class ProfForeignResearchController extends Controller
       public function delete($id){
         $Pforeignresearch = ProfForeignResearch::find($id);
         if(!Gate::allows('permission',$Pforeignresearch))
-            return redirect('prof_foreign_researc');
+            return redirect('prof_foreign_research');
         $Pforeignresearch->delete();
         return redirect('prof_foreign_research');
+    }
+
+
+    public function edit($id){
+        $Pforeignresearch = ProfForeignResearch::find($id);
+        if(Gate::allows('permission',$Pforeignresearch))
+            return view('prof/prof_foreign_research_edit',$Pforeignresearch);
+        return redirect('prof_foreign_research');
+    }
+    public function update($id,Request $request){
+        $Pforeignresearch = ProfForeignResearch::find($id);
+        if(!Gate::allows('permission',$Pforeignresearch))
+            return redirect('prof_foreign_research');
+        $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:20',
+            'profLevel'=>'required|max:11',
+            'nation'=>'required|max:20',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+            ]);
+        $Pforeignresearch->update($request->all());
+        return redirect('prof_foreign_research')->with('success','更新成功');
     }
 }

@@ -118,7 +118,7 @@
 
 							<div class="form-group">
 								<label for="semester">學期</label>
-								<select name="semester" id="semester" class="form-control">
+								<select name="semester" id="semester_option" class="form-control">
 									<option value="1">上學期</option>
 									<option value="2">下學期</option>
 								</select>
@@ -190,7 +190,7 @@
 							</div>
 							<div class="form-group">
 								<label for="semester">學期</label>
-								<select name="semester" id="semester" class="form-control">
+								<select name="semester" class="form-control">
 									<option ></option>
 									<option value="1">上學期</option>
 									<option value="2">下學期</option>
@@ -236,4 +236,9 @@
 		</div>
 	</div>
 </div>
+@if(count($errors)>0)
+	<script>
+		document.getElementById('semester_option').value = {{old('semester')}};
+	</script>
+@endif
 @endsection
