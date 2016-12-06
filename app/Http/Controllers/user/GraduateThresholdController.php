@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\GraduateThreshold;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Maatwebsite\Excel\Facades\Excel;
 
 class GraduateThresholdController extends Controller
 {
@@ -93,8 +94,10 @@ class GraduateThresholdController extends Controller
         $user = Auth::user();
         $data = compact('graduateThreshold','user');
         return view('user/graduate_threshold',$data);
-
-
-
+    }
+    public function upload(Request $request){
+        Excel::load($request->file('file'),function($reader){
+            dd($reader->get());
+        });
     }
 }
