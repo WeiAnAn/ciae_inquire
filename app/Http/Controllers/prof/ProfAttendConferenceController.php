@@ -121,5 +121,13 @@ class ProfAttendConferenceController extends Controller
         $Pattendconference->update($request->all());
         return redirect('prof_attend_conference');
     }
+    public function delete($id){
+        $Pattendconference = ProfAttendConference::find($id);
+        if(!Gate::allows('permission',$Pattendconference))
+            return redirect('prof_attend_conference');
+        $Pattendconference->delete();
+        return redirect('prof_attend_conference');
+    }
+
 
 }
