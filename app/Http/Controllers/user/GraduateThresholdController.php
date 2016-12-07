@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Maatwebsite\Excel\Facades\Excel;
 use Validator;
+use App\CollegeData;
 
 class GraduateThresholdController extends Controller
 {
@@ -50,6 +51,8 @@ class GraduateThresholdController extends Controller
 
     public function edit($id){
         $graduateThreshold = GraduateThreshold::find($id);
+        dd($graduateThreshold);
+
         if(Gate::allows('permission',$graduateThreshold))
             return view('user/graduate_threshold_edit',$graduateThreshold);
         return redirect('graduate_threshold');
@@ -154,10 +157,25 @@ class GraduateThresholdController extends Controller
                 }
                 $validator = Validator::make($item,[
                     'college' => 'required',
+                    'dept' => 'required',
+                    'testName' => 'required|max:200',
+                    'testGrade' => 'required|max:200',
+                    'comments' => 'max:500',
                 ]);
                 if($validator->fails()){
                     return redirect('graduate_threshold')
                         ->withErrors($validator,"upload");
+                }
+                if(CollegeData::where('college',$item['college'])
+                        ->where('dept',$item['dept'])->first()==null){
+                    $validator->errors()->add('number','系所代碼錯誤');
+                    return redirect('graduate_threshold')
+                                ->withErrors($validator,"upload");
+                }
+                if(!Gate::allows('permission',(object)$item)){
+                    $validator->errors()->add('permission','無法新增未有權限之系所部門');
+                    return redirect('graduate_threshold')
+                                ->withErrors($validator,"upload");
                 }
                 array_push($newArray,$item);
             }
