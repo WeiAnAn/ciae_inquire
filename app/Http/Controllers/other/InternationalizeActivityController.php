@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\InternationalizeActivity;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Excel;
+use Validator;
 
 class InternationalizeActivityController extends Controller
 {
@@ -99,5 +101,68 @@ class InternationalizeActivityController extends Controller
             return redirect('internationalize_activity');
         $internationalactivity->delete();
         return redirect('internationalize_activity');
-        }   
+        } 
+
+    public function upload(Request $request){
+        Excel::load($request->file('file'),function($reader){
+            $array = $reader->toArray();
+            $newArray = [];
+            foreach ($array as $item) {
+                foreach ($item as $key => $value) {
+
+                    switch ($key) {
+                        case '單位名稱':
+                            $item['college'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '系所部門':
+                            $item['dept'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '活動性質':
+                            $item['activityName'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '地點':
+                            $item['place'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '主辦':
+                            $item['host'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '外賓':
+                            $item['guest'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '開始時間':
+                            $item['startDate'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '結束時間':
+                            $item['endDate'] = $value;
+                            unset($item[$key]);
+                            break;
+                        default:
+                            break;
+                    }
+
+                }                     
+                $validator = Validator::make($item,[
+                    'college' => 'required',
+                ]);
+                if($validator->fails()){
+                    return redirect('internationalize_activity')
+                        ->withErrors($validator,"upload");
+                }
+                array_push($newArray,$item);
+            }
+            InternationalizeActivity::insert($newArray);
+        });
+        return redirect('internationalize_activity');
+    }
+
+    public function example(Request $request){
+        return response()->download(public_path().'/Excel_example/other/internationalize_activity.xlsx',"國際化活動.xlsx");
+    }  
 }

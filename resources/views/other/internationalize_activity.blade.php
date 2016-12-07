@@ -194,9 +194,12 @@
 					</div>
 
 					<div class="tab-pane fade in col-md-12" id="upload" style="margin-top: 10px;">
-						<form action="{{url('internationalize_activity/upload')}}">
-							<input type="file" class="" style="margin: 2px">
-							<button class="btn btn-primary" style="margin: 2px">上傳</button>								
+						<form action="{{url('internationalize_activity/upload')}}" method="post" enctype="multipart/form-data" >
+							{{ csrf_field() }}
+							<input type="file" name="file" class="" style="margin: 2px">
+							<button class="btn btn-primary" style="margin: 2px" onclick="checkFile(event)">上傳</button>
+							<a class="btn btn-success" href="{{url('internationalize_activity/example')}}">範例檔案</a>
+							<a class="btn btn-success" href="{{url('example')}}">系所對照表</a>								
 						</form>
 					</div>
 
