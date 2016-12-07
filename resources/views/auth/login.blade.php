@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>國際化調查系統</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -45,18 +45,15 @@
                         <form role="form" method="post" action="{{ url('/login') }}">
                          {{ csrf_field() }}
                             <fieldset>
+                            @if(count($errors)>0)
+                                <p class="text-danger">帳號密碼錯誤</p>
+                            @endif
                                 <div class="form-group">
                                     <input class="form-control" placeholder="帳號" name="username" type="text" autofocus>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="密碼" name="password" type="password" value="">
                                 </div>
-                                <!-- <div class="checkbox">
-                                    <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">記住我
-                                    </label>
-                                </div> -->
-                                <!-- Change this to a button or input when using this as a form -->
                                 <button class="btn btn-lg btn-success btn-block">登入</button>
                             </fieldset>
                         </form>
