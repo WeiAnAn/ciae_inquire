@@ -26,7 +26,6 @@ class GraduateThresholdController extends Controller
     	})->orderBy($sortBy,$orderBy)
             ->paginate(20);
         $user = Auth::user();
-        
         $graduateThreshold->appends($request->except('page'));
     	$data=compact('graduateThreshold','user');
     	return view ('user/graduate_threshold',$data);
@@ -146,6 +145,10 @@ class GraduateThresholdController extends Controller
                             unset($item[$key]);
                             break;
                         default:
+                            $validator = Validator::make($item,[]);
+                            $validator->errors()->add('format','檔案欄位錯誤');
+                            return redirect('graduate_threshold')
+                                ->withErrors($validator,"upload");
                             break;
                     }
                 }
