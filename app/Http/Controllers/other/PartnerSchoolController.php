@@ -46,9 +46,9 @@ class PartnerSchoolController extends Controller
             'comments'=>'max:500',
             ]);
 
-        internationalactivity::create($request->all());
+        partnerschool::create($request->all());
 
-        return redirect('internationalize_activity')->with('success','新增成功');
+        return redirect('partner_school')->with('success','新增成功');
     }
 
     public function search (Request $request){
