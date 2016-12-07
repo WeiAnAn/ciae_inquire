@@ -102,6 +102,9 @@ class GraduateThresholdController extends Controller
         if($request->testGrade != "")
             $graduateThreshold = $graduateThreshold
                 ->where('testGrade',"like","%$request->testGrade%");
+        if($request->testName != "")
+            $graduateThreshold = $graduateThreshold
+                ->where('testName',"like","%$request->testName%");
         if($request->comments != "")
             $graduateThreshold = $graduateThreshold
                 ->where('comments',"like","%$request->comments%");
