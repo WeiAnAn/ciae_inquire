@@ -47,17 +47,17 @@
 						<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
-									<td>單位</td>
-									<td>系所部門</td>
-									<td>國家</td>
-									<td>中文校名</td>
-									<td>英文校名</td>
-									<td>學士</td>
-									<td>碩士</td>
-									<td>博士</td>
-									<td>授課方式</td>
-									<td>學位授予方式</td>
-									<td>備註</td>
+									<td id="transnational_degree.college" onclick="sort(id)">單位</td>
+									<td id="transnational_degree.dept" onclick="sort(id)">系所部門</td>
+									<td id="nation" onclick="sort(id)">國家</td>
+									<td id="chtName" onclick="sort(id)">中文校名</td>
+									<td id="engName" onclick="sort(id)">英文校名</td>
+									<td id="bachelor" onclick="sort(id)">學士</td>
+									<td id="master" onclick="sort(id)">碩士</td>
+									<td id="PHD" onclick="sort(id)">博士</td>
+									<td id="classMode" onclick="sort(id)">授課方式</td>
+									<td id="degreeMode" onclick="sort(id)">學位授予方式</td>
+									<td id="comments" onclick="sort(id)">備註</td>
 									<td>管理</td>
 								</tr>
 								</thead>

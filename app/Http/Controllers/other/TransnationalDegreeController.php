@@ -24,7 +24,7 @@ class TransnationalDegreeController extends Controller
     	$transnational = TransnationalDegree::join('college_data',function($join){
     		$join->on('transnational_degree.college','college_data.college');
     		$join->on('transnational_degree.dept','college_data.dept');
-    		})->paginate(20);
+    		})->orderBy($sortBy,$orderBy)->paginate(20);
         $transnational->appends($request->except('page'));   
     	$user = Auth::user();
     	$data = compact('transnational','user');
