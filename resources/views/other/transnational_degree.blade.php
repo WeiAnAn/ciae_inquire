@@ -69,9 +69,21 @@
 									<td>{{$data->nation}}</td>
 									<td>{{$data->chtName}}</td>
 									<td>{{$data->engName}}</td>
-									<td>{{$data->bachelor}}</td>
-									<td>{{$data->master}}</td>
-									<td>{{$data->PHD}}</td>
+									<td>@if($data->bachelor==1)
+									有
+									@else
+									無
+									@endif</td>
+									<td>@if($data->master==1)
+									有
+									@else
+									無
+									@endif</td>
+									<td>@if($data->PHD==1)
+									有
+									@else
+									無
+									@endif
 									<td>{{$data->classMode}}</td>
 									<td>{{$data->degreeMode}}</td>
 									<td>{{$data->comments}}</td>

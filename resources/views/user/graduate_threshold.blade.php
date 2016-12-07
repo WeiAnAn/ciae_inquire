@@ -1,6 +1,7 @@
 @extends('../layouts/master')
 
 @section('content')
+{{-- {{var_dump($errors->upload)}} --}}
 <div class="row">
 	<div class="col-md-12">
 		<a href="{{url('graduate_threshold')}}" style="color: black">
@@ -156,6 +157,9 @@
 						<form action="{{url('graduate_threshold/upload')}}" method="post" enctype="multipart/form-data">
                         	{{ csrf_field() }}
                         	<div id="file_error"></div>
+                        	@if(count($errors->upload)>0)
+                        		<p class="text-danger">上傳欄位內容錯誤</p>
+                        	@endif
 							<input type="file" id="file" class="" style="margin: 2px" name="file">
 							<button class="btn btn-primary" style="margin: 2px"
 								onclick="checkFile(event)">上傳</button>
