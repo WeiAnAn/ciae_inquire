@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\CooperationProj;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Excel;
+use Validator;
+
 
 class CooperationProjController extends Controller
 {
@@ -102,5 +105,71 @@ class CooperationProjController extends Controller
             return redirect('cooperation_proj');
         $cooperationproj->delete();
         return redirect('cooperation_proj');
-        }   
+        }
+
+        public function upload(Request $request){
+        Excel::load($request->file('file'),function($reader){
+            $array = $reader->toArray();
+            $newArray = [];
+            foreach ($array as $item) {
+                foreach ($item as $key => $value) {
+
+                    switch ($key) {
+                        case '單位名稱':
+                            $item['college'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '系所部門':
+                            $item['dept'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '主持人':
+                            $item['name'] = $value;
+                            unset($item[$key]);
+                        case '合作機構':
+                            $item['projOrg'] = $value;
+                            unset($item[$key]);
+                            break; 
+                        case '計畫名稱':
+                            $item['projName'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '計畫內容':
+                            $item['projContent'] = $value;
+                            unset($item[$key]);
+                            break;                       
+                        case '開始時間':
+                            $item['startDate'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '結束時間':
+                            $item['endDate'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '備註':
+                            $item['comments'] = $value;
+                            unset($item[$key]);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                
+                $validator = Validator::make($item,[
+                    'college' => 'required',
+                ]);
+                if($validator->fails()){
+                    return redirect('cooperation_proj')
+                        ->withErrors($validator,"upload");
+                }
+                array_push($newArray,$item);
+            }
+            CooperationProj::insert($newArray);
+        });
+        return redirect('cooperation_proj');
+    }
+
+    public function example(Request $request){
+        return response()->download(public_path().'/Excel_example/other/cooperation_proj.xlsx',"國際合作交流計畫.xlsx");
+    }
 }

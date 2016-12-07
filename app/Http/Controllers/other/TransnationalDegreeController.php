@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\TransnationalDegree;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Excel;
+use Validator;
 
 class TransnationalDegreeController extends Controller
 {
@@ -105,11 +107,88 @@ class TransnationalDegreeController extends Controller
         $data = compact('transnational','user');
         return view('other/transnational_degree',$data);
     }
+
     public function delete($id){
         $transnational = TransnationalDegree::find($id);
         if(!Gate::allows('permission',$transnational))
             return redirect('transnational_degree');
         $transnational->delete();
         return redirect('transnational_degree');
-        }   
+        } 
+
+    public function upload(Request $request){
+        Excel::load($request->file('file'),function($reader){
+            $array = $reader->toArray();
+            $newArray = [];
+            foreach ($array as $item) {
+                foreach ($item as $key => $value) {
+
+                    switch ($key) {
+                        case '單位名稱':
+                            $item['college'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '系所部門':
+                            $item['dept'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '國家':
+                            $item['nation'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '中文校名':
+                            $item['chtName'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '英文校名':
+                            $item['engName'] = $value;
+                            unset($item[$key]);
+                            break;                        
+                        case '學士':
+                            $item['bachelor'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '碩士':
+                            $item['master'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '博士':
+                            $item['PHD'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '授課方式':
+                            $item['classMode'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '學位授予方式':
+                            $item['degreeMode'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '備註':
+                            $item['comments'] = $value;
+                            unset($item[$key]);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                
+                $validator = Validator::make($item,[
+                    'college' => 'required',
+                ]);
+                if($validator->fails()){
+                    return redirect('transnational_degree')
+                        ->withErrors($validator,"upload");
+                }
+                array_push($newArray,$item);
+            }
+            transnationalDegree::insert($newArray);
+        });
+        return redirect('transnational_degree');
+    }
+    
+    public function example(Request $request){
+        return response()->download(public_path().'/Excel_example/other/transnational_degree.xlsx',"跨國學位.xlsx");
+    }      
+
 }

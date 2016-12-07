@@ -217,7 +217,8 @@
 						<form action="{{url('prof_foreign_research/upload')}}" method="post" enctype="multipart/form-data">
 							{{ csrf_field() }}
 							<input type="file" name="file" class="" style="margin: 2px">
-							<button class="btn btn-primary" style="margin: 2px">上傳</button>
+							<button class="btn btn-primary" style="margin: 2px" 
+								onclick="checkFile(event)">上傳</button>
 							<a class="btn btn-success" href="{{url('prof_foreign_research/example')}}">範例檔案</a>
 							<a class="btn btn-success" href="{{url('example')}}">系所對照表</a>									
 						</form>
