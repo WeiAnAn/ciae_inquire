@@ -23,7 +23,7 @@ class StuForeignResearchController extends Controller
     	$foreignreseach = StuForeignResearch::join('college_data',function($join){
     		$join->on('stu_foreign_research.college','college_data.college');
     		$join->on('stu_foreign_research.dept','college_data.dept');
-    		})->paginate(20);
+    		})->orderBy($sortBy,$orderBy)->paginate(20);
         $foreignreseach->appends($request->except('page'));    
 
     	$user = Auth::user();

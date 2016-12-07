@@ -22,7 +22,7 @@ class StuFromPartnerSchoolController extends Controller
 		$frompartnerdata = StuFromPartnerSchool::join('college_data',function($join){
     		$join->on('stu_from_partner_school.college','college_data.college');
     		$join->on('stu_from_partner_school.dept','college_data.dept');
-    		})->paginate(20);
+    		})->orderBy($sortBy,$orderBy)->paginate(20);
         $frompartnerdata->appends($request->except('page'));  
 
 		$user = Auth::user();

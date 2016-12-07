@@ -46,14 +46,14 @@
 						<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
-									<td>單位</td>
-									<td>系所部門</td>
-									<td>姓名</td>
-									<td>身分</td>
-									<td>會議名稱</td>
-									<td>開始時間</td>
-									<td>結束時間</td>
-									<td>備註</td>
+									<td id="stu_foreign_research.college" onclick="sort(id)">單位</td>
+									<td id="stu_foreign_research.dept" onclick="sort(id)">系所部門</td>
+									<td id="name" onclick="sort(id)">姓名</td>
+									<td id="stuLevel" onclick="sort(id)">身分</td>
+									<td id="nation" onclick="sort(id)">前往國家</td>
+									<td id="startDate" onclick="sort(id)">開始時間</td>
+									<td id="endDate" onclick="sort(id)">結束時間</td>
+									<td id="comments" onclick="sort(id)">備註</td>
 									<td>管理</td>
 								</tr>
 								</thead>

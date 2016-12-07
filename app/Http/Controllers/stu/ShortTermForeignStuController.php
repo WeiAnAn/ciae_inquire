@@ -22,7 +22,7 @@ class ShortTermForeignStuController extends Controller
 		$shortterm = ShortTermForeignStu::join('college_data',function($join){
     		$join->on('short_term_foreign_stu.college','college_data.college');
     		$join->on('short_term_foreign_stu.dept','college_data.dept');
-    		})->paginate(20);
+    		})->orderBy($sortBy,$orderBy)->paginate(20);
         $shortterm->appends($request->except('page'));  
 		$user = Auth::user();
 		$data = compact('shortterm','user');

@@ -22,7 +22,7 @@ class StuAttendConfController extends Controller
     	$conf = StuAttendConf::join('college_data',function($join){
     		$join->on('stu_attend_conf.college','college_data.college');
     		$join->on('stu_attend_conf.dept','college_data.dept');
-    		})->paginate(20);
+    		})->orderBy($sortBy,$orderBy)->paginate(20);
     	$user = Auth::user();
     	$data=compact('conf','user');
     	return view ('stu/stu_attend_conf',$data);

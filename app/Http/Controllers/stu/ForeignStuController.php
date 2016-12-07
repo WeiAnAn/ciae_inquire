@@ -22,7 +22,7 @@ class ForeignStuController extends Controller
     	$foreignStu = ForeignStu::join('college_data',function($join){
     		$join->on('foreign_stu.college','college_data.college');
     		$join->on('foreign_stu.dept','college_data.dept');
-    		})->paginate(20);
+    		})->orderBy($sortBy,$orderBy)->paginate(20);
         $foreignStu->appends($request->except('page'));  
     	$user=Auth::user();
     	$data = compact('foreignStu','user');
