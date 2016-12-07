@@ -69,7 +69,7 @@
 									<td>{{$data->nation}}</td>
 									<td>{{$data->chtName}}</td>
 									<td>{{$data->engName}}</td>
-									<td>@if($data->bachelor==1)
+									<td>@if($data->bachelor==1)	
 									有
 									@else
 									無

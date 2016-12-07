@@ -121,16 +121,16 @@ class PartnerSchoolController extends Controller
                             $item['dept'] = $value;
                             unset($item[$key]);
                             break;
-                        case '姓名':
-                            $item['name'] = $value;
-                            unset($item[$key]);
-                            break;
-                        case '身分':
-                            $item['profLevel'] = $value;
-                            unset($item[$key]);
-                            break;
-                        case '前往國家':
+                        case '國家':
                             $item['nation'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '中文校名':
+                            $item['chtName'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '英文校名':
+                            $item['engName'] = $value;
                             unset($item[$key]);
                             break;                        
                         case '開始時間':
@@ -159,7 +159,7 @@ class PartnerSchoolController extends Controller
                 }
                 array_push($newArray,$item);
             }
-            ProfForeignResearch::insert($newArray);
+            PartnerSchool::insert($newArray);
         });
         return redirect('partner_school');
     }

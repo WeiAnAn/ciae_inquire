@@ -9,7 +9,7 @@ class PartnerSchool extends Model
     //
     protected $table ='partner_school';
     protected $fillable=['college','dept','nation',
-    					'chtName','enName','startDate',
+    					'chtName','engName','startDate',
     					'endDate','comments'];
     public $timestamps=false;
 }
