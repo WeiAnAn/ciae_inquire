@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\ForeignProfVist;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Excel;
+use Validator;
 
 class ForeignProfVistController extends Controller
 {
@@ -98,5 +100,68 @@ class ForeignProfVistController extends Controller
             return redirect('foreign_prof_vist');
         $foreignPvist->delete();
         return redirect('foreign_prof_vist');
+    }
+
+    public function upload(Request $request){
+        Excel::load($request->file('file'),function($reader){
+            $array = $reader->toArray();
+            $newArray = [];
+            foreach ($array as $item) {
+                foreach ($item as $key => $value) {
+
+                    switch ($key) {
+                        case '單位名稱':
+                            $item['college'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '系所部門':
+                            $item['dept'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '姓名':
+                            $item['name'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '身分':
+                            $item['profLevel'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '國籍':
+                            $item['nation'] = $value;
+                            unset($item[$key]);
+                            break;                        
+                        case '開始時間':
+                            $item['startDate'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '結束時間':
+                            $item['endDate'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '備註':
+                            $item['comments'] = $value;
+                            unset($item[$key]);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                
+                $validator = Validator::make($item,[
+                    'college' => 'required',
+                ]);
+                if($validator->fails()){
+                    return redirect('foreign_prof_vist')
+                        ->withErrors($validator,"upload");
+                }
+                array_push($newArray,$item);
+            }
+            ForeignProfVist::insert($newArray);
+        });
+        return redirect('foreign_prof_vist');
+    }
+
+    public function example(Request $request){
+        return response()->download(public_path().'/Excel_example/prof/foreign_prof_vist.xlsx',"外籍學者蒞校訪問.xlsx");
     }
 }
