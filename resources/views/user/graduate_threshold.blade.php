@@ -1,7 +1,6 @@
 @extends('../layouts/master')
 
 @section('content')
-{{dump($errors->upload)}}
 <div class="row">
 	<div class="col-md-12">
 		<a href="{{url('graduate_threshold')}}" style="color: black">
