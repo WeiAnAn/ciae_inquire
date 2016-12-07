@@ -24,7 +24,7 @@ class InternationalizeActivityController extends Controller
     	$internationalactivity= InternationalizeActivity::join('college_data',function($join){
     		$join->on('internationalize_activity.college','college_data.college');
     		$join->on('internationalize_activity.dept','college_data.dept');
-    		})->paginate(20);
+    		})->orderBy($sortBy,$orderBy)->paginate(20);
         $internationalactivity->appends($request->except('page')); 
     	$user= Auth::user();
     	$data=compact('internationalactivity','user');

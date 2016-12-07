@@ -21,11 +21,10 @@ class CooperationProjController extends Controller
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
             $orderBy = $request->orderBy;
-
     	$cooperationproj= CooperationProj::join('college_data',function($join){
     		$join->on('cooperation_proj.college','college_data.college');
     		$join->on('cooperation_proj.dept','college_data.dept');
-    		})->paginate(20);
+    		})->orderBy($sortBy,$orderBy)->paginate(20);
         $cooperationproj->appends($request->except('page')); 
     	$user=Auth::user();
     	$data=compact('cooperationproj','user');

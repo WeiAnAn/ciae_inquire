@@ -25,7 +25,7 @@ class PartnerSchoolController extends Controller
     	$partner= PartnerSchool::join('college_data',function($join){
     		$join->on('partner_school.college','college_data.college');
     		$join->on('partner_school.dept','college_data.dept');
-    		})->paginate(20);
+    		})->orderBy($sortBy,$orderBy)->paginate(20);
         $partner->appends($request->except('page')); 
     	$user=Auth::user();
     	$data=compact('partner','user');
