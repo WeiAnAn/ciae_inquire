@@ -34,6 +34,9 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             return false;
         });
+        Gate::define('superUser',function($user){
+            return ($user->permission == 0);
+        });
         //
     }
 }
