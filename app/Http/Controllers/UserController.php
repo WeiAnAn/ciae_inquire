@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\CollegeData;
+use Gate;
 
 
 class UserController extends Controller
@@ -43,5 +44,16 @@ class UserController extends Controller
     	
     	$user->update($request->all());
     	return redirect('/user')->with('success','更新成功');
+    }
+    public function manage(){
+        if(!Gate::allows('superUser'))
+            return redirect('graduate_threshold');
+        $user = User::join('college_data',function($join){
+                $join->on('user.college','college_data.college');
+                $join->on('user.dept','college_data.dept');
+            })->paginate(20);
+
+        $data = compact('user');
+        return view('user/manage',$data);
     }
 }

@@ -6,7 +6,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ route('home') }}"><b>國際化調查系統</b></a>
+                <a class="navbar-brand" href="{{ url('/home') }}"><b>國際化調查系統</b></a>
             </div>
             <!-- /.navbar-header -->
 

@@ -15,6 +15,9 @@
 			<a href="{{URL('/user')}}" class="list-group-item">單位資料修改</a>
 			<a href="{{URL('/graduate_threshold')}}" class="list-group-item">英檢畢業門檻</a>
 			<a href="{{URL('/foreign_language_class')}}" class="list-group-item">全外語授課之課程</a>
+			@can('superUser')
+			<a href="{{URL('/manage')}}" class="list-group-item">帳號管理</a>
+			@endcan
 		</div>
 	</div>
 	<div class="col-md-6">

@@ -14,6 +14,11 @@
                                 <li>
                                     <a href="{{URL('/foreign_language_class')}}">全外語授課之課程</a>
                                 </li>
+                                @can('superUser')
+                                <li>
+                                    <a href="{{URL('/manage')}}">帳號管理</a>
+                                </li>
+                                @endcan
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
