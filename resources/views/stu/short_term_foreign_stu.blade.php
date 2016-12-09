@@ -204,9 +204,33 @@
 					</div>
 
 					<div class="tab-pane fade in col-md-12" id="upload" style="margin-top: 10px;">
-						<form action="{{url('short_term_foreign_stu/upload')}}">
-							<input type="file" class="" style="margin: 2px">
-							<button class="btn btn-primary" style="margin: 2px">上傳</button>								
+						<form action="{{url('short_term_foreign_stu/upload')}}" method="post" enctype="multipart/form-data">
+						{{ csrf_field() }}
+                        	<div id="file_error"></div>
+                        	@if(count($errors->upload)>0)
+                        		@if($errors->upload->has('format'))
+                        			<p class="text-danger">
+										{{$errors->upload->first('format')}}
+                        			</p>
+                        		@elseif($errors->upload->has('permission'))
+                        			<p class="text-danger">
+                        				{{$errors->upload->first('permission')}}
+                        			</p>
+                        		@elseif($errors->upload->has('number'))
+                        			<p class="text-danger">
+                        				{{$errors->upload->first('number')}}
+                        			</p>
+                        		@else
+                        			<p class="text-danger">
+                        				欄位內容格式錯誤或必填欄位未填
+                        			</p>
+                        		@endif
+                        	@endif
+							<input type="file" class="" name="file" style="margin: 2px">
+							<button class="btn btn-primary" style="margin: 2px" 
+								onclick="checkFile(event)">上傳</button>
+							<a class="btn btn-success" href="{{url('short_term_foreign_stu/example')}}">範例檔案</a>
+							<a class="btn btn-success" href="{{url('example')}}">系所對照表</a>									
 						</form>
 					</div>
 

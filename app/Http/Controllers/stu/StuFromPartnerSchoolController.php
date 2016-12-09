@@ -7,6 +7,9 @@ use App\StuFromPartnerSchool;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Excel;
+use Validator;
+use App\CollegeData;
 
 class StuFromPartnerSchoolController extends Controller
 {
@@ -99,5 +102,86 @@ class StuFromPartnerSchoolController extends Controller
             return redirect('stu_from_partner_school');
         $frompartnerdata->delete();
         return redirect('stu_from_partner_school');
-        }     			
+        }  
+
+       public function upload(Request $request){
+        Excel::load($request->file('file'),function($reader){
+            $array = $reader->toArray();
+            $newArray = [];
+            foreach ($array as $item) {
+                foreach ($item as $key => $value) {
+
+                    switch ($key) {
+                        case '單位名稱':
+                            $item['college'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '系所部門':
+                            $item['dept'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '姓名':
+                            $item['name'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '身分':
+                            $item['stuLevel'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '國籍':
+                            $item['nation'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '開始時間':
+                            $item['startDate'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '結束時間':
+                            $item['endDate'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '備註':
+                            $item['comments'] = $value;
+                            unset($item[$key]);
+                            break;
+                        default:
+                            $validator = Validator::make($item,[]);
+                            $validator->errors()->add('format','檔案欄位錯誤');
+                            return redirect('stu_from_partner_school')
+                                ->withErrors($validator,"upload");
+                            break;
+                    }
+                }
+                $validator = Validator::make($item,[
+                    'college' => 'required',
+                    'dept' => 'required',
+                    'stuLevel' => 'required|max:200',
+                    'nation' => 'required|max:200',
+                    'comments' => 'max:500',
+                ]);
+                if($validator->fails()){
+                    return redirect('stu_from_partner_school')
+                        ->withErrors($validator,"upload");
+                }
+                if(CollegeData::where('college',$item['college'])
+                        ->where('dept',$item['dept'])->first()==null){
+                    $validator->errors()->add('number','系所代碼錯誤');
+                    return redirect('stu_from_partner_school')
+                                ->withErrors($validator,"upload");
+                }
+                if(!Gate::allows('permission',(object)$item)){
+                    $validator->errors()->add('permission','無法新增未有權限之系所部門');
+                    return redirect('stu_from_partner_school')
+                                ->withErrors($validator,"upload");
+                }
+                array_push($newArray,$item);
+            }
+            StuFromPartnerSchool::insert($newArray);
+        });
+        return redirect('stu_from_partner_school');
+    }
+    
+     public function example(Request $request){
+        return response()->download(public_path().'/Excel_example/stu/stu_from_partner_school.xlsx',"姊妹校學生至本校參加交換計畫.xlsx");
+    }    			
 }

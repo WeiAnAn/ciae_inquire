@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\ShortTermForeignStu;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Excel;
+use Validator;
+use App\CollegeData;
 
 class ShortTermForeignStuController extends Controller
 {
@@ -98,5 +101,87 @@ class ShortTermForeignStuController extends Controller
             return redirect('short_term_foreign_stu');
         $shortterm->delete();
         return redirect('short_term_foreign_stu');
-        } 			
+        }
+
+
+       public function upload(Request $request){
+        Excel::load($request->file('file'),function($reader){
+            $array = $reader->toArray();
+            $newArray = [];
+            foreach ($array as $item) {
+                foreach ($item as $key => $value) {
+
+                    switch ($key) {
+                        case '單位名稱':
+                            $item['college'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '系所部門':
+                            $item['dept'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '姓名':
+                            $item['name'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '身分':
+                            $item['stuLevel'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '國籍':
+                            $item['nation'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '開始時間':
+                            $item['startDate'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '結束時間':
+                            $item['endDate'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '備註':
+                            $item['comments'] = $value;
+                            unset($item[$key]);
+                            break;
+                        default:
+                            $validator = Validator::make($item,[]);
+                            $validator->errors()->add('format','檔案欄位錯誤');
+                            return redirect('short_term_foreign_stu')
+                                ->withErrors($validator,"upload");
+                            break;
+                    }
+                }
+                $validator = Validator::make($item,[
+                    'college' => 'required',
+                    'dept' => 'required',
+                    'stuLevel' => 'required|max:200',
+                    'nation' => 'required|max:200',
+                    'comments' => 'max:500',
+                ]);
+                if($validator->fails()){
+                    return redirect('short_term_foreign_stu')
+                        ->withErrors($validator,"upload");
+                }
+                if(CollegeData::where('college',$item['college'])
+                        ->where('dept',$item['dept'])->first()==null){
+                    $validator->errors()->add('number','系所代碼錯誤');
+                    return redirect('short_term_foreign_stu')
+                                ->withErrors($validator,"upload");
+                }
+                if(!Gate::allows('permission',(object)$item)){
+                    $validator->errors()->add('permission','無法新增未有權限之系所部門');
+                    return redirect('short_term_foreign_stu')
+                                ->withErrors($validator,"upload");
+                }
+                array_push($newArray,$item);
+            }
+            ShortTermForeignStu::insert($newArray);
+        });
+        return redirect('short_term_foreign_stu');
+    }
+    
+     public function example(Request $request){
+        return response()->download(public_path().'/Excel_example/stu/short_term_foreign_stu.xlsx',"外籍學生至本校短期交流訪問.xlsx");
+    }                   			
 }

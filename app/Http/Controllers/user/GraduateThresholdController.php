@@ -51,7 +51,6 @@ class GraduateThresholdController extends Controller
 
     public function edit($id){
         $graduateThreshold = GraduateThreshold::find($id);
-        dd($graduateThreshold);
 
         if(Gate::allows('permission',$graduateThreshold))
             return view('user/graduate_threshold_edit',$graduateThreshold);
