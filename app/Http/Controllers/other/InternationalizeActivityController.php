@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Excel;
 use Validator;
-
+use App\CollegeData;
 class InternationalizeActivityController extends Controller
 {
     //
@@ -142,18 +142,39 @@ class InternationalizeActivityController extends Controller
                         case '結束時間':
                             $item['endDate'] = $value;
                             unset($item[$key]);
-                            break;
+                            break;                        
                         default:
+                            $validator = Validator::make($item,[]);
+                            $validator->errors()->add('format','檔案欄位錯誤');
+                            return redirect('internationalize_activity')
+                                ->withErrors($validator,"upload");
                             break;
                     }
-
-                }                     
+                }
                 $validator = Validator::make($item,[
-                    'college' => 'required',
+                    'college'=>'required|max:11',
+                    'dept'=>'required|max:11',
+                    'activityName'=>'required|max:200',
+                    'place'=>'required|max:200',
+                    'host'=>'required|max:200',
+                    'guest'=>'required|max:200',
+                    'startDate'=>'required',
+                    'endDate'=>'required',
                 ]);
                 if($validator->fails()){
                     return redirect('internationalize_activity')
                         ->withErrors($validator,"upload");
+                }
+                if(CollegeData::where('college',$item['college'])
+                        ->where('dept',$item['dept'])->first()==null){
+                    $validator->errors()->add('number','系所代碼錯誤');
+                    return redirect('internationalize_activity')
+                                ->withErrors($validator,"upload");
+                }
+                if(!Gate::allows('permission',(object)$item)){
+                    $validator->errors()->add('permission','無法新增未有權限之系所部門');
+                    return redirect('internationalize_activity')
+                                ->withErrors($validator,"upload");
                 }
                 array_push($newArray,$item);
             }

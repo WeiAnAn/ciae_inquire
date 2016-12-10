@@ -195,7 +195,27 @@
 
 					<div class="tab-pane fade in col-md-12" id="upload" style="margin-top: 10px;">
 						<form action="{{url('internationalize_activity/upload')}}" method="post" enctype="multipart/form-data" >
-							{{ csrf_field() }}
+						{{ csrf_field() }}
+                        	<div id="file_error"></div>
+                        	@if(count($errors->upload)>0)
+                        		@if($errors->upload->has('format'))
+                        			<p class="text-danger">
+										{{$errors->upload->first('format')}}
+                        			</p>
+                        		@elseif($errors->upload->has('permission'))
+                        			<p class="text-danger">
+                        				{{$errors->upload->first('permission')}}
+                        			</p>
+                        		@elseif($errors->upload->has('number'))
+                        			<p class="text-danger">
+                        				{{$errors->upload->first('number')}}
+                        			</p>
+                        		@else
+                        			<p class="text-danger">
+                        				欄位內容格式錯誤或必填欄位未填
+                        			</p>
+                        		@endif
+                        	@endif                        	
 							<input type="file" name="file" class="" style="margin: 2px">
 							<button class="btn btn-primary" style="margin: 2px" onclick="checkFile(event)">上傳</button>
 							<a class="btn btn-success" href="{{url('internationalize_activity/example')}}">範例檔案</a>

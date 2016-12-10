@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Excel;
 use Validator;
-
+use App\CollegeData;
 
 class CooperationProjController extends Controller
 {
@@ -148,18 +148,40 @@ class CooperationProjController extends Controller
                         case '備註':
                             $item['comments'] = $value;
                             unset($item[$key]);
-                            break;
+                            break;                        
                         default:
+                            $validator = Validator::make($item,[]);
+                            $validator->errors()->add('format','檔案欄位錯誤');
+                            return redirect('cooperation_proj')
+                                ->withErrors($validator,"upload");
                             break;
                     }
                 }
-                
                 $validator = Validator::make($item,[
-                    'college' => 'required',
+                    'college'=>'required|max:11',
+                    'dept'=>'required|max:11',
+                    'name'=>'required|max:10',
+                    'projName'=>'required|max:200',
+                    'projOrg'=>'required|max:200',
+                    'projContent'=>'max:200',
+                    'startDate'=>'required',
+                    'endDate'=>'required',
+                    'comments'=>'max:500',
                 ]);
                 if($validator->fails()){
                     return redirect('cooperation_proj')
                         ->withErrors($validator,"upload");
+                }
+                if(CollegeData::where('college',$item['college'])
+                        ->where('dept',$item['dept'])->first()==null){
+                    $validator->errors()->add('number','系所代碼錯誤');
+                    return redirect('cooperation_proj')
+                                ->withErrors($validator,"upload");
+                }
+                if(!Gate::allows('permission',(object)$item)){
+                    $validator->errors()->add('permission','無法新增未有權限之系所部門');
+                    return redirect('cooperation_proj')
+                                ->withErrors($validator,"upload");
                 }
                 array_push($newArray,$item);
             }

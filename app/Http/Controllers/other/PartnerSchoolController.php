@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Excel;
 use Validator;
+use App\CollegeData;
 
 
 class PartnerSchoolController extends Controller
@@ -144,18 +145,39 @@ class PartnerSchoolController extends Controller
                         case '備註':
                             $item['comments'] = $value;
                             unset($item[$key]);
-                            break;
+                            break;                        
                         default:
+                            $validator = Validator::make($item,[]);
+                            $validator->errors()->add('format','檔案欄位錯誤');
+                            return redirect('partner_school')
+                                ->withErrors($validator,"upload");
                             break;
                     }
                 }
-                
                 $validator = Validator::make($item,[
-                    'college' => 'required',
+                    'college'=>'required|max:11',
+                    'dept'=>'required|max:11',
+                    'nation'=>'required|max:20',
+                    'chtName'=>'required|max:50',
+                    'engName'=>'required|max:80',
+                    'startDate'=>'required',
+                    'endDate'=>'required',
+                    'comments'=>'max:500',
                 ]);
                 if($validator->fails()){
                     return redirect('partner_school')
                         ->withErrors($validator,"upload");
+                }
+                if(CollegeData::where('college',$item['college'])
+                        ->where('dept',$item['dept'])->first()==null){
+                    $validator->errors()->add('number','系所代碼錯誤');
+                    return redirect('partner_school')
+                                ->withErrors($validator,"upload");
+                }
+                if(!Gate::allows('permission',(object)$item)){
+                    $validator->errors()->add('permission','無法新增未有權限之系所部門');
+                    return redirect('partner_school')
+                                ->withErrors($validator,"upload");
                 }
                 array_push($newArray,$item);
             }
