@@ -52,7 +52,8 @@
 									<td id="chtName" onclick="sort(id)">中文姓名</td>
 									<td id="engName" onclick="sort(id)">英文姓名</td>
 									<td id="stuLevel" onclick="sort(id)">身分</td>
-									<td id="nation" onclick="sort(id)">國籍</td>
+									<td id="nation" onclick="sort(id)">中文國籍</td>
+									<td id="engNation" onclick="sort(id)">英文國籍</td>
 									<td id="startDate" onclick="sort(id)">開始時間</td>
 									<td id="endDate" onclick="sort(id)">結束時間</td>
 									<td id="comments" onclick="sort(id)">備註</td>
@@ -76,6 +77,7 @@
 									@endif
 									</td>
 								<td class="text-nowrap">{{$data->nation}}</td>
+								<td class="text-nowrap">{{$data->engNation}}</td>								
 								<td >{{$data->startDate}}</td>
 								<td >{{$data->endDate}}</td>
 								<td >{{$data->comments}}</td>
@@ -151,8 +153,17 @@
                                 <p class="text-danger">{{$errors->first('nation')}}</p>
                             @endif
 							<div class="form-group">
-								<label for="nation">國籍</label>
+								<label for="nation">中文國籍</label>
 								<input type="text" name="nation" class="form-control" value="{{old('nation')}}">
+							</div>
+
+
+							@if($errors->has('nation'))
+                                <p class="text-danger">{{$errors->first('nation')}}</p>
+                            @endif
+							<div class="form-group">
+								<label for="engNation">英文國籍</label>
+								<input type="text" name="engNation" class="form-control" value="{{old('nation')}}">
 							</div>
 
 							@if($errors->has('startDate')||$errors->has('endDate'))
@@ -210,8 +221,12 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label for="nation">國籍</label>
+								<label for="nation">中文國籍</label>
 								<input type="text" name="nation" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="engNation">英文國籍</label>
+								<input type="text" name="engNation" class="form-control">
 							</div>
 							<div class="form-group" style="margin-bottom: 0px">
 								<label >日期</label>

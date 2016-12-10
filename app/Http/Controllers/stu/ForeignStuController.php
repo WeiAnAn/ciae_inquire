@@ -44,6 +44,7 @@ class ForeignStuController extends Controller
             'stuLevel'=>'required|max:11',
             'nation'=>'required|max:50',
             'engNation'=>'required|max:50',
+            'engNation'=>'required|max:50',
             'startDate'=>'required',
             'endDate'=>'required',
             'comments'=>'max:500',
@@ -87,7 +88,10 @@ class ForeignStuController extends Controller
                 ->where('stuLevel', $request->stuLevel);                
         if($request->nation != "")
             $foreignStu = $foreignStu
-                ->where('nation',"like","%$request->nation%");
+                ->where('nation',"like","%$request->nation%");               
+        if($request->engNation != "")
+            $foreignStu = $foreignStu
+                ->where('engNation',"like","%$request->engNation%");
         if($request->startDate != "")
             $foreignStu = $foreignStu
                 ->where('startDate','>',"$request->startDate");
@@ -145,8 +149,12 @@ class ForeignStuController extends Controller
                             $item['stuLevel'] = $value;
                             unset($item[$key]);
                             break;
-                        case '國籍':
+                        case '中文國籍':
                             $item['nation'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '英文國籍':
+                            $item['engNation'] = $value;
                             unset($item[$key]);
                             break;
                         case '開始時間':
