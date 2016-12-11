@@ -6,7 +6,6 @@
 		<h1 class="page-header">跨國學位</h1>
 	</div>
 </div>
-{{count($errors)}}
 <div class="row">	
 	<div class="col-md-12">	
 		<div class="panel panel-default">

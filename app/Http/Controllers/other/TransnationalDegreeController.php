@@ -33,6 +33,7 @@ class TransnationalDegreeController extends Controller
     }
 
     public function insert(Request $request){
+        //checkbox 傳值 傳ON 跟 空值 所以跟資料庫已經VALDATE()會出問題 暫時未解決
             $this->validate($request,[
             'college'=>'required|max:11',
             'dept'=>'required|max:11',
