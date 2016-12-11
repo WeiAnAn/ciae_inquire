@@ -151,11 +151,23 @@
 							<div class="form-group">
 								<label for="profLevel">授予身分</label>
 							</div>
+							
 							<div class="form-group">
-								<input type="checkbox" name="bachelor" class="checkbox-inline">學士
-								<input type="checkbox" name="master" class="checkbox-inline">碩士
-								<input type="checkbox" name="PHD" class="checkbox-inline">博士
+								<label for="bachelor">學士</label>
+								<input type="radio" name="bachelor" value="1" class="radio-inline">有授予
+								<input type="radio" name="bachelor" value="0" class="radio-inline">無授予
 							</div>
+							<div class="form-group">
+								<label for="master">碩士</label>
+								<input type="radio" name="master" value="1" class="radio-inline">有授予
+								<input type="radio" name="master" value="0" class="radio-inline">無授予
+							</div>
+							<div class="form-group">
+								<label for="PHD">博士</label>
+								<input type="radio" name="PHD" value="1" class="radio-inline">有授予
+								<input type="radio" name="PHD" value="0" class="radio-inline">無授予
+							</div>
+
 
 							@if($errors->has('classMode'))
                                 <p class="text-danger">{{$errors->first('classMode')}}</p>
