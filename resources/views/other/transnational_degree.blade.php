@@ -6,6 +6,7 @@
 		<h1 class="page-header">跨國學位</h1>
 	</div>
 </div>
+{{count($errors)}}
 <div class="row">	
 	<div class="col-md-12">	
 		<div class="panel panel-default">
@@ -152,17 +153,17 @@
 								<label for="profLevel">授予身分</label>
 							</div>
 							<div class="form-group">
-								<input type="checkbox" name="bachelor" class="checkbox-inline" value="{{old('bachelor')}}" >學士
-								<input type="checkbox" name="master" class="checkbox-inline" value="{{old('master')}}">碩士
-								<input type="checkbox" name="PHD" class="checkbox-inline" value="{{old('PHD')}}">博士
+								<input type="checkbox" name="bachelor" class="checkbox-inline">學士
+								<input type="checkbox" name="master" class="checkbox-inline">碩士
+								<input type="checkbox" name="PHD" class="checkbox-inline">博士
 							</div>
 
-							@if($errors->has('teachMode'))
-                                <p class="text-danger">{{$errors->first('teachMode')}}</p>
+							@if($errors->has('classMode'))
+                                <p class="text-danger">{{$errors->first('classMode')}}</p>
                             @endif
 							<div class="form-group">
-								<label for="teachMode">授課方式</label>
-								<textarea name="teachMode" id="teachMode" cols="30" rows="3" class="form-control">{{old('teachMode')}}</textarea>
+								<label for="classMode">授課方式</label>
+								<textarea name="classMode" id="classMode" cols="30" rows="3" class="form-control">{{old('classMode')}}</textarea>
 							</div>
 
 							@if($errors->has('degreeMode'))

@@ -33,11 +33,9 @@ class TransnationalDegreeController extends Controller
     }
 
     public function insert(Request $request){
-        
-        $this->validate($request,[
+            $this->validate($request,[
             'college'=>'required|max:11',
             'dept'=>'required|max:11',
-            'name'=>'required|max:11',
             'nation'=>'required|max:20',
             'chtName'=>'required|max:200',
             'engName'=>'required|max:200',
@@ -180,7 +178,6 @@ class TransnationalDegreeController extends Controller
                 $validator = Validator::make($item,[
                     'college'=>'required|max:11',
                     'dept'=>'required|max:11',
-                    'name'=>'required|max:11',
                     'nation'=>'required|max:20',
                     'chtName'=>'required|max:200',
                     'engName'=>'required|max:200',
