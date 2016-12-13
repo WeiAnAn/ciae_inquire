@@ -94,6 +94,32 @@ class ForeignProfVistController extends Controller
         $data = compact('foreignPvist','user');
         return view('prof/foreign_prof_vist',$data);
     }
+
+
+    public function edit($id){
+        $foreignPvist = ForeignProfVist::find($id);
+        if(Gate::allows('permission',$foreignPvist))
+            return view('prof/foreign_prof_vist_edit',$foreignPvist);
+        return redirect('foreign_prof_vist');
+    }
+
+    public function update($id,Request $request){
+        $foreignPvist = ForeignProfVist::find($id);
+        if(!Gate::allows('permission',$foreignPvist))
+            return redirect('foreign_prof_vist');
+        $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:20',
+            'profLevel'=>'required|max:11',
+            'nation'=>'required|max:20',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+            ]);
+        $foreignPvist->update($request->all());
+        return redirect('foreign_prof_vist')->with('success','更新成功');
+    }
     public function delete($id){
         $foreignPvist = ForeignProfVist::find($id);
         if(!Gate::allows('permission',$foreignPvist))
