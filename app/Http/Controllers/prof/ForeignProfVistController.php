@@ -146,13 +146,30 @@ class ForeignProfVistController extends Controller
                             break;
                     }
                 }
-                
                 $validator = Validator::make($item,[
-                    'college' => 'required',
+                    'college'=>'required|max:11',
+                    'dept'=>'required|max:11',
+                    'nation'=>'required|max:20',
+                    'chtName'=>'required|max:50',
+                    'engName'=>'required|max:80',
+                    'startDate'=>'required',
+                    'endDate'=>'required',
+                    'comments'=>'max:500',
                 ]);
                 if($validator->fails()){
                     return redirect('foreign_prof_vist')
                         ->withErrors($validator,"upload");
+                }
+                if(CollegeData::where('college',$item['college'])
+                        ->where('dept',$item['dept'])->first()==null){
+                    $validator->errors()->add('number','系所代碼錯誤');
+                    return redirect('foreign_prof_vist')
+                                ->withErrors($validator,"upload");
+                }
+                if(!Gate::allows('permission',(object)$item)){
+                    $validator->errors()->add('permission','無法新增未有權限之系所部門');
+                    return redirect('foreign_prof_vist')
+                                ->withErrors($validator,"upload");
                 }
                 array_push($newArray,$item);
             }
