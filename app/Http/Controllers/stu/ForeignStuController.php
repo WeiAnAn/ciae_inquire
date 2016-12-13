@@ -32,7 +32,7 @@ class ForeignStuController extends Controller
     	return view ('stu/foreign_stu',$data);
 
     }
-
+ 
     public function insert(Request $request){
         
         $this->validate($request,[
