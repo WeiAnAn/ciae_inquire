@@ -94,6 +94,31 @@ class StuToPartnerSchoolController extends Controller
         $data = compact('topartnerdata','user');
         return view('stu/stu_to_partner_school',$data);
     }
+
+    public function edit($id){
+        $topartnerdata = StuToPartnerSchool::find($id);
+        if(Gate::allows('permission',$topartnerdata))
+            return view('stu/stu_to_partner_school_edit',$topartnerdata);
+        return redirect('stu_to_partner_school');
+    }
+
+    public function update($id,Request $request){
+        $topartnerdata = StuToPartnerSchool::find($id);
+        if(!Gate::allows('permission',$topartnerdata))
+            return redirect('stu_to_partner_school');
+        $this->validate($request,[
+                'college'=>'required|max:11',
+                'dept'=>'required|max:11',
+                'name'=>'required|max:20',
+                'stuLevel'=>'required|max:11',
+                'nation'=>'required|max:20',
+                'startDate'=>'required',
+                'endDate'=>'required',
+                'comments'=>'max:500',
+            ]);
+        $topartnerdata->update($request->all());
+        return redirect('stu_to_partner_school')->with('success','更新成功');
+    }
      public function delete($id){
         $topartnerdata = StuToPartnerSchool::find($id);
         if(!Gate::allows('permission',$topartnerdata))

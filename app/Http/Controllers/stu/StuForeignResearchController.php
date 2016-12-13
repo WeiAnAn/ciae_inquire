@@ -97,6 +97,33 @@ class StuForeignResearchController extends Controller
         $data = compact('foreignreseach','user');
         return view('stu/stu_foreign_research',$data);
     }
+
+       public function edit($id){
+        $foreignreseach = StuForeignResearch::find($id);
+        if(Gate::allows('permission',$foreignreseach))
+            return view('stu/stu_foreign_research_edit',$foreignreseach);
+        return redirect('stu_foreign_research');
+    }
+
+    public function update($id,Request $request){
+        $foreignreseach = StuForeignResearch::find($id);
+        if(!Gate::allows('permission',$foreignreseach))
+            return redirect('stu_foreign_research');
+        $this->validate($request,[
+                'college'=>'required|max:11',
+                'dept'=>'required|max:11',
+                'name'=>'required|max:20',
+                'stuLevel'=>'required|max:11',
+                'nation'=>'required|max:20',
+                'startDate'=>'required',
+                'endDate'=>'required',
+                'comments'=>'max:500',
+            ]);
+        $foreignreseach->update($request->all());
+        return redirect('stu_foreign_research')->with('success','更新成功');
+    }
+
+    
      public function delete($id){
         $foreignreseach = StuForeignResearch::find($id);
         if(!Gate::allows('permission',$foreignreseach))

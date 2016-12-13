@@ -95,6 +95,33 @@ class ShortTermForeignStuController extends Controller
         $data = compact('shortterm','user');
         return view('stu/short_term_foreign_stu',$data);
     }
+
+    public function edit($id){
+        $shortterm = ShortTermForeignStu::find($id);
+        if(Gate::allows('permission',$shortterm))
+            return view('stu/short_term_foreign_stu_edit',$shortterm);
+        return redirect('short_term_foreign_stu');
+    }
+
+    public function update($id,Request $request){
+        $shortterm = ShortTermForeignStu::find($id);
+        if(!Gate::allows('permission',$shortterm))
+            return redirect('short_term_foreign_stu');
+        $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:50',
+            'stuLevel'=>'required|max:11',
+            'nation'=>'required|max:50',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+            ]);
+        $shortterm->update($request->all());
+        return redirect('short_term_foreign_stu')->with('success','更新成功');
+    }
+
+
     public function delete($id){
         $shortterm = ShortTermForeignStu::find($id);
         if(!Gate::allows('permission',$shortterm))

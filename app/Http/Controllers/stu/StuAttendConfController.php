@@ -115,6 +115,24 @@ class StuAttendConfController extends Controller
         return redirect('stu_attend_conf');
     }
 
+public function update($id,Request $request){
+        $conf = StuAttendConf::find($id);
+        if(!Gate::allows('permission',$conf))
+            return redirect('stu_attend_conf');
+        $this->validate($request,[
+                'college'=>'required|max:11',
+                'dept'=>'required|max:11',
+                'name'=>'required|max:20',
+                'stuLevel'=>'required|max:11',
+                'nation'=>'required|max:20',
+                'confName'=>'required|max:200',
+                'startDate'=>'required',
+                'endDate'=>'required',
+                'comments'=>'max:500',
+            ]);
+        $conf->update($request->all());
+        return redirect('stu_attend_conf')->with('success','更新成功');
+    }
 
     public function upload(Request $request){
         Excel::load($request->file('file'),function($reader){
