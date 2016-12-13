@@ -193,7 +193,13 @@ class ForeignLanguageClassController extends Controller
                 } 
                     
                 $validator = Validator::make($item,[
-                    'college' => 'required',
+                    'year' => 'required',
+                    'chtName' => 'required|max:50',
+                    'engName' => 'required|max:200',
+                    'teacher' => 'required|max:20',
+                    'language' => 'required|max:20',
+                    'totalCount' => 'required',
+                    'nationalCount' => 'required',
                 ]);
                 if($validator->fails()){
                     return redirect('foreign_language_class')
