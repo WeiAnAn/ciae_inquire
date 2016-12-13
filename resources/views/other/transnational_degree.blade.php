@@ -70,19 +70,19 @@
 									<td>{{$data->chtName}}</td>
 									<td>{{$data->engName}}</td>
 									<td>@if($data->bachelor==1)	
-									有
+									有授予
 									@else
-									無
+									無授予
 									@endif</td>
 									<td>@if($data->master==1)
-									有
+									有授予
 									@else
-									無
+									無授予
 									@endif</td>
 									<td>@if($data->PHD==1)
-									有
+									有授予
 									@else
-									無
+									無授予
 									@endif
 									<td>{{$data->classMode}}</td>
 									<td>{{$data->degreeMode}}</td>
@@ -154,18 +154,24 @@
 							
 							<div class="form-group">
 								<label for="bachelor">學士</label>
-								<input type="radio" name="bachelor" value="1" class="radio-inline">有授予
-								<input type="radio" name="bachelor" value="0" class="radio-inline">無授予
+								<select name="bachelor" id="bachelor_option" class="form-control">
+									<option value="0">無授予</option>
+									<option value="1">有授予</option>
+								</select>
 							</div>
 							<div class="form-group">
 								<label for="master">碩士</label>
-								<input type="radio" name="master" value="1" class="radio-inline">有授予
-								<input type="radio" name="master" value="0" class="radio-inline">無授予
+								<select name="master" id="master_option" class="form-control">
+									<option value="0">無授予</option>
+									<option value="1">有授予</option>
+								</select>
 							</div>
 							<div class="form-group">
 								<label for="PHD">博士</label>
-								<input type="radio" name="PHD" value="1" class="radio-inline">有授予
-								<input type="radio" name="PHD" value="0" class="radio-inline">無授予
+								<select name="PHD" id="PHD_option" class="form-control">
+									<option value="0">無授予</option>
+									<option value="1">有授予</option>
+								</select>
 							</div>
 
 
@@ -287,4 +293,11 @@
 		</div>
 	</div>
 </div>
+@if(count($errors)>0)
+	<script>
+		document.getElementById('bachelor_option').value ={{old('bachelor')}};
+		document.getElementById('master_option').value ={{old('master')}};
+		document.getElementById('PHD_option').value ={{old('PHD')}};
+	</script>
+@endif
 @endsection
