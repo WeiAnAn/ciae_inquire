@@ -30,7 +30,7 @@ class UserController extends Controller
     		'engName' => 'max:20',
     		'contactPeople' => 'required|max:10',
     		'phone' => 'max:20',
-    		'email' => 'max:50',
+    		'email' => 'email|max:50',
     	]);
     	foreach ($request->request as $key => $value) {
     		# code...
