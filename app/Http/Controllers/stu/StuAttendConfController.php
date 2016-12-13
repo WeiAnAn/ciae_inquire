@@ -170,11 +170,15 @@ class StuAttendConfController extends Controller
                 }
 
                 $validator = Validator::make($item,[
-                    'college' => 'required',
-                    'name' => 'required',
-                    'confName' => 'required|max:200',
-                    'nation' => 'required|max:200',
-                    'comments' => 'max:500',
+                    'college'=>'required|max:11',
+                    'dept'=>'required|max:11',
+                    'name'=>'required|max:20',
+                    'stuLevel'=>'required|max:11',
+                    'nation'=>'required|max:20',
+                    'confName'=>'required|max:200',
+                    'startDate'=>'required',
+                    'endDate'=>'required',
+                    'comments'=>'max:500',
                 ]);
                 if($validator->fails()){
                     return redirect('stu_attend_conf')

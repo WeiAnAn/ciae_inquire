@@ -104,6 +104,7 @@ class PartnerSchoolController extends Controller
         $partner->delete();
         return redirect('partner_school');
         }
+        
 
 
     public function upload(Request $request){

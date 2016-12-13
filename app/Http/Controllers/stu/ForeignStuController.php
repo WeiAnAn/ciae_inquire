@@ -178,11 +178,18 @@ class ForeignStuController extends Controller
                     }
                 }
                 $validator = Validator::make($item,[
-                    'college' => 'required',
-                    'dept' => 'required',
-                    'stuLevel' => 'required|max:200',
-                    'nation' => 'required|max:200',
-                    'comments' => 'max:500',
+                    'college'=>'required|max:11',
+                    'dept'=>'required|max:11',
+                    'chtName'=>'required|max:50',
+                    'engName'=>'required|max:50',
+                    'stuID'=>'required|max:15',
+                    'stuLevel'=>'required|max:11',
+                    'nation'=>'required|max:50',
+                    'engNation'=>'required|max:50',
+                    'engNation'=>'required|max:50',
+                    'startDate'=>'required',
+                    'endDate'=>'required',
+                    'comments'=>'max:500',
                 ]);
                 if($validator->fails()){
                     return redirect('foreign_stu')
