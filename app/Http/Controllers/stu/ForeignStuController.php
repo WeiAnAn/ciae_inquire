@@ -109,6 +109,36 @@ class ForeignStuController extends Controller
         $data = compact('foreignStu','user');
         return view('stu/foreign_stu',$data);
     }
+
+    public function edit($id){
+        $foreignStu = ForeignStu::find($id);
+        if(Gate::allows('permission',$foreignStu))
+            return view('stu/foreign_stu_edit',$foreignStu);
+        return redirect('foreign_stu');
+    }
+
+    public function update($id,Request $request){
+        $foreignStu = ForeignStu::find($id);
+        if(!Gate::allows('permission',$foreignStu))
+            return redirect('foreign_stu');
+        $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'chtName'=>'required|max:50',
+            'engName'=>'required|max:50',
+            'stuID'=>'required|max:15',
+            'stuLevel'=>'required|max:11',
+            'nation'=>'required|max:50',
+            'engNation'=>'required|max:50',
+            'engNation'=>'required|max:50',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+            ]);
+        $foreignStu->update($request->all());
+        return redirect('foreign_stu')->with('success','更新成功');
+    }
+
         public function delete($id){
         $foreignStu = ForeignStu::find($id);
         if(!Gate::allows('permission',$foreignStu))
