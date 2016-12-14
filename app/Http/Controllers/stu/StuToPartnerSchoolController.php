@@ -209,7 +209,7 @@ class StuToPartnerSchoolController extends Controller
     }
     
      public function example(Request $request){
-        return response()->download(public_path().'/Excel_example/stu/stu_to_partner_school.xlsx',"出國赴姊妹校參加交換計畫.xlsx");
+        return response()->download(public_path().'/Excel_example/stu/stu_to_partner_school.xlsx',"本校學生出國赴姊妹校參加交換計畫.xlsx");
     }
         		
 }

@@ -213,7 +213,7 @@ class StuForeignResearchController extends Controller
     }
     
      public function example(Request $request){
-        return response()->download(public_path().'/Excel_example/stu/stu_foreign_research.xlsx',"其他出國研修情形.xlsx");
+        return response()->download(public_path().'/Excel_example/stu/stu_foreign_research.xlsx',"本校學生其他出國研修情形.xlsx");
     }
                          			
 }

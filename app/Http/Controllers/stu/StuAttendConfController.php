@@ -221,6 +221,6 @@ public function update($id,Request $request){
     }
     
      public function example(Request $request){
-        return response()->download(public_path().'/Excel_example/stu/stu_attend_conf.xlsx',"赴國外出席國際會議.xlsx");
+        return response()->download(public_path().'/Excel_example/stu/stu_attend_conf.xlsx',"本校學生赴國外出席國際會議.xlsx");
     }
 }

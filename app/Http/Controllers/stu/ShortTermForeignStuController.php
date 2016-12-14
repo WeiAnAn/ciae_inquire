@@ -212,6 +212,6 @@ class ShortTermForeignStuController extends Controller
     }
     
      public function example(Request $request){
-        return response()->download(public_path().'/Excel_example/stu/short_term_foreign_stu.xlsx',"外籍學生至本校短期交流訪問.xlsx");
+        return response()->download(public_path().'/Excel_example/stu/short_term_foreign_stu.xlsx',"外籍學生至本校短期交流訪問或實習.xlsx");
     }                   			
 }
