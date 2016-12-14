@@ -62,7 +62,7 @@
 											<td>{{$data->chtCollege}}</td>
 											<td>{{$data->chtDept}}</td>
 											<td>{{$data->name}}</td>										
-											<td>{{$data->orgnization}}</td>
+											<td>{{$data->organization}}</td>
 											<td>{{$data->startDate}}</td>
 											<td>{{$data->endDate}}</td>
 											<td>{{$data->comments}}</td>
