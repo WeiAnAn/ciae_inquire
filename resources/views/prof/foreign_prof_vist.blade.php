@@ -56,8 +56,8 @@
 									<td id="comments" onclick="sort(id)">備註</td>
 									<td>管理</td>
 								</tr>
-								</thead>
-								<tbody>
+							</thead>
+							<tbody>
 								@foreach ($foreignPvist as $data)
 								<tr>
 									<td class='text-nowrap'>{{$data->chtCollege}}</td>
@@ -118,11 +118,11 @@
                                 <p class="text-danger">{{$errors->first('name')}}</p>
                             @endif
 							<div class="form-group">
-								<label for="">姓名</label>
+								<label for="">外籍學者姓名</label>
 								<input type="text" class="form-control" name="name" value="{{old('name')}}">
 							</div>
 							<div class="form-group">
-								<label for="profLevel">身分</label>
+								<label for="profLevel">外籍學者身分</label>
 								<select name="profLevel" id="profLevel_option" class="form-control">
 									<option value="1">教授</option>
 									<option value="2">副教授</option>
@@ -174,11 +174,11 @@
 						<form action="{{url('foreign_prof_vist/search')}}">
 							@include('../layouts/select_search')
 							<div class="form-group">
-								<label for="">姓名</label>
+								<label for="">外籍學者姓名</label>
 								<input type="text" class="form-control" name="name" />
 							</div>
 							<div class="form-group">
-								<label for="profLevel">身分</label>
+								<label for="profLevel">外籍學者身分</label>
 								<select name="profLevel" class="form-control">
 									<option value=""></option>
 									<option value="1">教授</option>
