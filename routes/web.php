@@ -235,14 +235,14 @@ Route::group(['middleware' => 'auth'],function(){
 
 		//擔任國際期刊編輯
 
-	Route::get('international_journal_edit','other\InternationalJournalEditorController@index');
-	Route::get('/international_journal_edit/search','other\InternationalJournalEditorController@search');
-	Route::get('/international_journal_edit/example','other\InternationalJournalEditorController@example');
-	Route::get('/international_journal_edit/{id}','other\InternationalJournalEditorController@edit');
-	Route::post('international_journal_edit','other\InternationalJournalEditorController@insert');
-	Route::post('/international_journal_edit/upload','other\InternationalJournalEditorController@upload');
-	Route::patch('/international_journal_edit/{id}','other\InternationalJournalEditorController@update');
-	Route::delete('/international_journal_edit/{id}','other\InternationalJournalEditorController@delete');
+	Route::get('international_journal_editor','other\InternationalJournalEditorController@index');
+	Route::get('/international_journal_editor/search','other\InternationalJournalEditorController@search');
+	Route::get('/international_journal_editor/example','other\InternationalJournalEditorController@example');
+	Route::get('/international_journal_editor/{id}','other\InternationalJournalEditorController@edit');
+	Route::post('international_journal_editor','other\InternationalJournalEditorController@insert');
+	Route::post('/international_journal_editor/upload','other\InternationalJournalEditorController@upload');
+	Route::patch('/international_journal_editor/{id}','other\InternationalJournalEditorController@update');
+	Route::delete('/international_journal_editor/{id}','other\InternationalJournalEditorController@delete');
 
 		//參與國際組織
 
