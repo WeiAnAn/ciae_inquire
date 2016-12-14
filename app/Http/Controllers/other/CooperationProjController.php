@@ -98,6 +98,34 @@ class CooperationProjController extends Controller
 
 
     }
+
+    public function edit($id){
+        $cooperationproj = CooperationProj::find($id);
+        if(Gate::allows('permission',$cooperationproj))
+            return view('other/cooperation_proj_edit',$cooperationproj);
+        return redirect('cooperation_proj');
+    }
+
+    public function update($id,Request $request){
+        $cooperationproj = CooperationProj::find($id);
+        if(!Gate::allows('permission',$cooperationproj))
+            return redirect('cooperation_proj');
+        $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:10',
+            'projName'=>'required|max:200',
+            'projOrg'=>'required|max:200',
+            'projContent'=>'max:200',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+            ]);
+        $cooperationproj->update($request->all());
+        return redirect('cooperation_proj')->with('success','更新成功');
+    }
+
+    
        public function delete($id){
         $cooperationproj = CooperationProj::find($id);
         if(!Gate::allows('permission',$cooperationproj))

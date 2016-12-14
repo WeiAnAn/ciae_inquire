@@ -97,13 +97,40 @@ class PartnerSchoolController extends Controller
         $data = compact('partner','user');
         return view('other/partner_school',$data);
     }
-      public function delete($id){
+
+    
+    public function edit($id){
+        $partner = PartnerSchool::find($id);
+        if(Gate::allows('permission',$partner))
+            return view('other/partner_school_edit',$partner);
+        return redirect('partner_school');
+    }
+
+    public function update($id,Request $request){
+        $partner = PartnerSchool::find($id);
+        if(!Gate::allows('permission',$partner))
+            return redirect('partner_school');
+        $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'nation'=>'required|max:20',
+            'chtName'=>'required|max:50',
+            'engName'=>'required|max:80',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+            ]);
+        $partner->update($request->all());
+        return redirect('partner_school')->with('success','更新成功');
+    }
+
+    public function delete($id){
         $partner = PartnerSchool::find($id);
         if(!Gate::allows('permission',$partner))
             return redirect('partner_school');
         $partner->delete();
         return redirect('partner_school');
-        }
+    }
         
 
 

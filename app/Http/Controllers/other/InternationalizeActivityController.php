@@ -95,6 +95,33 @@ class InternationalizeActivityController extends Controller
         $data = compact('internationalactivity','user');
         return view('other/internationalize_activity',$data);
     }
+
+    public function edit($id){
+        $internationalactivity = InternationalizeActivity::find($id);
+        if(Gate::allows('permission',$internationalactivity))
+            return view('other/internationalize_activity_edit',$internationalactivity);
+        return redirect('internationalize_activity');
+    }
+
+    public function update($id,Request $request){
+        $internationalactivity = InternationalizeActivity::find($id);
+        if(!Gate::allows('permission',$internationalactivity))
+            return redirect('internationalize_activity');
+        $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'activityName'=>'required|max:200',
+            'place'=>'required|max:200',
+            'host'=>'required|max:200',
+            'guest'=>'required|max:200',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            ]);
+        $internationalactivity->update($request->all());
+        return redirect('internationalize_activity')->with('success','更新成功');
+    }
+
+    
      public function delete($id){
         $internationalactivity = InternationalizeActivity::find($id);
         if(!Gate::allows('permission',$internationalactivity))
