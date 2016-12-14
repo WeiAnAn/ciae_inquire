@@ -49,7 +49,7 @@
 									<td id="international_journal_editor.college" onclick="sort(id)">所屬一級單位</td>
 									<td id="international_journal_editor.dept" onclick="sort(id)">所屬系所部門</td>
 									<td id="name" onclick="sort(id)">期刊編輯者</td>
-									<td id="" onclick="sort(id)">期刊名稱</td>
+									<td id="journalName" onclick="sort(id)">期刊名稱</td>
 									<td id="startDate" onclick="sort(id)">開始擔任時間</td>
 									<td id="endDate" onclick="sort(id)">結束擔任時間</td>
 									<td id="comments" onclick="sort(id)">備註</td>
@@ -84,12 +84,12 @@
 
 							{{-- 這裡需要改NAME --}}
 
-							@if($errors->has('nation'))
-                                <p class="text-danger">{{$errors->first('nation')}}</p>
+							@if($errors->has('journalName'))
+                                <p class="text-danger">{{$errors->first('journalName')}}</p>
                             @endif
 							<div class="form-group">
-								<label for="nation">期刊名稱</label>
-								<input type="text" name="nation" class="form-control" value="{{old('nation')}}">
+								<label for="journalName">期刊名稱</label>
+								<input type="text" name="journalName" class="form-control" value="{{old('journalName')}}">
 							</div>
 							
 							@if($errors->has('startDate')||$errors->has('endDate'))
@@ -126,13 +126,13 @@
 						<form action="{{url('international_journal_editor/search')}}">
 							@include('../layouts/select_search')
 							<div class="form-group">
-								<label for="">期刊編輯者姓名</label>
+								<label for="name">期刊編輯者姓名</label>
 								<input type="text" class="form-control" name="name" />
 							</div>
 							
 							<div class="form-group">
-								<label for="nation">期刊名稱</label>
-								<input type="text" name="nation" class="form-control">
+								<label for="journalName">期刊名稱</label>
+								<input type="text" name="journalName" class="form-control">
 							</div>
 							<div class="form-group" style="margin-bottom: 0px">
 								<label >開始擔任日期</label>

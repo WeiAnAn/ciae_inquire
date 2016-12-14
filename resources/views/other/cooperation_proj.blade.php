@@ -119,7 +119,7 @@
                             @endif
 							<div class="form-group">
 								<label for="projOrg">合作機構</label>
-								<textarea name="projOrg" id="projOrg" cols="30" rows="3" class="form-control">{{old('name')}}</textarea>
+								<textarea name="projOrg" id="projOrg" cols="30" rows="3" class="form-control">{{old('projOrg')}}</textarea>
 							</div>
 
 							@if($errors->has('projName'))
