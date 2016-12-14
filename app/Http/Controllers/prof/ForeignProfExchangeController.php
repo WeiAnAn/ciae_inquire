@@ -15,8 +15,24 @@ class ForeignProfExchangeController extends Controller
 {
     
     public function index(Request $request){
+        $sortBy = 'id';
+        $orderBy = "desc";
+        if($request->sortBy != null)
+            $sortBy = $request->sortBy;
+        if($request->orderBy != null)
+            $orderBy = $request->orderBy;
 
-    	return view ('prof/foreign_prof_exchange');
+        $foreignPexchange=ForeignProfExchange::
+            join('college_data',function($join){
+            $join->on('foreign_prof_exchange.college','college_data.college');
+            $join->on('foreign_prof_exchange.dept','college_data.dept');
+        })->orderBy($sortBy,$orderBy)
+            ->paginate(20);
+        $user = Auth::user();
+        $data=compact('foreignPexchange','user');
+
+
+    	return view ('prof/foreign_prof_exchange',$data);
     }
 
     public function upload(Request $request){

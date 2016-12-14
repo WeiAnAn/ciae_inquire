@@ -57,6 +57,34 @@
 								</tr>
 							</thead>
 							<tbody>
+								@foreach ($internationaljeditor as $data)
+								<tr>
+									<td>{{$data->chtCollege}}</td>
+									<td>{{$data->chtDept}}</td>
+									<td>{{$data->name}}</td>
+									<td>{{$data->journalName}}</td>
+									<td>{{$data->startDate}}</td>
+									<td>{{$data->endDate}}</td>
+									<td>{{$data->comments}}</td>
+									<td>
+										@can('permission',$data)
+										<a href="{{url('international_journal_editor',$data->id)}}"
+											class="glyphicon glyphicon-pencil	
+											btn btn-success btn-xs"></a>
+										<form 
+											action="{{url('international_journal_editor',$data->id)}}"
+											method="post" style="display: inline;">
+											{{ method_field('DELETE') }}
+                        					{{ csrf_field() }}
+											<button class="glyphicon glyphicon-trash
+												btn btn-danger btn-xs" 
+												onclick="clickDel(event)"></button>
+										</form>
+										@endcan
+									</td>
+
+								</tr>
+								@endforeach
 							</tbody>
 						</table>
 					</div>

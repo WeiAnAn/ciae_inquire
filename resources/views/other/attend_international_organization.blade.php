@@ -57,6 +57,32 @@
 								</tr>
 								</thead>
 								<tbody>
+									@foreach ($attendiorganization as $data)
+										<tr>
+											<td>{{$data->chtCollege}}</td>
+											<td>{{$data->chtDept}}</td>
+											<td>{{$data->name}}</td>										
+											<td>{{$data->orgnization}}</td>
+											<td>{{$data->startDate}}</td>
+											<td>{{$data->endDate}}</td>
+											<td>{{$data->comments}}</td>
+											<td class="text-nowrap">
+												@can('permission',$data)
+												<a href="{{url('attend_international_organization',$data->id)}}"
+													class="glyphicon glyphicon-pencil	
+													btn btn-success btn-xs"></a>
+												<form action="{{url('attend_international_organization',$data->id)}}"
+													method="post" style="display: inline;">
+													{{ method_field('DELETE') }}
+		                        					{{ csrf_field() }}
+													<button class="glyphicon glyphicon-trash
+														btn btn-danger btn-xs" 
+														onclick="clickDel(event)"></button>
+												</form>
+												@endcan
+											</td>
+										</tr>
+									@endforeach
 								</tbody>
 						</table>
 
