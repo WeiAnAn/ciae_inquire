@@ -47,12 +47,12 @@
 						<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
-									<td id="internationalize_activity.college" onclick="sort(id)">單位</td>
-									<td id="internationalize_activity.dept" onclick="sort(id)">系所部門</td>
+									<td id="internationalize_activity.college" onclick="sort(id)">所屬一級單位</td>
+									<td id="internationalize_activity.dept" onclick="sort(id)">所屬系所部門</td>
 									<td id="activityName" onclick="sort(id)">活動性質</td>
-									<td id="place" onclick="sort(id)">地點</td>
-									<td id="host" onclick="sort(id)">主辦</td>
-									<td id="guest" onclick="sort(id)">外賓</td>
+									<td id="place" onclick="sort(id)">活動地點</td>
+									<td id="host" onclick="sort(id)">本校參加人員</td>
+									<td id="guest" onclick="sort(id)">參加之外賓</td>
 									<td id="startDate" onclick="sort(id)">開始時間</td>
 									<td id="endDate" onclick="sort(id)">結束時間</td>
 									<td>管理</td>
@@ -119,7 +119,7 @@
                                 <p class="text-danger">{{$errors->first('place')}}</p>
                             @endif
 							<div class="form-group">
-								<label for="place">地點</label>
+								<label for="place">活動地點</label>
 								<input type="text" class="form-control" name="place" value="{{old('place')}}" />
 							</div>
 
@@ -127,7 +127,7 @@
                                 <p class="text-danger">{{$errors->first('host')}}</p>
                             @endif
 							<div class="form-group">
-								<label for="host">主辦</label>
+								<label for="host">本校參加人員</label>
 								<textarea name="host" id="host" cols="30" rows="3" class="form-control">{{old('host')}}</textarea>
 							</div>
 
@@ -135,7 +135,7 @@
                                 <p class="text-danger">{{$errors->first('guest')}}</p>
                             @endif
 							<div class="form-group">
-								<label for="guest">外賓</label>
+								<label for="guest">參加之外賓</label>
 								<textarea name="guest" id="guest" cols="30" rows="3" class="form-control">{{old('guest')}}</textarea>
 							</div>
 							
@@ -169,15 +169,15 @@
 								<input type="text" class="form-control" name="activityName" />
 							</div>
 							<div class="form-group">
-								<label for="place">地點</label>
+								<label for="place">活動地點</label>
 								<input type="text" class="form-control" name="place" />
 							</div>
 							<div class="form-group">
-								<label for="host">主辦</label>
+								<label for="host">本校參加人員</label>
 								<textarea name="host" id="host" cols="30" rows="3" class="form-control"></textarea>
 							</div>
 							<div class="form-group">
-								<label for="guest">外賓</label>
+								<label for="guest">參加之外賓</label>
 								<textarea name="guest" id="guest" cols="30" rows="3" class="form-control"></textarea>
 							</div>
 							

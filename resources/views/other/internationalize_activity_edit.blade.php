@@ -26,7 +26,7 @@
                         <p class="text-danger">{{$errors->first('place')}}</p>
                     @endif
 					<div class="form-group">
-						<label for="place">地點</label>
+						<label for="place">活動地點</label>
 						<input type="text" class="form-control" name="place" value="{{$place}}" />
 					</div>
 
@@ -34,7 +34,7 @@
                         <p class="text-danger">{{$errors->first('host')}}</p>
                     @endif
 					<div class="form-group">
-						<label for="host">主辦</label>
+						<label for="host">本校參加人員</label>
 						<textarea name="host" id="host" cols="30" rows="3" class="form-control">{{$host}}</textarea>
 					</div>
 
@@ -42,7 +42,7 @@
                         <p class="text-danger">{{$errors->first('guest')}}</p>
                     @endif
 					<div class="form-group">
-						<label for="guest">外賓</label>
+						<label for="guest">參加之外賓</label>
 						<textarea name="guest" id="guest" cols="30" rows="3" class="form-control">{{$guest}}</textarea>
 					</div>
 					

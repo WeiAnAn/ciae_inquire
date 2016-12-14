@@ -46,10 +46,10 @@
 						<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
-									<td id="prof_exchange.college" onclick="sort(id)">單位</td>
-									<td id="prof_exchange.dept" onclick="sort(id)">系所部門</td>
+									<td id="prof_exchange.college" onclick="sort(id)">所屬一級單位</td>
+									<td id="prof_exchange.dept" onclick="sort(id)">所屬系所部門</td>
 									<td id="name" onclick="sort(id)">姓名</td>
-									<td id="profLevel" onclick="sort(id)">身分</td>
+									<td id="profLevel" onclick="sort(id)">身分（教授、副教授、助理教授或博士後研究員）</td>
 									<td id="nation" onclick="sort(id)">前往國家</td>
 									<td id="startDate" onclick="sort(id)">開始時間</td>
 									<td id="endDate" onclick="sort(id)">結束時間</td>

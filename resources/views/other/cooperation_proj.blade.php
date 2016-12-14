@@ -47,9 +47,9 @@
 		      	 	<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
-									<td id="cooperation_proj.college" onclick="sort(id)">單位</td>
-									<td id="cooperation_proj.dept" onclick="sort(id)">系所部門</td>
-									<td id="name" onclick="sort(id)">主持人</td>
+									<td id="cooperation_proj.college" onclick="sort(id)">所屬一級單位</td>
+									<td id="cooperation_proj.dept" onclick="sort(id)">所屬系所部門</td>
+									<td id="name" onclick="sort(id)">主辦人</td>
 									<td id="projName" onclick="sort(id)">合作機構</td>
 									<td id="projOrg" onclick="sort(id)">計畫名稱</td>
 									<td id="projContent" onclick="sort(id)">計畫內容</td>
@@ -110,7 +110,7 @@
                                 <p class="text-danger">{{$errors->first('name')}}</p>
                             @endif
 							<div class="form-group">
-								<label for="">主持人</label>
+								<label for="">主辦人</label>
 								<input type="text" class="form-control" name="name" value="{{old('name')}}" />
 							</div>
 							
@@ -165,7 +165,7 @@
 						<form action="{{url('cooperation_proj/search')}}">
 							@include('../layouts/select_search')
 							<div class="form-group">
-								<label for="">主持人</label>
+								<label for="">主辦人</label>
 								<input type="text" class="form-control" name="name" />
 							</div>
 							<div class="form-group">
