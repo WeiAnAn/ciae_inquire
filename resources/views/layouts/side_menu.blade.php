@@ -8,12 +8,12 @@
                                 <li>
                                     <a href="{{URL('/user')}}">單位資料修改</a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a href="{{URL('/graduate_threshold')}}">英檢畢業門檻</a>
                                 </li>
                                 <li>
                                     <a href="{{URL('/foreign_language_class')}}">全外語授課之課程</a>
-                                </li>
+                                </li> -->
                                 @can('superUser')
                                 <li>
                                     <a href="{{URL('/manage')}}">帳號管理</a>
@@ -36,6 +36,9 @@
                                 </li>
                                 <li>
                                     <a href="{{URL('/foreign_prof_vist')}}">外籍學者蒞校訪問</a>
+                                </li>
+                                <li>
+                                    <a href="{{URL('/foreign_prof_exchange')}}">外籍學者蒞校交換</a>
                                 </li>
                             </ul>
                         </li>
