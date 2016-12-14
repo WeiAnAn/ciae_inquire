@@ -108,6 +108,34 @@ class TransnationalDegreeController extends Controller
         return view('other/transnational_degree',$data);
     }
 
+    public function edit($id){
+        $transnational = TransnationalDegree::find($id);
+        if(Gate::allows('permission',$transnational))
+            return view('other/transnational_degree_edit',$transnational);
+        return redirect('transnational_degree');
+    }
+
+    public function update($id,Request $request){
+        $transnational = TransnationalDegree::find($id);
+        if(!Gate::allows('permission',$transnational))
+            return redirect('transnational_degree');
+        $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'nation'=>'required|max:20',
+            'chtName'=>'required|max:200',
+            'engName'=>'required|max:200',
+            'bachelor'=>'required|max:11',
+            'master'=>'required|max:11',
+            'PHD'=>'required|max:11',
+            'classMode'=>'required|max:200',
+            'degreeMode'=>'required|max:200',
+            'comments'=>'max:500',
+            ]);
+        $transnational->update($request->all());
+        return redirect('transnational_degree')->with('success','更新成功');
+    }
+
     public function delete($id){
         $transnational = TransnationalDegree::find($id);
         if(!Gate::allows('permission',$transnational))

@@ -30,10 +30,10 @@
 					</div>
 					<div class="form-group">
 						@if($errors->has("nation"))
-							<p class="text-danger">rrrr{{$errors->first('nation')}}</p>
+							<p class="text-danger">{{$errors->first('nation')}}</p>
 						@endif
 							<label for="nation">國籍</label>
-							<input type="text" name="nation" class="form-control" value="{{old('nation')}}">
+							<input type="text" name="nation" class="form-control" value="{{$nation}}">
 					</div>
 					<div class="form-group">
 						<label for="startDate">開始時間</label>
