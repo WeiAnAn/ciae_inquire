@@ -44,11 +44,11 @@
                             <a href="#"><i class="fa fa-graduation-cap fa-fw"></i> 學生專區<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li><a href="{{ URL('/stu_attend_conf') }}">赴國外出席國際會議</a></li>
-                                <li><a href="{{URL('/stu_to_partner_school')}}">出國赴姊妹校參加交換計畫</a></li>
-                                <li><a href="{{URL('/stu_foreign_research')}}">其他出國研修情形</a></li>
+                                <li><a href="{{URL('/stu_to_partner_school')}}">本校學生出國赴姊妹校參加交換計畫</a></li>
+                                <li><a href="{{URL('/stu_foreign_research')}}">本校學生其他出國研修情形</a></li>
                                 <li><a href="{{URL('/stu_from_partner_school')}}">姊妹校學生至本校參加交換計畫</a></li>
                                 <li><a href="{{URL('/short_term_foreign_stu')}}">外籍學生至本校短期交流訪問</a></li>
-                                <li><a href="{{URL('/foreign_stu')}}">修讀正式學位之外國學生</a></li>
+                                <li><a href="{{URL('/foreign_stu')}}">修讀正式學位之外國</a></li>
                             </ul>
                         </li>
                             <!-- /.nav-second-level -->
@@ -67,6 +67,12 @@
                                 </li>
                                 <li>
                                     <a href="{{URL('/internationalize_activity')}}">國際化活動</a>
+                                </li>
+                                <li>
+                                    <a href="{{URL('/international_journal_editor')}}">擔任國際期刊編輯</a>
+                                </li>
+                                <li>
+                                    <a href="{{URL('/attend_international_organization')}}">餐與國際組織</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

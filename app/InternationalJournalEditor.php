@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class InternationalJournalEdit extends Model
+class InternationalJournalEditor extends Model
 {
     //
 }
