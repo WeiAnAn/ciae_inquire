@@ -55,7 +55,7 @@
 			<a href="{{URL('/cooperation_proj')}}" class="list-group-item">國際合作交流計畫</a>
 			<a href="{{URL('/internationalize_activity')}}" class="list-group-item">國際化活動</a>
 			<a href="{{URL('/international_journal_editor')}}" class="list-group-item">擔任國際期刊編輯</a>
-			<a href="{{URL('/attend_international_organization')}}" class="list-group-item">餐與國際組織</a>
+			<a href="{{URL('/attend_international_organization')}}" class="list-group-item">參與國際組織</a>
 		</div>
 	</div>
 </div>

@@ -75,7 +75,7 @@
                                     <a href="{{URL('/international_journal_editor')}}">擔任國際期刊編輯</a>
                                 </li>
                                 <li>
-                                    <a href="{{URL('/attend_international_organization')}}">餐與國際組織</a>
+                                    <a href="{{URL('/attend_international_organization')}}">參與國際組織</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
