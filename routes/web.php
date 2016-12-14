@@ -103,7 +103,16 @@ Route::group(['middleware' => 'auth'],function(){
 	Route::patch('/foreign_prof_vist/{id}','prof\ForeignProfVistController@update');
 	Route::delete('/foreign_prof_vist/{id}','prof\ForeignProfVistController@delete');
 
+		//外籍學者蒞校交換
 
+	Route::get('/foreign_prof_exchange','prof\ForeignProfExchangeController@index');
+	Route::get('/foreign_prof_exchange/search','prof\ForeignProfExchangeController@search');
+	Route::get('/foreign_prof_exchange/example','prof\ForeignProfExchangeController@example');
+	Route::post('/foreign_prof_exchange','prof\ForeignProfExchangeController@insert');
+	Route::post('/foreign_prof_exchange/upload','prof\ForeignProfExchangeController@upload');
+	Route::get('/foreign_prof_exchange/{id}','prof\ForeignProfExchangeController@edit');
+	Route::patch('/foreign_prof_exchange/{id}','prof\ForeignProfExchangeController@update');
+	Route::delete('/foreign_prof_exchange/{id}','prof\ForeignProfExchangeController@delete');
 
 	//學生專區
 
@@ -118,7 +127,7 @@ Route::group(['middleware' => 'auth'],function(){
 	Route::patch('/stu_attend_conf/{id}','stu\StuAttendConfController@update');
 	Route::delete('/stu_attend_conf/{id}','stu\StuAttendConfController@delete');
 
-		//出國赴姊妹校交換計畫
+		//本校學生出國赴姊妹校交換計畫
 
 	Route::get('/stu_to_partner_school','stu\StuToPartnerSchoolController@index');
 	Route::get('/stu_to_partner_school/search','stu\StuToPartnerSchoolController@search');
@@ -129,7 +138,7 @@ Route::group(['middleware' => 'auth'],function(){
 	Route::patch('/stu_to_partner_school/{id}','stu\StuToPartnerSchoolController@update');
 	Route::delete('/stu_to_partner_school/{id}','stu\StuToPartnerSchoolController@delete');
 
-		//其他出國研修情形
+		//本校學生其他出國研修情形
 
 	Route::get('/stu_foreign_research','stu\StuForeignResearchController@index');
 	Route::get('/stu_foreign_research/search','stu\StuForeignResearchController@search');
@@ -151,7 +160,7 @@ Route::group(['middleware' => 'auth'],function(){
 	Route::patch('/stu_from_partner_school/{id}','stu\StuFromPartnerSchoolController@update');
 	Route::delete('/stu_from_partner_school/{id}','stu\StuFromPartnerSchoolController@delete');
 	
-		//外籍學生至本校短期交流訪問
+		//外籍學生至本校短期交流訪問或實習
 
 	Route::get('/short_term_foreign_stu','stu\ShortTermForeignStuController@index');
 	Route::get('/short_term_foreign_stu/search','stu\ShortTermForeignStuController@search');
@@ -223,7 +232,29 @@ Route::group(['middleware' => 'auth'],function(){
 		'other\InternationalizeActivityController@update');
 	Route::delete('/internationalize_activity/{id}',
 		'other\InternationalizeActivityController@delete');
-	
+
+		//擔任國際期刊編輯
+
+	Route::get('international_journal_edit','other\InternationalJournalEditorController@index');
+	Route::get('/international_journal_edit/search','other\InternationalJournalEditorController@search');
+	Route::get('/international_journal_edit/example','other\InternationalJournalEditorController@example');
+	Route::get('/international_journal_edit/{id}','other\InternationalJournalEditorController@edit');
+	Route::post('international_journal_edit','other\InternationalJournalEditorController@insert');
+	Route::post('/international_journal_edit/upload','other\InternationalJournalEditorController@upload');
+	Route::patch('/international_journal_edit/{id}','other\InternationalJournalEditorController@update');
+	Route::delete('/international_journal_edit/{id}','other\InternationalJournalEditorController@delete');
+
+		//參與國際組織
+
+	Route::get('attend_international_organization','other\AttendInternationalOrganizationController@index');
+	Route::get('/attend_international_organization/search','other\AttendInternationalOrganizationController@search');
+	Route::get('/attend_international_organization/example','other\AttendInternationalOrganizationController@example');
+	Route::get('/attend_international_organization/{id}','other\AttendInternationalOrganizationController@edit');
+	Route::post('attend_international_organization','other\AttendInternationalOrganizationController@insert');
+	Route::post('/attend_international_organization/upload','other\AttendInternationalOrganizationController@upload');
+	Route::patch('/attend_international_organization/{id}','other\AttendInternationalOrganizationController@update');
+	Route::delete('/attend_international_organization/{id}','other\AttendInternationalOrganizationController@delete');
+
 		//系所對照表下載
 
 	Route::get('/example',function(){
