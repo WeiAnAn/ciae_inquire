@@ -47,13 +47,13 @@
 						<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
-									<td id="partner_school.college" onclick="sort(id)">單位</td>
-									<td id="partner_school.dept" onclick="sort(id)">系所部門</td>
-									<td id="nation" onclick="sort(id)">國家</td>
+									<td id="partner_school.college" onclick="sort(id)">簽約機構所屬一級單位</td>
+									<td id="partner_school.dept" onclick="sort(id)">簽約系所</td>
+									<td id="nation" onclick="sort(id)">姊妹校所屬國家</td>
 									<td id="chtName" onclick="sort(id)">中文校名</td>
 									<td id="engName" onclick="sort(id)">英文校名</td>
-									<td id="startDate" onclick="sort(id)">開始時間</td>
-									<td id="endDate" onclick="sort(id)">結束時間</td>
+									<td id="startDate" onclick="sort(id)">簽約時間</td>
+									<td id="endDate" onclick="sort(id)">到期時間</td>
 									<td id="comments" onclick="sort(id)">備註</td>
 									<td>管理</td>
 								</tr>
@@ -110,7 +110,7 @@
                                 <p class="text-danger">{{$errors->first('nation')}}</p>
                             @endif
 							<div class="form-group">
-								<label for="nation">國家</label>
+								<label for="nation">姊妹校所屬國家</label>
 								<input type="text" name="nation" class="form-control" value="{{old('nation')}}">
 							</div>
 
@@ -135,11 +135,11 @@
                                 <p class="text-danger col-md-6">{{ $errors->first('endDate')}}</p>
                             @endif
 							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
-								<label for="startDate">開始時間</label>
+								<label for="startDate">簽約時間</label>
 								<input type="date" name="startDate" class="form-control" value="{{old('startDate')}}">
 							</div>
 							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
-								<label for="endDate">結束時間</label>
+								<label for="endDate">到期時間</label>
 								<input type="date" name="endDate" class="form-control" value="{{old('endDate')}}">
 							</div>
 
@@ -164,7 +164,7 @@
 						<form action="{{url('partner_school/search')}}">
 							@include('../layouts/select_search')
 							<div class="form-group">
-								<label for="nation">國家</label>
+								<label for="nation">姊妹校所屬國家</label>
 								<input type="text" name="nation" class="form-control">
 							</div>
 							<div class="form-group">
@@ -177,11 +177,11 @@
 							</div>
 							
 							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
-								<label for="startDate">開始時間</label>
+								<label for="startDate">簽約時間</label>
 								<input type="date" name="startDate" class="form-control">
 							</div>
 							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
-								<label for="endDate">結束時間</label>
+								<label for="endDate">到期時間</label>
 								<input type="date" name="endDate" class="form-control">
 							</div>
 							<div class="form-group">

@@ -47,10 +47,10 @@
 						<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
-									<td id="stu_attend_conf.college" onclick="sort(id)">單位</td>
-									<td id="stu_attend_conf.dept" onclick="sort(id)">系所部門</td>
+									<td id="stu_attend_conf.college" onclick="sort(id)">所屬一級單位</td>
+									<td id="stu_attend_conf.dept" onclick="sort(id)">所屬系所部門</td>
 									<td id="name" onclick="sort(id)">姓名</td>
-									<td id="stuLevel" onclick="sort(id)">身分</td>
+									<td id="stuLevel" onclick="sort(id)">身分 (學士、碩士或博士班）</td>
 									<td id="nation" onclick="sort(id)">前往國家</td>
 									<td id="confName" onclick="sort(id)">會議名稱</td>
 									<td id="startDate" onclick="sort(id)">開始時間</td>

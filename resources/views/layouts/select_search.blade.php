@@ -1,6 +1,6 @@
 
 	<div class="form-group">
-		<label for="college">單位名稱</label>
+		<label for="college">所屬一級單位名稱</label>
 		<select name="college" id="college_search" onchange="change_search(value)" class="form-control">
 			<option value="0">所有單位</option>
 			<option value="1">文學院</option>
@@ -31,12 +31,11 @@
 		</select>
 	</div>
 	<div class="form-group">
-		<label for="dept">系所部門</label>
+		<label for="dept">所屬系所部門</label>
 		<select name="dept" id="dept_search" class="form-control" >
 			<option value="0">所有部門</option>
 		</select>
 	</div>
-	
 
 
 	<script>

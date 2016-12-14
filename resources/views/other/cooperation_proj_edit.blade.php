@@ -18,7 +18,7 @@
                         <p class="text-danger">{{$errors->first('name')}}</p>
                     @endif
 					<div class="form-group">
-						<label for="">主持人</label>
+						<label for="">主辦人</label>
 						<input type="text" class="form-control" name="name" value="{{$name}}" />
 					</div>
 					

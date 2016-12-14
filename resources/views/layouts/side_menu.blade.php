@@ -50,7 +50,7 @@
                                 <li><a href="{{URL('/stu_to_partner_school')}}">本校學生出國赴姊妹校參加交換計畫</a></li>
                                 <li><a href="{{URL('/stu_foreign_research')}}">本校學生其他出國研修情形</a></li>
                                 <li><a href="{{URL('/stu_from_partner_school')}}">姊妹校學生至本校參加交換計畫</a></li>
-                                <li><a href="{{URL('/short_term_foreign_stu')}}">外籍學生至本校短期交流訪問</a></li>
+                                <li><a href="{{URL('/short_term_foreign_stu')}}">外籍學生至本校短期交流訪問或實習</a></li>
                                 <li><a href="{{URL('/foreign_stu')}}">修讀正式學位之外國</a></li>
                             </ul>
                         </li>

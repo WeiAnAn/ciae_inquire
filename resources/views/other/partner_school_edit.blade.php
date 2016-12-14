@@ -18,7 +18,7 @@
                     <p class="text-danger">{{$errors->first('nation')}}</p>
                     @endif
 					<div class="form-group">
-						<label for="nation">國家</label>
+						<label for="nation">姊妹校所屬國家</label>
 						<input type="text" name="nation" class="form-control" value="{{$nation}}">
 					</div>
 

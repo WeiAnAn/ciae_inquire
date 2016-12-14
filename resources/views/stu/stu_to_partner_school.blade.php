@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<h1 class="page-header">出國赴姊妹校參加交換計畫</h1>
+		<h1 class="page-header">本校學生出國赴姊妹校參加交換計畫</h1>
 	</div>
 </div>
 <div class="row">	
@@ -46,10 +46,10 @@
 						<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
-									<td id="stu_to_partner_school.college" onclick="sort(id)">單位</td>
-									<td id="stu_to_partner_school.dept" onclick="sort(id)">系所部門</td>
+									<td id="stu_to_partner_school.college" onclick="sort(id)">所屬一級單位</td>
+									<td id="stu_to_partner_school.dept" onclick="sort(id)">所屬系所部門</td>
 									<td id="name" onclick="sort(id)">姓名</td>
-									<td id="stuLevel" onclick="sort(id)">身分</td>
+									<td id="stuLevel" onclick="sort(id)">身分 (學士、碩士或博士班）</td>
 									<td id="nation" onclick="sort(id)">前往國家</td>
 									<td id="startDate" onclick="sort(id)">開始時間</td>
 									<td id="endDate" onclick="sort(id)">結束時間</td>

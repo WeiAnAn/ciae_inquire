@@ -46,10 +46,10 @@
 						<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
-									<td id="foreign_prof_vist.college" onclick="sort(id)">單位</td>
-									<td id="foreign_prof_vist.dept" onclick="sort(id)">系所部門</td>
-									<td id="name" onclick="sort(id)">姓名</td>
-									<td id="profLevel" onclick="sort(id)">身分</td>
+									<td id="foreign_prof_vist.college" onclick="sort(id)">邀請單位(一級單位名稱)</td>
+									<td id="foreign_prof_vist.dept" onclick="sort(id)">邀請單位(二級單位名稱)</td>
+									<td id="name" onclick="sort(id)">外籍學者姓名</td>
+									<td id="profLevel" onclick="sort(id)">外籍學者身分（教授、副教授、助理教授或博士後研究員）</td>
 									<td id="nation" onclick="sort(id)">國籍</td>
 									<td id="startDate" onclick="sort(id)">開始時間</td>
 									<td id="endDate" onclick="sort(id)">結束時間</td>

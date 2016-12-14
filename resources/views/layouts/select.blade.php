@@ -1,6 +1,6 @@
 
 	<div class="form-group">
-		<label for="college">單位名稱</label>
+		<label for="college">所屬一級單位名稱</label>
 		<select name="college" id="college_option" onchange="change(value)" class="form-control">
 			<option value="1">文學院</option>
 			<option value="2">理學院</option>
@@ -30,7 +30,7 @@
 		</select>
 	</div>
 	<div class="form-group">
-		<label for="dept">系所部門</label>
+		<label for="dept">所屬系所部門</label>
 		<select name="dept" id="dept_option" class="form-control" >
 			<option value="0">文學院</option>
 			<option value="10">中文系/中文所</option>
