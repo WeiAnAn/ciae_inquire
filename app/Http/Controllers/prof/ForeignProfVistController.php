@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Excel;
 use Validator;
+use App\CollegeData;
 
 class ForeignProfVistController extends Controller
 {
@@ -136,19 +137,19 @@ class ForeignProfVistController extends Controller
                 foreach ($item as $key => $value) {
 
                     switch ($key) {
-                        case '單位名稱':
+                        case '邀請單位一級單位名稱':
                             $item['college'] = $value;
                             unset($item[$key]);
                             break;
-                        case '系所部門':
+                        case '邀請單位二級單位名稱':
                             $item['dept'] = $value;
                             unset($item[$key]);
                             break;
-                        case '姓名':
+                        case '外籍學者姓名':
                             $item['name'] = $value;
                             unset($item[$key]);
                             break;
-                        case '身分':
+                        case '外籍學者身分輸入數字':
                             $item['profLevel'] = $value;
                             unset($item[$key]);
                             break;
@@ -175,9 +176,9 @@ class ForeignProfVistController extends Controller
                 $validator = Validator::make($item,[
                     'college'=>'required|max:11',
                     'dept'=>'required|max:11',
+                    'name'=>'required|max:20',
+                    'profLevel'=>'required|max:11',
                     'nation'=>'required|max:20',
-                    'chtName'=>'required|max:50',
-                    'engName'=>'required|max:80',
                     'startDate'=>'required',
                     'endDate'=>'required',
                     'comments'=>'max:500',

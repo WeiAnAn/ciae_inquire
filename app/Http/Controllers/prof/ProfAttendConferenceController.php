@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Excel;
 use Validator;
+use App\CollegeData;
 
 class ProfAttendConferenceController extends Controller
 {
@@ -141,11 +142,11 @@ class ProfAttendConferenceController extends Controller
                 foreach ($item as $key => $value) {
 
                     switch ($key) {
-                        case '單位名稱':
+                        case '所屬一級單位':
                             $item['college'] = $value;
                             unset($item[$key]);
                             break;
-                        case '系所部門':
+                        case '所屬系所部門':
                             $item['dept'] = $value;
                             unset($item[$key]);
                             break;
@@ -153,7 +154,7 @@ class ProfAttendConferenceController extends Controller
                             $item['name'] = $value;
                             unset($item[$key]);
                             break;
-                        case '身分':
+                        case '身分輸入數字':
                             $item['profLevel'] = $value;
                             unset($item[$key]);
                             break;
