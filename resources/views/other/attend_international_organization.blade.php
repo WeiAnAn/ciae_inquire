@@ -109,8 +109,8 @@
 								<input type="text" class="form-control" name="name" value="{{old('name')}}" />
 							</div>
 							
-							@if($errors->has('orgName'))
-                                <p class="text-danger">{{$errors->first('orgName')}}</p>
+							@if($errors->has('orgnization'))
+                                <p class="text-danger">{{$errors->first('orgnization')}}</p>
                             @endif
 							<div class="form-group">
 								<label for="orgnization">組織名稱</label>

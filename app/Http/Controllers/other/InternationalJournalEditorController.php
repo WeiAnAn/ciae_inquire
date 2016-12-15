@@ -32,4 +32,26 @@ class InternationalJournalEditorController extends Controller
 
     	return view ('other/international_journal_editor',$data);
     }
+      public function insert(Request $request){
+      
+            $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:20',
+            'journalName'=>'required|max:200',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+            ]);
+          internationalJournaleditor::create($request->all());
+
+       return redirect('international_journal_editor')->with('success','新增成功');
+    }
+    public function delete($id){
+        $IJE = internationalJournaleditor::find($id);
+        if(!Gate::allows('permission',$IJE))
+            return redirect('international_journal_editor');
+        $IJE->delete();
+        return redirect('international_journal_editor');
+        }
 }

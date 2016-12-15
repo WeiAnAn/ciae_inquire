@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Excel;
 use Validator;
-
+use App\CollegeData;
 
 class AttendInternationalOrganizationController extends Controller
 {
@@ -21,7 +21,7 @@ class AttendInternationalOrganizationController extends Controller
         if($request->orderBy != null)
             $orderBy = $request->orderBy;
 
-        $attendiorganization=attendinternationalorganization::
+        $attendiorganization=AttendInternationalOrganization::
             join('college_data',function($join){
             $join->on('attend_international_organization.college','college_data.college');
             $join->on('attend_international_organization.dept','college_data.dept');
@@ -33,4 +33,29 @@ class AttendInternationalOrganizationController extends Controller
 
     	return view ('other/attend_international_organization',$data);
     }
+    public function insert(Request $request){
+      
+            $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:20',
+            'organization'=>'required|max:200',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+            ]);
+          AttendInternationalOrganization::create($request->all());
+
+       return redirect('attend_international_organization')->with('success','新增成功');
+    }
+    
+      public function delete($id){
+        $AIO = AttendInternationalOrganization::find($id);
+        if(!Gate::allows('permission',$AIO))
+            return redirect('attend_international_organization');
+        $AIO->delete();
+        return redirect('attend_international_organization');
+        }
+
+
 }
