@@ -35,6 +35,31 @@ class ForeignProfExchangeController extends Controller
     	return view ('prof/foreign_prof_exchange',$data);
     }
 
+    public function insert(Request $request){
+      
+            $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:20',
+            'profLevel'=>'required|max:11',
+            'nation'=>'required|max:30',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+            ]);
+          foreignprofexchange::create($request->all());
+
+       return redirect('foreign_prof_exchange')->with('success','新增成功');
+    }
+    
+      public function delete($id){
+        $AIO = foreignprofexchangen::find($id);
+        if(!Gate::allows('permission',$AIO))
+            return redirect('foreign_prof_exchange');
+        $AIO->delete();
+        return redirect('foreign_prof_exchange');
+        }
+
     public function upload(Request $request){
         Excel::load($request->file('file'),function($reader){
             $array = $reader->toArray();
