@@ -109,12 +109,12 @@
 								<input type="text" class="form-control" name="name" value="{{old('name')}}" />
 							</div>
 							
-							@if($errors->has('orgnization'))
-                                <p class="text-danger">{{$errors->first('orgnization')}}</p>
+							@if($errors->has('organization'))
+                                <p class="text-danger">{{$errors->first('organization')}}</p>
                             @endif
 							<div class="form-group">
-								<label for="orgnization">組織名稱</label>
-								<textarea name="orgnization" id="orgnization" cols="30" rows="3" class="form-control">{{old('name')}}</textarea>
+								<label for="organization">組織名稱</label>
+								<textarea name="organization" id="orgnization" cols="30" rows="3" class="form-control">{{old('organization')}}</textarea>
 							</div>
 
 							@if($errors->has('startDate')||$errors->has('endDate'))
