@@ -57,8 +57,46 @@
 									<td>管理</td>
 				        		</tr>
 			        		</thead>
+				        		
 			        		<tbody>
-
+			        			@foreach ($foreignPexchange as $data)
+									<tr>
+										<td class='text-nowrap'>{{$data->chtCollege}}</td>
+										<td>{{$data->chtDept}}</td>
+										<td>{{$data->name}}</td>
+										<td>@if($data->profLevel==1)
+										教授
+										@elseif($data->profLevel==2)
+										副教授
+										@elseif($data->profLevel==3)
+										助理教授
+										@elseif($data->profLevel==4)
+										準博士生
+										@else($data->profLevel==5)
+										研究生
+										@endif
+										</td>
+										<td>{{$data->nation}}</td>
+										<td>{{$data->startDate}}</td>
+										<td>{{$data->endDate}}</td>
+										<td>{{$data->comments}}</td>
+										<td class="text-nowrap">
+											@can('permission',$data)
+											<a href="{{url('foreign_prof_exchange',$data->id)}}"
+												class="glyphicon glyphicon-pencil	
+												btn btn-success btn-xs"></a>
+											<form action="{{url('foreign_prof_exchange',$data->id)}}"
+												method="post" style="display: inline;">
+												{{ method_field('DELETE') }}
+	                        					{{ csrf_field() }}
+												<button class="glyphicon glyphicon-trash
+													btn btn-danger btn-xs" 
+													onclick="clickDel(event)"></button>
+											</form>
+											@endcan
+										</td>
+									</tr>
+								@endforeach
 			        		</tbody>
 			        	</table>
             		</div>

@@ -13,9 +13,23 @@ use Validator;
 
 class InternationalJournalEditorController extends Controller
 {
-    //
     public function index(Request $request){
+        $sortBy = 'id';
+        $orderBy = "desc";
+        if($request->sortBy != null)
+            $sortBy = $request->sortBy;
+        if($request->orderBy != null)
+            $orderBy = $request->orderBy;
 
-    	return view ('other/international_journal_editor');
-	}
+        $internationaljeditor=internationalJournaleditor::
+            join('college_data',function($join){
+            $join->on('international_journal_editor.college','college_data.college');
+            $join->on('international_journal_editor.dept','college_data.dept');
+        })->orderBy($sortBy,$orderBy)
+            ->paginate(20);
+        $user = Auth::user();
+        $data=compact('internationaljeditor','user');
+
+    	return view ('other/international_journal_editor',$data);
+    }
 }
