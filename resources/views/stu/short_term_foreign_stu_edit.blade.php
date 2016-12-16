@@ -14,13 +14,17 @@
 					{{ csrf_field() }}
 					@include("../layouts/select_edit")
 					<div class="form-group">
+							@if($errors->has('name'))
+                                <p class="text-danger">{{$errors->first('name')}}</p>
+                            @endif
+							<div class="form-group">
 								<label for="">姓名</label>
-								<input type="text" class="form-control" name="name" value="{{old('name')}}">
+								<input type="text" class="form-control" name="name" value="{{$name}}">
 							</div>
 
 							<div class="form-group">
 								<label for="stuLevel">身分</label>
-								<select name="stuLevel" id="stuLevel_option" class="form-control">
+								<select name="stuLevel" id="stuLevel" class="form-control">
 									<option value="1">博士班</option>
 									<option value="2">碩士班</option>
 									<option value="3">學士班</option>
@@ -32,7 +36,7 @@
                             @endif
 							<div class="form-group">
 								<label for="nation">國籍</label>
-								<input type="text" name="nation" class="form-control" value="{{old('nation')}}">
+								<input type="text" name="nation" class="form-control" value="{{$nation}}">
 							</div>
 							
 							@if($errors->has('startDate')||$errors->has('endDate'))
@@ -41,17 +45,19 @@
                             @endif
 							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 								<label for="startDate">開始時間</label>
-								<input type="date" name="startDate" class="form-control" value="{{old('startDate')}}">
+								<input type="date" name="startDate" class="form-control" value="{{$startDate}}">
 							</div>
 							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 								<label for="endDate">結束時間</label>
-								<input type="date" name="endDate" class="form-control" value="{{old('endDate')}}">
+								<input type="date" name="endDate" class="form-control" value="{{$endDate}}">
 							</div>
 
+							@if($errors->has('comments'))
+                                <p class="text-danger">{{$errors->first('comments')}}</p>
+                            @endif
 							<div class="form-group">
 								<label for="comments">備註</label>
-								<input type="text" name="comments" class="form-control" 
-									value="{{$comments}}">
+								<textarea name="comments" id="comments" cols="30" rows="3" class="form-control">{{$comments}}</textarea>
 							</div>
 
 							<button class="btn btn-success">修改</button>

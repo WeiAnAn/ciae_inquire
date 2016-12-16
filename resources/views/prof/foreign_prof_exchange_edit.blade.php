@@ -41,10 +41,10 @@
 							<input type="text" name="nation" class="form-control" value="{{$nation}}">
 						</div>
 							
-							@if($errors->has('startDate')||$errors->has('endDate'))
-                                <p class="text-danger col-md-6">{{ $errors->first('startDate')}}</p>                      
-                                <p class="text-danger col-md-6">{{ $errors->first('endDate')}}</p>
-                            @endif
+						@if($errors->has('startDate')||$errors->has('endDate'))
+                            <p class="text-danger col-md-6">{{ $errors->first('startDate')}}</p>                      
+                            <p class="text-danger col-md-6">{{ $errors->first('endDate')}}</p>
+                        @endif
 						<div class="form-group col-md-6" style="padding-left:0 ;	padding-right: 0">
 								<label for="startDate">開始時間</label>
 								<input type="date" name="startDate" class="form-control" value="{{$startDate}}">
