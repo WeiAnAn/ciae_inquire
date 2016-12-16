@@ -138,23 +138,43 @@ class ProfAttendConferenceController extends Controller
         Excel::load($request->file('file'),function($reader){
             $array = $reader->toArray();
             $newArray = [];
-            foreach ($array as $item) {
+            foreach ($array as $arrayKey => $item) {
                 foreach ($item as $key => $value) {
-
                     switch ($key) {
                         case '所屬一級單位':
                             $item['college'] = $value;
                             unset($item[$key]);
                             break;
                         case '所屬系所部門':
-                            $item['dept'] = $value;
+                            $item['dept'] = $value; 
                             unset($item[$key]);
                             break;
                         case '姓名':
                             $item['name'] = $value;
                             unset($item[$key]);
                             break;
-                        case '身分輸入數字':
+                        case '身分教授副教授助理教授或博士後研究員':
+                            switch($value){
+                                case "教授":
+                                    $value = 1;
+                                    break;
+                                case "副教授":
+                                    $value = 2;
+                                    break;
+                                case "助理教授":
+                                    $value = 3;
+                                    break;
+                                case "博士後研究員":
+                                    $value = 4;
+                                    break;
+                                default:
+                                    $validator = Validator::make($item,[]);
+                                    $errorLine = $arrayKey + 2;
+                                    $validator->errors()->add('身分',"身分內容填寫錯誤,第 $errorLine 行");
+                                    return redirect('prof_attend_conference')
+                                        ->withErrors($validator,"upload");
+                                    break;
+                            }
                             $item['profLevel'] = $value;
                             unset($item[$key]);
                             break;
@@ -178,7 +198,15 @@ class ProfAttendConferenceController extends Controller
                             $item['comments'] = $value;
                             unset($item[$key]);
                             break;
+                        case '教授':
+                            $item['1'] = $value;
+                            unset($item[$key]);
+                            break;
                         default:
+                            $validator = Validator::make($item,[]);
+                            $validator->errors()->add('format',"欄位錯誤");
+                            return redirect('prof_attend_conference')
+                                ->withErrors($validator,"upload");
                             break;
                     }
                 }
