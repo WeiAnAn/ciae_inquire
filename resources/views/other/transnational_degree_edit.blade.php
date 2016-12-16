@@ -37,11 +37,10 @@
 						<label for="">英文校名</label>
 						<input type="text" class="form-control" name="engName" value="{{$engName}}">
 					</div>
-					<!--還沒完成-->
+
 					<div class="form-group">
 						<label for="profLevel">授予身分</label>
 					</div>
-					
 					<div class="form-group">
 						<label for="bachelor">學士</label>
 						<select name="bachelor" id="bachelor_option" class="form-control">
@@ -94,5 +93,9 @@
 		</div>
 	</div>
 </div>
-
+<script>
+	document.getElementById('bachelor_option').value ={{$bachelor}};
+	document.getElementById('master_option').value ={{$master}};
+	document.getElementById('PHD_option').value ={{$PHD}};
+</script>
 @endsection
