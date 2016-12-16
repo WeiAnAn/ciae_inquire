@@ -79,10 +79,10 @@ class CooperationProjController extends Controller
                 ->where('projName',"like","%$request->projName%"); 
         if($request->startDate != "")
             $cooperationproj = $cooperationproj
-                ->where('startDate','>',"$request->startDate");
+                ->where('startDate','>=',"$request->startDate");
         if($request->endDate != "")
             $cooperationproj = $cooperationproj
-                ->where('endDate','<',"$request->endDate");
+                ->where('endDate','<=',"$request->endDate");
         if($request->comments != "")
             $cooperationproj = $cooperationproj
                 ->where('comments',"like","%$request->comments%");

@@ -94,10 +94,10 @@ class ForeignStuController extends Controller
                 ->where('engNation',"like","%$request->engNation%");
         if($request->startDate != "")
             $foreignStu = $foreignStu
-                ->where('startDate','>',"$request->startDate");
+                ->where('startDate','>=',"$request->startDate");
         if($request->endDate != "")
             $foreignStu = $foreignStu
-                ->where('endDate','<',"$request->endDate");
+                ->where('endDate','<=',"$request->endDate");
         if($request->comments != "")
             $foreignStu = $foreignStu
                 ->where('comments',"like","%$request->comments%");

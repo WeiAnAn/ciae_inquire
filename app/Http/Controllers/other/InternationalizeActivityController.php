@@ -82,10 +82,10 @@ class InternationalizeActivityController extends Controller
                 ->where('guest',"like","%$request->guest%"); 
         if($request->startDate != "")
             $internationalactivity = $internationalactivity
-                ->where('startDate','>',"$request->startDate");
+                ->where('startDate','>=',"$request->startDate");
         if($request->endDate != "")
             $internationalactivity = $internationalactivity
-                ->where('endDate','<',"$request->endDate");
+                ->where('endDate','<=',"$request->endDate");
 
 
         $internationalactivity = $internationalactivity->orderBy($sortBy,$orderBy)

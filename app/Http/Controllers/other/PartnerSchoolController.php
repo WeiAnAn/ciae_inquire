@@ -81,10 +81,10 @@ class PartnerSchoolController extends Controller
                 ->where('engName',"like","%$request->engName%");
         if($request->startDate != "")
             $internationalactivity = $internationalactivity
-                ->where('startDate','>',"$request->startDate");
+                ->where('startDate','>=',"$request->startDate");
         if($request->endDate != "")
             $internationalactivity = $internationalactivity
-                ->where('endDate','<',"$request->endDate");
+                ->where('endDate','<=',"$request->endDate");
         if($request->comments != "")
             $partner = $partner
                 ->where('comments','like',"%$request->comments%");

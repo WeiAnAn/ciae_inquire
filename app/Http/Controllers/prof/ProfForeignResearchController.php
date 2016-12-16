@@ -80,10 +80,10 @@ class ProfForeignResearchController extends Controller
                 ->where('nation',"like","%$request->nation%");
         if($request->startDate != "")
             $Pforeignresearch = $Pforeignresearch
-                ->where('startDate','>',"$request->startDate");
+                ->where('startDate','>=',"$request->startDate");
         if($request->endDate != "")
             $Pforeignresearch = $Pforeignresearch
-                ->where('endDate','<',"$request->endDate");
+                ->where('endDate','<=',"$request->endDate");
         if($request->comments != "")
             $Pforeignresearch = $Pforeignresearch
                 ->where('comments',"like","%$request->comments%");
