@@ -66,11 +66,11 @@
 									<td>{{$data->chtDept}}</td>
 									<td>{{$data->name}}</td>
 									<td class="text-nowrap">@if ($data->stuLevel==1)
-									博士生
+									博士班
 									@elseif ($data->stuLevel==2)
-									碩士生
+									碩士班
 									@else
-									學士生
+									學士班
 									@endif</td>
 									<td>{{$data->nation}}</td>
 									<td>{{$data->confName}}</td>

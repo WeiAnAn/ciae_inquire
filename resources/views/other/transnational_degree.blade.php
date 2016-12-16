@@ -148,7 +148,6 @@
 								<label for="">英文校名</label>
 								<input type="text" class="form-control" name="engName" value="{{old('engName')}}">
 							</div>
-							<!--還沒完成-->
 							<div class="form-group">
 								<label for="profLevel">授予身分</label>
 							</div>
@@ -224,23 +223,32 @@
 								<label for="">英文校名</label>
 								<input type="text" class="form-control" name="engName" />
 							</div>
-							<div class="form-group">
-								<label for="profLevel">授予身分</label>
-							</div>
+								<div class="form-group">
+									<label for="profLevel">授予身分</label>
+								</div>
 							<div class="form-group">
 								<label for="bachelor">學士</label>
-								<input type="radio" name="bachelor" value="1" class="radio-inline">有授予
-								<input type="radio" name="bachelor" value="0" class="radio-inline">無授予
+								<select name="bachelor" id="bachelor" class="form-control">
+									<option value="">所有授予情形</option>
+									<option value="0">無授予</option>
+									<option value="1">有授予</option>
+								</select>
 							</div>
 							<div class="form-group">
 								<label for="master">碩士</label>
-								<input type="radio" name="master" value="1" class="radio-inline">有授予
-								<input type="radio" name="master" value="0" class="radio-inline">無授予
+								<select name="master" id="master" class="form-control">
+									<option value="">所有授予情形</option>
+									<option value="0">無授予</option>
+									<option value="1">有授予</option>
+								</select>
 							</div>
 							<div class="form-group">
 								<label for="PHD">博士</label>
-								<input type="radio" name="PHD" value="1" class="radio-inline">有授予
-								<input type="radio" name="PHD" value="0" class="radio-inline">無授予
+								<select name="PHD" id="PHD" class="form-control">
+									<option value="">所有授予情形</option>
+									<option value="0">無授予</option>
+									<option value="1">有授予</option>
+								</select>
 							</div>
 							<div class="form-group">
 								<label for="teachMode">授課方式</label>
