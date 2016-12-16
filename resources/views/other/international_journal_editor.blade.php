@@ -106,11 +106,9 @@
                                 <p class="text-danger">{{$errors->first('name')}}</p>
                             @endif
 							<div class="form-group">
-								<label for="">期刊編輯者姓名</label>
+								<label for="name">期刊編輯者姓名</label>
 								<input type="text" class="form-control" name="name" value="{{old('name')}}">
 							</div>
-
-							{{-- 這裡需要改NAME --}}
 
 							@if($errors->has('journalName'))
                                 <p class="text-danger">{{$errors->first('journalName')}}</p>
