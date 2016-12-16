@@ -90,6 +90,30 @@ class InternationalJournalEditorController extends Controller
         return view('other/international_journal_editor',$data);
     }
 
+     public function edit($id){
+        $internationaljeditor = internationaljournaleditor::find($id);
+        if(Gate::allows('permission',$internationaljeditor))
+            return view('other/international_journal_editor_edit',$internationaljeditor);
+        return redirect('internationaljeditor');
+    }
+
+    public function update($id,Request $request){
+        $internationaljeditor = internationaljournaleditor::find($id);
+        if(!Gate::allows('permission',$internationaljeditor))
+            return redirect('international_journal_editor');
+        $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:20',
+            'journalName'=>'required|max:200',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+            ]);
+        $internationaljeditor->update($request->all());
+        return redirect('international_journal_editor')->with('success','更新成功');
+    }
+
 
 
     public function delete($id){

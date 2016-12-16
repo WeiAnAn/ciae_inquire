@@ -97,9 +97,33 @@ class ForeignProfExchangeController extends Controller
         return view('prof/foreign_prof_exchange',$data);
     }
 
-    
+    public function edit($id){
+        $foreignPexchange = ForeignProfexchange::find($id);
+        if(Gate::allows('permission',$foreignPexchange))
+            return view('prof/foreign_prof_exchange_edit',$foreignPexchange);
+        return redirect('foreign_prof_exchange');
+    }
+
+    public function update($id,Request $request){
+        $foreignPexchange = ForeignProfExchange::find($id);
+        if(!Gate::allows('permission',$foreignPexchange))
+            return redirect('foreign_prof_exchange');
+        $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:20',
+            'profLevel'=>'required|max:11',
+            'nation'=>'required|max:20',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+            ]);
+        $foreignPexchange->update($request->all());
+        return redirect('foreign_prof_exchange')->with('success','更新成功');
+    }
+
       public function delete($id){
-        $AIO = foreignprofexchangen::find($id);
+        $AIO = foreignprofexchange::find($id);
         if(!Gate::allows('permission',$AIO))
             return redirect('foreign_prof_exchange');
         $AIO->delete();

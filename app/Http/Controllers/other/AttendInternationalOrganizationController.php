@@ -91,6 +91,30 @@ class AttendInternationalOrganizationController extends Controller
         return view('other/attend_international_organization',$data);
     }
 
+    public function edit($id){
+        $attendiorganization = attendinternationalorganization::find($id);
+        if(Gate::allows('permission',$attendiorganization))
+            return view('other/attend_international_organization_edit',$attendiorganization);
+        return redirect('attend_international_organization');
+    }
+
+    public function update($id,Request $request){
+        $attendiorganization = attendinternationalorganization::find($id);
+        if(!Gate::allows('permission',$attendiorganization))
+            return redirect('attend_international_organization');
+        $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:20',
+            'organization'=>'required|max:200',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+        ]);
+        $attendiorganization->update($request->all());
+        return redirect('attend_international_organization')->with('success','更新成功');
+    }
+
 
     public function delete($id){
         $AIO = AttendInternationalOrganization::find($id);
