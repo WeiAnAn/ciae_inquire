@@ -49,7 +49,7 @@
 									<td id="attend_international_organization.college" onclick="sort(id)">所屬一級單位</td>
 									<td id="attend_international_organization.dept" onclick="sort(id)">所屬系所部門</td>
 									<td id="name" onclick="sort(id)">參加人</td>
-									<td id="orgnization" onclick="sort(id)">組織名稱</td>
+									<td id="organization" onclick="sort(id)">組織名稱</td>
 									<td id="startDate" onclick="sort(id)">開始時間</td>
 									<td id="endDate" onclick="sort(id)">結束時間</td>
 									<td id="comments" onclick="sort(id)">備註</td>
@@ -114,7 +114,7 @@
                             @endif
 							<div class="form-group">
 								<label for="organization">組織名稱</label>
-								<textarea name="organization" id="orgnization" cols="30" rows="3" class="form-control">{{old('organization')}}</textarea>
+								<textarea name="organization" id="organization" cols="30" rows="3" class="form-control">{{old('organization')}}</textarea>
 							</div>
 
 							@if($errors->has('startDate')||$errors->has('endDate'))
@@ -155,8 +155,8 @@
 								<input type="text" class="form-control" name="name" />
 							</div>
 							<div class="form-group">
-								<label for="orgnization">組織名稱</label>
-								<textarea name="orgnization" id="orgnization" cols="30" rows="3" class="form-control"></textarea>
+								<label for="organization">組織名稱</label>
+								<textarea name="organization" id="organization" cols="30" rows="3" class="form-control"></textarea>
 							</div>
 
 							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
