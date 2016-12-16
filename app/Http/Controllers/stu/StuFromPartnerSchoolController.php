@@ -81,10 +81,10 @@ class StuFromPartnerSchoolController extends Controller
                 ->where('nation',"like","%$request->nation%");
         if($request->startDate != "")
             $frompartnerdata = $frompartnerdata
-                ->where('startDate','>',"$request->startDate");
+                ->where('startDate','>=',"$request->startDate");
         if($request->endDate != "")
             $frompartnerdata = $frompartnerdata
-                ->where('endDate','<',"$request->endDate");
+                ->where('endDate','<=',"$request->endDate");
         if($request->comments != "")
             $frompartnerdata = $frompartnerdata
                 ->where('comments',"like","%$request->comments%");

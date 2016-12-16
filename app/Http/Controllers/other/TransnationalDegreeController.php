@@ -33,16 +33,15 @@ class TransnationalDegreeController extends Controller
     }
 
     public function insert(Request $request){
-        //checkbox 傳值 傳ON 跟 空值 所以跟資料庫已經VALDATE()會出問題 暫時未解決
             $this->validate($request,[
             'college'=>'required|max:11',
             'dept'=>'required|max:11',
             'nation'=>'required|max:20',
             'chtName'=>'required|max:200',
             'engName'=>'required|max:200',
-            'bachelor'=>'required|max:11',
-            'master'=>'required|max:11',
-            'PHD'=>'required|max:11',
+            'bachelor'=>'required',
+            'master'=>'required',
+            'PHD'=>'required',
             'classMode'=>'required|max:200',
             'degreeMode'=>'required|max:200',
             'comments'=>'max:500',
@@ -125,9 +124,9 @@ class TransnationalDegreeController extends Controller
             'nation'=>'required|max:20',
             'chtName'=>'required|max:200',
             'engName'=>'required|max:200',
-            'bachelor'=>'required|max:11',
-            'master'=>'required|max:11',
-            'PHD'=>'required|max:11',
+            'bachelor'=>'required',
+            'master'=>'required',
+            'PHD'=>'required',
             'classMode'=>'required|max:200',
             'degreeMode'=>'required|max:200',
             'comments'=>'max:500',

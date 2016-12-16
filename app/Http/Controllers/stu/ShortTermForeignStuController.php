@@ -80,10 +80,10 @@ class ShortTermForeignStuController extends Controller
                 ->where('nation',"like","%$request->nation%");
         if($request->startDate != "")
             $shortterm = $shortterm
-                ->where('startDate','>',"$request->startDate");
+                ->where('startDate','>=',"$request->startDate");
         if($request->endDate != "")
             $shortterm = $shortterm
-                ->where('endDate','<',"$request->endDate");
+                ->where('endDate','<=',"$request->endDate");
         if($request->comments != "")
             $shortterm = $shortterm
                 ->where('comments',"like","%$request->comments%");

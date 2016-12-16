@@ -130,6 +130,13 @@
 								<textarea name="projName" id="projName" cols="30" rows="3" class="form-control">{{old('projName')}}</textarea>
 							</div>
 							
+							@if($errors->has('projContent'))
+                                <p class="text-danger">{{$errors->first('projContent')}}</p>
+                            @endif
+							<div class="form-group">
+								<label for="projContent">計畫內容</label>
+								<textarea name="projContent" id="projContent" cols="30" rows="3" class="form-control">{{old('projContent')}}</textarea>
+							</div>
 
 							@if($errors->has('startDate')||$errors->has('endDate'))
                                 <p class="text-danger col-md-6">{{ $errors->first('startDate')}}</p>                      
@@ -176,6 +183,12 @@
 								<label for="projName">計畫名稱</label>
 								<textarea name="projName" id="projName" cols="30" rows="3" class="form-control"></textarea>
 							</div>
+
+							<div class="form-group">
+								<label for="projContent">計畫內容</label>
+								<textarea name="projContent" id="projContent" cols="30" rows="3" class="form-control"></textarea>
+							</div>
+
 							
 							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 								<label for="startDate">開始時間</label>

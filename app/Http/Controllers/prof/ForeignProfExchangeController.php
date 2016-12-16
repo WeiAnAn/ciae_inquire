@@ -35,6 +35,101 @@ class ForeignProfExchangeController extends Controller
     	return view ('prof/foreign_prof_exchange',$data);
     }
 
+    public function insert(Request $request){
+      
+            $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:20',
+            'profLevel'=>'required|max:11',
+            'nation'=>'required|max:20',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+            ]);
+          foreignprofexchange::create($request->all());
+
+       return redirect('foreign_prof_exchange')->with('success','新增成功');
+    }
+
+    public function search (Request $request){
+        $sortBy = 'id';
+        $orderBy = "desc";
+        if($request->sortBy != null)
+            $sortBy = $request->sortBy;
+        if($request->orderBy != null)
+            $orderBy = $request->orderBy;
+
+        $foreignPexchange = ForeignProfExchange::join('college_data',function($join){
+                $join->on('foreign_prof_exchange.college','college_data.college');
+                $join->on('foreign_prof_exchange.dept','college_data.dept');
+            });
+        if($request->college != 0)
+            $foreignPexchange = $foreignPexchange
+                ->where('foreign_prof_exchange.college',$request->college);
+        if($request->dept != 0)
+            $foreignPexchange = $foreignPexchange
+                ->where('foreign_prof_exchange.dept',$request->dept);
+        if($request->name != "")
+            $foreignPexchange = $foreignPexchange
+                ->where('name',"like","%$request->name%"); 
+        if($request->profLevel != "")
+            $foreignPexchange = $foreignPexchange
+                ->where('profLevel',$request->profLevel);
+        if($request->nation != "")
+            $foreignPexchange = $foreignPexchange
+                ->where('nation',"like","%$request->nation%"); 
+        if($request->startDate != "")
+            $foreignPexchange = $foreignPexchange
+                ->where('startDate','>=',"$request->startDate");
+        if($request->endDate != "")
+            $foreignPexchange = $foreignPexchange
+                ->where('endDate','<=',"$request->endDate");
+        if($request->comments != "")
+            $foreignPexchange = $foreignPexchange
+                ->where('comments',"like","%$request->comments%");
+
+        $foreignPexchange = $foreignPexchange->orderBy($sortBy,$orderBy)
+            ->paginate(20);
+        $foreignPexchange->appends($request->except('page'));    
+        $user = Auth::user();
+        $data = compact('foreignPexchange','user');
+        return view('prof/foreign_prof_exchange',$data);
+    }
+
+    public function edit($id){
+        $foreignPexchange = ForeignProfexchange::find($id);
+        if(Gate::allows('permission',$foreignPexchange))
+            return view('prof/foreign_prof_exchange_edit',$foreignPexchange);
+        return redirect('foreign_prof_exchange');
+    }
+
+    public function update($id,Request $request){
+        $foreignPexchange = ForeignProfExchange::find($id);
+        if(!Gate::allows('permission',$foreignPexchange))
+            return redirect('foreign_prof_exchange');
+        $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:20',
+            'profLevel'=>'required|max:11',
+            'nation'=>'required|max:20',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+            ]);
+        $foreignPexchange->update($request->all());
+        return redirect('foreign_prof_exchange')->with('success','更新成功');
+    }
+
+      public function delete($id){
+        $AIO = foreignprofexchange::find($id);
+        if(!Gate::allows('permission',$AIO))
+            return redirect('foreign_prof_exchange');
+        $AIO->delete();
+        return redirect('foreign_prof_exchange');
+        }
+
     public function upload(Request $request){
         Excel::load($request->file('file'),function($reader){
             $array = $reader->toArray();

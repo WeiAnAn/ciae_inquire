@@ -80,10 +80,10 @@ class ProfExchangeController extends Controller
                 ->where('nation',"like","%$request->nation%");
         if($request->startDate != "")
             $Pexchange = $Pexchange
-                ->where('startDate','>',"$request->startDate");
+                ->where('startDate','>=',"$request->startDate");
         if($request->endDate != "")
             $Pexchange = $Pexchange
-                ->where('endDate','<',"$request->endDate");        
+                ->where('endDate','<=',"$request->endDate");        
         if($request->comments != "")
             $Pexchange = $Pexchange
                 ->where('comments',"like","%$request->comments%");

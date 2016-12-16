@@ -83,10 +83,10 @@ class StuAttendConfController extends Controller
                 ->where('confName',"like","%$request->confName%"); 
         if($request->startDate != "")
             $conf = $conf
-                ->where('startDate','>',"$request->startDate");
+                ->where('startDate','>=',"$request->startDate");
         if($request->endDate != "")
             $conf = $conf
-                ->where('endDate','<',"$request->endDate"); 
+                ->where('endDate','<=',"$request->endDate"); 
         if($request->comments != "")
             $conf = $conf
                 ->where('comments',"like","%$request->comments%");

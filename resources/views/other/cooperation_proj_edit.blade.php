@@ -37,7 +37,14 @@
 						<label for="projName">計畫名稱</label>
 						<textarea name="projName" id="projName" cols="30" rows="3" class="form-control">{{$projName}}</textarea>
 					</div>
-					<!--少 計畫內容-->	
+					
+					@if($errors->has('projContent'))
+                                <p class="text-danger">{{$errors->first('projContent')}}</p>
+                            @endif
+							<div class="form-group">
+								<label for="projContent">計畫內容</label>
+								<textarea name="projContent" id="projContent" cols="30" rows="3" class="form-control">{{$projContent}}</textarea>
+							</div>
 
 					@if($errors->has('startDate')||$errors->has('endDate'))
                         <p class="text-danger col-md-6">{{ $errors->first('startDate')}}</p>                      

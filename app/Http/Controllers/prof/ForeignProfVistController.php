@@ -80,10 +80,10 @@ class ForeignProfVistController extends Controller
                 ->where('nation',"like","%$request->nation%");
         if($request->startDate != "")
             $foreignPvist = $foreignPvist
-                ->where('startDate','>',"$request->startDate");
+                ->where('startDate','>=',"$request->startDate");
         if($request->endDate != "")
             $foreignPvist = $foreignPvist
-                ->where('endDate','<',"$request->endDate");
+                ->where('endDate','<=',"$request->endDate");
         if($request->comments != "")
             $foreignPvist = $foreignPvist
                 ->where('comments',"like","%$request->comments%");
