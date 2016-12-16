@@ -77,6 +77,9 @@ class CooperationProjController extends Controller
         if($request->projName != "")
             $cooperationproj = $cooperationproj
                 ->where('projName',"like","%$request->projName%"); 
+        if($request->projContent != "")
+            $cooperationproj = $cooperationproj
+                ->where('projContent',"like","%$request->projContent%"); 
         if($request->startDate != "")
             $cooperationproj = $cooperationproj
                 ->where('startDate','>=',"$request->startDate");
