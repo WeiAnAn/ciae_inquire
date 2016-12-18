@@ -198,10 +198,6 @@ class ProfAttendConferenceController extends Controller
                             $item['comments'] = $value;
                             unset($item[$key]);
                             break;
-                        case '教授':
-                            $item['1'] = $value;
-                            unset($item[$key]);
-                            break;
                         default:
                             $validator = Validator::make($item,[]);
                             $validator->errors()->add('format',"欄位錯誤");
