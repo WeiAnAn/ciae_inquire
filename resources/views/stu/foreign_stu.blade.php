@@ -81,8 +81,9 @@
 								<td class="text-nowrap">{{$data->engNation}}</td>								
 								<td >{{$data->startDate}}</td>
 								<td >{{$data->endDate}}</td>
-								<td >{{$data->comments}}</td>
-								<td>
+								<td>{{$data->status}}</td>
+								<td>{{$data->comments}}</td>	
+									<td>
 									@can('permission',$data)
 									<a href="{{url('foreign_stu',$data->id)}}"
 										class="glyphicon glyphicon-pencil btn 

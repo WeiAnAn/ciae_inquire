@@ -76,6 +76,15 @@
 							<input type="date" name="endDate" class="form-control" value="{{$endDate}}">
 						</div>
 
+						<div class="form-group">
+							<label for="status">學籍狀態</label>
+							<select name="status" id="status" class="form-control">
+								<option value="1">在學中</option>
+								<option value="2">休學中</option>
+								<option value="3">已畢業</option>
+							</select>
+						</div>
+
 						@if($errors->has('comments'))
                             <p class="text-danger">{{$errors->first('comments')}}</p>
                         @endif

@@ -214,9 +214,30 @@ class ForeignStuController extends Controller
                             unset($item[$key]);
                             break;
                         case '學籍狀態':
-                            $item['endDate'] = $value;
+                            switch($value){
+                                case "在學中":
+                                    $value = 1;
+                                    break;
+                                case "休學中":
+                                    $value = 2;
+                                    break;
+                                case "已畢業":
+                                    $value = 3;
+                                    break;
+                                default:
+                                    $validator = Validator::make($item,[]);
+                                    $errorLine = $arrayKey + 2;
+                                    $validator->errors()->add('身分',"身分內容填寫錯誤,第 $errorLine 行");
+                                    return redirect('foreign_stu')
+                                        ->withErrors($validator,"upload");
+                                    break;
+                            }
+                            $item['stuLevel'] = $value;
                             unset($item[$key]);
                             break;
+                            $item['status'] = $value;
+                            unset($item[$key]);
+                            break;                            
                         case '備註':
                             $item['comments'] = $value;
                             unset($item[$key]);
