@@ -169,7 +169,12 @@ class InternationalizeActivityController extends Controller
                         case '結束時間':
                             $item['endDate'] = $value;
                             unset($item[$key]);
-                            break;                        
+                            break;
+                        case '備註':
+                            $item['commemts'] = $value;
+                            unset($item[$key]);
+                            break;
+                            
                         default:
                             $validator = Validator::make($item,[]);
                             $validator->errors()->add('format','檔案欄位錯誤');

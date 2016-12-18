@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Excel;
 use Validator;
+use App\CollegeData;
 
 
 class InternationalJournalEditorController extends Controller
@@ -143,6 +144,10 @@ class InternationalJournalEditorController extends Controller
                             break;
                         case '期刊名稱':
                             $item['journalName'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '期刊編輯者':
+                            $item['name'] = $value;
                             unset($item[$key]);
                             break;
                         case '開始擔任時間':
