@@ -142,15 +142,15 @@ class PartnerSchoolController extends Controller
                 foreach ($item as $key => $value) {
 
                     switch ($key) {
-                        case '單位名稱':
+                        case '簽約機構所屬一級單位':
                             $item['college'] = $value;
                             unset($item[$key]);
                             break;
-                        case '系所部門':
+                        case '簽約系所':
                             $item['dept'] = $value;
                             unset($item[$key]);
                             break;
-                        case '國家':
+                        case '姊妹校所屬國家':
                             $item['nation'] = $value;
                             unset($item[$key]);
                             break;
@@ -162,11 +162,11 @@ class PartnerSchoolController extends Controller
                             $item['engName'] = $value;
                             unset($item[$key]);
                             break;                        
-                        case '開始時間':
+                        case '簽約時間':
                             $item['startDate'] = $value;
                             unset($item[$key]);
                             break;
-                        case '結束時間':
+                        case '到期時間':
                             $item['endDate'] = $value;
                             unset($item[$key]);
                             break;

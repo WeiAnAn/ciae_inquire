@@ -151,11 +151,11 @@ class TransnationalDegreeController extends Controller
                 foreach ($item as $key => $value) {
 
                     switch ($key) {
-                        case '單位名稱':
+                        case '所屬一級單位':
                             $item['college'] = $value;
                             unset($item[$key]);
                             break;
-                        case '系所部門':
+                        case '所屬系所部門':
                             $item['dept'] = $value;
                             unset($item[$key]);
                             break;
@@ -170,17 +170,25 @@ class TransnationalDegreeController extends Controller
                         case '英文校名':
                             $item['engName'] = $value;
                             unset($item[$key]);
+                            break;
+                        case '身分學士碩士或博士班'
+                            $item[] = $value;
+                            unset($item[$key]);
                             break;                        
-                        case '學士':
-                            $item['bachelor'] = $value;
-                            unset($item[$key]);
-                            break;
-                        case '碩士':
-                            $item['master'] = $value;
-                            unset($item[$key]);
-                            break;
-                        case '博士':
-                            $item['PHD'] = $value;
+                        // case '學士':
+                        //     $item['bachelor'] = $value;
+                        //     unset($item[$key]);
+                        //     break;
+                        // case '碩士':
+                        //     $item['master'] = $value;
+                        //     unset($item[$key]);
+                        //     break;
+                        // case '博士':
+                        //     $item['PHD'] = $value;
+                        //     unset($item[$key]);
+                        //     break;
+                        case '修業年限';
+                            $item[''] = $value;
                             unset($item[$key]);
                             break;
                         case '授課方式':

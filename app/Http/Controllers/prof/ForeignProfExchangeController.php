@@ -150,7 +150,28 @@ class ForeignProfExchangeController extends Controller
                             $item['name'] = $value;
                             unset($item[$key]);
                             break;
-                        case '外籍學者身分輸入數字':
+                        case '外籍學者身分教授副教授助理教授或博士後研究員':
+                            switch($value){
+                                case "教授":
+                                    $value = 1;
+                                    break;
+                                case "副教授":
+                                    $value = 2;
+                                    break;
+                                case "助理教授":
+                                    $value = 3;
+                                    break;
+                                case "博士後研究員":
+                                    $value = 4;
+                                    break;
+                                default:
+                                    $validator = Validator::make($item,[]);
+                                    $errorLine = $arrayKey + 2;
+                                    $validator->errors()->add('身分',"身分內容填寫錯誤,第 $errorLine 行");
+                                    return redirect('foreign_prof_exchange')
+                                        ->withErrors($validator,"upload");
+                                    break;
+                            }
                             $item['profLevel'] = $value;
                             unset($item[$key]);
                             break;

@@ -145,15 +145,15 @@ class CooperationProjController extends Controller
                 foreach ($item as $key => $value) {
 
                     switch ($key) {
-                        case '單位名稱':
+                        case '所屬一級單位':
                             $item['college'] = $value;
                             unset($item[$key]);
                             break;
-                        case '系所部門':
+                        case '所屬系所部門':
                             $item['dept'] = $value;
                             unset($item[$key]);
                             break;
-                        case '主持人':
+                        case '主辦人':
                             $item['name'] = $value;
                             unset($item[$key]);
                         case '合作機構':
@@ -164,10 +164,10 @@ class CooperationProjController extends Controller
                             $item['projName'] = $value;
                             unset($item[$key]);
                             break;
-                        case '計畫內容':
-                            $item['projContent'] = $value;
-                            unset($item[$key]);
-                            break;                       
+                        // case '計畫內容':
+                        //     $item['projContent'] = $value;
+                        //     unset($item[$key]);
+                        //     break;                       
                         case '開始時間':
                             $item['startDate'] = $value;
                             unset($item[$key]);

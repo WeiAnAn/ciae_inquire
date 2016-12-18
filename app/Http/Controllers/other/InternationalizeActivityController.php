@@ -138,11 +138,11 @@ class InternationalizeActivityController extends Controller
                 foreach ($item as $key => $value) {
 
                     switch ($key) {
-                        case '單位名稱':
+                        case '所屬一級單位':
                             $item['college'] = $value;
                             unset($item[$key]);
                             break;
-                        case '系所部門':
+                        case '所屬系所部門':
                             $item['dept'] = $value;
                             unset($item[$key]);
                             break;
@@ -150,15 +150,15 @@ class InternationalizeActivityController extends Controller
                             $item['activityName'] = $value;
                             unset($item[$key]);
                             break;
-                        case '地點':
+                        case '活動地點':
                             $item['place'] = $value;
                             unset($item[$key]);
                             break;
-                        case '主辦':
+                        case '本校參加人員':
                             $item['host'] = $value;
                             unset($item[$key]);
                             break;
-                        case '外賓':
+                        case '參加之外賓':
                             $item['guest'] = $value;
                             unset($item[$key]);
                             break;
