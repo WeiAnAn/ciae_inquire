@@ -142,11 +142,11 @@ public function update($id,Request $request){
                 foreach ($item as $key => $value) {
 
                     switch ($key) {
-                        case '單位名稱':
+                        case '所屬一級單位':
                             $item['college'] = $value;
                             unset($item[$key]);
                             break;
-                        case '系所部門':
+                        case '所屬系所部門':
                             $item['dept'] = $value;
                             unset($item[$key]);
                             break;
@@ -154,7 +154,25 @@ public function update($id,Request $request){
                             $item['name'] = $value;
                             unset($item[$key]);
                             break;
-                        case '身分':
+                        case '身分學士碩士或博士班':                           
+                            switch($value){
+                                case "學士":
+                                    $value = 3;
+                                    break;
+                                case "碩士":
+                                    $value = 2;
+                                    break;
+                                case "博士":
+                                    $value = 1;
+                                    break;
+                                default:
+                                    $validator = Validator::make($item,[]);
+                                    $errorLine = $arrayKey + 2;
+                                    $validator->errors()->add('身分',"身分內容填寫錯誤,第 $errorLine 行");
+                                    return redirect('stu_attend_conf')
+                                        ->withErrors($validator,"upload");
+                                    break;
+                            }
                             $item['stuLevel'] = $value;
                             unset($item[$key]);
                             break;
