@@ -149,7 +149,7 @@ class ProfForeignResearchController extends Controller
                             $item['name'] = $value;
                             unset($item[$key]);
                             break;
-                        case '身分輸入數字':
+                        case '身分教授副教授助理教授或博士後研究員':
                             $item['profLevel'] = $value;
                             unset($item[$key]);
                             break;
