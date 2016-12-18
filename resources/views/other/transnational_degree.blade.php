@@ -85,6 +85,7 @@
 									@else
 									無授予
 									@endif
+									<td></td>
 									<td>{{$data->classMode}}</td>
 									<td>{{$data->degreeMode}}</td>
 									<td>{{$data->comments}}</td>

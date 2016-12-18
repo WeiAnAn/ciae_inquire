@@ -171,10 +171,10 @@ class TransnationalDegreeController extends Controller
                             $item['engName'] = $value;
                             unset($item[$key]);
                             break;
-                        case '身分學士碩士或博士班'
-                            $item[] = $value;
-                            unset($item[$key]);
-                            break;                        
+                        // case '身分學士碩士或博士班'
+                        //     $item[] = $value;
+                        //     unset($item[$key]);
+                        //     break;                        
                         // case '學士':
                         //     $item['bachelor'] = $value;
                         //     unset($item[$key]);
