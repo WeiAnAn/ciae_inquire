@@ -125,4 +125,82 @@ class AttendInternationalOrganizationController extends Controller
     }
 
 
+    public function upload(Request $request){
+        Excel::load($request->file('file'),function($reader){
+            $array = $reader->toArray();
+            $newArray = [];
+            foreach ($array as $item) {
+                foreach ($item as $key => $value) {
+
+                    switch ($key) {
+                        case '所屬一級單位':
+                            $item['college'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '所屬系所部門':
+                            $item['dept'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '參加人':
+                            $item['name'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '組織名稱':
+                            $item['organization'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '開始時間':
+                            $item['startDate'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '結束時間':
+                            $item['endDate'] = $value;
+                            unset($item[$key]);                            
+                        case '備註':
+                            $item['comments'] = $value;
+                            unset($item[$key]);
+                            break;          
+                            break;                        
+                        default:
+                            $validator = Validator::make($item,[]);
+                            $validator->errors()->add('format','檔案欄位錯誤');
+                            return redirect('attend_international_organization')
+                                ->withErrors($validator,"upload");
+                            break;
+                    }
+                }
+                $validator = Validator::make($item,[
+                    'college'=>'required|max:11',
+                    'dept'=>'required|max:11',
+                    'name'=>'required|max:20',
+                    'organization'=>'required|max:200',
+                    'startDate'=>'required',
+                    'endDate'=>'required',
+                    'comments'=>'max:500',
+                ]);
+                if($validator->fails()){
+                    return redirect('attend_international_organization')
+                        ->withErrors($validator,"upload");
+                }
+                if(CollegeData::where('college',$item['college'])
+                        ->where('dept',$item['dept'])->first()==null){
+                    $validator->errors()->add('number','系所代碼錯誤');
+                    return redirect('attend_international_organization')
+                                ->withErrors($validator,"upload");
+                }
+                if(!Gate::allows('permission',(object)$item)){
+                    $validator->errors()->add('permission','無法新增未有權限之系所部門');
+                    return redirect('attend_international_organization')
+                                ->withErrors($validator,"upload");
+                }
+                array_push($newArray,$item);
+            }
+            attendinternationalorganization::insert($newArray);
+        });
+        return redirect('attend_international_organization');
+    }
+
+    public function example(Request $request){
+        return response()->download(public_path().'/Excel_example/other/attend_international_organization.xlsx',"參與國際組織.xlsx");
+    }  
 }

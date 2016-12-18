@@ -123,4 +123,80 @@ class InternationalJournalEditorController extends Controller
         $IJE->delete();
         return redirect('international_journal_editor');
         }
+
+
+    public function upload(Request $request){
+        Excel::load($request->file('file'),function($reader){
+            $array = $reader->toArray();
+            $newArray = [];
+            foreach ($array as $item) {
+                foreach ($item as $key => $value) {
+
+                    switch ($key) {
+                        case '所屬一級單位':
+                            $item['college'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '所屬系所部門':
+                            $item['dept'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '期刊名稱':
+                            $item['journalName'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '開始擔任時間':
+                            $item['startDate'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '結束擔任時間':
+                            $item['endDate'] = $value;
+                            unset($item[$key]);
+                            break;
+                        case '備註':
+                            $item['comments'] = $value;
+                            unset($item[$key]);
+                            break;                        
+                        default:
+                            $validator = Validator::make($item,[]);
+                            $validator->errors()->add('format','檔案欄位錯誤');
+                            return redirect('international_journal_editor')
+                                ->withErrors($validator,"upload");
+                            break;
+                    }
+                }
+                $validator = Validator::make($item,[
+                    'college'=>'required|max:11',
+                    'dept'=>'required|max:11',
+                    'name'=>'required|max:20',
+                    'journalName'=>'required|max:200',
+                    'startDate'=>'required',
+                    'endDate'=>'required',
+                    'comments'=>'max:500',
+                ]);
+                if($validator->fails()){
+                    return redirect('international_journal_editor')
+                        ->withErrors($validator,"upload");
+                }
+                if(CollegeData::where('college',$item['college'])
+                        ->where('dept',$item['dept'])->first()==null){
+                    $validator->errors()->add('number','系所代碼錯誤');
+                    return redirect('international_journal_editor')
+                                ->withErrors($validator,"upload");
+                }
+                if(!Gate::allows('permission',(object)$item)){
+                    $validator->errors()->add('permission','無法新增未有權限之系所部門');
+                    return redirect('international_journal_editor')
+                                ->withErrors($validator,"upload");
+                }
+                array_push($newArray,$item);
+            }
+            internationaljournaleditor::insert($newArray);
+        });
+        return redirect('international_journal_editor');
+    }
+
+    public function example(Request $request){
+        return response()->download(public_path().'/Excel_example/other/international_journal_editor.xlsx',"擔任國際期刊編輯.xlsx");
+    }  
 }
