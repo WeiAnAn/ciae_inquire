@@ -3,7 +3,9 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<h1 class="page-header">本校教師赴國外出席國際會議</h1>
+		<a href="{{URL('prof_attend_conference')}}" style="color:black">
+			<h1 class="page-header">本校教師赴國外出席國際會議</h1>
+		</a>
 	</div>
 </div>
 <div class="row">	
@@ -46,16 +48,25 @@
 						<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
-									<td id="prof_attend_conference.college" onclick="sort(id)">所屬單位</td>
-									<td class="text-nowrap" id="prof_attend_conference.dept" onclick="sort(id)" style="max-width: 200px">系所部門</td>
-									<td id="name" onclick="sort(id)">姓名</td>
-									<td id="profLevel" onclick="sort(id)">身分</td>
-									<td id="nation" onclick="sort(id)">前往國家</td>
-									<td id="confName" onclick="sort(id)">會議名稱</td>
-									<td id="startDate" onclick="sort(id)">開始時間</td>
-									<td id="endDate" onclick="sort(id)">結束時間</td>
-									<td class="text-nowrap" id="comments" onclick="sort(id)">備註</td>
-									<td>管理</td>
+									<td id="prof_attend_conference.college" class="text-nowrap"
+										onclick="sort(id)">所屬單位</td>
+									<td class="text-nowrap" id="prof_attend_conference.dept" class="text-nowrap"
+										onclick="sort(id)" style="max-width: 200px">系所部門</td>
+									<td id="name" class="text-nowrap"
+										onclick="sort(id)">姓名</td>
+									<td id="profLevel" class="text-nowrap"
+										onclick="sort(id)">身分</td>
+									<td id="nation" class="text-nowrap"
+										onclick="sort(id)">前往國家</td>
+									<td id="confName" class="text-nowrap"
+										onclick="sort(id)">會議名稱</td>
+									<td id="startDate" class="text-nowrap"
+										onclick="sort(id)">開始時間</td>
+									<td id="endDate" class="text-nowrap"
+										onclick="sort(id)">結束時間</td>
+									<td class="text-nowrap" id="comments" class="text-nowrap"
+										onclick="sort(id)">備註</td>
+									<td class="text-nowrap">管理</td>
 								</tr>
 								</thead>
 								<tbody>
@@ -72,7 +83,7 @@
 									助理教授
 									@elseif($data->profLevel==4)
 									博士後研究員
-									@else($data->profLevel==5)
+									@elseif($data->profLevel==5)
 									研究生
 									@endif
 									</td>
@@ -130,7 +141,7 @@
 										<option value="2">副教授</option>
 										<option value="3">助理教授</option>
 										<option value="4">博士後研究員</option>
-										<option value="5">研究生</option>
+										{{-- <option value="5">研究生</option> --}}
 									</select>
 								</div>
 							
@@ -194,8 +205,8 @@
 									<option value="1">教授</option>
 									<option value="2">副教授</option>
 									<option value="3">助理教授</option>
-									<option value="4">博士後</option>
-									<option value="5">研究生</option>
+									<option value="4">博士後研究員</option>
+									{{-- <option value="5">研究生</option> --}}
 								</select>
 							</div>
 							<div class="form-group">
