@@ -3,7 +3,9 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<h1 class="page-header">本校學生其他出國研修情形</h1>
+		<a href="stu_foreign_research">
+			<h1 class="page-header">本校學生其他出國研修情形</h1>
+		</a>
 	</div>
 </div>
 <div class="row">	
