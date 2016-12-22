@@ -100,5 +100,6 @@
 </div>
 <script>
 	document.getElementById('stuLevel').value = {{$stuLevel}};
+	document.getElementById('status').value = {{$status}};
 </script>
 @endsection
