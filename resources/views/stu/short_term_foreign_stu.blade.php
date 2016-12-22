@@ -3,7 +3,9 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<h1 class="page-header">外籍學生至本校短期交流訪問或實習</h1>
+		<a href="{{URL('short_term_foreign_stu')}}" style="color: black">
+			<h1 class="page-header">外籍學生至本校短期交流訪問或實習</h1>
+		</a>
 	</div>
 </div>
 <div class="row">	
@@ -46,14 +48,22 @@
 						<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
-									<td id="short_term_foreign_stu.college" onclick="sort(id)">所屬一級單位</td>
-									<td id="short_term_foreign_stu.dept" onclick="sort(id)">所屬系所部門</td>
-									<td id="name" onclick="sort(id)">姓名</td>
-									<td id="stuLevel" onclick="sort(id)">身分 (學士、碩士或博士班）</td>
-									<td id="nation" onclick="sort(id)">國籍</td>
-									<td id="startDate" onclick="sort(id)">開始時間</td>
-									<td id="endDate" onclick="sort(id)">結束時間</td>
-									<td id="comments" onclick="sort(id)">備註</td>
+									<td id="short_term_foreign_stu.college" class="text-nowrap"
+										onclick="sort(id)">所屬單位</td>
+									<td id="short_term_foreign_stu.dept" class="text-nowrap"
+										onclick="sort(id)">系所部門</td>
+									<td id="name" class="text-nowrap"
+										onclick="sort(id)">姓名</td>
+									<td id="stuLevel" class="text-nowrap"
+										onclick="sort(id)">身分</td>
+									<td id="nation" class="text-nowrap"
+										onclick="sort(id)">國籍</td>
+									<td id="startDate" class="text-nowrap"
+										onclick="sort(id)">開始時間</td>
+									<td id="endDate" class="text-nowrap"
+										onclick="sort(id)">結束時間</td>
+									<td id="comments" class="text-nowrap"
+										onclick="sort(id)">備註</td>
 									<td>管理</td>
 								</tr>
 								</thead>
@@ -63,7 +73,7 @@
 									<td class='text-nowrap'>{{$data->chtCollege}}</td>
 									<td>{{$data->chtDept}}</td>
 									<td>{{$data->name}}</td>
-									<td>@if ($data->stuLevel==1)
+									<td class='text-nowrap'>@if ($data->stuLevel==1)
 									博士班
 									@elseif ($data->stuLevel==2)
 									碩士班
@@ -72,8 +82,8 @@
 									@endif
 									</td>
 									<td>{{$data->nation}}</td>
-									<td>{{$data->startDate}}</td>
-									<td>{{$data->endDate}}</td>
+									<td class='text-nowrap'>{{$data->startDate}}</td>
+									<td class='text-nowrap'>{{$data->endDate}}</td>
 									<td>{{$data->comments}}</td>
 									<td class="text-nowrap">
 										@can('permission',$data)
