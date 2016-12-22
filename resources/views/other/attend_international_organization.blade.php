@@ -46,13 +46,20 @@
 		      	 	<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
-									<td id="attend_international_organization.college" onclick="sort(id)">所屬一級單位</td>
-									<td id="attend_international_organization.dept" onclick="sort(id)">所屬系所部門</td>
-									<td id="name" onclick="sort(id)">參加人</td>
-									<td id="organization" onclick="sort(id)">組織名稱</td>
-									<td id="startDate" onclick="sort(id)">開始時間</td>
-									<td id="endDate" onclick="sort(id)">結束時間</td>
-									<td id="comments" onclick="sort(id)">備註</td>
+									<td class="text-nowrap" id="attend_international_organization.college" 
+										onclick="sort(id)">所屬單位</td>
+									<td class="text-nowrap" id="attend_international_organization.dept" 
+										onclick="sort(id)">系所部門</td>
+									<td class="text-nowrap" id="name" 
+										onclick="sort(id)">參加人</td>
+									<td class="text-nowrap" id="organization" 
+										onclick="sort(id)">組織名稱</td>
+									<td class="text-nowrap" id="startDate" 
+										onclick="sort(id)">開始時間</td>
+									<td class="text-nowrap" id="endDate" 
+										onclick="sort(id)">結束時間</td>
+									<td class="text-nowrap" id="comments" 
+										onclick="sort(id)">備註</td>
 									<td>管理</td>
 								</tr>
 								</thead>
@@ -63,8 +70,8 @@
 											<td>{{$data->chtDept}}</td>
 											<td>{{$data->name}}</td>										
 											<td>{{$data->organization}}</td>
-											<td>{{$data->startDate}}</td>
-											<td>{{$data->endDate}}</td>
+											<td class="text-nowrap">{{$data->startDate}}</td>
+											<td class="text-nowrap">{{$data->endDate}}</td>
 											<td>{{$data->comments}}</td>
 											<td class="text-nowrap">
 												@can('permission',$data)
