@@ -138,7 +138,7 @@ class ForeignProfExchangeController extends Controller
                 foreach ($item as $key => $value) {
 
                     switch ($key) {
-                        case '單請單位一級單位名稱':
+                        case '邀請單位一級單位名稱':
                             $item['college'] = $value;
                             unset($item[$key]);
                             break;
@@ -222,7 +222,7 @@ class ForeignProfExchangeController extends Controller
                 }
                 array_push($newArray,$item);
             }
-            ForeignProfVist::insert($newArray);
+            foreignprofexchange::insert($newArray);
         });
         return redirect('foreign_prof_exchange');
     }

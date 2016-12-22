@@ -162,7 +162,7 @@ class ProfAttendConferenceController extends Controller
                                     $value = 2;
                                     break;
                                 case "助理教授":
-                                    $value = 3;
+                                    $value = 3; 
                                     break;
                                 case "博士後研究員":
                                     $value = 4;
