@@ -3,7 +3,9 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<h1 class="page-header">參與國際組織</h1>
+		<a href="{{URL('attend_international_organization')}}" style="color: black">
+			<h1 class="page-header">參與國際組織</h1>
+		</a>
 	</div>
 </div>
 <div class="row">
