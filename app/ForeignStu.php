@@ -11,7 +11,7 @@ class ForeignStu extends Model
     protected $fillable=['college','dept','chtName',
     					'engName','stuID','stuLevel',
     					'nation','engNation','startDate',
-    					'endDate','comments'];
+    					'endDate','comments','status'];
     public $timestamps=false;
 
 }

@@ -47,6 +47,7 @@ class ForeignStuController extends Controller
             'engNation'=>'required|max:50',
             'startDate'=>'required',
             'endDate'=>'required',
+            'status'=>'required',
             'comments'=>'max:500',
             ]);
 
@@ -98,6 +99,9 @@ class ForeignStuController extends Controller
         if($request->endDate != "")
             $foreignStu = $foreignStu
                 ->where('endDate','<=',"$request->endDate");
+        if($request->status != "")
+            $foreignStu = $foreignStu
+                ->where('status',"$request->status");
         if($request->comments != "")
             $foreignStu = $foreignStu
                 ->where('comments',"like","%$request->comments%");
@@ -133,6 +137,7 @@ class ForeignStuController extends Controller
             'engNation'=>'required|max:50',
             'startDate'=>'required',
             'endDate'=>'required',
+            'status'=>'required',
             'comments'=>'max:500',
             ]);
         $foreignStu->update($request->all());

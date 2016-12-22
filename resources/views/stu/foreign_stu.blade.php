@@ -3,7 +3,9 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<h1 class="page-header">修讀正式學位之外國學生</h1>
+		<a href="{{URL('foreign_stu')}}" style="color: black">
+			<h1 class="page-header">修讀正式學位之外國學生</h1>
+		</a>
 	</div>
 </div>
 <div class="row">	
@@ -46,26 +48,38 @@
 						<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
-									<td id="foreign_stu.college" onclick="sort(id)">所屬一級單位</td>
-									<td id="foreign_stu.dept" onclick="sort(id)">所屬系所部門</td>
-									<td id="stuID" onclick="sort(id)">學號</td>
-									<td id="chtName" onclick="sort(id)">中文姓名</td>
-									<td id="engName" onclick="sort(id)">英文姓名</td>
-									<td id="stuLevel" onclick="sort(id)">身分</td>
-									<td id="nation" onclick="sort(id)">國籍(中文)</td>
-									<td id="engNation" onclick="sort(id)">國籍(英文)</td>
-									<td id="startDate" onclick="sort(id)">開始時間</td>
-									<td id="endDate" onclick="sort(id)">結束時間</td>
-									<td id="" onclick="sort(id)">學籍狀態</td>
-									<td id="comments" onclick="sort(id)">備註</td>
-									<td>管理</td>
+									<td id="foreign_stu.college" class="text-nowrap"
+										onclick="sort(id)">所屬單位</td>
+									<td id="foreign_stu.dept" class="text-nowrap"
+										onclick="sort(id)">系所部門</td>
+									<td id="stuID" class="text-nowrap"
+										onclick="sort(id)">學號</td>
+									<td id="chtName" class="text-nowrap"
+										onclick="sort(id)">中文姓名</td>
+									<td id="engName" class="text-nowrap"
+										onclick="sort(id)">英文姓名</td>
+									<td id="stuLevel" class="text-nowrap"
+										onclick="sort(id)">身分</td>
+									<td id="nation" class="text-nowrap"
+										onclick="sort(id)">國籍(中文)</td>
+									<td id="engNation" class="text-nowrap"
+										onclick="sort(id)">國籍(英文)</td>
+									<td id="startDate" class="text-nowrap"
+										onclick="sort(id)">開始時間</td>
+									<td id="endDate" class="text-nowrap"
+										onclick="sort(id)">結束時間</td>
+									<td id="" class="text-nowrap"
+										onclick="sort(id)">學籍狀態</td>
+									<td id="comments" class="text-nowrap"
+										onclick="sort(id)">備註</td>
+									<td class="text-nowrap">管理</td>
 								</tr>
 								</thead>
 								<tbody>
 								@foreach($foreignStu as $data)
 								<tr>
 								<td class="text-nowrap">{{$data->chtCollege}}</td>
-								<td >{{$data->chtDept}}</td>
+								<td style="max-width: 90px">{{$data->chtDept}}</td>
 								<td class="text-nowrap">{{$data->stuID}}</td>
 								<td >{{$data->chtName}}</td>
 								<td >{{$data->engName}}</td>									
@@ -78,12 +92,20 @@
 									@endif
 									</td>
 								<td class="text-nowrap">{{$data->nation}}</td>
-								<td class="text-nowrap">{{$data->engNation}}</td>								
-								<td >{{$data->startDate}}</td>
-								<td >{{$data->endDate}}</td>
-								<td>{{$data->status}}</td>
+								<td>{{$data->engNation}}</td>								
+								<td class="text-nowrap">{{$data->startDate}}</td>
+								<td class="text-nowrap">{{$data->endDate}}</td>
+								<td>
+									@if($data->status == 1)
+										在學中
+									@elseif($data->status == 2)
+										休學中
+									@elseif($data->status == 3)
+										已畢業
+									@endif
+								</td>
 								<td>{{$data->comments}}</td>	
-									<td>
+								<td class="text-nowrap">
 									@can('permission',$data)
 									<a href="{{url('foreign_stu',$data->id)}}"
 										class="glyphicon glyphicon-pencil btn 
@@ -181,6 +203,18 @@
 								<input type="date" name="endDate" class="form-control" value="{{old('endDate')}}">
 							</div>
 
+							@if($errors->has('status'))
+                                <p class="text-danger">{{$errors->first('status')}}</p>
+                            @endif
+							<div class="form-group">
+								<label for="comments">學籍狀態</label>
+								<select name="status" class="form-control">
+									<option value="1">在學中</option>
+									<option value="2">休學中</option>
+									<option value="3">已畢業</option>
+								</select>
+							</div>
+
 							@if($errors->has('comments'))
                                 <p class="text-danger">{{$errors->first('comments')}}</p>
                             @endif
@@ -240,6 +274,15 @@
 							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 								<label for="endDate">到</label>
 								<input type="date" name="endDate" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="comments">學籍狀態</label>
+								<select name="status" class="form-control">
+									<option value=""></option>
+									<option value="1">在學中</option>
+									<option value="2">休學中</option>
+									<option value="3">已畢業</option>
+								</select>
 							</div>
 							<div class="form-group">
 								<label for="comments">備註</label>
