@@ -47,15 +47,25 @@
 						<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
-									<td id="internationalize_activity.college" onclick="sort(id)">所屬一級單位</td>
-									<td id="internationalize_activity.dept" onclick="sort(id)">所屬系所部門</td>
-									<td id="activityName" onclick="sort(id)">活動性質</td>
-									<td id="place" onclick="sort(id)">活動地點</td>
-									<td id="host" onclick="sort(id)">本校參加人員</td>
-									<td id="guest" onclick="sort(id)">參加之外賓</td>
-									<td id="startDate" onclick="sort(id)">開始時間</td>
-									<td id="endDate" onclick="sort(id)">結束時間</td>
-									<td>管理</td>
+									<td id="internationalize_activity.college" class="text-nowrap"
+										onclick="sort(id)">所屬單位</td>
+									<td id="internationalize_activity.dept" class="text-nowrap"
+										onclick="sort(id)">系所部門</td>
+									<td id="activityName" class="text-nowrap"
+										onclick="sort(id)">活動性質</td>
+									<td id="place" class="text-nowrap"
+										onclick="sort(id)">活動地點</td>
+									<td id="host" class="text-nowrap"
+										onclick="sort(id)">本校參加人員</td>
+									<td id="guest" class="text-nowrap"
+										onclick="sort(id)">參加之外賓</td>
+									<td id="startDate" class="text-nowrap"
+										onclick="sort(id)">開始時間</td>
+									<td id="endDate" class="text-nowrap"
+										onclick="sort(id)">結束時間</td>
+									<td id="comment" class="text-nowrap"
+										onclick="sort(id)">備註</td>
+									<td class="text-nowrap">管理</td>
 								</tr>
 								</thead>
 								<tbody>
@@ -67,9 +77,10 @@
 									<td>{{$data->place}}</td>
 									<td>{{$data->host}}</td>
 									<td>{{$data->guest}}</td>
-									<td>{{$data->startDate}}</td>
-									<td>{{$data->endDate}}</td>
-									<td>
+									<td class="text-nowrap">{{$data->startDate}}</td>
+									<td class="text-nowrap">{{$data->endDate}}</td>
+									<td>{{$data->comment}}</td>
+									<td class="text-nowrap">
 										@can('permission',$data)
 										<a href="{{url('internationalize_activity',$data->id)}}"
 											class="glyphicon glyphicon-pencil	

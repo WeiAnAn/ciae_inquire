@@ -3,7 +3,9 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<h1 class="page-header">擔任國際期刊編輯</h1>
+		<a href="{{URL('international_journal_editor')}}" style="color:black">
+			<h1 class="page-header">擔任國際期刊編輯</h1>
+		</a>
 	</div>
 </div>
 <div class="row">
@@ -46,14 +48,21 @@
 						<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
-									<td id="international_journal_editor.college" onclick="sort(id)">所屬一級單位</td>
-									<td id="international_journal_editor.dept" onclick="sort(id)">所屬系所部門</td>
-									<td id="name" onclick="sort(id)">期刊編輯者</td>
-									<td id="journalName" onclick="sort(id)">期刊名稱</td>
-									<td id="startDate" onclick="sort(id)">開始擔任時間</td>
-									<td id="endDate" onclick="sort(id)">結束擔任時間</td>
-									<td id="comments" onclick="sort(id)">備註</td>
-									<td>管理</td>
+									<td id="international_journal_editor.college" class="text-nowrap" 
+										onclick="sort(id)">所屬單位</td>
+									<td id="international_journal_editor.dept" class="text-nowrap" 
+										onclick="sort(id)">系所部門</td>
+									<td id="name" class="text-nowrap" 
+										onclick="sort(id)">期刊編輯者</td>
+									<td id="journalName" class="text-nowrap" 
+										onclick="sort(id)">期刊名稱</td>
+									<td id="startDate" class="text-nowrap" 
+										onclick="sort(id)">開始擔任時間</td>
+									<td id="endDate" class="text-nowrap" 
+										onclick="sort(id)">結束擔任時間</td>
+									<td id="comments" class="text-nowrap" 
+										onclick="sort(id)">備註</td>
+									<td class="text-nowrap">管理</td>
 								</tr>
 							</thead>
 							<tbody>
@@ -66,7 +75,7 @@
 									<td>{{$data->startDate}}</td>
 									<td>{{$data->endDate}}</td>
 									<td>{{$data->comments}}</td>
-									<td>
+									<td class="text-nowrap">
 										@can('permission',$data)
 										<a href="{{url('international_journal_editor',$data->id)}}"
 											class="glyphicon glyphicon-pencil	
