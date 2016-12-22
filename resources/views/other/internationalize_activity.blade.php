@@ -50,23 +50,41 @@
 							<thead>	
 								<tr>
 									<td id="internationalize_activity.college" class="text-nowrap"
-										onclick="sort(id)">所屬單位</td>
+										onclick="sort(id)">所屬單位
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="internationalize_activity.dept" class="text-nowrap"
-										onclick="sort(id)">系所部門</td>
+										onclick="sort(id)">系所部門
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="activityName" class="text-nowrap"
-										onclick="sort(id)">活動性質</td>
+										onclick="sort(id)">活動性質
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="place" class="text-nowrap"
-										onclick="sort(id)">活動地點</td>
+										onclick="sort(id)">活動地點
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="host" class="text-nowrap"
-										onclick="sort(id)">本校參加人員</td>
+										onclick="sort(id)">本校參加人員
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="guest" class="text-nowrap"
-										onclick="sort(id)">參加之外賓</td>
+										onclick="sort(id)">參加之外賓
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="startDate" class="text-nowrap"
-										onclick="sort(id)">開始時間</td>
+										onclick="sort(id)">開始時間
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="endDate" class="text-nowrap"
-										onclick="sort(id)">結束時間</td>
+										onclick="sort(id)">結束時間
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="comments" class="text-nowrap"
-										onclick="sort(id)">備註</td>
+										onclick="sort(id)">備註
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td class="text-nowrap">管理</td>
 								</tr>
 								</thead>

@@ -49,21 +49,37 @@
 							<thead>	
 								<tr>
 									<td id="prof_foreign_research.college" class="text-nowrap" 
-										onclick="sort(id)">所屬單位</td>
+										onclick="sort(id)">所屬單位
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="prof_foreign_research.dept" class="text-nowrap" 
-										onclick="sort(id)">系所部門</td>
+										onclick="sort(id)">系所部門
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="name" class="text-nowrap" 
-										onclick="sort(id)">姓名</td>
+										onclick="sort(id)">姓名
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="profLevel" class="text-nowrap" 
-										onclick="sort(id)">身分</td>
+										onclick="sort(id)">身分
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="nation" class="text-nowrap" 
-										onclick="sort(id)">前往國家</td>
+										onclick="sort(id)">前往國家
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="startDate" class="text-nowrap" 
-										onclick="sort(id)">開始時間</td>
+										onclick="sort(id)">開始時間
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="endDate" class="text-nowrap" 
-										onclick="sort(id)">結束時間</td>
+										onclick="sort(id)">結束時間
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="comments" class="text-nowrap" 
-										onclick="sort(id)">備註</td>
+										onclick="sort(id)">備註
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td class="text-nowrap">管理</td>
 								</tr>
 								</thead>

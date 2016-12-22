@@ -49,19 +49,33 @@
 							<thead>	
 								<tr>
 									<td id="international_journal_editor.college" class="text-nowrap" 
-										onclick="sort(id)">所屬單位</td>
+										onclick="sort(id)">所屬單位
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="international_journal_editor.dept" class="text-nowrap" 
-										onclick="sort(id)">系所部門</td>
+										onclick="sort(id)">系所部門
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="name" class="text-nowrap" 
-										onclick="sort(id)">期刊編輯者</td>
+										onclick="sort(id)">期刊編輯者
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="journalName" class="text-nowrap" 
-										onclick="sort(id)">期刊名稱</td>
+										onclick="sort(id)">期刊名稱
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="startDate" class="text-nowrap" 
-										onclick="sort(id)">開始擔任時間</td>
+										onclick="sort(id)">開始擔任時間
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="endDate" class="text-nowrap" 
-										onclick="sort(id)">結束擔任時間</td>
+										onclick="sort(id)">結束擔任時間
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="comments" class="text-nowrap" 
-										onclick="sort(id)">備註</td>
+										onclick="sort(id)">備註
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td class="text-nowrap">管理</td>
 								</tr>
 							</thead>

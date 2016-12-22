@@ -49,20 +49,34 @@
 							<thead>	
 								<tr>
 									<td class="text-nowrap" id="attend_international_organization.college" 
-										onclick="sort(id)">所屬單位</td>
+										onclick="sort(id)">所屬單位
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td class="text-nowrap" id="attend_international_organization.dept" 
-										onclick="sort(id)">系所部門</td>
+										onclick="sort(id)">系所部門
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td class="text-nowrap" id="name" 
-										onclick="sort(id)">參加人</td>
+										onclick="sort(id)">參加人
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td class="text-nowrap" id="organization" 
-										onclick="sort(id)">組織名稱</td>
+										onclick="sort(id)">組織名稱
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td class="text-nowrap" id="startDate" 
-										onclick="sort(id)">開始時間</td>
+										onclick="sort(id)">開始時間
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td class="text-nowrap" id="endDate" 
-										onclick="sort(id)">結束時間</td>
+										onclick="sort(id)">結束時間
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td class="text-nowrap" id="comments" 
-										onclick="sort(id)">備註</td>
-									<td>管理</td>
+										onclick="sort(id)">備註
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
+									<td class="text-nowrap">管理</td>
 								</tr>
 								</thead>
 								<tbody>

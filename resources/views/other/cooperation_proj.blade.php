@@ -48,22 +48,37 @@
 							<thead>	
 								<tr>
 									<td id="cooperation_proj.college" class="text-nowrap" 
-										onclick="sort(id)">所屬單位</td>
+										onclick="sort(id)">所屬單位
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="cooperation_proj.dept" class="text-nowrap" 
-										onclick="sort(id)">系所部門</td>
+										onclick="sort(id)">系所部門
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="name" class="text-nowrap" 
-										onclick="sort(id)">主辦人</td>
+										onclick="sort(id)">主辦人
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="projName" class="text-nowrap" 
-										onclick="sort(id)">合作機構</td>
+										onclick="sort(id)">合作機構
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="projOrg" class="text-nowrap" 
-										onclick="sort(id)">計畫名稱</td>
-									
+										onclick="sort(id)">計畫名稱
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="startDate" class="text-nowrap" 
-										onclick="sort(id)">開始時間</td>
+										onclick="sort(id)">開始時間
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="endDate" class="text-nowrap" 
-										onclick="sort(id)">結束時間</td>
+										onclick="sort(id)">結束時間
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="comments" class="text-nowrap" 
-										onclick="sort(id)">備註</td>
+										onclick="sort(id)">備註
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td class="text-nowrap">管理</td>
 								</tr>
 								</thead>

@@ -49,29 +49,53 @@
 							<thead>	
 								<tr>
 									<td id="foreign_stu.college" class="text-nowrap"
-										onclick="sort(id)">所屬單位</td>
+										onclick="sort(id)">所屬單位
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="foreign_stu.dept" class="text-nowrap"
-										onclick="sort(id)">系所部門</td>
+										onclick="sort(id)">系所部門
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="stuID" class="text-nowrap"
-										onclick="sort(id)">學號</td>
+										onclick="sort(id)">學號
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="chtName" class="text-nowrap"
-										onclick="sort(id)">中文姓名</td>
+										onclick="sort(id)">中文姓名
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="engName" class="text-nowrap"
-										onclick="sort(id)">英文姓名</td>
+										onclick="sort(id)">英文姓名
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="stuLevel" class="text-nowrap"
-										onclick="sort(id)">身分</td>
+										onclick="sort(id)">身分
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="nation" class="text-nowrap"
-										onclick="sort(id)">國籍(中文)</td>
+										onclick="sort(id)">國籍(中文)
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="engNation" class="text-nowrap"
-										onclick="sort(id)">國籍(英文)</td>
+										onclick="sort(id)">國籍(英文)
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="startDate" class="text-nowrap"
-										onclick="sort(id)">開始時間</td>
+										onclick="sort(id)">開始時間
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="endDate" class="text-nowrap"
-										onclick="sort(id)">結束時間</td>
+										onclick="sort(id)">結束時間
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="" class="text-nowrap"
-										onclick="sort(id)">學籍狀態</td>
+										onclick="sort(id)">學籍狀態
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="comments" class="text-nowrap"
-										onclick="sort(id)">備註</td>
+										onclick="sort(id)">備註
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td class="text-nowrap">管理</td>
 								</tr>
 								</thead>

@@ -50,21 +50,37 @@
 							<thead>	
 								<tr>
 									<td id="partner_school.college" class="text-nowrap"
-										onclick="sort(id)">所屬單位</td>
+										onclick="sort(id)">所屬單位
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="partner_school.dept" class="text-nowrap"
-										onclick="sort(id)">簽約系所</td>
+										onclick="sort(id)">簽約系所
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="nation" class="text-nowrap"
-										onclick="sort(id)">姊妹校所屬國家</td>
+										onclick="sort(id)">姊妹校所屬國家
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="chtName" class="text-nowrap"
-										onclick="sort(id)">中文校名</td>
+										onclick="sort(id)">中文校名
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="engName" class="text-nowrap"
-										onclick="sort(id)">英文校名</td>
+										onclick="sort(id)">英文校名
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="startDate" class="text-nowrap"
-										onclick="sort(id)">簽約時間</td>
+										onclick="sort(id)">簽約時間
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="endDate" class="text-nowrap"
-										onclick="sort(id)">到期時間</td>
+										onclick="sort(id)">到期時間
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td id="comments" class="text-nowrap"
-										onclick="sort(id)">備註</td>
+										onclick="sort(id)">備註
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
 									<td class="text-nowrap">管理</td>
 								</tr>
 								</thead>
