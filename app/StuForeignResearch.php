@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class StuForeignResearch extends Model
 {
     //
+    use SoftDeletes;
     protected $table = 'stu_foreign_research';
     
     protected $fillable = [
@@ -16,4 +18,5 @@ class StuForeignResearch extends Model
 
 
     public $timestamps = false;
+    protected $dates = ['deleted_at'];
 }
