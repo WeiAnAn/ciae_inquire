@@ -39,7 +39,6 @@ class CooperationProjController extends Controller
             'name'=>'required|max:10',
             'projName'=>'required|max:200',
             'projOrg'=>'required|max:200',
-            'projContent'=>'max:200',
             'startDate'=>'required',
             'endDate'=>'required',
             'comments'=>'max:500',
@@ -77,9 +76,6 @@ class CooperationProjController extends Controller
         if($request->projName != "")
             $cooperationproj = $cooperationproj
                 ->where('projName',"like","%$request->projName%"); 
-        if($request->projContent != "")
-            $cooperationproj = $cooperationproj
-                ->where('projContent',"like","%$request->projContent%"); 
         if($request->startDate != "")
             $cooperationproj = $cooperationproj
                 ->where('startDate','>=',"$request->startDate");
@@ -119,7 +115,6 @@ class CooperationProjController extends Controller
             'name'=>'required|max:10',
             'projName'=>'required|max:200',
             'projOrg'=>'required|max:200',
-            'projContent'=>'max:200',
             'startDate'=>'required',
             'endDate'=>'required',
             'comments'=>'max:500',
@@ -194,7 +189,6 @@ class CooperationProjController extends Controller
                     'name'=>'required|max:10',
                     'projName'=>'required|max:200',
                     'projOrg'=>'required|max:200',
-                    'projContent'=>'max:200',
                     'startDate'=>'required',
                     'endDate'=>'required',
                     'comments'=>'max:500',

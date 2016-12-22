@@ -47,16 +47,24 @@
 		      	 	<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
-									<td id="cooperation_proj.college" onclick="sort(id)">所屬一級單位</td>
-									<td id="cooperation_proj.dept" onclick="sort(id)">所屬系所部門</td>
-									<td id="name" onclick="sort(id)">主辦人</td>
-									<td id="projName" onclick="sort(id)">合作機構</td>
-									<td id="projOrg" onclick="sort(id)">計畫名稱</td>
-									<td id="projContent" onclick="sort(id)">計畫內容</td>
-									<td id="startDate" onclick="sort(id)">開始時間</td>
-									<td id="endDate" onclick="sort(id)">結束時間</td>
-									<td id="comments" onclick="sort(id)">備註</td>
-									<td>管理</td>
+									<td id="cooperation_proj.college" class="text-nowrap" 
+										onclick="sort(id)">所屬單位</td>
+									<td id="cooperation_proj.dept" class="text-nowrap" 
+										onclick="sort(id)">系所部門</td>
+									<td id="name" class="text-nowrap" 
+										onclick="sort(id)">主辦人</td>
+									<td id="projName" class="text-nowrap" 
+										onclick="sort(id)">合作機構</td>
+									<td id="projOrg" class="text-nowrap" 
+										onclick="sort(id)">計畫名稱</td>
+									
+									<td id="startDate" class="text-nowrap" 
+										onclick="sort(id)">開始時間</td>
+									<td id="endDate" class="text-nowrap" 
+										onclick="sort(id)">結束時間</td>
+									<td id="comments" class="text-nowrap" 
+										onclick="sort(id)">備註</td>
+									<td class="text-nowrap">管理</td>
 								</tr>
 								</thead>
 								<tbody>
@@ -67,11 +75,10 @@
 									<td>{{$data->name}}</td>
 									<td>{{$data->projOrg}}</td>
 									<td>{{$data->projName}}</td>
-									<td>{{$data->projContent}}</td>
-									<td>{{$data->startDate}}</td>
-									<td>{{$data->endDate}}</td>
+									<td class="text-nowrap">{{$data->startDate}}</td>
+									<td class="text-nowrap">{{$data->endDate}}</td>
 									<td>{{$data->comments}}</td>
-									<td>
+									<td class="text-nowrap">
 										@can('permission',$data)
 										<a href="{{url('cooperation_proj',$data->id)}}"
 											class="glyphicon glyphicon-pencil	

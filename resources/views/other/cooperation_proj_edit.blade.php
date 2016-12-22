@@ -27,7 +27,7 @@
                     @endif
 					<div class="form-group">
 						<label for="projOrg">合作機構</label>
-						<textarea name="projOrg" id="projOrg" cols="30" rows="3" class="form-control">{{$name}}</textarea>
+						<textarea name="projOrg" id="projOrg" cols="30" rows="3" class="form-control">{{$projOrg}}</textarea>
 					</div>
 
 					@if($errors->has('projName'))
@@ -38,14 +38,6 @@
 						<textarea name="projName" id="projName" cols="30" rows="3" class="form-control">{{$projName}}</textarea>
 					</div>
 					
-					@if($errors->has('projContent'))
-                                <p class="text-danger">{{$errors->first('projContent')}}</p>
-                            @endif
-							<div class="form-group">
-								<label for="projContent">計畫內容</label>
-								<textarea name="projContent" id="projContent" cols="30" rows="3" class="form-control">{{$projContent}}</textarea>
-							</div>
-
 					@if($errors->has('startDate')||$errors->has('endDate'))
                         <p class="text-danger col-md-6">{{ $errors->first('startDate')}}</p>                      
                         <p class="text-danger col-md-6">{{ $errors->first('endDate')}}</p>
