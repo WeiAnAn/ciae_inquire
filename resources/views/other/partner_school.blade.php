@@ -3,7 +3,9 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<h1 class="page-header">姊妹校締約情形</h1>
+		<a href="{{URL('partner_school')}}" style="color:black">
+			<h1 class="page-header">姊妹校締約情形</h1>
+		</a>
 	</div>
 </div>
 <div class="row">	
@@ -47,15 +49,23 @@
 						<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
-									<td id="partner_school.college" onclick="sort(id)">簽約機構所屬一級單位</td>
-									<td id="partner_school.dept" onclick="sort(id)">簽約系所</td>
-									<td id="nation" onclick="sort(id)">姊妹校所屬國家</td>
-									<td id="chtName" onclick="sort(id)">中文校名</td>
-									<td id="engName" onclick="sort(id)">英文校名</td>
-									<td id="startDate" onclick="sort(id)">簽約時間</td>
-									<td id="endDate" onclick="sort(id)">到期時間</td>
-									<td id="comments" onclick="sort(id)">備註</td>
-									<td>管理</td>
+									<td id="partner_school.college" class="text-nowrap"
+										onclick="sort(id)">所屬單位</td>
+									<td id="partner_school.dept" class="text-nowrap"
+										onclick="sort(id)">簽約系所</td>
+									<td id="nation" class="text-nowrap"
+										onclick="sort(id)">姊妹校所屬國家</td>
+									<td id="chtName" class="text-nowrap"
+										onclick="sort(id)">中文校名</td>
+									<td id="engName" class="text-nowrap"
+										onclick="sort(id)">英文校名</td>
+									<td id="startDate" class="text-nowrap"
+										onclick="sort(id)">簽約時間</td>
+									<td id="endDate" class="text-nowrap"
+										onclick="sort(id)">到期時間</td>
+									<td id="comments" class="text-nowrap"
+										onclick="sort(id)">備註</td>
+									<td class="text-nowrap">管理</td>
 								</tr>
 								</thead>
 								<tbody>
@@ -66,10 +76,10 @@
 									<td>{{$data->nation}}</td>
 									<td>{{$data->chtName}}</td>
 									<td>{{$data->engName}}</td>
-									<td>{{$data->startDate}}</td>
-									<td>{{$data->endDate}}</td>
+									<td class="text-nowrap">{{$data->startDate}}</td>
+									<td class="text-nowrap">{{$data->endDate}}</td>
 									<td>{{$data->comments}}</td>
-									<td>
+									<td class="text-nowrap">
 										@can('permission',$data)
 										<a href="{{url('partner_school',$data->id)}}"
 											class="glyphicon glyphicon-pencil	
