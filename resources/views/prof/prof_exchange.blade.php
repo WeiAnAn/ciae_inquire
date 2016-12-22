@@ -18,19 +18,32 @@
 	                </li>
 	                <li class="active"><a href="#insert" data-toggle="tab">新增</a>
 	                </li>
-				@else
-	                <li class="active"><a href="#show" data-toggle="tab">檢視</a>
+	                <li><a href="#search" data-toggle="tab">進階搜尋</a>
+	                </li>
+	                <li><a href="#upload" data-toggle="tab">批次上傳</a>
+	                </li>
+				@elseif(count($errors->upload)>0)
+	                <li><a href="#show" data-toggle="tab">檢視</a>
 	                </li>
 	                <li><a href="#insert" data-toggle="tab">新增</a>
 	                </li>
-	            @endif    
-                <li><a href="#search" data-toggle="tab">進階搜尋</a>
-                </li>
-                <li><a href="#upload" data-toggle="tab">批次上傳</a>
-                </li>
+	                <li><a href="#search" data-toggle="tab">進階搜尋</a>
+	                </li>
+	                <li class="active"><a href="#upload" data-toggle="tab">批次上傳</a>
+	                </li>
+	            @else
+	           		<li class="active"><a href="#show" data-toggle="tab">檢視</a>
+	                </li>
+	                <li><a href="#insert" data-toggle="tab">新增</a>
+	                </li>
+	                <li><a href="#search" data-toggle="tab">進階搜尋</a>
+	                </li>
+	                <li><a href="#upload" data-toggle="tab">批次上傳</a>
+	                </li>
+	            @endif
             </ul>
             	<div class="tab-content">
-					@if(count($errors)>0)
+					@if(count($errors)>0||count($errors->upload)>0)
 						<div class="tab-pane fade in table-responsive" id="show" 
 							style="margin-top: 10px">
 					@else
@@ -239,7 +252,11 @@
 						</form>
 					</div>
 
-					<div class="tab-pane fade in col-md-12" id="upload" style="margin-top: 10px;">
+					@if(count($errors->upload)>0)
+						<div class="tab-pane fade in col-md-12 active" id="upload" style="margin-top: 10px;">
+					@else
+						<div class="tab-pane fade in col-md-12" id="upload" style="margin-top: 10px;">
+					@endif
 						<form action="{{url('prof_exchange/upload')}}" method="post" enctype="multipart/form-data">
 							{{ csrf_field() }}
                         	<div id="file_error"></div>
