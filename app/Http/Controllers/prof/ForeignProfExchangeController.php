@@ -196,15 +196,15 @@ class ForeignProfExchangeController extends Controller
                     }
                 }
                 $validator = Validator::make($item,[
-                 'college'=>'required|max:11',
+                'college'=>'required|max:11',
                      'dept'=>'required|max:11',
                      'nation'=>'required|max:20',
-                     'chtName'=>'required|max:50',
-                     'engName'=>'required|max:80',
+                     'profLevel'=>'required|max:20',
+
                      'startDate'=>'required',
                      'endDate'=>'required',
                      'comments'=>'max:500',
-                ]);
+                          ]);
                 if($validator->fails()){
                     return redirect('foreign_prof_exchange')
                         ->withErrors($validator,"upload");
