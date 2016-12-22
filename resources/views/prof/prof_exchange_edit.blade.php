@@ -2,7 +2,7 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<h1 class="page-header">本校教師赴國外出席國際會議資料修改</h1>
+		<h1 class="page-header">本校教師赴國外交換資料修改</h1>
 	</div>
 </div>
 <div class="row">
@@ -25,7 +25,7 @@
 							<option value="2">副教授</option>
 							<option value="3">助理教授</option>
 							<option value="4">博士後研究員</option>
-							<option value="5">研究生</option>
+							{{-- <option value="5">研究生</option> --}}
 						</select>
 
 					</div>
