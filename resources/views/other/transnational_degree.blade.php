@@ -3,7 +3,9 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<h1 class="page-header">跨國學位</h1>
+		<a href="{{URL('transnational_degree')}}" style="color:black">
+			<h1 class="page-header">跨國學位</h1>
+		</a>
 	</div>
 </div>
 <div class="row">	
@@ -47,19 +49,31 @@
 						<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
-									<td id="transnational_degree.college" onclick="sort(id)">所屬一級單位</td>
-									<td id="transnational_degree.dept" onclick="sort(id)">所屬系所部門</td>
-									<td id="nation" onclick="sort(id)">國家</td>
-									<td id="chtName" onclick="sort(id)">中文校名</td>
-									<td id="engName" onclick="sort(id)">英文校名</td>
-									<td id="bachelor" onclick="sort(id)">學士</td>
-									<td id="master" onclick="sort(id)">碩士</td>
-									<td id="PHD" onclick="sort(id)">博士</td>
-									<td id="" onclick="sort(id)">修業年限</td>
-									<td id="classMode" onclick="sort(id)">授課方式</td>
-									<td id="degreeMode" onclick="sort(id)">學位授予方式</td>
-									<td id="comments" onclick="sort(id)">備註</td>
-									<td>管理</td>
+									<td id="transnational_degree.college" class="text-nowrap"
+										onclick="sort(id)">所屬單位</td>
+									<td id="transnational_degree.dept" class="text-nowrap"
+										onclick="sort(id)">系所部門</td>
+									<td id="nation" class="text-nowrap"
+										onclick="sort(id)">國家</td>
+									<td id="chtName" class="text-nowrap"
+										onclick="sort(id)">中文校名</td>
+									<td id="engName" class="text-nowrap"
+										onclick="sort(id)">英文校名</td>
+									<td id="bachelor" class="text-nowrap"
+										onclick="sort(id)">學士</td>
+									<td id="master" class="text-nowrap"
+										onclick="sort(id)">碩士</td>
+									<td id="PHD" class="text-nowrap"
+										onclick="sort(id)">博士</td>
+									<td id="" class="text-nowrap"
+										onclick="sort(id)">修業年限</td>
+									<td id="classMode" class="text-nowrap"
+										onclick="sort(id)">授課方式</td>
+									<td id="degreeMode" class="text-nowrap"
+										onclick="sort(id)">學位授予方式</td>
+									<td id="comments" class="text-nowrap"
+										onclick="sort(id)">備註</td>
+									<td class="text-nowrap">管理</td>
 								</tr>
 								</thead>
 								<tbody>
@@ -71,25 +85,25 @@
 									<td>{{$data->chtName}}</td>
 									<td>{{$data->engName}}</td>
 									<td>@if($data->bachelor==1)	
-									有授予
+									o
 									@else
-									無授予
+									x
 									@endif</td>
 									<td>@if($data->master==1)
-									有授予
+									o
 									@else
-									無授予
+									x
 									@endif</td>
 									<td>@if($data->PHD==1)
-									有授予
+									o
 									@else
-									無授予
+									x
 									@endif
 									<td></td>
 									<td>{{$data->classMode}}</td>
 									<td>{{$data->degreeMode}}</td>
 									<td>{{$data->comments}}</td>
-									<td>
+									<td class="text-nowrap">
 										@can('permission',$data)
 										<a href="{{url('transnational_degree',$data->id)}}"
 											class="glyphicon glyphicon-pencil	
