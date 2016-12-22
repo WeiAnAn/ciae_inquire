@@ -3,7 +3,9 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<h1 class="page-header">外籍學者蒞校交換</h1>
+		<a href="{{URL('foreign_prof_exchange')}}" style="color:black">
+			<h1 class="page-header">外籍學者蒞校交換</h1>
+		</a>
 	</div>
 </div>
 <div class="row">
@@ -46,15 +48,23 @@
 			        	<table width="100%" class="table table-striped table-bordered table-hover">
 				        	<thead>
 				        		<tr>
-				        			<td id="foreign_prof_exchange.college" onclick="sort(id)">邀請單位(一級單位名稱)</td>
-									<td id="foreign_prof_exchange.dept" onclick="sort(id)">邀請單位(二級單位名稱)</td>
-									<td id="name" onclick="sort(id)">外籍學者姓名</td>
-									<td id="profLevel" onclick="sort(id)">外籍學者身分（教授、副教授、助理教授或博士後研究員）</td>
-									<td id="nation" onclick="sort(id)">國籍</td>
-									<td id="startDate" onclick="sort(id)">開始時間</td>
-									<td id="endDate" onclick="sort(id)">結束時間</td>
-									<td id="comments" onclick="sort(id)">備註</td>
-									<td>管理</td>
+				        			<td id="foreign_prof_exchange.college" class="text-nowrap"
+				        				onclick="sort(id)">邀請單位</td>
+									<td id="foreign_prof_exchange.dept" class="text-nowrap"
+										onclick="sort(id)">系所部門</td>
+									<td id="name" class="text-nowrap"
+										onclick="sort(id)">外籍學者姓名</td>
+									<td id="profLevel" class="text-nowrap"
+										onclick="sort(id)">學者身分</td>
+									<td id="nation" class="text-nowrap"
+										onclick="sort(id)">國籍</td>
+									<td id="startDate" class="text-nowrap"
+										onclick="sort(id)">開始時間</td>
+									<td id="endDate" class="text-nowrap"
+										onclick="sort(id)">結束時間</td>
+									<td id="comments" class="text-nowrap"
+										onclick="sort(id)">備註</td>
+									<td class="text-nowrap">管理</td>
 				        		</tr>
 			        		</thead>
 				        		
@@ -71,14 +81,14 @@
 										@elseif($data->profLevel==3)
 										助理教授
 										@elseif($data->profLevel==4)
-										準博士生
-										@else($data->profLevel==5)
+										博士後研究員
+										@elseif($data->profLevel==5)
 										研究生
 										@endif
 										</td>
 										<td>{{$data->nation}}</td>
-										<td>{{$data->startDate}}</td>
-										<td>{{$data->endDate}}</td>
+										<td class="text-nowrap">{{$data->startDate}}</td>
+										<td class="text-nowrap">{{$data->endDate}}</td>
 										<td>{{$data->comments}}</td>
 										<td class="text-nowrap">
 											@can('permission',$data)
@@ -127,8 +137,8 @@
 								<option value="1">教授</option>
 								<option value="2">副教授</option>
 								<option value="3">助理教授</option>
-								<option value="4">博士候選人</option>
-								<option value="5">研究生</option>
+								<option value="4">博士後研究員</option>
+								{{-- <option value="5">研究生</option> --}}
 							</select>
 						</div>
 
@@ -185,8 +195,8 @@
 								<option value="1">教授</option>
 								<option value="2">副教授</option>
 								<option value="3">助理教授</option>
-								<option value="4">博士候選人</option>
-								<option value="5">研究生</option>
+								<option value="4">博士後研究員</option>
+								{{-- <option value="5">研究生</option> --}}
 							</select>
 						</div>
 						<div class="form-group">
