@@ -201,6 +201,7 @@ public function update($id,Request $request){
                             $validator->errors()->add('format','檔案欄位錯誤');
                             return redirect('stu_attend_conf')
                                 ->withErrors($validator,"upload");
+                                
                             break;
                     }
                 }
@@ -214,7 +215,8 @@ public function update($id,Request $request){
                     'confName'=>'required|max:200',
                     'startDate'=>'required',
                     'endDate'=>'required',
-                    'comments'=>'max:500',
+                    'comments'=>'max:500', 
+                    
                 ]);
                 if($validator->fails()){
                     return redirect('stu_attend_conf')

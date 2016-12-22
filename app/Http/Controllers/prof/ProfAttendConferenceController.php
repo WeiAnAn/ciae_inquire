@@ -234,7 +234,7 @@ class ProfAttendConferenceController extends Controller
                 }
                 array_push($newArray,$item);
             }
-            profAttendConference::insert($newArray);
+            ProfAttendConference::insert($newArray);
         });
         return redirect('prof_attend_conference');
     }
