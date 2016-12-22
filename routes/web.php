@@ -26,10 +26,11 @@ Route::group(['middleware' => 'auth'],function(){
 	Route::patch('/user','UserController@update');
 
 	Route::get('/manage','UserController@manage');
-	Route::get('/manage/search','UserController@search');
-	Route::get('/manage/{id}','UserController@edit');
-	Route::post('/manage','UserController@insert');
-	Route::delete('/manage/{id}','UserController@delete');
+	Route::get('/manage/search','UserController@manageSearch');
+	Route::get('/manage/{id}','UserController@manageEdit');
+	Route::post('/manage','UserController@manageInsert');
+	Route::patch('/manage/{id}','UserController@manageUpdate');
+	Route::delete('/manage/{id}','UserController@manageDelete');
 
 		//英檢畢業門檻
 	

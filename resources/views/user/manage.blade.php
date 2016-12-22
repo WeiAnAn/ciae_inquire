@@ -47,16 +47,35 @@
 						<table width="100%" class="table table-striped table-bordered table-hover">
 							<thead>	
 								<tr>
-									<td id="username" onclick="sort(id)">使用者名稱</td>
-									<td id="user.college" onclick="sort(id)">單位</td>
-									<td id="user.dept" onclick="sort(id)">系所部門</td>
-									<td id="chtName" onclick="sort(id)">中文名稱</td>
-									<td id="engName" onclick="sort(id)">英文名稱</td>
-									<td id="contactPeople" onclick="sort(id)">聯絡人</td>
-									<td id="phone" onclick="sort(id)">電話</td>
-									<td id="eamil" onclick="sort(id)">電子信箱</td>
-									<td id="permission" onclick="sort(id)">權限</td>
-									<td>管理</td>
+									<td id="username" class="text-nowrap" 
+										onclick="sort(id)">使用者名稱
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
+									<td id="user.college" class="text-nowrap" 
+										onclick="sort(id)">單位
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
+									<td id="user.dept" class="text-nowrap" 
+										onclick="sort(id)">系所部門
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
+									<td id="contactPeople" class="text-nowrap" 
+										onclick="sort(id)">聯絡人
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
+									<td id="phone" class="text-nowrap" 
+										onclick="sort(id)">電話
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
+									<td id="email" class="text-nowrap" 
+										onclick="sort(id)">電子信箱
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
+									<td id="permission" class="text-nowrap" 
+										onclick="sort(id)">權限
+										<i class="fa fa-sort" aria-hidden="true"></i>
+									</td>
+									<td class="text-nowrap">管理</td>
 								</tr>
 								</thead>
 								<tbody>
@@ -65,12 +84,10 @@
 									<td class="text-nowrap">{{$data->username}}</td>
 									<td class="text-nowrap">{{$data->chtCollege}}</td>
 									<td >{{$data->chtDept}}</td>
-									<td>{{$data->chtName}}</td>
-									<td>{{$data->engName}}</td>
 									<td>{{$data->contactPeople}}</td>
 									<td>{{$data->phone}}</td>
 									<td>{{$data->email}}</td>
-									<td>
+									<td class="text-nowrap">
 									@if($data->permission == 0)
 										最高權限
 									@elseif($data->permission == 1)
@@ -129,29 +146,13 @@
                             @endif
 							<div class="form-group">
 								<label for="password">使用者密碼</label>
-								<input type="text" name="password" class="form-control">
+								<input type="password" name="password" class="form-control">
 							</div>
 
 							<div class="form-group">
                                 <label for="password" >確認密碼</label>
                                 <input type="password" class="form-control" name="password_confirmation">
                             </div>
-
-							@if($errors->has('chtName'))
-                                <p class="text-danger">{{$errors->first('chtName')}}</p>
-                            @endif
-							<div class="form-group">
-								<label for="chtName">中文名稱</label>
-								<input type="text" name="chtName" class="form-control" value="{{old('chtName')}}">
-							</div>
-
-							@if($errors->has('engName'))
-                                <p class="text-danger">{{$errors->first('engName')}}</p>
-                            @endif
-							<div class="form-group">
-								<label for="engName">英文名稱</label>
-								<input type="text" name="engName" class="form-control" value="{{old('engName')}}">
-							</div>
 
 							@if($errors->has('contactPeople'))
                                 <p class="text-danger">{{$errors->first('contactPeople')}}</p>
@@ -188,7 +189,7 @@
 									<option value="1">所有權限</option>
 									<option value="2">院級權限</option>
 									<option value="3">系級權限</option>
-									<option value="4">無權限</option>
+									<option value="4" selected>無權限</option>
 								</select>
 							</div>
 							@if($errors->has('permission'))
@@ -215,16 +216,6 @@
 							<div class="form-group">
 								<label for="username">使用者名稱</label>
 								<input type="text" name="username" class="form-control">
-							</div>
-
-							<div class="form-group">
-								<label for="chtName">中文名稱</label>
-								<input type="text" name="chtName" class="form-control">
-							</div>
-
-							<div class="form-group">
-								<label for="engName">英文名稱</label>
-								<input type="text" name="engName" class="form-control">
 							</div>
 
 							<div class="form-group">

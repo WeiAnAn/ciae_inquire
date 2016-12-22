@@ -31,9 +31,15 @@
                     
                     
                         <div class="form-group">
-                            <label for="username" >系所名稱</label>
+                            <label for="username" >單位</label>
                             <input type="text" class="form-control" name="username" 
-                            disabled value="{{$collegeData->chtName}}">
+                            disabled value="{{$collegeData->chtCollege}}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="username" >系所部門</label>
+                            <input type="text" class="form-control" name="username" 
+                            disabled value="{{$collegeData->chtDept}}">
                         </div>
                         
                         <!--change page-->
@@ -56,25 +62,7 @@
                                 <input type="password" class="form-control" name="password_confirmation">
                             </div>
 
-                            @if($errors->has('chtName'))
-                                <p class="text-danger">{{ $errors->first('chtName') }}</p>
-                            @endif
-                            <div class="form-group">
-                                <label for="">中文名稱</label>
-                                <input type="text" class="form-control" name="chtName" 
-                                value="{{Auth::user()->chtName}}">
-                            </div>
-
-                            @if($errors->has('engName'))
-                                <p class="text-danger">{{ $errors->first('engName') }}</p>
-                            @endif
-                            <div class="form-group">
-                                <label for="engName">英文名稱</label>
-                                <input type="text" class="form-control" name="engName"
-                                value="{{Auth::user()->engName}}">
-                            </div>
-
-                             @if($errors->has('contactPeople'))
+                            @if($errors->has('contactPeople'))
                                 <p class="text-danger">{{ $errors->first('contactPeople')}}</p>
                             @endif
                             <div class="form-group">
