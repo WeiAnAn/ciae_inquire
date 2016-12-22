@@ -34,7 +34,7 @@ function sort(id){
     location.assign(url);
 }
 function explodeQuery(query){
-    console.log(query);
+    // console.log(query);
     query = query.slice(1);
     var result = {};
     var array = query.split("&");
@@ -44,9 +44,22 @@ function explodeQuery(query){
     });
     return result;
 }
+function changeIcon(){
+    // console.log("a");
+    if(location.search != ""){
+        var query = explodeQuery(location.search);
+        var icon = document.getElementById(query.sortBy).children[0];
+        icon.classList.remove("fa-sort");
+        if(query.orderBy == 'desc')
+            icon.classList.add("fa-sort-desc");
+        else if(query.orderBy == 'asc')
+            icon.classList.add("fa-sort-asc");
+    }
+    
+}
 function checkFile(event){
     var fileName = document.getElementById('file').value.split(/(\\|\/)/g).pop();
-    console.log(fileName);
+    // console.log(fileName);
     var test = /(.xls$|.xlsx$)/;
     if(!test.test(fileName)){
         event.preventDefault();

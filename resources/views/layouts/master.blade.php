@@ -46,7 +46,7 @@
 
     </div>
     <!-- /#wrapper -->
-
+    
     <!-- jQuery -->
     <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
 
@@ -61,6 +61,9 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="{{asset('js/sb-admin-2.js')}}"></script>
+    <script>
+        changeIcon();
+    </script>
 
 </body>
 
