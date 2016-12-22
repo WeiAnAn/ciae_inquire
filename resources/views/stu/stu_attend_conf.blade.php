@@ -4,7 +4,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<a href="stu_attend_conf" style="color: black">
+		<a href="{{URL('stu_attend_conf')}}" style="color: black">
 			<h1 class="page-header">本校學生赴國外出席國際會議</h1>
 		</a>
 	</div>
