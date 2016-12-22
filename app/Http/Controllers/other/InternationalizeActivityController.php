@@ -45,7 +45,7 @@ class InternationalizeActivityController extends Controller
             'endDate'=>'required',
             ]);
 
-        internationalactivity::create($request->all());
+        InternationalizeActivity::create($request->all());
 
         return redirect('internationalize_activity')->with('success','新增成功');
     }

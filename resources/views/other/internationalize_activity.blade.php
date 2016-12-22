@@ -3,7 +3,9 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<h1 class="page-header">國際化活動</h1>
+		<a href="{{URL('internationalize_activity')}}" style="color:black">
+			<h1 class="page-header">國際化活動</h1>
+		</a>
 	</div>
 </div>
 <div class="row">	
@@ -63,7 +65,7 @@
 										onclick="sort(id)">開始時間</td>
 									<td id="endDate" class="text-nowrap"
 										onclick="sort(id)">結束時間</td>
-									<td id="comment" class="text-nowrap"
+									<td id="comments" class="text-nowrap"
 										onclick="sort(id)">備註</td>
 									<td class="text-nowrap">管理</td>
 								</tr>
@@ -79,7 +81,7 @@
 									<td>{{$data->guest}}</td>
 									<td class="text-nowrap">{{$data->startDate}}</td>
 									<td class="text-nowrap">{{$data->endDate}}</td>
-									<td>{{$data->comment}}</td>
+									<td>{{$data->comments}}</td>
 									<td class="text-nowrap">
 										@can('permission',$data)
 										<a href="{{url('internationalize_activity',$data->id)}}"
@@ -162,6 +164,11 @@
 								<label for="endDate">結束時間</label>
 								<input type="date" name="endDate" class="form-control" value="{{old('endDate')}}">
 							</div>
+							<div class="form-group">
+								<label for="comments">備註</label>
+								<textarea name="comments" id="comments" 
+									cols="30" rows="3" class="form-control"></textarea>
+							</div>
 							<button class="btn btn-success">新增</button>
 						</form>
 					</div>
@@ -199,6 +206,11 @@
 							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 								<label for="endDate">結束時間</label>
 								<input type="date" name="endDate" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="comments">備註</label>
+								<textarea name="comments" id="comments" 
+									cols="30" rows="3" class="form-control"></textarea>
 							</div>
 							<button class="btn btn-success">搜尋</button>
 						</form>

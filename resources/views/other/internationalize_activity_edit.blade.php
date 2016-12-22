@@ -59,6 +59,14 @@
 						<input type="date" name="endDate" class="form-control" value="{{$endDate}}">
 					</div>
 
+					@if($errors->has('comments'))
+                        <p class="text-danger">{{$errors->first('comments')}}</p>
+                    @endif
+					<div class="form-group">
+						<label for="comments">備註</label>
+						<textarea name="comments" id="comments" cols="30" rows="3" class="form-control">{{$comments}}</textarea>
+					</div>
+
 					<button class="btn btn-success">修改</button>
 				</form>
 			</div>

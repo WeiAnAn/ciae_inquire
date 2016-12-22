@@ -10,6 +10,6 @@ class InternationalizeActivity extends Model
     protected $table ='internationalize_activity';
     protected $fillable=['college','dept','activityName',
     					'place','host','guest',
-    					'startDate','endDate'];
+    					'startDate','endDate','comments'];
     public $timestamps=false;
 }
