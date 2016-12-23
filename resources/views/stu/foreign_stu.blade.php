@@ -245,7 +245,7 @@
                             @endif
 							<div class="form-group">
 								<label for="comments">學籍狀態</label>
-								<select name="status" class="form-control">
+								<select name="status" id="status_option" class="form-control">
 									<option value="1">在學中</option>
 									<option value="2">休學中</option>
 									<option value="3">已畢業</option>
@@ -372,6 +372,7 @@
 @if(count($errors)>0)
 	<script>
 		document.getElementById('stuLevel_option').value ={{old('stuLevel')}};
+		document.getElementById('status_option').value ={{old('status')}};
 	</script>
 @endif
 @endsection
