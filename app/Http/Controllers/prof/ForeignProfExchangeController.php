@@ -124,7 +124,7 @@ class ForeignProfExchangeController extends Controller
         $foreignPexchange = ForeignProfExchange::find($id);
         if(!Gate::allows('permission',$foreignPexchange))
             return redirect('foreign_prof_exchange');
-        $this->validate($request,[
+        $rules=[
             'college'=>'required|max:11',
             'dept'=>'required|max:11',
             'name'=>'required|max:20',
@@ -133,7 +133,24 @@ class ForeignProfExchangeController extends Controller
             'startDate'=>'required',
             'endDate'=>'required',
             'comments'=>'max:500',
-            ]);
+        ];
+
+        $message=[
+            'required'=>'必須填寫:attribute欄位',
+            'max'=>':attribute欄位的輸入長度不能大於:max',
+        ];
+
+        $validator=Validator::make($request->all(),$rules,$message);
+
+        if($request->startDate > $request->endDate){
+            $validator->errors()->add('endDate','開始時間必須在結束時間前');
+            return redirect("foreign_prof_exchange/$id")->withErrors($validator)->withInput();
+        }
+
+        if($validator->fails()){
+            return redirect("foreign_prof_exchange/$id")->withErrors($validator)->withInput();
+        }
+        
         $foreignPexchange->update($request->all());
         return redirect('foreign_prof_exchange')->with('success','更新成功');
     }

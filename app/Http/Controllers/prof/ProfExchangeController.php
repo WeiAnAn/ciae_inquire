@@ -127,7 +127,7 @@ class ProfExchangeController extends Controller
         $Pexchange = ProfExchange::find($id);
         if(!Gate::allows('permission',$Pexchange))
             return redirect('prof_exchange');
-        $this->validate($request,[
+        $rules=[
             'college'=>'required|max:11',
             'dept'=>'required|max:11',
             'name'=>'required|max:20',
@@ -136,7 +136,24 @@ class ProfExchangeController extends Controller
             'startDate'=>'required',
             'endDate'=>'required',
             'comments'=>'max:500',
-            ]);
+        ];
+
+        $message=[
+            'required'=>'必須填寫:attribute欄位',
+            'max'=>':attribute欄位的輸入長度不能大於:max',
+        ];
+
+        $validator=Validator::make($request->all(),$rules,$message);
+
+        if($request->startDate > $request->endDate){
+            $validator->errors()->add('endDate','開始時間必須在結束時間前');
+            return redirect("prof_exchange/$id")->withErrors($validator)->withInput();
+        }
+
+        if($validator->fails()){
+            return redirect("prof_exchange/$id")->withErrors($validator)->withInput();
+        }
+
         $Pexchange->update($request->all());
         return redirect('prof_exchange')->with('success','更新成功');
     }
