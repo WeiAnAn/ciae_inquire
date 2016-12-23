@@ -164,7 +164,7 @@ class StuToPartnerSchoolController extends Controller
         Excel::load($request->file('file'),function($reader){
             $array = $reader->toArray();
             $newArray = [];
-            foreach ($array as $item) {
+            foreach ($array as $arrayKey => $item) {
                 foreach ($item as $key => $value) {
 
                     switch ($key) {
