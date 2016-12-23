@@ -37,7 +37,7 @@ class ForeignProfExchangeController extends Controller
 
     public function insert(Request $request){
       
-            $this->validate($request,[
+        $this->validate($request,[
             'college'=>'required|max:11',
             'dept'=>'required|max:11',
             'name'=>'required|max:20',
@@ -47,9 +47,16 @@ class ForeignProfExchangeController extends Controller
             'endDate'=>'required',
             'comments'=>'max:500',
             ]);
-          foreignprofexchange::create($request->all());
 
-       return redirect('foreign_prof_exchange')->with('success','新增成功');
+        if($request->startDate > $request->endDate){
+            $validator = Validator::make($request->all(),[]);
+            $validator->errors()->add('endDate','開始時間必須在結束時間前');
+            return redirect('foreign_prof_exchange')->withErrors($validator)->withInput();
+        }
+
+        foreignprofexchange::create($request->all());
+
+        return redirect('foreign_prof_exchange')->with('success','新增成功');
     }
 
     public function search (Request $request){

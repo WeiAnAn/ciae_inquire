@@ -33,7 +33,8 @@ class TransnationalDegreeController extends Controller
     }
 
     public function insert(Request $request){
-            $this->validate($request,[
+
+        $this->validate($request,[
             'college'=>'required|max:11',
             'dept'=>'required|max:11',
             'nation'=>'required|max:20',

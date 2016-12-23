@@ -45,6 +45,12 @@ class ForeignProfVistController extends Controller
             'comments'=>'max:500',
             ]);
 
+        if($request->startDate > $request->endDate){
+            $validator = Validator::make($request->all(),[]);
+            $validator->errors()->add('endDate','開始時間必須在結束時間前');
+            return redirect('foreign_prof_vist')->withErrors($validator)->withInput();
+        }
+
         ForeignProfVist::create($request->all());
 
         return redirect('foreign_prof_vist')->with('success','新增成功');

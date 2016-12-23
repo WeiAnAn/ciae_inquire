@@ -33,6 +33,8 @@ class CooperationProjController extends Controller
 
     public function insert(Request $request){
         
+
+
         $this->validate($request,[
             'college'=>'required|max:11',
             'dept'=>'required|max:11',
@@ -43,6 +45,13 @@ class CooperationProjController extends Controller
             'endDate'=>'required',
             'comments'=>'max:500',
             ]);
+
+        if($request->startDate > $request->endDate){
+            $validator = Validator::make($request->all(),[]);
+            $validator->errors()->add('endDate','開始時間必須在結束時間之前');
+            return redirect('cooperation_proj')->withErrors($validator)->withInput();
+        }
+
 
         cooperationproj::create($request->all());
 

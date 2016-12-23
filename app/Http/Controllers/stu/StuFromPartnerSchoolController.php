@@ -35,21 +35,27 @@ class StuFromPartnerSchoolController extends Controller
 
     public function insert(Request $request){
             
-            $this->validate($request,[
-                'college'=>'required|max:11',
-                'dept'=>'required|max:11',
-                'name'=>'required|max:20',
-                'stuLevel'=>'required|max:11',
-                'nation'=>'required|max:20',
-                'startDate'=>'required',
-                'endDate'=>'required',
-                'comments'=>'max:500',
-                ]);
+        $this->validate($request,[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:20',
+            'stuLevel'=>'required|max:11',
+            'nation'=>'required|max:20',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+            ]);
 
-            StuFromPartnerSchool::create($request->all());
-
-            return redirect('stu_from_partner_school')->with('success','新增成功');
+        if($request->startDate > $request->endDate){
+            $validator = Validator::make($request->all(),[]);
+            $validator->errors()->add('endDate','開始時間必須在結束時間前');
+            return redirect('stu_from_partner_school')->withErrors($validator)->withInput();
         }
+
+        StuFromPartnerSchool::create($request->all());
+
+        return redirect('stu_from_partner_school')->with('success','新增成功');
+    }
 
 	public function search (Request $request){
 

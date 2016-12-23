@@ -46,6 +46,12 @@ class ProfAttendConferenceController extends Controller
     		'comments'=>'max:500',
     		]);
 
+        if($request->startDate > $request->endDate){
+            $validator = Validator::make($request->all(),[]);
+            $validator->errors()->add('endDate','開始時間必須在結束時間前');
+            return redirect('prof_attend_conference')->withErrors($validator)->withInput();
+        }
+
     	profAttendConference::create($request->all());
 
         return redirect('prof_attend_conference')->with('success','新增成功');

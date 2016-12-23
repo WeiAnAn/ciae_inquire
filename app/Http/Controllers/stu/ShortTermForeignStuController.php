@@ -45,6 +45,12 @@ class ShortTermForeignStuController extends Controller
             'comments'=>'max:500',
             ]);
 
+        if($request->startDate > $request->endDate){
+            $validator = Validator::make($request->all(),[]);
+            $validator->errors()->add('endDate','開始時間必須在結束時間前');
+            return redirect('short_term_foreign_stu')->withErrors($validator)->withInput();
+        }
+
         ShortTermForeignStu::create($request->all());
 
         return redirect('short_term_foreign_stu')->with('success','新增成功');

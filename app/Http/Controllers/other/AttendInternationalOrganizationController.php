@@ -34,7 +34,7 @@ class AttendInternationalOrganizationController extends Controller
     	return view ('other/attend_international_organization',$data);
     }
     public function insert(Request $request){
-      
+
         $this->validate($request,[
         'college'=>'required|max:11',
         'dept'=>'required|max:11',
@@ -44,6 +44,13 @@ class AttendInternationalOrganizationController extends Controller
         'endDate'=>'required',
         'comments'=>'max:500',
         ]);
+
+        if($request->startDate > $request->endDate){
+            $validator = Validator::make($request->all(),[]);
+            $validator->errors()->add('endDate','開始時間必須在結束時間前');
+            return redirect('attend_international_organization')->withErrors($validator)->withInput();
+        }
+        
         AttendInternationalOrganization::create($request->all());
 
         return redirect('attend_international_organization')->with('success','新增成功');

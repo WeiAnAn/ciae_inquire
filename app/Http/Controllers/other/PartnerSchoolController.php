@@ -47,6 +47,12 @@ class PartnerSchoolController extends Controller
             'comments'=>'max:500',
             ]);
 
+        if($request->startDate > $request->endDate){
+            $validator = Validator::make($request->all(),[]);
+            $validator->errors()->add('endDate','開始時間必須在結束時間前');
+            return redirect('partner_school')->withErrors($validator)->withInput();
+        }
+
         partnerschool::create($request->all());
 
         return redirect('partner_school')->with('success','新增成功');

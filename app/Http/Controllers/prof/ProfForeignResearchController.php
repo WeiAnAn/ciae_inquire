@@ -45,6 +45,12 @@ class ProfForeignResearchController extends Controller
             'comments'=>'max:500',
             ]);
 
+        if($request->startDate > $request->endDate){
+            $validator = Validator::make($request->all(),[]);
+            $validator->errors()->add('endDate','開始時間必須在結束時間前');
+            return redirect('prof_foreign_research')->withErrors($validator)->withInput();
+        }
+
         ProfForeignResearch::create($request->all());
 
         return redirect('prof_foreign_research')->with('success','新增成功');

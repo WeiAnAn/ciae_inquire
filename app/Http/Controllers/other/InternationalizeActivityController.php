@@ -45,6 +45,12 @@ class InternationalizeActivityController extends Controller
             'endDate'=>'required',
             ]);
 
+        if($request->startDate > $request->endDate){
+            $validator = Validator::make($request->all(),[]);
+            $validator->errors()->add('endDate','開始時間必須在結束時間前');
+            return redirect('internationalize_activity')->withErrors($validator)->withInput();
+        }
+
         InternationalizeActivity::create($request->all());
 
         return redirect('internationalize_activity')->with('success','新增成功');
