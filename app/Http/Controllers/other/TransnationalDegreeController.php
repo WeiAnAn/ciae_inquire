@@ -48,7 +48,12 @@ class TransnationalDegreeController extends Controller
             'comments'=>'max:500',
         ];
 
-        $validator=Validator::make($request->all(),$rules);
+        $message=[
+            'required'=>'必須填寫:attribute欄位',
+            'max'=>':attribute欄位的輸入長度不能大於:max',
+        ];
+
+        $validator=Validator::make($request->all(),$rules,$message);
 
         if($validator->fails()){
             return redirect('transnational_degree')->withErrors($validator)->withInput();
