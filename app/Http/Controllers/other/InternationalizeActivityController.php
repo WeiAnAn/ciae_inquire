@@ -203,7 +203,7 @@ class InternationalizeActivityController extends Controller
                             unset($item[$key]);
                             break;
                         case '備註':
-                            $item['commemts'] = $value;
+                            $item['comments'] = $value;
                             unset($item[$key]);
                             break;
                             
