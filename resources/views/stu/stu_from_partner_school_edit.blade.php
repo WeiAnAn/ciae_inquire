@@ -1,7 +1,8 @@
 @extends('../layouts/master')
 @section('content')
 <div class="row">
-	<div class="col-md-12">姊妹校學生至本校參加交換計畫資料修改</h1>
+	<div class="col-md-12">
+		<h1 class="page-header">姊妹校學生至本校參加交換計畫資料修改</h1>
 	</div>
 </div>
 <div class="row">
