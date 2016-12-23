@@ -163,7 +163,7 @@ class ProfExchangeController extends Controller
         Excel::load($request->file('file'),function($reader){
             $array = $reader->toArray();
             $newArray = [];
-      foreach ($array as $arrayKey => $item) {
+            foreach ($array as $arrayKey => $item) {
                 foreach ($item as $key => $value) {
 
                     switch ($key) {
