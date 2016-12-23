@@ -14,59 +14,52 @@
 					{{ csrf_field() }}
 					@include("../layouts/select_edit")
 
+						@if($errors->has('name'))
+                            <p class="text-danger">{{$errors->first('name')}}</p>
+                        @endif
+						<div class="form-group">
+							<label for="">外籍學者姓名</label>
+							<input type="text" class="form-control" name="name" value="{{$name}}">
+						</div>
+						<div class="form-group">
+							<label for="profLevel">外籍學者身分</label>
+							<select name="profLevel" id="profLevel" class="form-control">
+								<option value="1">教授</option>
+								<option value="2">副教授</option>
+								<option value="3">助理教授</option>
+								<option value="4">博士後研究員</option>
+								{{-- <option value="5">研究生</option> --}}
+							</select>
+						</div>
 
-					<div class="form-group">
-						@if($errors->has("name"))
-							<p class="text-danger">{{$errors->first('name')}}</p>
-						@endif
-
-						<label for="">姓名</label>
-						<input type="text" name="name" class="form-control" 
-							value="{{$name}}">
-					</div>
-					<div class="form-group">
-						<label for="profLevel">身分</label>
-						<select name="profLevel" id="profLevel" class="form-control" >
-							<option value="1">教授</option>
-							<option value="2">副教授</option>
-							<option value="3">助理教授</option>
-							<option value="4">博士後研究員</option>
-							{{-- <option value="5">研究生</option> --}}
-						</select>
-					</div>
-					<div class="form-group">
-						@if($errors->has("nation"))
-							<p class="text-danger">{{$errors->first('nation')}}</p>
-						@endif
+						@if($errors->has('nation'))
+                            <p class="text-danger">{{$errors->first('nation')}}</p>
+                        @endif
+						<div class="form-group">
 							<label for="nation">國籍</label>
 							<input type="text" name="nation" class="form-control" value="{{$nation}}">
-					</div>
+						</div>
+						
+						@if($errors->has('startDate')||$errors->has('endDate'))
+                            <p class="text-danger col-md-6">{{ $errors->first('startDate')}}</p>                      
+                            <p class="text-danger col-md-6">{{ $errors->first('endDate')}}</p>
+                        @endif
+						<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
+							<label for="startDate">開始時間</label>
+							<input type="date" name="startDate" class="form-control" value="{{$startDate}}">
+						</div>
+						<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
+							<label for="endDate">結束時間</label>
+							<input type="date" name="endDate" class="form-control" value="{{$endDate}}">
+						</div>
 
-					@if($errors->has('startDate')||$errors->has('endDate'))
-                        <p class="text-danger col-md-6">{{ $errors->first('startDate')}}</p>                      
-                        <p class="text-danger col-md-6">{{ $errors->first('endDate')}}</p>
-                    @endif
-
-					<div class="form-group">
-						<label for="startDate">開始時間</label>
-						<input type="date" name="startDate" class="form-control"
-							value="{{$startDate}}">
-					</div>
-					<div class="form-group">
-						<label for="endDate">結束時間</label>
-						<input type="date" name="endDate" class="form-control"
-							value="{{$endDate}}">
-					</div>
-
-					@if($errors->has('comments'))
+						@if($errors->has('comments'))
                             <p class="text-danger">{{$errors->first('comments')}}</p>
-                    @endif
-
-					<div class="form-group">
-						<label for="comments">備註</label>
-						<input type="text" name="comments" class="form-control" 
-							value="{{$comments}}">
-					</div>
+                        @endif
+						<div class="form-group">
+							<label for="comments">備註</label>
+							<textarea name="comments" id="comments" cols="30" rows="3" class="form-control">{{old('comments')}}</textarea>
+						</div>
 
 					<button class="btn btn-success">修改</button>
 				</form>
