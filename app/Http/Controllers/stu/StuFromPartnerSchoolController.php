@@ -182,7 +182,7 @@ class StuFromPartnerSchoolController extends Controller
                             $item['name'] = $value;
                             unset($item[$key]);
                             break;
-                        case '身分學士碩士或博士班':                           
+                        case '身分學士碩士或博士':                           
                             switch($value){
                                 case "學士":
                                     $value = 3;
