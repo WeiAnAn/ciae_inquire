@@ -45,7 +45,12 @@ class AttendInternationalOrganizationController extends Controller
             'comments'=>'max:500',
         ];
 
-        $validator=Validator::make($request->all(),$rules);
+        $message=[
+            'required'=>'必須填寫:attribute欄位',
+            'max'=>':attribute欄位的輸入長度不能大於:max',
+        ];
+
+        $validator=Validator::make($request->all(),$rules,$message);
 
         if($request->startDate > $request->endDate){
             $validator->errors()->add('endDate','開始時間必須在結束時間前');
@@ -113,7 +118,7 @@ class AttendInternationalOrganizationController extends Controller
         $attendiorganization = attendinternationalorganization::find($id);
         if(!Gate::allows('permission',$attendiorganization))
             return redirect('attend_international_organization');
-        $this->validate($request,[
+        $rules=[
             'college'=>'required|max:11',
             'dept'=>'required|max:11',
             'name'=>'required|max:20',
@@ -121,7 +126,24 @@ class AttendInternationalOrganizationController extends Controller
             'startDate'=>'required',
             'endDate'=>'required',
             'comments'=>'max:500',
-        ]);
+        ];
+
+        $message=[
+            'required'=>'必須填寫:attribute欄位',
+            'max'=>':attribute欄位的輸入長度不能大於:max',
+        ];
+
+        $validator=Validator::make($request->all(),$rules,$message);
+
+        if($request->startDate > $request->endDate){
+            $validator->errors()->add('endDate','開始時間必須在結束時間前');
+            return redirect("attend_international_organization/$id")->withErrors($validator)->withInput();
+        }
+
+        if($validator->fails()){
+            return redirect("attend_international_organization/$id")->withErrors($validator)->withInput();
+        }
+
         $attendiorganization->update($request->all());
         return redirect('attend_international_organization')->with('success','更新成功');
     }

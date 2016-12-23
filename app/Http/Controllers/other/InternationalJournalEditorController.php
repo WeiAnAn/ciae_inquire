@@ -111,14 +111,14 @@ class InternationalJournalEditorController extends Controller
         $internationaljeditor = internationaljournaleditor::find($id);
         if(Gate::allows('permission',$internationaljeditor))
             return view('other/international_journal_editor_edit',$internationaljeditor);
-        return redirect('internationaljeditor');
+        return redirect('international_journal_editor');
     }
 
     public function update($id,Request $request){
         $internationaljeditor = internationaljournaleditor::find($id);
         if(!Gate::allows('permission',$internationaljeditor))
             return redirect('international_journal_editor');
-        $this->validate($request,[
+        $rules=[
             'college'=>'required|max:11',
             'dept'=>'required|max:11',
             'name'=>'required|max:20',
@@ -126,9 +126,28 @@ class InternationalJournalEditorController extends Controller
             'startDate'=>'required',
             'endDate'=>'required',
             'comments'=>'max:500',
-            ]);
+        ];
+
+        $message=[
+            'required'=>'必須填寫:attribute欄位',
+            'max'=>':attribute欄位的輸入長度不能大於:max',
+        ];
+
+        $validator=Validator::make($request->all(),$rules,$message);
+
+        if($request->startDate > $request->endDate){
+            $validator->errors()->add('endDate','開始時間必須在結束時間前');
+            return redirect("international_journal_editor/$id")->withErrors($validator)->withInput();
+        }
+
+        if($validator->fails()){
+            return redirect("international_journal_editor/$id")->withErrors($validator)->withInput();
+        }
+
         $internationaljeditor->update($request->all());
         return redirect('international_journal_editor')->with('success','更新成功');
+
+
     }
 
 

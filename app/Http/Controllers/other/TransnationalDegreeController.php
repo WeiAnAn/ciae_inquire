@@ -129,6 +129,33 @@ class TransnationalDegreeController extends Controller
         $transnational = TransnationalDegree::find($id);
         if(!Gate::allows('permission',$transnational))
             return redirect('transnational_degree');
+        $rules=[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'nation'=>'required|max:20',
+            'chtName'=>'required|max:200',
+            'engName'=>'required|max:200',
+            'bachelor'=>'required',
+            'master'=>'required',
+            'PHD'=>'required',
+            'classMode'=>'required|max:200',
+            'degreeMode'=>'required|max:200',
+            'comments'=>'max:500',
+        ];
+
+        $message=[
+            'required'=>'必須填寫:attribute欄位',
+            'max'=>':attribute欄位的輸入長度不能大於:max',
+        ];
+
+        $validator=Validator::make($request->all(),$rules,$message);
+
+        if($validator->fails()){
+            return redirect("transnational_degree/$id")->withErrors($validator)->withInput();
+        }
+
+        $transnational->update($request->all());
+        return redirect('transnational_degree')->with('success','更新成功');
         $this->validate($request,[
             'college'=>'required|max:11',
             'dept'=>'required|max:11',
