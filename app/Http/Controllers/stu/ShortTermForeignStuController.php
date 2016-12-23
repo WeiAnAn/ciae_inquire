@@ -122,7 +122,7 @@ class ShortTermForeignStuController extends Controller
         $shortterm = ShortTermForeignStu::find($id);
         if(!Gate::allows('permission',$shortterm))
             return redirect('short_term_foreign_stu');
-        $this->validate($request,[
+        $rules=[
             'college'=>'required|max:11',
             'dept'=>'required|max:11',
             'name'=>'required|max:50',
@@ -131,7 +131,24 @@ class ShortTermForeignStuController extends Controller
             'startDate'=>'required',
             'endDate'=>'required',
             'comments'=>'max:500',
-            ]);
+        ];
+
+        $message=[
+            'required'=>'必須填寫:attribute欄位',
+            'max'=>':attribute欄位的輸入長度不能大於:max',
+        ];
+
+        $validator=Validator::make($request->all(),$rules,$message);
+
+        if($request->startDate > $request->endDate){
+            $validator->errors()->add('endDate','開始時間必須在結束時間前');
+            return redirect("short_term_foreign_stu/$id")->withErrors($validator)->withInput();
+        }
+
+        if($validator->fails()){
+            return redirect("short_term_foreign_stu/$id")->withErrors($validator)->withInput();
+        }
+
         $shortterm->update($request->all());
         return redirect('short_term_foreign_stu')->with('success','更新成功');
     }

@@ -123,18 +123,35 @@ class StuFromPartnerSchoolController extends Controller
         $frompartnerdata = StuFromPartnerSchool::find($id);
         if(!Gate::allows('permission',$frompartnerdata))
             return redirect('stu_from_partner_school');
-        $this->validate($request,[
-                'college'=>'required|max:11',
-                'dept'=>'required|max:11',
-                'name'=>'required|max:20',
-                'stuLevel'=>'required|max:11',
-                'nation'=>'required|max:20',
-                'startDate'=>'required',
-                'endDate'=>'required',
-                'comments'=>'max:500',
-            ]);
+        $rules=[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:20',
+            'stuLevel'=>'required|max:11',
+            'nation'=>'required|max:20',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+        ];
+
+        $message=[
+            'required'=>'必須填寫:attribute欄位',
+            'max'=>':attribute欄位的輸入長度不能大於:max',
+        ];
+
+        $validator=Validator::make($request->all(),$rules,$message);
+
+        if($request->startDate > $request->endDate){
+            $validator->errors()->add('endDate','開始時間必須在結束時間前');
+            return redirect("stu_from_partner_school/$id")->withErrors($validator)->withInput();
+        }
+
+        if($validator->fails()){
+            return redirect("stu_from_partner_school/$id")->withErrors($validator)->withInput();
+        }
+
         $frompartnerdata->update($request->all());
-        return redirect('foreign_stu')->with('success','更新成功');
+        return redirect('stu_from_partner_school')->with('success','更新成功');
     }
 
        public function delete($id){

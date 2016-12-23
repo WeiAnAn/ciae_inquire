@@ -140,7 +140,7 @@ class ForeignStuController extends Controller
         $foreignStu = ForeignStu::find($id);
         if(!Gate::allows('permission',$foreignStu))
             return redirect('foreign_stu');
-        $this->validate($request,[
+        $rules=[
             'college'=>'required|max:11',
             'dept'=>'required|max:11',
             'chtName'=>'required|max:50',
@@ -154,7 +154,24 @@ class ForeignStuController extends Controller
             'endDate'=>'required',
             'status'=>'required',
             'comments'=>'max:500',
-            ]);
+        ];
+
+        $message=[
+            'required'=>'必須填寫:attribute欄位',
+            'max'=>':attribute欄位的輸入長度不能大於:max',
+        ];
+
+        $validator=Validator::make($request->all(),$rules,$message);
+
+        if($request->startDate > $request->endDate){
+            $validator->errors()->add('endDate','開始時間必須在結束時間前');
+            return redirect("foreign_stu/$id")->withErrors($validator)->withInput();
+        }
+
+        if($validator->fails()){
+            return redirect("foreign_stu/$id")->withErrors($validator)->withInput();
+        }
+        
         $foreignStu->update($request->all());
         return redirect('foreign_stu')->with('success','更新成功');
     }

@@ -124,16 +124,33 @@ class StuForeignResearchController extends Controller
         $foreignreseach = StuForeignResearch::find($id);
         if(!Gate::allows('permission',$foreignreseach))
             return redirect('stu_foreign_research');
-        $this->validate($request,[
-                'college'=>'required|max:11',
-                'dept'=>'required|max:11',
-                'name'=>'required|max:20',
-                'stuLevel'=>'required|max:11',
-                'nation'=>'required|max:20',
-                'startDate'=>'required',
-                'endDate'=>'required',
-                'comments'=>'max:500',
-            ]);
+        $rules=[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:20',
+            'stuLevel'=>'required|max:11',
+            'nation'=>'required|max:20',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+        ];
+
+        $message=[
+            'required'=>'必須填寫:attribute欄位',
+            'max'=>':attribute欄位的輸入長度不能大於:max',
+        ];
+
+        $validator=Validator::make($request->all(),$rules,$message);
+
+        if($request->startDate > $request->endDate){
+            $validator->errors()->add('endDate','開始時間必須在結束時間前');
+            return redirect("stu_foreign_research/$id")->withErrors($validator)->withInput();
+        }
+
+        if($validator->fails()){
+            return redirect("stu_foreign_research/$id")->withErrors($validator)->withInput();
+        }
+
         $foreignreseach->update($request->all());
         return redirect('stu_foreign_research')->with('success','更新成功');
     }
