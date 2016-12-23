@@ -34,7 +34,7 @@ class TransnationalDegreeController extends Controller
 
     public function insert(Request $request){
 
-        $this->validate($request,[
+        $rules=[
             'college'=>'required|max:11',
             'dept'=>'required|max:11',
             'nation'=>'required|max:20',
@@ -46,10 +46,15 @@ class TransnationalDegreeController extends Controller
             'classMode'=>'required|max:200',
             'degreeMode'=>'required|max:200',
             'comments'=>'max:500',
-            ]);
+        ];
+
+        $validator=Validator::make($request->all(),$rules);
+
+        if($validator->fails()){
+            return redirect('transnational_degree')->withErrors($validator)->withInput();
+        }
 
         transnationalDegree::create($request->all());
-
         return redirect('transnational_degree')->with('success','新增成功');
     }
 

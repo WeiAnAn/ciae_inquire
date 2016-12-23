@@ -34,7 +34,7 @@ class ProfForeignResearchController extends Controller
 
     public function insert(Request $request){
         
-        $this->validate($request,[
+        $rules=[
             'college'=>'required|max:11',
             'dept'=>'required|max:11',
             'name'=>'required|max:20',
@@ -43,16 +43,20 @@ class ProfForeignResearchController extends Controller
             'startDate'=>'required',
             'endDate'=>'required',
             'comments'=>'max:500',
-            ]);
+        ];
+
+        $validator=Validator::make($request->all(),$rules);
 
         if($request->startDate > $request->endDate){
-            $validator = Validator::make($request->all(),[]);
             $validator->errors()->add('endDate','開始時間必須在結束時間前');
             return redirect('prof_foreign_research')->withErrors($validator)->withInput();
         }
 
-        ProfForeignResearch::create($request->all());
+        if($validator->fails()){
+            return redirect('prof_foreign_research')->withErrors($validator)->withInput();
+        }
 
+        ProfForeignResearch::create($request->all());
         return redirect('prof_foreign_research')->with('success','新增成功');
     }
 

@@ -34,25 +34,29 @@ class ForeignProfVistController extends Controller
 
     public function insert(Request $request){
         
-        $this->validate($request,[
+        $rules=[
             'college'=>'required|max:11',
             'dept'=>'required|max:11',
-            'name'=>'required|max:50',
+            'name'=>'required|max:20',
             'profLevel'=>'required|max:11',
             'nation'=>'required|max:20',
             'startDate'=>'required',
             'endDate'=>'required',
             'comments'=>'max:500',
-            ]);
+        ];
+
+        $validator=Validator::make($request->all(),$rules);
 
         if($request->startDate > $request->endDate){
-            $validator = Validator::make($request->all(),[]);
             $validator->errors()->add('endDate','開始時間必須在結束時間前');
             return redirect('foreign_prof_vist')->withErrors($validator)->withInput();
         }
 
-        ForeignProfVist::create($request->all());
+        if($validator->fails()){
+            return redirect('foreign_prof_vist')->withErrors($validator)->withInput();
+        }
 
+        ForeignProfVist::create($request->all());
         return redirect('foreign_prof_vist')->with('success','新增成功');
     }
 

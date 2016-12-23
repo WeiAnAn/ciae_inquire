@@ -34,8 +34,8 @@ class ForeignStuController extends Controller
     }
  
     public function insert(Request $request){
-        
-        $this->validate($request,[
+
+        $rules=[
             'college'=>'required|max:11',
             'dept'=>'required|max:11',
             'chtName'=>'required|max:50',
@@ -49,16 +49,20 @@ class ForeignStuController extends Controller
             'endDate'=>'required',
             'status'=>'required',
             'comments'=>'max:500',
-            ]);
+        ];
+
+        $validator=Validator::make($request->all(),$rules);
 
         if($request->startDate > $request->endDate){
-            $validator = Validator::make($request->all(),[]);
             $validator->errors()->add('endDate','開始時間必須在結束時間前');
             return redirect('foreign_stu')->withErrors($validator)->withInput();
         }
 
-        ForeignStu::create($request->all());
+        if($validator->fails()){
+            return redirect('foreign_stu')->withErrors($validator)->withInput();
+        }
 
+        ForeignStu::create($request->all());
         return redirect('foreign_stu')->with('success','新增成功');
     }
 

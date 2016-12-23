@@ -32,8 +32,8 @@ class StuAttendConfController extends Controller
     	}
 
     public function insert(Request $request){
-            
-        $this->validate($request,[
+
+        $rules=[
             'college'=>'required|max:11',
             'dept'=>'required|max:11',
             'name'=>'required|max:20',
@@ -43,16 +43,20 @@ class StuAttendConfController extends Controller
             'startDate'=>'required',
             'endDate'=>'required',
             'comments'=>'max:500',
-            ]);
+        ];
+
+        $validator=Validator::make($request->all(),$rules);
 
         if($request->startDate > $request->endDate){
-            $validator = Validator::make($request->all(),[]);
             $validator->errors()->add('endDate','開始時間必須在結束時間前');
             return redirect('stu_attend_conf')->withErrors($validator)->withInput();
         }
 
-        StuAttendConf::create($request->all());
+        if($validator->fails()){
+            return redirect('stu_attend_conf')->withErrors($validator)->withInput();
+        }
 
+        StuAttendConf::create($request->all());
         return redirect('stu_attend_conf')->with('success','新增成功');
     }
 

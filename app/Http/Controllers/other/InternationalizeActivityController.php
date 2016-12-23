@@ -33,8 +33,8 @@ class InternationalizeActivityController extends Controller
     }
 
     public function insert(Request $request){
-        
-        $this->validate($request,[
+
+        $rules=[
             'college'=>'required|max:11',
             'dept'=>'required|max:11',
             'activityName'=>'required|max:200',
@@ -43,16 +43,20 @@ class InternationalizeActivityController extends Controller
             'guest'=>'required|max:200',
             'startDate'=>'required',
             'endDate'=>'required',
-            ]);
+        ];
+
+        $validator=Validator::make($request->all(),$rules);
 
         if($request->startDate > $request->endDate){
-            $validator = Validator::make($request->all(),[]);
             $validator->errors()->add('endDate','開始時間必須在結束時間前');
             return redirect('internationalize_activity')->withErrors($validator)->withInput();
         }
 
-        InternationalizeActivity::create($request->all());
+        if($validator->fails()){
+            return redirect('internationalize_activity')->withErrors($validator)->withInput();
+        }
 
+        InternationalizeActivity::create($request->all());
         return redirect('internationalize_activity')->with('success','新增成功');
     }
 

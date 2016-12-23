@@ -33,9 +33,9 @@ class InternationalJournalEditorController extends Controller
 
     	return view ('other/international_journal_editor',$data);
     }
-      public function insert(Request $request){
-      
-        $this->validate($request,[
+    public function insert(Request $request){
+
+        $rules=[
             'college'=>'required|max:11',
             'dept'=>'required|max:11',
             'name'=>'required|max:20',
@@ -43,16 +43,20 @@ class InternationalJournalEditorController extends Controller
             'startDate'=>'required',
             'endDate'=>'required',
             'comments'=>'max:500',
-            ]);
+        ];
+
+        $validator=Validator::make($request->all(),$rules);
 
         if($request->startDate > $request->endDate){
-            $validator = Validator::make($request->all(),[]);
             $validator->errors()->add('endDate','開始時間必須在結束時間前');
             return redirect('international_journal_editor')->withErrors($validator)->withInput();
         }
 
-        internationalJournaleditor::create($request->all());
+        if($validator->fails()){
+            return redirect('international_journal_editor')->withErrors($validator)->withInput();
+        }
 
+        internationalJournaleditor::create($request->all());
         return redirect('international_journal_editor')->with('success','新增成功');
     }
 

@@ -35,27 +35,31 @@ class AttendInternationalOrganizationController extends Controller
     }
     public function insert(Request $request){
 
-        $this->validate($request,[
-        'college'=>'required|max:11',
-        'dept'=>'required|max:11',
-        'name'=>'required|max:20',
-        'organization'=>'required|max:200',
-        'startDate'=>'required',
-        'endDate'=>'required',
-        'comments'=>'max:500',
-        ]);
+        $rules=[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:20',
+            'organization'=>'required|max:200',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+        ];
+
+        $validator=Validator::make($request->all(),$rules);
 
         if($request->startDate > $request->endDate){
-            $validator = Validator::make($request->all(),[]);
             $validator->errors()->add('endDate','開始時間必須在結束時間前');
             return redirect('attend_international_organization')->withErrors($validator)->withInput();
         }
-        
-        AttendInternationalOrganization::create($request->all());
 
+        if($validator->fails()){
+            return redirect('attend_international_organization')->withErrors($validator)->withInput();
+        }
+
+        AttendInternationalOrganization::create($request->all());
         return redirect('attend_international_organization')->with('success','新增成功');
     }
-    
+
     public function search (Request $request){
         $sortBy = 'id';
         $orderBy = "desc";

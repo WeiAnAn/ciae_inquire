@@ -33,27 +33,31 @@ class ProfAttendConferenceController extends Controller
     	return view ('prof/prof_attend_conference',$data);
     }
     public function insert(Request $request){
-    	
-    	$this->validate($request,[
-    		'college'=>'required|max:11',
-    		'dept'=>'required|max:11',
-    		'name'=>'required|max:20',
-    		'profLevel'=>'required|max:11',
-    		'nation'=>'required|max:20',
-    		'confName'=>'required|max:200',
-    		'startDate'=>'required',
-    		'endDate'=>'required',
-    		'comments'=>'max:500',
-    		]);
+
+    	 $rules=[
+            'college'=>'required|max:11',
+            'dept'=>'required|max:11',
+            'name'=>'required|max:20',
+            'profLevel'=>'required|max:11',
+            'nation'=>'required|max:20',
+            'confName'=>'required|max:200',
+            'startDate'=>'required',
+            'endDate'=>'required',
+            'comments'=>'max:500',
+        ];
+
+        $validator=Validator::make($request->all(),$rules);
 
         if($request->startDate > $request->endDate){
-            $validator = Validator::make($request->all(),[]);
             $validator->errors()->add('endDate','開始時間必須在結束時間前');
             return redirect('prof_attend_conference')->withErrors($validator)->withInput();
         }
 
-    	profAttendConference::create($request->all());
+        if($validator->fails()){
+            return redirect('prof_attend_conference')->withErrors($validator)->withInput();
+        }
 
+    	profAttendConference::create($request->all());
         return redirect('prof_attend_conference')->with('success','新增成功');
     }
 

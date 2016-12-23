@@ -32,10 +32,8 @@ class CooperationProjController extends Controller
     }
 
     public function insert(Request $request){
-        
 
-
-        $this->validate($request,[
+        $rules=[
             'college'=>'required|max:11',
             'dept'=>'required|max:11',
             'name'=>'required|max:10',
@@ -44,18 +42,22 @@ class CooperationProjController extends Controller
             'startDate'=>'required',
             'endDate'=>'required',
             'comments'=>'max:500',
-            ]);
+        ];
+
+        $validator=Validator::make($request->all(),$rules);
 
         if($request->startDate > $request->endDate){
-            $validator = Validator::make($request->all(),[]);
-            $validator->errors()->add('endDate','開始時間必須在結束時間之前');
+            $validator->errors()->add('endDate','開始時間必須在結束時間前');
             return redirect('cooperation_proj')->withErrors($validator)->withInput();
         }
 
+        if($validator->fails()){
+            return redirect('cooperation_proj')->withErrors($validator)->withInput();
+        }
 
         cooperationproj::create($request->all());
-
         return redirect('cooperation_proj')->with('success','新增成功');
+
     }
 
     public function search (Request $request){
