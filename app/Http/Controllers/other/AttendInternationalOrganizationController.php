@@ -162,7 +162,7 @@ class AttendInternationalOrganizationController extends Controller
         Excel::load($request->file('file'),function($reader){
             $array = $reader->toArray();
             $newArray = [];
-            foreach ($array as $item) {
+            foreach ($array as $arrayKey => $item) {
                 foreach ($item as $key => $value) {
 
                     switch ($key) {
@@ -188,12 +188,12 @@ class AttendInternationalOrganizationController extends Controller
                             break;
                         case '結束時間':
                             $item['endDate'] = $value;
-                            unset($item[$key]);                            
+                            unset($item[$key]);
                         case '備註':
                             $item['comments'] = $value;
                             unset($item[$key]);
-                            break;          
-                            break;                        
+                            break;
+                            break;
                         default:
                             $validator = Validator::make($item,[]);
                             $validator->errors()->add('format','檔案欄位錯誤');
