@@ -239,7 +239,7 @@
                         			</p>
                         		@endif
                         	@endif                        	
-							<input type="file" name= "file"class="" style="margin: 2px">
+							<input type="file" name="file" id="file" style="margin: 2px">
 							<button class="btn btn-primary" style="margin: 2px" 
 								onclick="checkFile(event)">上傳</button>
 							<a class="btn btn-success" href="{{url('attend_international_organization/example')}}">範例檔案</a>
