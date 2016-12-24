@@ -296,6 +296,7 @@ class ForeignStuController extends Controller
                     'engNation'=>'required|max:50',
                     'startDate'=>'required',
                     'endDate'=>'required',
+                    'status'=>'required',
                     'comments'=>'max:500',
                 ]);
                 if($validator->fails()){
