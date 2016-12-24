@@ -250,7 +250,7 @@ class ForeignStuController extends Controller
                             $item['endDate'] = $value;
                             unset($item[$key]);
                             break;
-                        case '學籍狀態':
+                        case '學籍狀態在學中休學中已畢業':
                             switch($value){
                                 case "在學中":
                                     $value = 1;
@@ -269,9 +269,6 @@ class ForeignStuController extends Controller
                                         ->withErrors($validator,"upload");
                                     break;
                             }
-                            $item['stuLevel'] = $value;
-                            unset($item[$key]);
-                            break;
                             $item['status'] = $value;
                             unset($item[$key]);
                             break;                            
