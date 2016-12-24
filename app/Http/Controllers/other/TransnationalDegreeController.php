@@ -40,9 +40,8 @@ class TransnationalDegreeController extends Controller
             'nation'=>'required|max:20',
             'chtName'=>'required|max:200',
             'engName'=>'required|max:200',
-            'bachelor'=>'required',
-            'master'=>'required',
-            'PHD'=>'required',
+            'stuLevel'=>'required',
+            'year'=>'required|max:200',
             'classMode'=>'required|max:200',
             'degreeMode'=>'required|max:200',
             'comments'=>'max:500',
@@ -52,7 +51,6 @@ class TransnationalDegreeController extends Controller
             'required'=>'必須填寫:attribute欄位',
             'max'=>':attribute欄位的輸入長度不能大於:max',
         ];
-
         $validator=Validator::make($request->all(),$rules,$message);
 
         if($validator->fails()){
@@ -135,9 +133,8 @@ class TransnationalDegreeController extends Controller
             'nation'=>'required|max:20',
             'chtName'=>'required|max:200',
             'engName'=>'required|max:200',
-            'bachelor'=>'required',
-            'master'=>'required',
-            'PHD'=>'required',
+            'stuLevel'=>'required',
+            'year'=>'required|max:200',
             'classMode'=>'required|max:200',
             'degreeMode'=>'required|max:200',
             'comments'=>'max:500',
@@ -162,9 +159,8 @@ class TransnationalDegreeController extends Controller
             'nation'=>'required|max:20',
             'chtName'=>'required|max:200',
             'engName'=>'required|max:200',
-            'bachelor'=>'required',
-            'master'=>'required',
-            'PHD'=>'required',
+            'stuLevel'=>'required',
+            'year'=>'required|max:200',
             'classMode'=>'required|max:200',
             'degreeMode'=>'required|max:200',
             'comments'=>'max:500',
@@ -209,24 +205,30 @@ class TransnationalDegreeController extends Controller
                             $item['engName'] = $value;
                             unset($item[$key]);
                             break;
-                        // case '身分學士碩士或博士班'
-                        //     $item[] = $value;
-                        //     unset($item[$key]);
-                        //     break;                        
-                        // case '學士':
-                        //     $item['bachelor'] = $value;
-                        //     unset($item[$key]);
-                        //     break;
-                        // case '碩士':
-                        //     $item['master'] = $value;
-                        //     unset($item[$key]);
-                        //     break;
-                        // case '博士':
-                        //     $item['PHD'] = $value;
-                        //     unset($item[$key]);
-                        //     break;
+                        case '身分_學士碩士或博士':
+                            switch($value){
+                                case "學士":
+                                    $value = 3;
+                                    break;
+                                case "碩士":
+                                    $value = 2;
+                                    break;
+                                case "博士":
+                                    $value = 1;
+                                    break;
+                                default:
+                                    $validator = Validator::make($item,[]);
+                                    $errorLine = $arrayKey + 2;
+                                    $validator->errors()->add('身分',"身分內容填寫錯誤,第 $errorLine 行");
+                                    return redirect('short_term_foreign_stu')
+                                        ->withErrors($validator,"upload");
+                                    break;
+                            }
+                            $item['stuLevel'] = $value;
+                            unset($item[$key]);
+                            break;
                         case '修業年限';
-                            $item[''] = $value;
+                            $item['year'] = $value;
                             unset($item[$key]);
                             break;
                         case '授課方式':
@@ -255,9 +257,8 @@ class TransnationalDegreeController extends Controller
                     'nation'=>'required|max:20',
                     'chtName'=>'required|max:200',
                     'engName'=>'required|max:200',
-                    'bachelor'=>'required|max:11',
-                    'master'=>'required|max:11',
-                    'PHD'=>'required|max:11',
+                    'stuLevel'=>'required',
+                    'year'=>'required|max:200',
                     'classMode'=>'required|max:200',
                     'degreeMode'=>'required|max:200',
                     'comments'=>'max:500',

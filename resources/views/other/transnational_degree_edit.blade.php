@@ -39,28 +39,20 @@
 					</div>
 
 					<div class="form-group">
-						<label for="profLevel">授予身分</label>
-					</div>
-					<div class="form-group">
-						<label for="bachelor">學士</label>
-						<select name="bachelor" id="bachelor_option" class="form-control">
-							<option value="0">無授予</option>
-							<option value="1">有授予</option>
+						<label for="stuLevel">授予身分</label>
+						<select name="stuLevel" id="stuLevel_option" class="form-control">
+							<option value="1">博士班</option>
+							<option value="2">碩士班</option>
+							<option value="3">學士班</option>
 						</select>
 					</div>
+
+					@if($errors->has('year'))
+                        <p class="text-danger">{{$errors->first('year')}}</p>
+                    @endif
 					<div class="form-group">
-						<label for="master">碩士</label>
-						<select name="master" id="master_option" class="form-control">
-							<option value="0">無授予</option>
-							<option value="1">有授予</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="PHD">博士</label>
-						<select name="PHD" id="PHD_option" class="form-control">
-							<option value="0">無授予</option>
-							<option value="1">有授予</option>
-						</select>
+						<label for="year">修業年限</label>
+						<textarea name="year" id="year" cols="30" rows="3" class="form-control">{{$year}}</textarea>
 					</div>
 
 					@if($errors->has('classMode'))
@@ -94,8 +86,6 @@
 	</div>
 </div>
 <script>
-	document.getElementById('bachelor_option').value ={{$bachelor}};
-	document.getElementById('master_option').value ={{$master}};
-	document.getElementById('PHD_option').value ={{$PHD}};
+	document.getElementById('stuLevel_option').value ={{$stuLevel}};
 </script>
 @endsection

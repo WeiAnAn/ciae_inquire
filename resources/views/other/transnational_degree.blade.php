@@ -82,16 +82,8 @@
 										onclick="sort(id)">英文校名
 										<i class="fa fa-sort" aria-hidden="true"></i>
 									</td>
-									<td id="bachelor" class="text-nowrap"
-										onclick="sort(id)">學士
-										<i class="fa fa-sort" aria-hidden="true"></i>
-									</td>
-									<td id="master" class="text-nowrap"
-										onclick="sort(id)">碩士
-										<i class="fa fa-sort" aria-hidden="true"></i>
-									</td>
-									<td id="PHD" class="text-nowrap"
-										onclick="sort(id)">博士
+									<td id="stuLevel" class="text-nowrap"
+										onclick="sort(id)">身分
 										<i class="fa fa-sort" aria-hidden="true"></i>
 									</td>
 									<td id="" class="text-nowrap"
@@ -121,22 +113,16 @@
 									<td>{{$data->nation}}</td>
 									<td>{{$data->chtName}}</td>
 									<td>{{$data->engName}}</td>
-									<td>@if($data->bachelor==1)	
-									o
-									@else
-									x
-									@endif</td>
-									<td>@if($data->master==1)
-									o
-									@else
-									x
-									@endif</td>
-									<td>@if($data->PHD==1)
-									o
-									@else
-									x
+									<td>
+									@if($data->stuLevel==1)	
+									博士班
+									@elseif($data->stuLevel==2)
+									碩士班
+									@elseif($data->stuLevel==3)
+									學士班
 									@endif
-									<td></td>
+									</td>
+									<td>{{$data->year}}</td>
 									<td>{{$data->classMode}}</td>
 									<td>{{$data->degreeMode}}</td>
 									<td>{{$data->comments}}</td>
@@ -201,31 +187,21 @@
 								<input type="text" class="form-control" name="engName" value="{{old('engName')}}">
 							</div>
 							<div class="form-group">
-								<label for="profLevel">授予身分</label>
-							</div>
-							
-							<div class="form-group">
-								<label for="bachelor">學士</label>
-								<select name="bachelor" id="bachelor_option" class="form-control">
-									<option value="0">無授予</option>
-									<option value="1">有授予</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label for="master">碩士</label>
-								<select name="master" id="master_option" class="form-control">
-									<option value="0">無授予</option>
-									<option value="1">有授予</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label for="PHD">博士</label>
-								<select name="PHD" id="PHD_option" class="form-control">
-									<option value="0">無授予</option>
-									<option value="1">有授予</option>
+								<label for="stuLevel">授予身分</label>
+								<select name="stuLevel" id="stuLevel_option" class="form-control">
+									<option value="1">博士班</option>
+									<option value="2">碩士班</option>
+									<option value="3">學士班</option>
 								</select>
 							</div>
 
+							@if($errors->has('year'))
+                                <p class="text-danger">{{$errors->first('year')}}</p>
+                            @endif
+							<div class="form-group">
+								<label for="year">修業年限</label>
+								<textarea name="year" id="year" cols="30" rows="3" class="form-control">{{old('year')}}</textarea>
+							</div>
 
 							@if($errors->has('classMode'))
                                 <p class="text-danger">{{$errors->first('classMode')}}</p>
@@ -275,32 +251,18 @@
 								<label for="">英文校名</label>
 								<input type="text" class="form-control" name="engName" />
 							</div>
-								<div class="form-group">
-									<label for="profLevel">授予身分</label>
-								</div>
 							<div class="form-group">
-								<label for="bachelor">學士</label>
-								<select name="bachelor" id="bachelor" class="form-control">
-									<option value="">所有授予情形</option>
-									<option value="0">無授予</option>
-									<option value="1">有授予</option>
+								<label for="stuLevel">授予身分</label>
+								<select name="stuLevel" id="stuLevel_option" class="form-control">
+									<option value=""></option>
+									<option value="1">博士班</option>
+									<option value="2">碩士班</option>
+									<option value="3">學士班</option>
 								</select>
 							</div>
 							<div class="form-group">
-								<label for="master">碩士</label>
-								<select name="master" id="master" class="form-control">
-									<option value="">所有授予情形</option>
-									<option value="0">無授予</option>
-									<option value="1">有授予</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label for="PHD">博士</label>
-								<select name="PHD" id="PHD" class="form-control">
-									<option value="">所有授予情形</option>
-									<option value="0">無授予</option>
-									<option value="1">有授予</option>
-								</select>
+								<label for="year">修業年限</label>
+								<textarea name="year" id="year" cols="30" rows="3" class="form-control"></textarea>
 							</div>
 							<div class="form-group">
 								<label for="teachMode">授課方式</label>

@@ -11,9 +11,8 @@ class TransnationalDegree extends Model
     use SoftDeletes;
     protected $table ='transnational_degree';
     protected $fillable=['college','dept','nation',
-    					'chtName','engName','bachelor',
-    					'master','PHD','classMode',
-    					'degreeMode','comments'];
+    					'chtName','engName','stuLevel','year'
+    					,'classMode','degreeMode','comments'];
     public $timestamps=false;
     protected $dates = ['deleted_at'];
 }
