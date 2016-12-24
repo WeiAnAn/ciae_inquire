@@ -21,6 +21,7 @@ class DeptMapping{
 		$result = mysqli_query($connect,"select * from college_data where college = $college AND dept = 0");
 		$array = mysqli_fetch_row($result);
 		if(!$array){
+			echo "select * from college_data where college = $college AND dept = 0";
 			return null;
 		}
 		return $array;

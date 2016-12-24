@@ -130,12 +130,10 @@ mysqli_query($new_connect,"CREATE TABLE `user` (
   `password` varchar(60) NOT NULL,
   `college` int(11) NOT NULL,
   `dept` int(11) NOT NULL,
-  `chtName` varchar(10) NOT NULL,
-  `engName` varchar(20) DEFAULT NULL,
   `contactPeople` varchar(20) NOT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
-  `permission` int(11) NOT NULL DEFAULT '3',
+  `permission` int(11) NOT NULL DEFAULT '4',
   `remember_token` varchar(100)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;");
 
@@ -149,15 +147,15 @@ while($array = mysqli_fetch_row($result)){
 	if($array[1] == "admin"){
 		$password =  password_hash($array[2],PASSWORD_BCRYPT);
 		$sql = "insert into 
-			user(username,password,college,dept,chtName,contactPeople,email,permission) 
-			values('$array[1]','$password',23,0,'$array[3]','$array[3]','$array[4]',0)";
+			user(username,password,college,dept,contactPeople,email,permission) 
+			values('$array[1]','$password',23,0,'$array[3]','$array[4]',0)";
 		if(!mysqli_query($new_connect,$sql))
 			echo $sql."\n";
 	}else{
 		$password =  password_hash($array[2],PASSWORD_BCRYPT);
 		$sql = "insert into 
-			user(username,password,college,dept,chtName,contactPeople,email,permission) 
-			values('$array[1]','$password',23,0,'$array[3]','$array[3]','$array[4]',1)";
+			user(username,password,college,dept,contactPeople,email,permission) 
+			values('$array[1]','$password',23,0,'$array[3]','$array[4]',1)";
 		if(!mysqli_query($new_connect,$sql))
 			echo $sql."\n";
 	}
@@ -180,13 +178,13 @@ while($array = mysqli_fetch_array($result)){
 
 	if($newData[1]!=0){
 		$sql = "insert into user values(0,'$array[UserID]','$password'
-			,$newData[0],$newData[1],'$newData[4]','$array[EngName]','$array[ContactPeople]','$array[ContactPhone]'
+			,$newData[0],$newData[1],'$array[ContactPeople]','$array[ContactPhone]'
 			,'$array[ContactEmail]',3,'')";
 		if(!mysqli_query($new_connect,$sql))
 			echo $sql."\n";
 	}else{
 		$sql = "insert into user values(0,'$array[UserID]','$password'
-			,$newData[0],$newData[1],'$newData[4]','$array[EngName]','$array[ContactPeople]','$array[ContactPhone]'
+			,$newData[0],$newData[1],'$array[ContactPeople]','$array[ContactPhone]'
 			,'$array[ContactEmail]',2,'')";
 		if(!mysqli_query($new_connect,$sql))
 			echo $sql."\n";
@@ -202,7 +200,7 @@ $result = mysqli_query($old_connect,"select * from test_prefixschooldeptclass");
 while($array = mysqli_fetch_array($result)){
 	$password = password_hash($array['PassWd'],PASSWORD_BCRYPT);
 	$sql = "insert into user	
-		values(0,'$array[UserID]','$password',$array[cid],0,'$array[ChtName]','$array[EngName]'
+		values(0,'$array[UserID]','$password',$array[cid],0
 		,'$array[ContactPeople]','$array[ContactPhone]','$array[ContactEmail]',2,'')";
 	if(!mysqli_query($new_connect,$sql))
 		echo $sql."\n";
@@ -218,7 +216,7 @@ mysqli_query($new_connect,"
 	  `college` int(11) NOT NULL,
 	  `dept` int(11) NOT NULL,
 	  `nation` varchar(20) NOT NULL,
-	  `chtName` varchar(50) NOT NULL,
+	  `chtName` varchar(50),
 	  `engName` varchar(80),
 	  `startDate` date NOT NULL,
 	  `endDate` date NOT NULL,
@@ -318,7 +316,8 @@ mysqli_query($new_connect,"
 	  `host` varchar(200) NOT NULL,
 	  `guest` varchar(200) NOT NULL,
 	  `startDate` date NOT NULL,
-	  `endDate` date NOT NULL
+	  `endDate` date NOT NULL,
+	  `comments` varchar(500)
 	) ENGINE=InnoDB DEFAULT CHARSET=utf32;");
 
 $result = mysqli_query($old_connect,"select * from test_prefixinlactivity");
@@ -335,7 +334,7 @@ while($array = mysqli_fetch_array($result)){
 
 	$sql = "insert into internationalize_activity 
 		values(0,$newData[0],$newData[1],'$array[Character]','$array[Place]','$array[Host]'
-		,'$array[Guest]','$array[StartDate]','$array[EndDate]')";
+		,'$array[Guest]','$array[StartDate]','$array[EndDate]','$array[Memo]')";
 
 	if(!mysqli_query($new_connect,$sql))
 		echo $sql."\n";
@@ -353,9 +352,8 @@ mysqli_query($new_connect,"
 	  `nation` varchar(20) NOT NULL,
 	  `chtName` varchar(200) NOT NULL,
 	  `engName` varchar(200) NOT NULL,
-	  `bachelor` int(11) NOT NULL,
-	  `master` int(11) NOT NULL,
-	  `PHD` int(11) NOT NULL,
+	  `stuLevel` int(11) NOT NULL,
+	  `year` varchar(200) NOT NULL,
 	  `classMode` varchar(200) NOT NULL,
 	  `degreeMode` varchar(200) NOT NULL,
 	  `comments` varchar(500)
@@ -370,24 +368,32 @@ $newData = null;
 	if(!$newData)
 		$newData = DeptMapping::findByCollege($array['DeptClass']);
 
-	if($array['PHD']=="o")
-		$array['PHD'] = 0;
-	else 
-		$array['PHD'] = 1;
-
-	if($array['Master']=="o")
-		$array['Master'] = 0;
-	else 
-		$array['Master'] = 1;
-
-	if($array['Bachelor']=="o")
-		$array['Bachelor'] = 0;
-	else 
-		$array['Bachelor'] = 1;
-
-	$sql = "insert into transnational_degree
+	if($array['PHD']=="o"){
+		$sql = "insert into transnational_degree
 		values(0,$newData[0],$newData[1],'$array[Nation]','$array[ChtName]','$array[EngName]'
-		,'$array[Bachelor]','$array[Master]','$array[PHD]','$array[ClassMode]','$array[DegreeMode]','$array[Memo]')";
+		,1,'','$array[ClassMode]','$array[DegreeMode]','$array[Memo]')";
+		if(!mysqli_query($new_connect,$sql))
+		echo $sql."\n";
+	}
+	if($array['Master']=="o"){
+		$sql = "insert into transnational_degree
+		values(0,$newData[0],$newData[1],'$array[Nation]','$array[ChtName]','$array[EngName]'
+		,2,'','$array[ClassMode]','$array[DegreeMode]','$array[Memo]')";
+		if(!mysqli_query($new_connect,$sql))
+		echo $sql."\n";
+	}
+
+	if($array['Bachelor']=="o"){
+		$sql = "insert into transnational_degree
+		values(0,$newData[0],$newData[1],'$array[Nation]','$array[ChtName]','$array[EngName]'
+		,3,'','$array[ClassMode]','$array[DegreeMode]','$array[Memo]')";
+		if(!mysqli_query($new_connect,$sql))
+		echo $sql."\n";
+	}
+
+	// $sql = "insert into transnational_degree
+	// 	values(0,$newData[0],$newData[1],'$array[Nation]','$array[ChtName]','$array[EngName]'
+	// 	,'$array[Bachelor]','$array[Master]','$array[PHD]','$array[ClassMode]','$array[DegreeMode]','$array[Memo]')";
 
 	if(!mysqli_query($new_connect,$sql))
 		echo $sql."\n";
@@ -901,7 +907,7 @@ mysqli_query($new_connect,"
 
 $result = mysqli_query($new_connect,"show tables");
 while($array = mysqli_fetch_row($result)){
-	$sql = "ALTER TABLE ".$array[0]." ADD active int(1) default 1";
+	$sql = "ALTER TABLE ".$array[0]." ADD deleted_at datetime";
 	echo $sql;
 	mysqli_query($new_connect,$sql);
 }
