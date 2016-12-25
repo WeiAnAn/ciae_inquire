@@ -168,8 +168,29 @@ class ForeignProfExchangeController extends Controller
             $array = $reader->toArray();
             $newArray = [];
             foreach ($array as $arrayKey => $item) {
-                foreach ($item as $key => $value) {
 
+                $errorLine = $arrayKey + 2;
+                $rules = [
+                        '邀請單位一級單位名稱'=>'required|max:11',
+                        '邀請單位二級單位名稱'=>'required|max:11',
+                        '國籍'=>'required|max:20',
+                        '外籍學者姓名'=>'required|max:20',
+                        '外籍學者身分教授副教授助理教授或博士後研究員'=>'required|max:20',
+                        '開始時間'=>'required',
+                        '結束時間'=>'required',
+                        '備註'=>'max:500',
+                ];
+                $message=[
+                    'required'=>"必須填寫 :attribute 欄位,第 $errorLine 行",
+                    'max'=>':attribute 欄位的輸入長度不能大於:max'.",第 $errorLine 行",
+                ];
+                $validator = Validator::make($item,$rules,$message);
+                if($validator->fails()){
+                    return redirect('foreign_prof_exchange')
+                        ->withErrors($validator,"upload");
+                }
+                foreach ($item as $key => $value) {
+                    
                     switch ($key) {
                         case '邀請單位一級單位名稱':
                             $item['college'] = $value;
@@ -198,8 +219,6 @@ class ForeignProfExchangeController extends Controller
                                     $value = 4;
                                     break;
                                 default:
-                                    $validator = Validator::make($item,[]);
-                                    $errorLine = $arrayKey + 2;
                                     $validator->errors()->add('身分',"身分內容填寫錯誤,第 $errorLine 行");
                                     return redirect('foreign_prof_exchange')
                                         ->withErrors($validator,"upload");
@@ -225,31 +244,22 @@ class ForeignProfExchangeController extends Controller
                             unset($item[$key]);
                             break;
                         default:
+                            $validator->errors()->add('format',"檔案欄位錯誤,第 $errorLine 行");
+                            return redirect('internationalize_activity')
+                                ->withErrors($validator,"upload");
                             break;
                     }
+                    
                 }
-                $validator = Validator::make($item,[
-                'college'=>'required|max:11',
-                     'dept'=>'required|max:11',
-                     'nation'=>'required|max:20',
-                     'profLevel'=>'required|max:20',
-
-                     'startDate'=>'required',
-                     'endDate'=>'required',
-                     'comments'=>'max:500',
-                          ]);
-                if($validator->fails()){
-                    return redirect('foreign_prof_exchange')
-                        ->withErrors($validator,"upload");
-                }
+                
                 if(CollegeData::where('college',$item['college'])
                         ->where('dept',$item['dept'])->first()==null){
-                    $validator->errors()->add('number','系所代碼錯誤');
+                    $validator->errors()->add('number','系所代碼錯誤,第 $errorLine 行');
                     return redirect('foreign_prof_exchange')
                                 ->withErrors($validator,"upload");
                 }
                 if(!Gate::allows('permission',(object)$item)){
-                    $validator->errors()->add('permission','無法新增未有權限之系所部門');
+                    $validator->errors()->add('permission','無法新增未有權限之系所部門,第 $errorLine 行');
                     return redirect('foreign_prof_exchange')
                                 ->withErrors($validator,"upload");
                 }

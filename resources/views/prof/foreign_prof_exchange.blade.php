@@ -274,7 +274,9 @@
                     			</p>
                     		@else
                     			<p class="text-danger">
-                    				欄位內容格式錯誤或必填欄位未填
+                    			@foreach($errors->upload->all() as $error)
+									{{$error}}<br>
+								@endforeach
                     			</p>
                     		@endif
                     	@endif
