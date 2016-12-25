@@ -12,6 +12,7 @@ class AttendInternationalOrganization extends Model
     protected $fillable=['college','dept','name',
     					'organization','startDate',
     					'endDate','comments'];
+                        
     public $timestamps=false;
     protected $dates = ['deleted_at'];
 }
