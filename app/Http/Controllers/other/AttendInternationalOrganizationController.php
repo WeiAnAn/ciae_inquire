@@ -163,6 +163,26 @@ class AttendInternationalOrganizationController extends Controller
             $array = $reader->toArray();
             $newArray = [];
             foreach ($array as $arrayKey => $item) {
+                
+                $errorLine = $arrayKey + 2;
+                $rules = [
+                    '所屬一級單位'=>'required|max:11',
+                    '所屬系所部門'=>'required|max:11',
+                    '參加人'=>'required|max:20',
+                    '組織名稱'=>'required|max:200',
+                    '開始時間'=>'required',
+                    '結束時間'=>'required',
+                    '備註'=>'max:500',
+                ];
+                 $message=[
+                    'required'=>"必須填寫 :attribute 欄位,第 $errorLine 行",
+                    'max'=>':attribute 欄位的輸入長度不能大於:max'.",第 $errorLine 行",
+                ];
+                $validator = Validator::make($item,$rules,$message);
+                if($validator->fails()){
+                    return redirect('attend_international_organization')
+                        ->withErrors($validator,"upload");
+                }
                 foreach ($item as $key => $value) {
 
                     switch ($key) {
@@ -193,7 +213,6 @@ class AttendInternationalOrganizationController extends Controller
                             $item['comments'] = $value;
                             unset($item[$key]);
                             break;
-                            break;
                         default:
                             $validator = Validator::make($item,[]);
                             $validator->errors()->add('format','檔案欄位錯誤');
@@ -202,27 +221,15 @@ class AttendInternationalOrganizationController extends Controller
                             break;
                     }
                 }
-                $validator = Validator::make($item,[
-                    'college'=>'required|max:11',
-                    'dept'=>'required|max:11',
-                    'name'=>'required|max:20',
-                    'organization'=>'required|max:200',
-                    'startDate'=>'required',
-                    'endDate'=>'required',
-                    'comments'=>'max:500',
-                ]);
-                if($validator->fails()){
-                    return redirect('attend_international_organization')
-                        ->withErrors($validator,"upload");
-                }
+                
                 if(CollegeData::where('college',$item['college'])
                         ->where('dept',$item['dept'])->first()==null){
-                    $validator->errors()->add('number','系所代碼錯誤');
+                    $validator->errors()->add('number','系所代碼錯誤'.",第 $errorLine 行");
                     return redirect('attend_international_organization')
                                 ->withErrors($validator,"upload");
                 }
                 if(!Gate::allows('permission',(object)$item)){
-                    $validator->errors()->add('permission','無法新增未有權限之系所部門');
+                    $validator->errors()->add('permission','無法新增未有權限之系所部門'.",第 $errorLine 行");
                     return redirect('attend_international_organization')
                                 ->withErrors($validator,"upload");
                 }
