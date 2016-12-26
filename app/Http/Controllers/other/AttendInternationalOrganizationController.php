@@ -174,7 +174,7 @@ class AttendInternationalOrganizationController extends Controller
                     '結束時間'=>'required',
                     '備註'=>'max:500',
                 ];
-                 $message=[
+                $message=[
                     'required'=>"必須填寫 :attribute 欄位,第 $errorLine 行",
                     'max'=>':attribute 欄位的輸入長度不能大於:max'.",第 $errorLine 行",
                 ];
