@@ -235,26 +235,20 @@
 						<form action="{{url('cooperation_proj/upload')}}" method="post" enctype="multipart/form-data">			
 						{{ csrf_field() }}
                         	<div id="file_error"></div>
+							
                         	@if(count($errors->upload)>0)
-                        		@if($errors->upload->has('format'))
-                        			<p class="text-danger">
-										{{$errors->upload->first('format')}}
-                        			</p>
-                        		@elseif($errors->upload->has('permission'))
-                        			<p class="text-danger">
-                        				{{$errors->upload->first('permission')}}
-                        			</p>
-                        		@elseif($errors->upload->has('number'))
-                        			<p class="text-danger">
-                        				{{$errors->upload->first('number')}}
-                        			</p>
-                        		@else
-                        			<p class="text-danger">
-                        				欄位內容格式錯誤或必填欄位未填
-                        			</p>
-                        		@endif
+								<div class="alert alert-danger alert-dismissible" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<strong>
+										@foreach($errors->upload->all() as $errors)
+											{{$errors}}<br>
+										@endforeach
+									</strong>
+								</div>
                         	@endif                        	
-							<input type="file" name= "file"class="" style="margin: 2px">
+							<input type="file" name="file" id="file" style="margin: 2px">
 							<button class="btn btn-primary" style="margin: 2px" 
 								onclick="checkFile(event)">上傳</button>
 							<a class="btn btn-success" href="{{url('cooperation_proj/example')}}">範例檔案</a>
