@@ -179,10 +179,7 @@ class AttendInternationalOrganizationController extends Controller
                     'max'=>':attribute 欄位的輸入長度不能大於:max'.",第 $errorLine 行",
                 ];
                 $validator = Validator::make($item,$rules,$message);
-                if($validator->fails()){
-                    return redirect('attend_international_organization')
-                        ->withErrors($validator,"upload");
-                }
+                
                 foreach ($item as $key => $value) {
 
                     switch ($key) {
@@ -214,23 +211,25 @@ class AttendInternationalOrganizationController extends Controller
                             unset($item[$key]);
                             break;
                         default:
-                            $validator->errors()->add('format','檔案欄位錯誤');
                             return redirect('attend_international_organization')
-                                ->withErrors($validator,"upload");
+                                ->withErrors(['format'=>'檔案欄位錯誤'],"upload");
                             break;
                     }
                 }
-                
+
+                if($item['startDate'] > $item['endDate']){
+                    $validator->errors()->add('date','開始時間必須在結束時間前'.",第 $errorLine 行");
+                }
                 if(CollegeData::where('college',$item['college'])
                         ->where('dept',$item['dept'])->first()==null){
                     $validator->errors()->add('number','系所代碼錯誤'.",第 $errorLine 行");
-                    return redirect('attend_international_organization')
-                                ->withErrors($validator,"upload");
                 }
                 if(!Gate::allows('permission',(object)$item)){
                     $validator->errors()->add('permission','無法新增未有權限之系所部門'.",第 $errorLine 行");
+                }
+                if(count($validator->errors())>0){
                     return redirect('attend_international_organization')
-                                ->withErrors($validator,"upload");
+                        ->withErrors($validator,"upload");
                 }
                 array_push($newArray,$item);
             }
