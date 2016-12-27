@@ -240,9 +240,8 @@ class ForeignProfExchangeController extends Controller
                             unset($item[$key]);
                             break;
                         default:
-                            $validator->errors()->add('format',"檔案欄位錯誤");
                             return redirect('foreign_prof_exchange')
-                                ->withErrors($validator,"upload");
+                               ->withErrors(['format'=>'檔案欄位錯誤'],"upload");
                             break;
                     }
 

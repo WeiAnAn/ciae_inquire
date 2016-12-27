@@ -207,7 +207,7 @@ public function update($id,Request $request){
                             $item['name'] = $value;
                             unset($item[$key]);
                             break;
-                        case '身分學士碩士或博士':                           
+                        case '身分學士碩士或博士':
                             switch($value){
                                 case "學士":
                                     $value = 3;
@@ -246,9 +246,8 @@ public function update($id,Request $request){
                             unset($item[$key]);
                             break;
                         default:
-                            $validator->errors()->add('format','檔案欄位錯誤');
                             return redirect('stu_attend_conf')
-                                ->withErrors($validator,"upload");
+                                ->withErrors(['format'=>'檔案欄位錯誤'],"upload");
                             break;
                     }
                 }

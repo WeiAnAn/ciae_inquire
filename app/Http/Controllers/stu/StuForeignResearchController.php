@@ -204,7 +204,7 @@ class StuForeignResearchController extends Controller
                             $item['name'] = $value;
                             unset($item[$key]);
                             break;
-                        case '身分學士碩士或博士':                           
+                        case '身分學士碩士或博士':
                             switch($value){
                                 case "學士":
                                     $value = 3;
@@ -239,9 +239,8 @@ class StuForeignResearchController extends Controller
                             unset($item[$key]);
                             break;
                         default:
-                            $validator->errors()->add('format','檔案欄位錯誤');
                             return redirect('stu_foreign_research')
-                                ->withErrors($validator,"upload");
+                                ->withErrors(['format'=>'檔案欄位錯誤'],"upload");
                             break;
                     }
                 }

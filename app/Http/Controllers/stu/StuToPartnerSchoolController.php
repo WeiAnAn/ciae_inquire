@@ -235,9 +235,8 @@ class StuToPartnerSchoolController extends Controller
                             unset($item[$key]);
                             break;
                         default:
-                            $validator->errors()->add('format','檔案欄位錯誤');
                             return redirect('stu_to_partner_school')
-                                ->withErrors($validator,"upload");
+                                ->withErrors(['format'=>'檔案欄位錯誤'],"upload");
                             break;
                     }
                 }
@@ -261,9 +260,8 @@ class StuToPartnerSchoolController extends Controller
         });
         return redirect('stu_to_partner_school');
     }
-    
+
      public function example(Request $request){
         return response()->download(public_path().'/Excel_example/stu/stu_to_partner_school.xlsx',"本校學生出國赴姊妹校參加交換計畫.xlsx");
     }
-        		
 }

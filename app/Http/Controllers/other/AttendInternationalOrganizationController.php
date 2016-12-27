@@ -212,9 +212,8 @@ class AttendInternationalOrganizationController extends Controller
                             unset($item[$key]);
                             break;
                         default:
-                            $validator->errors()->add('format',"檔案欄位錯誤");
                             return redirect('attend_international_organization')
-                                ->withErrors($validator,"upload");
+                                ->withErrors(['format'=>'檔案欄位錯誤'],"upload");
                             break;
                     }
                 }

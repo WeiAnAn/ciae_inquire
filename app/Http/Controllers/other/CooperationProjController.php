@@ -228,9 +228,8 @@ class CooperationProjController extends Controller
                             unset($item[$key]);
                             break;
                         default:
-                            $validator->errors()->add('format',"檔案欄位錯誤");
                             return redirect('cooperation_proj')
-                                ->withErrors($validator,"upload");
+                                ->withErrors(['format'=>'檔案欄位錯誤'],"upload");
                             break;
                     }
                 }
