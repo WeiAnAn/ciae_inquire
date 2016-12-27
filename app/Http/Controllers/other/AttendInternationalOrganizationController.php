@@ -163,23 +163,24 @@ class AttendInternationalOrganizationController extends Controller
             $array = $reader->toArray();
             $newArray = [];
             foreach ($array as $arrayKey => $item) {
-                
+
                 $errorLine = $arrayKey + 2;
                 $rules = [
                     '所屬一級單位'=>'required|max:11',
                     '所屬系所部門'=>'required|max:11',
                     '參加人'=>'required|max:20',
                     '組織名稱'=>'required|max:200',
-                    '開始時間'=>'required',
-                    '結束時間'=>'required',
+                    '開始時間'=>'required|date',
+                    '結束時間'=>'required|date',
                     '備註'=>'max:500',
                 ];
                 $message=[
                     'required'=>"必須填寫 :attribute 欄位,第 $errorLine 行",
                     'max'=>':attribute 欄位的輸入長度不能大於:max'.",第 $errorLine 行",
+                    'date'=>':attribute 欄位時間格式錯誤, 應為 xxxx/xx/xx'.", 第 $errorLine 行",
                 ];
                 $validator = Validator::make($item,$rules,$message);
-                
+
                 foreach ($item as $key => $value) {
 
                     switch ($key) {
@@ -211,14 +212,15 @@ class AttendInternationalOrganizationController extends Controller
                             unset($item[$key]);
                             break;
                         default:
+                            $validator->errors()->add('format',"檔案欄位錯誤");
                             return redirect('attend_international_organization')
-                                ->withErrors(['format'=>'檔案欄位錯誤'],"upload");
+                                ->withErrors($validator,"upload");
                             break;
                     }
                 }
 
                 if($item['startDate'] > $item['endDate']){
-                    $validator->errors()->add('date','開始時間必須在結束時間前'.",第 $errorLine 行");
+                    $validator->errors()->add('date','開始擔任時間必須在結束擔任時間前'.",第 $errorLine 行");
                 }
                 if(CollegeData::where('college',$item['college'])
                         ->where('dept',$item['dept'])->first()==null){

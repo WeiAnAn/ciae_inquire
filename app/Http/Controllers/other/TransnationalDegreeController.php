@@ -153,20 +153,7 @@ class TransnationalDegreeController extends Controller
 
         $transnational->update($request->all());
         return redirect('transnational_degree')->with('success','更新成功');
-        $this->validate($request,[
-            'college'=>'required|max:11',
-            'dept'=>'required|max:11',
-            'nation'=>'required|max:20',
-            'chtName'=>'required|max:200',
-            'engName'=>'required|max:200',
-            'stuLevel'=>'required',
-            'year'=>'required|max:200',
-            'classMode'=>'required|max:200',
-            'degreeMode'=>'required|max:200',
-            'comments'=>'max:500',
-            ]);
-        $transnational->update($request->all());
-        return redirect('transnational_degree')->with('success','更新成功');
+
     }
 
     public function delete($id){
@@ -182,6 +169,26 @@ class TransnationalDegreeController extends Controller
             $array = $reader->toArray();
             $newArray = [];
             foreach ($array as $arrayKey => $item) {
+
+                $errorLine = $arrayKey + 2;
+                $rules = [
+                    '所屬一級單位'=>'required|max:11',
+                    '所屬系所部門'=>'required|max:11',
+                    '國家'=>'required|max:20',
+                    '中文校名'=>'required|max:200',
+                    '英文校名'=>'required|max:200',
+                    '身分_學士碩士或博士'=>'required',
+                    '修業年限'=>'required|max:200',
+                    '授課方式'=>'required|max:200',
+                    '學位授予方式'=>'required|max:200',
+                    '備註'=>'max:500',
+                ];
+                $message = [
+                    'required'=>"必須填寫 :attribute 欄位,第 $errorLine 行",
+                    'max'=>':attribute 欄位的輸入長度不能大於:max'.",第 $errorLine 行",
+                ];
+                $validator = Validator::make($item,$rules,$message);
+
                 foreach ($item as $key => $value) {
 
                     switch ($key) {
@@ -217,11 +224,7 @@ class TransnationalDegreeController extends Controller
                                     $value = 1;
                                     break;
                                 default:
-                                    $validator = Validator::make($item,[]);
-                                    $errorLine = $arrayKey + 2;
                                     $validator->errors()->add('身分',"身分內容填寫錯誤,第 $errorLine 行");
-                                    return redirect('short_term_foreign_stu')
-                                        ->withErrors($validator,"upload");
                                     break;
                             }
                             $item['stuLevel'] = $value;
@@ -242,39 +245,23 @@ class TransnationalDegreeController extends Controller
                         case '備註':
                             $item['comments'] = $value;
                             unset($item[$key]);
-                            break;                        
+                            break;
                         default:
-                            $validator = Validator::make($item,[]);
-                            $validator->errors()->add('format','檔案欄位錯誤');
+                            $validator->errors()->add('format',"檔案欄位錯誤");
                             return redirect('transnational_degree')
                                 ->withErrors($validator,"upload");
                             break;
                     }
                 }
-                $validator = Validator::make($item,[
-                    'college'=>'required|max:11',
-                    'dept'=>'required|max:11',
-                    'nation'=>'required|max:20',
-                    'chtName'=>'required|max:200',
-                    'engName'=>'required|max:200',
-                    'stuLevel'=>'required',
-                    'year'=>'required|max:200',
-                    'classMode'=>'required|max:200',
-                    'degreeMode'=>'required|max:200',
-                    'comments'=>'max:500',
-                ]);
-                if($validator->fails()){
-                    return redirect('transnational_degree')
-                        ->withErrors($validator,"upload");
-                }
+
                 if(CollegeData::where('college',$item['college'])
                         ->where('dept',$item['dept'])->first()==null){
-                    $validator->errors()->add('number','系所代碼錯誤');
-                    return redirect('transnational_degree')
-                                ->withErrors($validator,"upload");
+                    $validator->errors()->add('number','系所代碼錯誤'.",第 $errorLine 行");
                 }
                 if(!Gate::allows('permission',(object)$item)){
-                    $validator->errors()->add('permission','無法新增未有權限之系所部門');
+                    $validator->errors()->add('permission','無法新增未有權限之系所部門'.",第 $errorLine 行");
+                }
+                if(count($validator->errors())>0){
                     return redirect('transnational_degree')
                                 ->withErrors($validator,"upload");
                 }
@@ -284,9 +271,9 @@ class TransnationalDegreeController extends Controller
         });
         return redirect('transnational_degree');
     }
-    
+
     public function example(Request $request){
         return response()->download(public_path().'/Excel_example/other/transnational_degree.xlsx',"跨國學位.xlsx");
-    }      
+    }
 
 }

@@ -43,6 +43,7 @@ class InternationalizeActivityController extends Controller
             'guest'=>'required|max:200',
             'startDate'=>'required',
             'endDate'=>'required',
+            'comments'=>'max:500',
         ];
 
         $message=[
@@ -131,6 +132,7 @@ class InternationalizeActivityController extends Controller
             'guest'=>'required|max:200',
             'startDate'=>'required',
             'endDate'=>'required',
+            'comments'=>'max:500',
         ];
 
         $message=[
@@ -153,20 +155,39 @@ class InternationalizeActivityController extends Controller
         return redirect('internationalize_activity')->with('success','更新成功');
     }
 
-    
      public function delete($id){
         $internationalactivity = InternationalizeActivity::find($id);
         if(!Gate::allows('permission',$internationalactivity))
             return redirect('internationalize_activity');
         $internationalactivity->delete();
         return redirect('internationalize_activity');
-        } 
+        }
 
     public function upload(Request $request){
         Excel::load($request->file('file'),function($reader){
             $array = $reader->toArray();
             $newArray = [];
             foreach ($array as $arrayKey => $item) {
+
+                $errorLine = $arrayKey + 2;
+                $rules = [
+                    '所屬一級單位'=>'required|max:11',
+                    '所屬系所部門'=>'required|max:11',
+                    '活動性質'=>'required|max:200',
+                    '活動地點'=>'required|max:200',
+                    '本校參加人員'=>'required|max:200',
+                    '參加之外賓'=>'required|max:200',
+                    '開始時間'=>'required|date',
+                    '結束時間'=>'required|date',
+                    '備註'=>'max:500',
+                ];
+                $message = [
+                    'required'=>"必須填寫 :attribute 欄位,第 $errorLine 行",
+                    'max'=>':attribute 欄位的輸入長度不能大於:max'.",第 $errorLine 行",
+                    'date'=>':attribute 欄位時間格式錯誤, 應為 xxxx/xx/xx'.", 第 $errorLine 行"
+                ];
+                $validator = Validator::make($item,$rules,$message);
+
                 foreach ($item as $key => $value) {
 
                     switch ($key) {
@@ -206,37 +227,25 @@ class InternationalizeActivityController extends Controller
                             $item['comments'] = $value;
                             unset($item[$key]);
                             break;
-                            
                         default:
-                            $validator = Validator::make($item,[]);
                             $validator->errors()->add('format','檔案欄位錯誤');
                             return redirect('internationalize_activity')
                                 ->withErrors($validator,"upload");
                             break;
                     }
                 }
-                $validator = Validator::make($item,[
-                    'college'=>'required|max:11',
-                    'dept'=>'required|max:11',
-                    'activityName'=>'required|max:200',
-                    'place'=>'required|max:200',
-                    'host'=>'required|max:200',
-                    'guest'=>'required|max:200',
-                    'startDate'=>'required',
-                    'endDate'=>'required',
-                ]);
-                if($validator->fails()){
-                    return redirect('internationalize_activity')
-                        ->withErrors($validator,"upload");
+
+               if($item['startDate'] > $item['endDate']){
+                    $validator->errors()->add('date','開始時間必須在結束時間前'.",第 $errorLine 行");
                 }
                 if(CollegeData::where('college',$item['college'])
                         ->where('dept',$item['dept'])->first()==null){
-                    $validator->errors()->add('number','系所代碼錯誤');
-                    return redirect('internationalize_activity')
-                                ->withErrors($validator,"upload");
+                    $validator->errors()->add('number','系所代碼錯誤'.",第 $errorLine 行");
                 }
                 if(!Gate::allows('permission',(object)$item)){
-                    $validator->errors()->add('permission','無法新增未有權限之系所部門');
+                    $validator->errors()->add('permission','無法新增未有權限之系所部門'.",第 $errorLine 行");
+                }
+                if(count($validator->errors())>0){
                     return redirect('internationalize_activity')
                                 ->withErrors($validator,"upload");
                 }

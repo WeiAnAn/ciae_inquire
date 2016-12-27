@@ -214,7 +214,7 @@ class CooperationProjController extends Controller
                         // case '計畫內容':
                         //     $item['projContent'] = $value;
                         //     unset($item[$key]);
-                        //     break;                       
+                        //     break;
                         case '開始時間':
                             $item['startDate'] = $value;
                             unset($item[$key]);
@@ -226,14 +226,15 @@ class CooperationProjController extends Controller
                         case '備註':
                             $item['comments'] = $value;
                             unset($item[$key]);
-                            break;                        
+                            break;
                         default:
+                            $validator->errors()->add('format',"檔案欄位錯誤");
                             return redirect('cooperation_proj')
-                                ->withErrors(['format'=>'檔案欄位錯誤'],"upload");
+                                ->withErrors($validator,"upload");
                             break;
                     }
                 }
-                
+
                 if($item['startDate'] > $item['endDate']){
                     $validator->errors()->add('date','開始時間必須在結束時間前'.",第 $errorLine 行");
                 }
