@@ -176,18 +176,19 @@ class ForeignProfExchangeController extends Controller
                         '國籍'=>'required|max:20',
                         '外籍學者姓名'=>'required|max:20',
                         '外籍學者身分教授副教授助理教授或博士後研究員'=>'required|max:20',
-                        '開始時間'=>'required',
-                        '結束時間'=>'required',
+                        '開始時間'=>'required|date',
+                        '結束時間'=>'required|date',
                         '備註'=>'max:500',
                 ];
                 $message=[
                     'required'=>"必須填寫 :attribute 欄位,第 $errorLine 行",
                     'max'=>':attribute 欄位的輸入長度不能大於:max'.",第 $errorLine 行",
+                    'date'=>':attribute 欄位時間格式錯誤, 應為 xxxx/xx/xx'.", 第 $errorLine 行"
                 ];
                 $validator = Validator::make($item,$rules,$message);
-               
+
                 foreach ($item as $key => $value) {
-                    
+
                     switch ($key) {
                         case '邀請單位一級單位名稱':
                             $item['college'] = $value;
@@ -225,7 +226,7 @@ class ForeignProfExchangeController extends Controller
                         case '國籍':
                             $item['nation'] = $value;
                             unset($item[$key]);
-                            break;                        
+                            break;
                         case '開始時間':
                             $item['startDate'] = $value;
                             unset($item[$key]);
