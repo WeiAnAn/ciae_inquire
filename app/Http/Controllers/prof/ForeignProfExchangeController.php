@@ -13,7 +13,7 @@ use App\CollegeData;
 
 class ForeignProfExchangeController extends Controller
 {
-    
+
     public function index(Request $request){
         $sortBy = 'id';
         $orderBy = "desc";
@@ -88,13 +88,13 @@ class ForeignProfExchangeController extends Controller
                 ->where('foreign_prof_exchange.dept',$request->dept);
         if($request->name != "")
             $foreignPexchange = $foreignPexchange
-                ->where('name',"like","%$request->name%"); 
+                ->where('name',"like","%$request->name%");
         if($request->profLevel != "")
             $foreignPexchange = $foreignPexchange
                 ->where('profLevel',$request->profLevel);
         if($request->nation != "")
             $foreignPexchange = $foreignPexchange
-                ->where('nation',"like","%$request->nation%"); 
+                ->where('nation',"like","%$request->nation%");
         if($request->startDate != "")
             $foreignPexchange = $foreignPexchange
                 ->where('startDate','>=',"$request->startDate");
@@ -107,7 +107,7 @@ class ForeignProfExchangeController extends Controller
 
         $foreignPexchange = $foreignPexchange->orderBy($sortBy,$orderBy)
             ->paginate(20);
-        $foreignPexchange->appends($request->except('page'));    
+        $foreignPexchange->appends($request->except('page'));
         $user = Auth::user();
         $data = compact('foreignPexchange','user');
         return view('prof/foreign_prof_exchange',$data);
@@ -150,7 +150,7 @@ class ForeignProfExchangeController extends Controller
         if($validator->fails()){
             return redirect("foreign_prof_exchange/$id")->withErrors($validator)->withInput();
         }
-        
+
         $foreignPexchange->update($request->all());
         return redirect('foreign_prof_exchange')->with('success','更新成功');
     }
@@ -240,11 +240,12 @@ class ForeignProfExchangeController extends Controller
                             unset($item[$key]);
                             break;
                         default:
-                            return redirect('internationalize_activity')
-                                ->withErrors(['format'=>"檔案欄位錯誤"],"upload");
+                            $validator->errors()->add('format',"檔案欄位錯誤");
+                            return redirect('foreign_prof_exchange')
+                                ->withErrors($validator,"upload");
                             break;
                     }
-                    
+
                 }
                 if($item['startDate'] > $item['endDate']){
                     $validator->errors()->add('date','開始時間必須在結束時間前'.",第 $errorLine 行");

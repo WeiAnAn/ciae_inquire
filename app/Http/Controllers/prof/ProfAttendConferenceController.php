@@ -171,6 +171,26 @@ class ProfAttendConferenceController extends Controller
             $array = $reader->toArray();
             $newArray = [];
             foreach ($array as $arrayKey => $item) {
+
+                $errorLine = $arrayKey + 2;
+                $rules = [
+                    '所屬一級單位'=>'required|max:11',
+                    '所屬系所部門'=>'required|max:11',
+                    '姓名'=>'required|max:20',
+                    '身分教授副教授助理教授或博士後研究員'=>'required|max:11',
+                    '前往國家'=>'required|max:20',
+                    '會議名稱'=>'required|max:200',
+                    '開始時間'=>'required|date',
+                    '結束時間'=>'required|date',
+                    '備註'=>'max:500',
+                ];
+                $message = [
+                    'required'=>"必須填寫 :attribute 欄位,第 $errorLine 行",
+                    'max'=>':attribute 欄位的輸入長度不能大於:max'.",第 $errorLine 行",
+                    'date'=>':attribute 欄位時間格式錯誤, 應為 xxxx/xx/xx'.", 第 $errorLine 行"
+                ];
+                $validator = Validator::make($item,$rules,$message);
+
                 foreach ($item as $key => $value) {
                     switch ($key) {
                         case '所屬一級單位':
@@ -200,11 +220,7 @@ class ProfAttendConferenceController extends Controller
                                     $value = 4;
                                     break;
                                 default:
-                                    $validator = Validator::make($item,[]);
-                                    $errorLine = $arrayKey + 2;
                                     $validator->errors()->add('身分',"身分內容填寫錯誤,第 $errorLine 行");
-                                    return redirect('prof_attend_conference')
-                                        ->withErrors($validator,"upload");
                                     break;
                             }
                             $item['profLevel'] = $value;
@@ -231,36 +247,24 @@ class ProfAttendConferenceController extends Controller
                             unset($item[$key]);
                             break;
                         default:
-                            $validator = Validator::make($item,[]);
-                            $validator->errors()->add('format',"欄位錯誤");
+                            $validator->errors()->add('format',"檔案欄位錯誤");
                             return redirect('prof_attend_conference')
                                 ->withErrors($validator,"upload");
                             break;
                     }
                 }
-                $validator = Validator::make($item,[
-                    'college'=>'required|max:11',
-                    'dept'=>'required|max:11',
-                    'name'=>'required|max:20',
-                    'profLevel'=>'required|max:11',
-                    'nation'=>'required|max:20',
-                    'confName'=>'required|max:200',
-                    'startDate'=>'required',
-                    'endDate'=>'required',
-                    'comments'=>'max:500',      
-                ]);
-                if($validator->fails()){
-                    return redirect('prof_attend_conference')
-                        ->withErrors($validator,"upload");
+
+                if($item['startDate'] > $item['endDate']){
+                    $validator->errors()->add('date','開始時間必須在結束時間前'.",第 $errorLine 行");
                 }
                 if(CollegeData::where('college',$item['college'])
                         ->where('dept',$item['dept'])->first()==null){
-                    $validator->errors()->add('number','系所代碼錯誤');
-                    return redirect('prof_attend_conference')
-                                ->withErrors($validator,"upload");
+                    $validator->errors()->add('number','系所代碼錯誤'.",第 $errorLine 行");
                 }
                 if(!Gate::allows('permission',(object)$item)){
-                    $validator->errors()->add('permission','無法新增未有權限之系所部門');
+                    $validator->errors()->add('permission','無法新增未有權限之系所部門'.",第 $errorLine 行");
+                }
+                if(count($validator->errors())>0){
                     return redirect('prof_attend_conference')
                                 ->withErrors($validator,"upload");
                 }
