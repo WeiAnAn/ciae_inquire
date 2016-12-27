@@ -168,6 +168,26 @@ class ShortTermForeignStuController extends Controller
             $array = $reader->toArray();
             $newArray = [];
             foreach ($array as $arrayKey => $item) {
+
+                $errorLine = $arrayKey + 2;
+                $rules=[
+                    '所屬一級單位'=>'required|max:11',
+                    '所屬系所部門'=>'required|max:11',
+                    '姓名'=>'required|max:50',
+                    '身分學士碩士或博士'=>'required|max:11',
+                    '國籍'=>'required|max:50',
+                    '開始時間'=>'required|date',
+                    '結束時間'=>'required|date',
+                    '備註'=>'max:500',
+                ];
+
+                $message=[
+                    'required'=>'必須填寫:attribute欄位',
+                    'max'=>':attribute欄位的輸入長度不能大於:max',
+                    'date'=>':attribute 欄位時間格式錯誤, 應為 xxxx/xx/xx'.", 第 $errorLine 行"
+                ];
+                $validator = Validator::make($item,$rules,$message);
+
                 foreach ($item as $key => $value) {
 
                     switch ($key) {
@@ -183,7 +203,7 @@ class ShortTermForeignStuController extends Controller
                             $item['name'] = $value;
                             unset($item[$key]);
                             break;
-                        case '身分學士碩士或博士':                            
+                        case '身分學士碩士或博士':
                             switch($value){
                                 case "學士":
                                     $value = 3;
@@ -195,11 +215,7 @@ class ShortTermForeignStuController extends Controller
                                     $value = 1;
                                     break;
                                 default:
-                                    $validator = Validator::make($item,[]);
-                                    $errorLine = $arrayKey + 2;
                                     $validator->errors()->add('身分',"身分內容填寫錯誤,第 $errorLine 行");
-                                    return redirect('short_term_foreign_stu')
-                                        ->withErrors($validator,"upload");
                                     break;
                             }
                             $item['stuLevel'] = $value;
@@ -222,35 +238,24 @@ class ShortTermForeignStuController extends Controller
                             unset($item[$key]);
                             break;
                         default:
-                            $validator = Validator::make($item,[]);
                             $validator->errors()->add('format','檔案欄位錯誤');
                             return redirect('short_term_foreign_stu')
                                 ->withErrors($validator,"upload");
                             break;
                     }
                 }
-                $validator = Validator::make($item,[
-                    'college'=>'required|max:11',
-                    'dept'=>'required|max:11',
-                    'name'=>'required|max:50',
-                    'stuLevel'=>'required|max:11',
-                    'nation'=>'required|max:50',
-                    'startDate'=>'required',
-                    'endDate'=>'required',
-                    'comments'=>'max:500',
-                ]);
-                if($validator->fails()){
-                    return redirect('short_term_foreign_stu')
-                        ->withErrors($validator,"upload");
+
+                if($item['startDate'] > $item['endDate']){
+                    $validator->errors()->add('date','開始時間必須在結束時間前'.",第 $errorLine 行");
                 }
                 if(CollegeData::where('college',$item['college'])
                         ->where('dept',$item['dept'])->first()==null){
-                    $validator->errors()->add('number','系所代碼錯誤');
-                    return redirect('short_term_foreign_stu')
-                                ->withErrors($validator,"upload");
+                    $validator->errors()->add('number','系所代碼錯誤'.",第 $errorLine 行");
                 }
                 if(!Gate::allows('permission',(object)$item)){
-                    $validator->errors()->add('permission','無法新增未有權限之系所部門');
+                    $validator->errors()->add('permission','無法新增未有權限之系所部門'.",第 $errorLine 行");
+                }
+                if(count($validator->errors())>0){
                     return redirect('short_term_foreign_stu')
                                 ->withErrors($validator,"upload");
                 }

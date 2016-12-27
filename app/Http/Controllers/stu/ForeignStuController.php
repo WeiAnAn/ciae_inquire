@@ -44,7 +44,6 @@ class ForeignStuController extends Controller
             'stuLevel'=>'required|max:11',
             'nation'=>'required|max:50',
             'engNation'=>'required|max:50',
-            'engNation'=>'required|max:50',
             'startDate'=>'required',
             'endDate'=>'required',
             'status'=>'required',
@@ -92,19 +91,19 @@ class ForeignStuController extends Controller
                 ->where('foreign_stu.dept',$request->dept);
         if($request->stuID != "")
             $foreignStu = $foreignStu
-                ->where('stuID',"like","%$request->stuID%"); 
+                ->where('stuID',"like","%$request->stuID%");
         if($request->chtName != "")
             $foreignStu = $foreignStu
-                ->where('chtName',"like","%$request->chtName%"); 
+                ->where('chtName',"like","%$request->chtName%");
         if($request->engName != "")
             $foreignStu = $foreignStu
-                ->where('engName',"like","%$request->engName%");       
+                ->where('engName',"like","%$request->engName%");
         if($request->stuLevel != "")
             $foreignStu = $foreignStu
-                ->where('stuLevel', $request->stuLevel);                
+                ->where('stuLevel', $request->stuLevel);
         if($request->nation != "")
             $foreignStu = $foreignStu
-                ->where('nation',"like","%$request->nation%");               
+                ->where('nation',"like","%$request->nation%");
         if($request->engNation != "")
             $foreignStu = $foreignStu
                 ->where('engNation',"like","%$request->engNation%");
@@ -123,7 +122,7 @@ class ForeignStuController extends Controller
 
         $foreignStu = $foreignStu->orderBy($sortBy,$orderBy)
             ->paginate(20);
-        $foreignStu->appends($request->except('page'));    
+        $foreignStu->appends($request->except('page'));
         $user = Auth::user();
         $data = compact('foreignStu','user');
         return view('stu/foreign_stu',$data);
@@ -149,7 +148,6 @@ class ForeignStuController extends Controller
             'stuLevel'=>'required|max:11',
             'nation'=>'required|max:50',
             'engNation'=>'required|max:50',
-            'engNation'=>'required|max:50',
             'startDate'=>'required',
             'endDate'=>'required',
             'status'=>'required',
@@ -171,7 +169,7 @@ class ForeignStuController extends Controller
         if($validator->fails()){
             return redirect("foreign_stu/$id")->withErrors($validator)->withInput();
         }
-        
+
         $foreignStu->update($request->all());
         return redirect('foreign_stu')->with('success','更新成功');
     }
@@ -189,6 +187,30 @@ class ForeignStuController extends Controller
             $array = $reader->toArray();
             $newArray = [];
             foreach ($array as $arrayKey => $item) {
+
+                $errorLine = $arrayKey + 2;
+                $rules=[
+                    '所屬一級單位'=>'required|max:11',
+                    '所屬系所部門'=>'required|max:11',
+                    '中文姓名'=>'required|max:50',
+                    '英文姓名'=>'required|max:50',
+                    '學號'=>'required|max:15',
+                    '身分學士碩士或博士'=>'required|max:11',
+                    '國籍中文'=>'required|max:50',
+                    '國籍英文'=>'required|max:50',
+                    '開始時間'=>'required|date',
+                    '結束時間'=>'required|date',
+                    '學籍狀態在學中休學中已畢業'=>'required',
+                    '備註'=>'max:500',
+                ];
+
+                $message=[
+                    'required'=>'必須填寫:attribute欄位',
+                    'max'=>':attribute欄位的輸入長度不能大於:max',
+                    'date'=>':attribute 欄位時間格式錯誤, 應為 xxxx/xx/xx'.", 第 $errorLine 行"
+                ];
+                $validator = Validator::make($item,$rules,$message);
+
                 foreach ($item as $key => $value) {
 
                     switch ($key) {
@@ -224,11 +246,7 @@ class ForeignStuController extends Controller
                                     $value = 1;
                                     break;
                                 default:
-                                    $validator = Validator::make($item,[]);
-                                    $errorLine = $arrayKey + 2;
-                                    $validator->errors()->add('身分',"身分內容填寫錯誤,第 $errorLine 行");
-                                    return redirect('foreign_stu')
-                                        ->withErrors($validator,"upload");
+                                    $validator->errors()->add('stuLevel',"身分內容填寫錯誤,第 $errorLine 行");
                                     break;
                             }
                             $item['stuLevel'] = $value;
@@ -262,55 +280,35 @@ class ForeignStuController extends Controller
                                     $value = 3;
                                     break;
                                 default:
-                                    $validator = Validator::make($item,[]);
-                                    $errorLine = $arrayKey + 2;
-                                    $validator->errors()->add('身分',"身分內容填寫錯誤,第 $errorLine 行");
-                                    return redirect('foreign_stu')
-                                        ->withErrors($validator,"upload");
+                                    $validator->errors()->add('status',"學籍狀態內容填寫錯誤,第 $errorLine 行");
                                     break;
                             }
                             $item['status'] = $value;
                             unset($item[$key]);
-                            break;                            
+                            break;
                         case '備註':
                             $item['comments'] = $value;
                             unset($item[$key]);
                             break;
                         default:
-                            $validator = Validator::make($item,[]);
                             $validator->errors()->add('format','檔案欄位錯誤');
                             return redirect('foreign_stu')
                                 ->withErrors($validator,"upload");
                             break;
                     }
                 }
-                $validator = Validator::make($item,[
-                    'college'=>'required|max:11',
-                    'dept'=>'required|max:11',
-                    'chtName'=>'required|max:50',
-                    'engName'=>'required|max:50',
-                    'stuID'=>'required|max:15',
-                    'stuLevel'=>'required|max:11',
-                    'nation'=>'required|max:50',
-                    'engNation'=>'required|max:50',
-                    'engNation'=>'required|max:50',
-                    'startDate'=>'required',
-                    'endDate'=>'required',
-                    'status'=>'required',
-                    'comments'=>'max:500',
-                ]);
-                if($validator->fails()){
-                    return redirect('foreign_stu')
-                        ->withErrors($validator,"upload");
+
+                if($item['startDate'] > $item['endDate']){
+                    $validator->errors()->add('date','開始時間必須在結束時間前'.",第 $errorLine 行");
                 }
                 if(CollegeData::where('college',$item['college'])
                         ->where('dept',$item['dept'])->first()==null){
-                    $validator->errors()->add('number','系所代碼錯誤');
-                    return redirect('foreign_stu')
-                                ->withErrors($validator,"upload");
+                    $validator->errors()->add('number','系所代碼錯誤'.",第 $errorLine 行");
                 }
                 if(!Gate::allows('permission',(object)$item)){
-                    $validator->errors()->add('permission','無法新增未有權限之系所部門');
+                    $validator->errors()->add('permission','無法新增未有權限之系所部門'.",第 $errorLine 行");
+                }
+                if(count($validator->errors())>0){
                     return redirect('foreign_stu')
                                 ->withErrors($validator,"upload");
                 }
