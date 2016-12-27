@@ -170,6 +170,7 @@ class CooperationProjController extends Controller
             $array = $reader->toArray();
             $newArray = [];
             foreach ($array as $arrayKey => $item) {
+
                 $errorLine = $arrayKey + 2;
                 $rules = [
                     '所屬一級單位'=>'required|max:11',
@@ -187,7 +188,7 @@ class CooperationProjController extends Controller
                     'date'=>':attribute 欄位時間格式錯誤, 應為 xxxx/xx/xx'.", 第 $errorLine 行"
                 ];
                 $validator = Validator::make($item,$rules,$message);
-                
+
                 foreach ($item as $key => $value) {
 
                     switch ($key) {
