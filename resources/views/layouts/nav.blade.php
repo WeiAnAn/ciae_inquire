@@ -21,7 +21,7 @@
 
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> 個人資料</a>
+                        <li><a href="{{ url('/user') }}"><i class="fa fa-user fa-fw"></i> 個人資料</a>
                         </li>
                         
 
