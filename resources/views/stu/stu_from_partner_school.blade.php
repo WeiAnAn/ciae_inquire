@@ -272,6 +272,19 @@
 							<a class="btn btn-success" href="{{url('stu_from_partner_school/example')}}">範例檔案</a>
 							<a class="btn btn-success" href="{{url('example')}}">系所對照表</a>
 						</form>
+
+						<div class="alert alert-warning" style="margin-top:10px">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<strong>上傳注意事項</strong>
+							<ul>
+								<li>請下載範例檔案填寫</li>	
+								<li>請將系所欄位依照系所對照表之代號填入</li>
+								<li>其餘欄位若有限制請參照該欄位括弧中選項填入</li>
+							</ul>
+						</div>
+						
 					</div>
 
 				</div>
