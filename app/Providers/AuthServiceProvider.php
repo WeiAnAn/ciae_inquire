@@ -30,7 +30,7 @@ class AuthServiceProvider extends ServiceProvider
             if(($user->permission < 2 )|| 
                 ($user->permission == 2 && $user->college == $data->college) ||
                 ($user->permission == 3 && $user->college == $data->college && 
-                $data->dept == $data->dept))
+                $user->dept == $data->dept))
                 return true;
             return false;
         });
