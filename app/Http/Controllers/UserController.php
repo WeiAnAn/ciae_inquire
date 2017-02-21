@@ -67,12 +67,13 @@ class UserController extends Controller
         $this->validate($request,[
             'college'=>'required|max:11',
             'dept'=>'required|max:11',
-            'password' => 'confirmed|max:16',
+            'password' => 'required|confirmed|max:16',
             'contactPeople' => 'required|max:10',
             'phone' => 'max:20',
             'email' => 'email|max:50',
         ]);
         $user = User::create($request->all());
+        $user->password = bcrypt($request->password);
         $user->permission = $request->permission;
         $user->save();
         return redirect('manage')->with('success','新增成功');
