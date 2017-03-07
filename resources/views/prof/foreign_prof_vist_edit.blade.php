@@ -28,7 +28,7 @@
 								<option value="2">副教授</option>
 								<option value="3">助理教授</option>
 								<option value="4">博士後研究員</option>
-								{{-- <option value="5">研究生</option> --}}
+								<option value="5">研究生</option>
 							</select>
 						</div>
 
