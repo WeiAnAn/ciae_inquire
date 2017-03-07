@@ -28,7 +28,8 @@ function sort(id){
     
     var url = "?";
     for(var key in query){
-        url += `${key}=${query[key]}&`;
+        // url += `${key}=${query[key]}&`;
+        url += key+"="+query[key]+"&";
     }
     url = url.slice(0,-1);
     location.assign(url);
@@ -63,14 +64,14 @@ function checkFile(event){
     var test = /(.xls$|.xlsx$)/;
     if(!test.test(fileName)){
         event.preventDefault();
-        document.getElementById('file_error').innerHTML = `
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <strong>檔案格式錯誤</strong>
-            </div>
-        `
+        document.getElementById('file_error').innerHTML = 
+            '<div class="alert alert-danger alert-dismissible" role="alert">'+
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
+                    '<span aria-hidden="true">&times;</span>'+
+                '</button>'+
+                '<strong>檔案格式錯誤</strong>'+
+            '</div>'
+        
     }
 }
 //Loads the correct sidebar on window load,
