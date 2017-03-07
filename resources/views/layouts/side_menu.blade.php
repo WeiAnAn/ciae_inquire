@@ -38,7 +38,7 @@
                                     <a href="{{URL('/foreign_prof_vist')}}">外籍學者蒞校訪問</a>
                                 </li>
                                 <li>
-                                    <a href="{{URL('/foreign_prof_exchange')}}">外籍學者蒞校交換</a>
+                                    <a href="{{URL('/foreign_prof_exchange')}}">外籍學者來校交換</a>
                                 </li>
                             </ul>
                         </li>

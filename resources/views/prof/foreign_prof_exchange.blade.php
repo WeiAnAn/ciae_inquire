@@ -4,7 +4,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<a href="{{URL('foreign_prof_exchange')}}" style="color:black">
-			<h1 class="page-header">外籍學者蒞校交換</h1>
+			<h1 class="page-header">外籍學者來校交換</h1>
 		</a>
 	</div>
 </div>
