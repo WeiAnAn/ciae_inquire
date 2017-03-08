@@ -16,12 +16,21 @@
 
     <!-- MetisMenu CSS -->
     <link href="{{asset('vendor/metisMenu/metisMenu.min.css')}}" rel="stylesheet">
+    
+    <link href="{{asset('css/bootstrap-datepicker3.min.css')}}" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="{{asset('css/sb-admin-2.css')}}" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="{{asset('vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+
+    <script src="{{asset('vendor/jquery/jquery.js')}}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap-datepicker.js')}}"></script>
+    
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -48,23 +57,13 @@
     <!-- /#wrapper -->
     
     <!-- jQuery -->
-    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{{asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="{{asset('vendor/metisMenu/metisMenu.min.js')}}"></script>
 
-    <!-- Morris Charts JavaScript -->
-    <script src="{{asset('vendor/raphael/raphael.min.js')}}"></script>
-
     <!-- Custom Theme JavaScript -->
     <script src="{{asset('js/sb-admin-2.js')}}"></script>
-    <script>
-        changeIcon();
-    </script>
-
 </body>
 
 </html>
