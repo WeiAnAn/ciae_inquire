@@ -45,7 +45,7 @@ function explodeQuery(query){
     });
     return result;
 }
-function changeIcon(){
+(function changeIcon(){
     // console.log("a");
     if(location.search != ""){
         var query = explodeQuery(location.search);
@@ -57,7 +57,7 @@ function changeIcon(){
             icon.classList.add("fa-sort-asc");
     }
     
-}
+})()
 function checkFile(event){
     var fileName = document.getElementById('file').value.split(/(\\|\/)/g).pop();
     // console.log(fileName);
