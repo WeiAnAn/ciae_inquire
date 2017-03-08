@@ -326,6 +326,23 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$("#insert_startDate").datepicker({
+		format: 'yyyy/mm/dd',
+		setDate: "{{old('startDate')}}",
+	})
+	$("#insert_endDate").datepicker({
+		format: 'yyyy/mm/dd',
+		setDate: "{{old('endDate')}}",
+	})
+	$("#search_startDate").datepicker({
+		format: 'yyyy/mm/dd',
+	})
+	$("#search_endDate").datepicker({
+		format: 'yyyy/mm/dd',
+	})
+</script>
 @if(count($errors)>0)
 	<script>
 		document.getElementById('bachelor_option').value ={{old('bachelor')}};

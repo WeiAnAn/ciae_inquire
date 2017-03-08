@@ -36,11 +36,11 @@
                         @endif
 						<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 							<label for="startDate">開始擔任時間</label>
-							<input type="date" name="startDate" class="form-control" value="{{$startDate}}">
+							<input type="text" name="startDate" class="form-control" value="{{$startDate}}" id="edit_startDate">
 						</div>
 						<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 							<label for="endDate">結束擔任時間</label>
-							<input type="date" name="endDate" class="form-control" value="{{$endDate}}">
+							<input type="text" name="endDate" class="form-control" value="{{$endDate}}" id="edit_endDate">
 						</div>
 
 						@if($errors->has('comments'))
@@ -56,6 +56,17 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$("#edit_startDate").datepicker({
+		format: 'yyyy/mm/dd',
+		setDate: "{{$startDate}}",
+	})
+	$("#edit_endDate").datepicker({
+		format: 'yyyy/mm/dd',
+		setDate: "{{$endDate}}",
+	})
+</script>
 
 @endsection
 

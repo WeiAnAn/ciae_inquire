@@ -1,4 +1,4 @@
-@extends('../layouts/master')
+ @extends('../layouts/master')
 @section('content')
 <div class="row">
 	<div class="col-md-12">
@@ -85,7 +85,14 @@
 		</div>
 	</div>
 </div>
-<script>
-	document.getElementById('stuLevel_option').value ={{$stuLevel}};
+<script type="text/javascript">
+	$("#edit_startDate").datepicker({
+		format: 'yyyy/mm/dd',
+		setDate: "{{$startDate}}",
+	})
+	$("#edit_endDate").datepicker({
+		format: 'yyyy/mm/dd',
+		setDate: "{{$endDate}}",
+	})
 </script>
 @endsection

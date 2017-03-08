@@ -175,11 +175,11 @@
                             @endif
 							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 								<label for="startDate">簽約時間</label>
-								<input type="date" name="startDate" class="form-control" value="{{old('startDate')}}">
+								<input type="text" name="startDate" class="form-control" value="{{old('startDate')}}" id="insert_startDate">
 							</div>
 							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 								<label for="endDate">到期時間</label>
-								<input type="date" name="endDate" class="form-control" value="{{old('endDate')}}">
+								<input type="text" name="endDate" class="form-control" value="{{old('endDate')}}" id="insert_endDate">
 							</div>
 
 							@if($errors->has('comments'))
@@ -217,11 +217,11 @@
 							
 							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 								<label for="startDate">簽約時間</label>
-								<input type="date" name="startDate" class="form-control">
+								<input type="text" name="startDate" class="form-control" id="search_startDate">
 							</div>
 							<div class="form-group col-md-6" style="padding-left:0 ;padding-right: 0">
 								<label for="endDate">到期時間</label>
-								<input type="date" name="endDate" class="form-control">
+								<input type="text" name="endDate" class="form-control" id="search_endDate">
 							</div>
 							<div class="form-group">
 								<label for="comments">備註</label>
@@ -276,4 +276,21 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$("#insert_startDate").datepicker({
+		format: 'yyyy/mm/dd',
+		setDate: "{{old('startDate')}}",
+	})
+	$("#insert_endDate").datepicker({
+		format: 'yyyy/mm/dd',
+		setDate: "{{old('endDate')}}",
+	})
+	$("#search_startDate").datepicker({
+		format: 'yyyy/mm/dd',
+	})
+	$("#search_endDate").datepicker({
+		format: 'yyyy/mm/dd',
+	})
+</script>
 @endsection
