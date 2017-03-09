@@ -63,7 +63,7 @@
 							<thead>	
 								<tr>
 									<td id="partner_school.college" class="text-nowrap"
-										onclick="sort(id)">所屬單位
+										onclick="sort(id)">一級單位
 										<i class="fa fa-sort" aria-hidden="true"></i>
 									</td>
 									<td id="partner_school.dept" class="text-nowrap"
