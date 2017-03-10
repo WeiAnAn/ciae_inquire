@@ -62,7 +62,7 @@
 							<thead>	
 								<tr>
 									<td id="foreign_prof_vist.college" class="text-nowrap"
-										onclick="sort(id)">邀請單位
+										onclick="sort(id)">一級單位
 										<i class="fa fa-sort" aria-hidden="true"></i>
 									</td>
 									<td id="foreign_prof_vist.dept" class="text-nowrap"
