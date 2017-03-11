@@ -102,11 +102,11 @@
 	document.getElementById('stuLevel').value = {{$stuLevel}};
 	document.getElementById('status').value = {{$status}};
 	$("#edit_startDate").datepicker({
-		format: 'yyyy/mm/dd',
+		format: 'yyyy-mm-dd',
 		setDate: "{{$startDate}}",
 	})
 	$("#edit_endDate").datepicker({
-		format: 'yyyy/mm/dd',
+		format: 'yyyy-mm-dd',
 		setDate: "{{$endDate}}",
 	})
 </script>

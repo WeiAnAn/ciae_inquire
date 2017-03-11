@@ -87,11 +87,11 @@
 </div>
 <script type="text/javascript">
 	$("#edit_startDate").datepicker({
-		format: 'yyyy/mm/dd',
+		format: 'yyyy-mm-dd',
 		setDate: "{{$startDate}}",
 	})
 	$("#edit_endDate").datepicker({
-		format: 'yyyy/mm/dd',
+		format: 'yyyy-mm-dd',
 		setDate: "{{$endDate}}",
 	})
 </script>
