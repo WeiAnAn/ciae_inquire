@@ -4,7 +4,7 @@ namespace App\Http\Controllers\other;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\internationalJournaleditor;
+use App\InternationalJournalEditor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Excel;
@@ -22,7 +22,7 @@ class InternationalJournalEditorController extends Controller
         if($request->orderBy != null)
             $orderBy = $request->orderBy;
 
-        $internationaljeditor=internationalJournaleditor::
+        $internationaljeditor=InternationalJournalEditor::
             join('college_data',function($join){
             $join->on('international_journal_editor.college','college_data.college');
             $join->on('international_journal_editor.dept','college_data.dept');
@@ -61,7 +61,7 @@ class InternationalJournalEditorController extends Controller
             return redirect('international_journal_editor')->withErrors($validator)->withInput();
         }
 
-        internationalJournaleditor::create($request->all());
+        InternationalJournalEditor::create($request->all());
         return redirect('international_journal_editor')->with('success','新增成功');
     }
 
@@ -73,7 +73,7 @@ class InternationalJournalEditorController extends Controller
         if($request->orderBy != null)
             $orderBy = $request->orderBy;
 
-        $internationaljeditor = internationalJournaleditor::join('college_data',function($join){
+        $internationaljeditor = InternationalJournalEditor::join('college_data',function($join){
                 $join->on('international_journal_editor.college','college_data.college');
                 $join->on('international_journal_editor.dept','college_data.dept');
             });
@@ -108,14 +108,14 @@ class InternationalJournalEditorController extends Controller
     }
 
      public function edit($id){
-        $internationaljeditor = internationaljournaleditor::find($id);
+        $internationaljeditor = InternationalJournalEditor::find($id);
         if(Gate::allows('permission',$internationaljeditor))
             return view('other/international_journal_editor_edit',$internationaljeditor);
         return redirect('international_journal_editor');
     }
 
     public function update($id,Request $request){
-        $internationaljeditor = internationaljournaleditor::find($id);
+        $internationaljeditor = InternationalJournalEditor::find($id);
         if(!Gate::allows('permission',$internationaljeditor))
             return redirect('international_journal_editor');
         $rules=[
@@ -153,7 +153,7 @@ class InternationalJournalEditorController extends Controller
 
 
     public function delete($id){
-        $IJE = internationalJournaleditor::find($id);
+        $IJE = InternationalJournalEditor::find($id);
         if(!Gate::allows('permission',$IJE))
             return redirect('international_journal_editor');
         $IJE->delete();
@@ -237,7 +237,7 @@ class InternationalJournalEditorController extends Controller
                 }
                 array_push($newArray,$item);
             }
-            internationaljournaleditor::insert($newArray);
+            InternationalJournalEditor::insert($newArray);
         });
         return redirect('international_journal_editor');
     }
