@@ -17,6 +17,8 @@ class ProfExchangeController extends Controller
     public function index(Request $request){
      	$sortBy = 'id';
         $orderBy = "desc";
+        $user = Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -25,9 +27,18 @@ class ProfExchangeController extends Controller
     	$Pexchange=ProfExchange::join('college_data',function($join){
             $join->on('prof_exchange.college','college_data.college');
             $join->on('prof_exchange.dept','college_data.dept');
-        })->orderBy($sortBy,$orderBy)
+        });
+        
+        if($user->permission == 2){
+            $Pexchange = $Pexchange->where('prof_exchange.college',$user->college);
+        }else if($user->permission == 3){
+            $Pexchange = $Pexchange->where('prof_exchange.college',$user->college)
+                ->where('prof_exchange.dept', $user->dept);
+        }
+        $Pexchange = $Pexchange->orderBy($sortBy,$orderBy)
             ->paginate(20);
-        $user = Auth::user();
+        $Pexchange->appends($request->except('page'));    
+
     	$data=compact('Pexchange','user');
     	return view ('prof/prof_exchange',$data);
     }
@@ -69,6 +80,8 @@ class ProfExchangeController extends Controller
 
     	$sortBy = 'id';
         $orderBy = "desc";
+        $user = Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -103,10 +116,16 @@ class ProfExchangeController extends Controller
             $Pexchange = $Pexchange
                 ->where('comments',"like","%$request->comments%");
 
+        if($user->permission == 2){
+            $Pexchange = $Pexchange->where('prof_exchange.college',$user->college);
+        }else if($user->permission == 3){
+            $Pexchange = $Pexchange->where('prof_exchange.college',$user->college)
+                ->where('prof_exchange.dept', $user->dept);
+        }
+
         $Pexchange = $Pexchange->orderBy($sortBy,$orderBy)
             ->paginate(20);
         $Pexchange->appends($request->except('page'));    
-        $user = Auth::user();
         $data = compact('Pexchange','user');
         return view('prof/prof_exchange',$data);
     }

@@ -17,6 +17,8 @@ class ForeignStuController extends Controller
     public function index(Request $request){
     	$sortBy = 'id';
         $orderBy = "desc";
+    	$user=Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -25,9 +27,17 @@ class ForeignStuController extends Controller
     	$foreignStu = ForeignStu::join('college_data',function($join){
     		$join->on('foreign_stu.college','college_data.college');
     		$join->on('foreign_stu.dept','college_data.dept');
-    		})->orderBy($sortBy,$orderBy)->paginate(20);
+    		});
+
+        if($user->permission == 2){
+            $foreignStu = $foreignStu->where('foreign_stu.college',$user->college);
+        }else if($user->permission == 3){
+            $foreignStu = $foreignStu->where('foreign_stu.college',$user->college)
+                ->where('foreign_stu.dept', $user->dept);
+        }
+        $foreignStu = $foreignStu->orderBy($sortBy,$orderBy)
+            ->paginate(20);
         $foreignStu->appends($request->except('page'));  
-    	$user=Auth::user();
     	$data = compact('foreignStu','user');
     	return view ('stu/foreign_stu',$data);
 
@@ -74,6 +84,8 @@ class ForeignStuController extends Controller
 
     	$sortBy = 'id';
         $orderBy = "desc";
+    	$user=Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -119,11 +131,17 @@ class ForeignStuController extends Controller
         if($request->comments != "")
             $foreignStu = $foreignStu
                 ->where('comments',"like","%$request->comments%");
+        
+        if($user->permission == 2){
+            $foreignStu = $foreignStu->where('foreign_stu.college',$user->college);
+        }else if($user->permission == 3){
+            $foreignStu = $foreignStu->where('foreign_stu.college',$user->college)
+                ->where('foreign_stu.dept', $user->dept);
+        }
 
         $foreignStu = $foreignStu->orderBy($sortBy,$orderBy)
             ->paginate(20);
         $foreignStu->appends($request->except('page'));
-        $user = Auth::user();
         $data = compact('foreignStu','user');
         return view('stu/foreign_stu',$data);
     }

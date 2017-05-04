@@ -18,6 +18,8 @@ class StuForeignResearchController extends Controller
      public function index (Request $request){
      	$sortBy = 'id';
         $orderBy = "desc";
+    	$user = Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -26,10 +28,19 @@ class StuForeignResearchController extends Controller
     	$foreignreseach = StuForeignResearch::join('college_data',function($join){
     		$join->on('stu_foreign_research.college','college_data.college');
     		$join->on('stu_foreign_research.dept','college_data.dept');
-    		})->orderBy($sortBy,$orderBy)->paginate(20);
+    		});
+
+        if($user->permission == 2){
+            $foreignreseach = $foreignreseach->where('stu_foreign_research.college',$user->college);
+        }else if($user->permission == 3){
+            $foreignreseach = $foreignreseach->where('stu_foreign_research.college',$user->college)
+                ->where('stu_foreign_research.dept', $user->dept);
+        }
+
+        $foreignreseach = $foreignreseach->orderBy($sortBy,$orderBy)
+            ->paginate(20);
         $foreignreseach->appends($request->except('page'));    
 
-    	$user = Auth::user();
 		$data = compact('foreignreseach','user');
 		return view('stu/stu_foreign_research',$data);
     	}
@@ -71,6 +82,8 @@ class StuForeignResearchController extends Controller
 
     	$sortBy = 'id';
         $orderBy = "desc";
+        $user = Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -104,11 +117,17 @@ class StuForeignResearchController extends Controller
         if($request->comments != "")
             $foreignreseach = $foreignreseach
                 ->where('comments',"like","%$request->comments%");
+        
+        if($user->permission == 2){
+            $foreignreseach = $foreignreseach->where('stu_foreign_research.college',$user->college);
+        }else if($user->permission == 3){
+            $foreignreseach = $foreignreseach->where('stu_foreign_research.college',$user->college)
+                ->where('stu_foreign_research.dept', $user->dept);
+        }
 
         $foreignreseach = $foreignreseach->orderBy($sortBy,$orderBy)
             ->paginate(20);
         $foreignreseach->appends($request->except('page'));    
-        $user = Auth::user();
         $data = compact('foreignreseach','user');
         return view('stu/stu_foreign_research',$data);
     }

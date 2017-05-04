@@ -21,16 +21,27 @@ class AttendInternationalOrganizationController extends Controller
         if($request->orderBy != null)
             $orderBy = $request->orderBy;
 
+        $user = Auth::user();
+        
         $attendiorganization=AttendInternationalOrganization::
             join('college_data',function($join){
             $join->on('attend_international_organization.college','college_data.college');
             $join->on('attend_international_organization.dept','college_data.dept');
-        })->orderBy($sortBy,$orderBy)
+        });
+        
+        if($user->permission == 2){
+            $attendiorganization = $attendiorganization->where('attend_international_organization.college',$user->college);
+        }else if($user->permission == 3){
+            $attendiorganization = $attendiorganization->where('attend_international_organization.college',$user->college)
+                ->where('attend_international_organization.dept', $user->dept);
+        }
+        
+        $attendiorganization = $attendiorganization->orderBy($sortBy,$orderBy)
             ->paginate(20);
-        $user = Auth::user();
+
+
+        $attendiorganization->appends($request->except('page'));    
         $data=compact('attendiorganization','user');
-
-
     	return view ('other/attend_international_organization',$data);
     }
     public function insert(Request $request){
@@ -68,6 +79,7 @@ class AttendInternationalOrganizationController extends Controller
     public function search (Request $request){
         $sortBy = 'id';
         $orderBy = "desc";
+        $user = Auth::user();
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -77,6 +89,7 @@ class AttendInternationalOrganizationController extends Controller
                 $join->on('attend_international_organization.college','college_data.college');
                 $join->on('attend_international_organization.dept','college_data.dept');
             });
+       
         if($request->college != 0)
             $attendiorganization = $attendiorganization
                 ->where('attend_international_organization.college',$request->college);
@@ -98,6 +111,13 @@ class AttendInternationalOrganizationController extends Controller
         if($request->comments != "")
             $attendiorganization = $attendiorganization
                 ->where('comments',"like","%$request->comments%");
+
+        if($user->permission == 2){
+            $attendiorganization = $attendiorganization->where('attend_international_organization.college',$user->college);
+        }else if($user->permission == 3){
+            $attendiorganization = $attendiorganization->where('attend_international_organization.college',$user->college)
+                ->where('attend_international_organization.dept', $user->dept);
+        }
 
         $attendiorganization = $attendiorganization->orderBy($sortBy,$orderBy)
             ->paginate(20);

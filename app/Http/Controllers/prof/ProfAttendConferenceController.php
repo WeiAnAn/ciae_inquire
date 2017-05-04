@@ -17,6 +17,8 @@ class ProfAttendConferenceController extends Controller
     public function index(Request $request){
         $sortBy = 'id';
         $orderBy = "desc";
+        $user = Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -25,10 +27,18 @@ class ProfAttendConferenceController extends Controller
     	$Pattendconference=ProfAttendConference::join('college_data',function($join){
             $join->on('prof_attend_conference.college','college_data.college');
             $join->on('prof_attend_conference.dept','college_data.dept');
-        })->orderBy($sortBy,$orderBy)
+        });
+        
+        if($user->permission == 2){
+            $Pattendconference = $Pattendconference->where('prof_attend_conference.college',$user->college);
+        }else if($user->permission == 3){
+            $Pattendconference = $Pattendconference->where('prof_attend_conference.college',$user->college)
+                ->where('prof_attend_conference.dept', $user->dept);
+        }
+
+        $Pattendconference= $Pattendconference->orderBy($sortBy,$orderBy)
             ->paginate(20);
         $Pattendconference->appends($request->except('page'));    
-        $user = Auth::user();
     	$data=compact('Pattendconference','user');
     	return view ('prof/prof_attend_conference',$data);
     }
@@ -70,6 +80,8 @@ class ProfAttendConferenceController extends Controller
 
         $sortBy = 'id';
         $orderBy = "desc";
+        $user = Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -107,10 +119,17 @@ class ProfAttendConferenceController extends Controller
             $Pattendconference = $Pattendconference
                 ->where('endDate','<=',"$request->endDate");
 
+        if($user->permission == 2){
+            $Pattendconference = $Pattendconference->where('prof_attend_conference.college',$user->college);
+        }else if($user->permission == 3){
+            $Pattendconference = $Pattendconference->where('prof_attend_conference.college',$user->college)
+                ->where('prof_attend_conference.dept', $user->dept);
+        }
+
         $Pattendconference = $Pattendconference->orderBy($sortBy,$orderBy)
             ->paginate(20);
+            
         $Pattendconference->appends($request->except('page'));    
-        $user = Auth::user();
         $data = compact('Pattendconference','user');
         return view('prof/prof_attend_conference',$data);
     }

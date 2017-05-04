@@ -18,6 +18,8 @@ class PartnerSchoolController extends Controller
     public function index (Request $request){
     	$sortBy = 'id';
         $orderBy = "desc";
+    	$user=Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -26,9 +28,17 @@ class PartnerSchoolController extends Controller
     	$partner= PartnerSchool::join('college_data',function($join){
     		$join->on('partner_school.college','college_data.college');
     		$join->on('partner_school.dept','college_data.dept');
-    		})->orderBy($sortBy,$orderBy)->paginate(20);
+    		});
+
+        if($user->permission == 2){
+            $partner = $partner->where('partner_school.college',$user->college);
+        }else if($user->permission == 3){
+            $partner = $partner->where('partner_school.college',$user->college)
+                ->where('partner_school.dept', $user->dept);
+        }
+        $partner = $partner->orderBy($sortBy,$orderBy)
+            ->paginate(20);
         $partner->appends($request->except('page')); 
-    	$user=Auth::user();
     	$data=compact('partner','user');
 
     	return view ('other/partner_school',$data);
@@ -70,6 +80,8 @@ class PartnerSchoolController extends Controller
     public function search (Request $request){
     	$sortBy = 'id';
         $orderBy = "desc";
+    	$user=Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -95,20 +107,25 @@ class PartnerSchoolController extends Controller
             $partner = $partner
                 ->where('engName',"like","%$request->engName%");
         if($request->startDate != "")
-            $internationalactivity = $internationalactivity
+            $partner = $partner
                 ->where('startDate','>=',"$request->startDate");
         if($request->endDate != "")
-            $internationalactivity = $internationalactivity
+            $partner = $partner
                 ->where('endDate','<=',"$request->endDate");
         if($request->comments != "")
             $partner = $partner
                 ->where('comments','like',"%$request->comments%");
-
+                
+        if($user->permission == 2){
+            $partner = $partner->where('partner_school.college',$user->college);
+        }else if($user->permission == 3){
+            $partner = $partner->where('partner_school.college',$user->college)
+                ->where('partner_school.dept', $user->dept);
+        }
 
         $partner = $partner->orderBy($sortBy,$orderBy)
             ->paginate(20);
         $partner->appends($request->except('page'));    
-        $user = Auth::user();
         $data = compact('partner','user');
         return view('other/partner_school',$data);
     }

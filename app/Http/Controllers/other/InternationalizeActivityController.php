@@ -16,6 +16,8 @@ class InternationalizeActivityController extends Controller
     public function index(Request $request){
     	$sortBy = 'id';
         $orderBy = "desc";
+    	$user= Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -24,9 +26,18 @@ class InternationalizeActivityController extends Controller
     	$internationalactivity= InternationalizeActivity::join('college_data',function($join){
     		$join->on('internationalize_activity.college','college_data.college');
     		$join->on('internationalize_activity.dept','college_data.dept');
-    		})->orderBy($sortBy,$orderBy)->paginate(20);
+    		});
+
+        if($user->permission == 2){
+            $internationalactivity = $internationalactivity->where('internationalize_activity.college',$user->college);
+        }else if($user->permission == 3){
+            $internationalactivity = $internationalactivity->where('internationalize_activity.college',$user->college)
+                ->where('internationalize_activity.dept', $user->dept);
+        }
+
+        $internationalactivity = $internationalactivity->orderBy($sortBy,$orderBy)->paginate(20);
+        
         $internationalactivity->appends($request->except('page')); 
-    	$user= Auth::user();
     	$data=compact('internationalactivity','user');
 
     	return view ('other/internationalize_activity',$data);
@@ -69,6 +80,8 @@ class InternationalizeActivityController extends Controller
     public function search (Request $request){
     	$sortBy = 'id';
         $orderBy = "desc";
+        $user = Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -103,11 +116,16 @@ class InternationalizeActivityController extends Controller
             $internationalactivity = $internationalactivity
                 ->where('endDate','<=',"$request->endDate");
 
+        if($user->permission == 2){
+            $internationalactivity = $internationalactivity->where('internationalize_activity.college',$user->college);
+        }else if($user->permission == 3){
+            $internationalactivity = $internationalactivity->where('internationalize_activity.college',$user->college)
+                ->where('internationalize_activity.dept', $user->dept);
+        }
 
         $internationalactivity = $internationalactivity->orderBy($sortBy,$orderBy)
             ->paginate(20);
         $internationalactivity->appends($request->except('page'));    
-        $user = Auth::user();
         $data = compact('internationalactivity','user');
         return view('other/internationalize_activity',$data);
     }

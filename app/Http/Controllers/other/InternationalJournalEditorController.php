@@ -17,6 +17,8 @@ class InternationalJournalEditorController extends Controller
     public function index(Request $request){
         $sortBy = 'id';
         $orderBy = "desc";
+        $user = Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -26,9 +28,18 @@ class InternationalJournalEditorController extends Controller
             join('college_data',function($join){
             $join->on('international_journal_editor.college','college_data.college');
             $join->on('international_journal_editor.dept','college_data.dept');
-        })->orderBy($sortBy,$orderBy)
+        });
+
+        if($user->permission == 2){
+            $internationaljeditor = $internationaljeditor->where('international_journal_editor.college',$user->college);
+        }else if($user->permission == 3){
+            $internationaljeditor = $internationaljeditor->where('international_journal_editor.college',$user->college)
+                ->where('international_journal_editor.dept', $user->dept);
+        }
+        
+        $internationaljeditor = $internationaljeditor->orderBy($sortBy,$orderBy)
             ->paginate(20);
-        $user = Auth::user();
+        $internationaljeditor->appends($request->except('page'));    
         $data=compact('internationaljeditor','user');
 
     	return view ('other/international_journal_editor',$data);
@@ -68,6 +79,8 @@ class InternationalJournalEditorController extends Controller
     public function search (Request $request){
         $sortBy = 'id';
         $orderBy = "desc";
+        $user = Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -99,10 +112,16 @@ class InternationalJournalEditorController extends Controller
             $internationaljeditor = $internationaljeditor
                 ->where('comments',"like","%$request->comments%");
 
+        if($user->permission == 2){
+            $internationaljeditor = $internationaljeditor->where('international_journal_editor.college',$user->college);
+        }else if($user->permission == 3){
+            $internationaljeditor = $internationaljeditor->where('international_journal_editor.college',$user->college)
+                ->where('international_journal_editor.dept', $user->dept);
+        }
+
         $internationaljeditor = $internationaljeditor->orderBy($sortBy,$orderBy)
             ->paginate(20);
         $internationaljeditor->appends($request->except('page'));    
-        $user = Auth::user();
         $data = compact('internationaljeditor','user');
         return view('other/international_journal_editor',$data);
     }

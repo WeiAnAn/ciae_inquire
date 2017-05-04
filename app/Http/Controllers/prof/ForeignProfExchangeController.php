@@ -17,6 +17,8 @@ class ForeignProfExchangeController extends Controller
     public function index(Request $request){
         $sortBy = 'id';
         $orderBy = "desc";
+        $user = Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -26,9 +28,18 @@ class ForeignProfExchangeController extends Controller
             join('college_data',function($join){
             $join->on('foreign_prof_exchange.college','college_data.college');
             $join->on('foreign_prof_exchange.dept','college_data.dept');
-        })->orderBy($sortBy,$orderBy)
+        });
+        
+        if($user->permission == 2){
+            $foreignPexchange = $foreignPexchange->where('foreign_prof_exchange.college',$user->college);
+        }else if($user->permission == 3){
+            $foreignPexchange = $foreignPexchange->where('foreign_prof_exchange.college',$user->college)
+                ->where('foreign_prof_exchange.dept', $user->dept);
+        }
+        $foreignPexchange= $foreignPexchange->orderBy($sortBy,$orderBy)
             ->paginate(20);
-        $user = Auth::user();
+        $foreignPexchange->appends($request->except('page'));    
+
         $data=compact('foreignPexchange','user');
 
 
@@ -71,6 +82,8 @@ class ForeignProfExchangeController extends Controller
     public function search (Request $request){
         $sortBy = 'id';
         $orderBy = "desc";
+        $user = Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -105,10 +118,16 @@ class ForeignProfExchangeController extends Controller
             $foreignPexchange = $foreignPexchange
                 ->where('comments',"like","%$request->comments%");
 
+        if($user->permission == 2){
+            $foreignPexchange = $foreignPexchange->where('foreign_prof_exchange.college',$user->college);
+        }else if($user->permission == 3){
+            $foreignPexchange = $foreignPexchange->where('foreign_prof_exchange.college',$user->college)
+                ->where('foreign_prof_exchange.dept', $user->dept);
+        }
+        
         $foreignPexchange = $foreignPexchange->orderBy($sortBy,$orderBy)
             ->paginate(20);
         $foreignPexchange->appends($request->except('page'));
-        $user = Auth::user();
         $data = compact('foreignPexchange','user');
         return view('prof/foreign_prof_exchange',$data);
     }
@@ -155,13 +174,13 @@ class ForeignProfExchangeController extends Controller
         return redirect('foreign_prof_exchange')->with('success','更新成功');
     }
 
-      public function delete($id){
+    public function delete($id){
         $AIO = foreignprofexchange::find($id);
         if(!Gate::allows('permission',$AIO))
             return redirect('foreign_prof_exchange');
         $AIO->delete();
         return redirect('foreign_prof_exchange');
-        }
+    }
 
     public function upload(Request $request){
         Excel::load($request->file('file'),function($reader){

@@ -17,6 +17,8 @@ class StuFromPartnerSchoolController extends Controller
     public function index(Request $request){
     	$sortBy = 'id';
         $orderBy = "desc";
+		$user = Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -25,10 +27,18 @@ class StuFromPartnerSchoolController extends Controller
 		$frompartnerdata = StuFromPartnerSchool::join('college_data',function($join){
     		$join->on('stu_from_partner_school.college','college_data.college');
     		$join->on('stu_from_partner_school.dept','college_data.dept');
-    		})->orderBy($sortBy,$orderBy)->paginate(20);
+    		});
+        if($user->permission == 2){
+            $frompartnerdata = $frompartnerdata->where('stu_from_partner_school.college',$user->college);
+        }else if($user->permission == 3){
+            $frompartnerdata = $frompartnerdata->where('stu_from_partner_school.college',$user->college)
+                ->where('stu_from_partner_school.dept', $user->dept);
+        }
+
+        $frompartnerdata = $frompartnerdata->orderBy($sortBy,$orderBy)
+            ->paginate(20);
         $frompartnerdata->appends($request->except('page'));  
 
-		$user = Auth::user();
 		$data = compact('frompartnerdata','user');
 		return view('stu/stu_from_partner_school',$data);
 	}
@@ -70,6 +80,8 @@ class StuFromPartnerSchoolController extends Controller
 
     	$sortBy = 'id';
         $orderBy = "desc";
+        $user = Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -104,10 +116,16 @@ class StuFromPartnerSchoolController extends Controller
             $frompartnerdata = $frompartnerdata
                 ->where('comments',"like","%$request->comments%");
 
+        if($user->permission == 2){
+            $frompartnerdata = $frompartnerdata->where('stu_from_partner_school.college',$user->college);
+        }else if($user->permission == 3){
+            $frompartnerdata = $frompartnerdata->where('stu_from_partner_school.college',$user->college)
+                ->where('stu_from_partner_school.dept', $user->dept);
+        }
+
         $frompartnerdata = $frompartnerdata->orderBy($sortBy,$orderBy)
             ->paginate(20);
         $frompartnerdata->appends($request->except('page'));    
-        $user = Auth::user();
         $data = compact('frompartnerdata','user');
         return view('stu/stu_from_partner_school',$data);
     }

@@ -17,6 +17,8 @@ class ProfForeignResearchController extends Controller
     public function index(Request $request){
     	$sortBy = 'id';
         $orderBy = "desc";
+        $user = Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -25,9 +27,18 @@ class ProfForeignResearchController extends Controller
     	$Pforeignresearch=ProfForeignResearch::join('college_data',function($join){
             $join->on('prof_foreign_research.college','college_data.college');
             $join->on('prof_foreign_research.dept','college_data.dept');
-        })->orderBy($sortBy,$orderBy)
+        });
+        
+        if($user->permission == 2){
+            $Pforeignresearch = $Pforeignresearch->where('prof_foreign_research.college',$user->college);
+        }else if($user->permission == 3){
+            $Pforeignresearch = $Pforeignresearch->where('prof_foreign_research.college',$user->college)
+                ->where('prof_foreign_research.dept', $user->dept);
+        }
+
+        $Pforeignresearch = $Pforeignresearch->orderBy($sortBy,$orderBy)
             ->paginate(20);
-        $user = Auth::user();
+        $Pforeignresearch->appends($request->except('page'));    
     	$data=compact('Pforeignresearch','user');
     	return view ('prof/prof_foreign_research',$data);
     }
@@ -69,6 +80,8 @@ class ProfForeignResearchController extends Controller
 
     	$sortBy = 'id';
         $orderBy = "desc";
+        $user = Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -102,11 +115,17 @@ class ProfForeignResearchController extends Controller
         if($request->comments != "")
             $Pforeignresearch = $Pforeignresearch
                 ->where('comments',"like","%$request->comments%");
+        
+        if($user->permission == 2){
+            $Pforeignresearch = $Pforeignresearch->where('prof_foreign_research.college',$user->college);
+        }else if($user->permission == 3){
+            $Pforeignresearch = $Pforeignresearch->where('prof_foreign_research.college',$user->college)
+                ->where('prof_foreign_research.dept', $user->dept);
+        }
 
         $Pforeignresearch = $Pforeignresearch->orderBy($sortBy,$orderBy)
             ->paginate(20);
         $Pforeignresearch->appends($request->except('page'));    
-        $user = Auth::user();
         $data = compact('Pforeignresearch','user');
         return view('prof/prof_foreign_research',$data);
     }

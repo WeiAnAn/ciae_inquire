@@ -17,6 +17,8 @@ class ForeignProfVistController extends Controller
     public function index(Request $request){
     	$sortBy = 'id';
         $orderBy = "desc";
+        $user = Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -25,9 +27,18 @@ class ForeignProfVistController extends Controller
     	$foreignPvist=ForeignProfVist::join('college_data',function($join){
             $join->on('foreign_prof_vist.college','college_data.college');
             $join->on('foreign_prof_vist.dept','college_data.dept');
-        })->orderBy($sortBy,$orderBy)
+        });
+        
+        if($user->permission == 2){
+            $foreignPvist = $foreignPvist->where('foreign_prof_vist.college',$user->college);
+        }else if($user->permission == 3){
+            $foreignPvist = $foreignPvist->where('foreign_prof_vist.college',$user->college)
+                ->where('foreign_prof_vist.dept', $user->dept);
+        }
+        $foreignPvist = $foreignPvist->orderBy($sortBy,$orderBy)
             ->paginate(20);
-        $user = Auth::user();
+        $foreignPvist->appends($request->except('page'));
+
     	$data=compact('foreignPvist','user');
     	return view ('prof/foreign_prof_vist',$data);
     }
@@ -69,6 +80,8 @@ class ForeignProfVistController extends Controller
 
     	$sortBy = 'id';
         $orderBy = "desc";
+        $user = Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -103,10 +116,17 @@ class ForeignProfVistController extends Controller
             $foreignPvist = $foreignPvist
                 ->where('comments',"like","%$request->comments%");
 
+        if($user->permission == 2){
+            $foreignPvist = $foreignPvist->where('foreign_prof_vist.college',$user->college);
+        }else if($user->permission == 3){
+            $foreignPvist = $foreignPvist->where('foreign_prof_vist.college',$user->college)
+                ->where('foreign_prof_vist.dept', $user->dept);
+        }
+
         $foreignPvist = $foreignPvist->orderBy($sortBy,$orderBy)
             ->paginate(20);
         $foreignPvist->appends($request->except('page'));    
-        $user = Auth::user();
+
         $data = compact('foreignPvist','user');
         return view('prof/foreign_prof_vist',$data);
     }

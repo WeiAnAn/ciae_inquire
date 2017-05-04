@@ -17,6 +17,8 @@ class TransnationalDegreeController extends Controller
     public function index (Request $request){
     	$sortBy = 'id';
         $orderBy = "desc";
+    	$user = Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -25,9 +27,17 @@ class TransnationalDegreeController extends Controller
     	$transnational = TransnationalDegree::join('college_data',function($join){
     		$join->on('transnational_degree.college','college_data.college');
     		$join->on('transnational_degree.dept','college_data.dept');
-    		})->orderBy($sortBy,$orderBy)->paginate(20);
+    		});
+
+        if($user->permission == 2){
+            $transnational = $transnational->where('transnational_degree.college',$user->college);
+        }else if($user->permission == 3){
+            $transnational = $transnational->where('transnational_degree.college',$user->college)
+                ->where('transnational_degree.dept', $user->dept);
+        }
+
+        $transnational = $transnational->orderBy($sortBy,$orderBy)->paginate(20);
         $transnational->appends($request->except('page'));   
-    	$user = Auth::user();
     	$data = compact('transnational','user');
     	return view ('other/transnational_degree',$data);
     }
@@ -64,6 +74,8 @@ class TransnationalDegreeController extends Controller
     public function search (Request $request){
     	$sortBy = 'id';
         $orderBy = "desc";
+    	$user = Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -107,7 +119,13 @@ class TransnationalDegreeController extends Controller
             $transnational = $transnational
                 ->where('comments','like',"%$request->comments%");
 
-
+        if($user->permission == 2){
+            $transnational = $transnational->where('transnational_degree.college',$user->college);
+        }else if($user->permission == 3){
+            $transnational = $transnational->where('transnational_degree.college',$user->college)
+                ->where('transnational_degree.dept', $user->dept);
+        }
+        
         $transnational = $transnational->orderBy($sortBy,$orderBy)
             ->paginate(20);
         $transnational->appends($request->except('page'));    
@@ -162,7 +180,7 @@ class TransnationalDegreeController extends Controller
             return redirect('transnational_degree');
         $transnational->delete();
         return redirect('transnational_degree');
-        } 
+    } 
 
     public function upload(Request $request){
         Excel::load($request->file('file'),function($reader){

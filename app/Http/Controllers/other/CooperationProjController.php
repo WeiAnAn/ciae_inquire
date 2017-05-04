@@ -17,16 +17,27 @@ class CooperationProjController extends Controller
     public function index(Request $request){
     	$sortBy = 'id';
         $orderBy = "desc";
+    	$user=Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
             $orderBy = $request->orderBy;
+
     	$cooperationproj= CooperationProj::join('college_data',function($join){
     		$join->on('cooperation_proj.college','college_data.college');
     		$join->on('cooperation_proj.dept','college_data.dept');
-    		})->orderBy($sortBy,$orderBy)->paginate(20);
+    		});
+
+        if($user->permission == 2){
+            $cooperationproj = $cooperationproj->where('cooperation_proj.college',$user->college);
+        }else if($user->permission == 3){
+            $cooperationproj = $cooperationproj->where('cooperation_proj.college',$user->college)
+                ->where('cooperation_proj.dept', $user->dept);
+        }
+            
+        $cooperationproj = $cooperationproj->orderBy($sortBy,$orderBy)->paginate(20);
         $cooperationproj->appends($request->except('page')); 
-    	$user=Auth::user();
     	$data=compact('cooperationproj','user');
     	return view ('other/cooperation_proj',$data);
     }
@@ -68,6 +79,8 @@ class CooperationProjController extends Controller
     public function search (Request $request){
     	$sortBy = 'id';
         $orderBy = "desc";
+        $user = Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -102,10 +115,16 @@ class CooperationProjController extends Controller
             $cooperationproj = $cooperationproj
                 ->where('comments',"like","%$request->comments%");
 
+        if($user->permission == 2){
+            $cooperationproj = $cooperationproj->where('cooperation_proj.college',$user->college);
+        }else if($user->permission == 3){
+            $cooperationproj = $cooperationproj->where('cooperation_proj.college',$user->college)
+                ->where('cooperation_proj.dept', $user->dept);
+        }
+
         $cooperationproj = $cooperationproj->orderBy($sortBy,$orderBy)
             ->paginate(20);
         $cooperationproj->appends($request->except('page'));    
-        $user = Auth::user();
         $data = compact('cooperationproj','user');
         return view('other/cooperation_proj',$data);
 

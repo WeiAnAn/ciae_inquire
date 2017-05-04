@@ -17,6 +17,8 @@ class StuAttendConfController extends Controller
     public function index (Request $request){
     	$sortBy = 'id';
         $orderBy = "desc";
+    	$user = Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -25,8 +27,18 @@ class StuAttendConfController extends Controller
     	$conf = StuAttendConf::join('college_data',function($join){
     		$join->on('stu_attend_conf.college','college_data.college');
     		$join->on('stu_attend_conf.dept','college_data.dept');
-    		})->orderBy($sortBy,$orderBy)->paginate(20);
-    	$user = Auth::user();
+    		});
+
+        if($user->permission == 2){
+            $conf = $conf->where('stu_attend_conf.college',$user->college);
+        }else if($user->permission == 3){
+            $conf = $conf->where('stu_attend_conf.college',$user->college)
+                ->where('stu_attend_conf.dept', $user->dept);
+        }
+
+        $conf = $conf->orderBy($sortBy,$orderBy)
+            ->paginate(20);
+        $conf->appends($request->except('page'));  
     	$data=compact('conf','user');
     	return view ('stu/stu_attend_conf',$data);
     	}
@@ -69,6 +81,8 @@ class StuAttendConfController extends Controller
 
     	$sortBy = 'id';
         $orderBy = "desc";
+        $user = Auth::user();
+        
         if($request->sortBy != null)
             $sortBy = $request->sortBy;
         if($request->orderBy != null)
@@ -105,11 +119,17 @@ class StuAttendConfController extends Controller
         if($request->comments != "")
             $conf = $conf
                 ->where('comments',"like","%$request->comments%");
+        
+        if($user->permission == 2){
+            $conf = $conf->where('stu_attend_conf.college',$user->college);
+        }else if($user->permission == 3){
+            $conf = $conf->where('stu_attend_conf.college',$user->college)
+                ->where('stu_attend_conf.dept', $user->dept);
+        }
 
         $conf = $conf->orderBy($sortBy,$orderBy)
             ->paginate(20);
         $conf->appends($request->except('page'));    
-        $user = Auth::user();
         $data = compact('conf','user');
         return view('stu/stu_attend_conf',$data);
     }	
