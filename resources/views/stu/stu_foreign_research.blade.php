@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<a href="stu_foreign_research" style="color: black">
+		<a href="{{URL('stu_foreign_research')}}" style="color: black">
 			<h1 class="page-header">本校學生其他出國研修情形</h1>
 		</a>
 	</div>
