@@ -101,7 +101,9 @@
 				"<option value='0'>教育學院</option>"+
 				"<option value='40'>成教系/成教所/高齡所</option>"+
 				"<option value='45'>犯防系/犯防所</option>"+
-				"<option value='50'>教育所</option>"
+				"<option value='50'>教育所</option>"+
+				"<option value='54'>課程所/師培中心</option>"+
+				"<option value='90'>運動競技學系(運動與休閒教育碩士班)</option>"
 			
 			,
 
