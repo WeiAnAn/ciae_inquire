@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>國際化調查系統</title>
+    <title>國立中正大學國際化調查系統</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">

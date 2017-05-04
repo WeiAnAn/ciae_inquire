@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>國際化調查系統</title>
+    <title>國立中正大學國際化調查系統</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -39,7 +39,7 @@
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">國際化調查系統</h3>
+                        <h3 class="panel-title">國立中正大學國際化調查系統</h3>
                     </div>
                     <div class="panel-body">
                         <form role="form" method="post" action="{{ url('/login') }}">
