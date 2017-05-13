@@ -27,6 +27,7 @@
 			<option value="23">國際處</option>
 			<option value="24">通識教育中心</option>
 			<option value="25">語言中心</option>
+			<option value='26'>前瞻製造系統頂尖研究中心</option>
 		</select>
 	</div>
 	<div class="form-group">
@@ -174,8 +175,7 @@
 				"<option value='32'>尖端製程與軋鍛技術研發中心</option>"+
 				"<option value='33'>台商運籌研究中心</option>"+
 				"<option value='34'>國家安全研究中心</option>"+
-				"<option value='35'>後殖民研究中心</option>"+
-				"<option value='36'>前瞻製造系統頂尖研究</option>"
+				"<option value='35'>後殖民研究中心</option>"
 			
 			
 			,
@@ -221,6 +221,8 @@
 			, 
 			
 				"<option value='0'>語言中心</option>"
+			,
+				"<option value='0'>前瞻製造系統頂尖研究中心</option>"
 			];
 
 			document.getElementById('dept_option').innerHTML = college[value];
