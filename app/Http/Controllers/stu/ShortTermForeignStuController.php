@@ -38,6 +38,7 @@ class ShortTermForeignStuController extends Controller
 
         $shortterm = $shortterm->orderBy($sortBy,$orderBy)
             ->paginate(20);
+
         $shortterm->appends($request->except('page'));  
 		$data = compact('shortterm','user');
 		return view('stu/short_term_foreign_stu',$data);
