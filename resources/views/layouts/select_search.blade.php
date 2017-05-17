@@ -95,7 +95,7 @@
 
 				"<option value='0'>法學院</option>"+
 				"<option value='10'>法律系/法律所</option>"+
-				"<option value='20'>財經法律學系</option>"
+				"<option value='30'>財經法律學系</option>"
 			
 			,
 
