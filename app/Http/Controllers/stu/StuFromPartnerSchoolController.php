@@ -186,6 +186,9 @@ class StuFromPartnerSchoolController extends Controller
             $newArray = [];
             foreach ($array as $arrayKey => $item) {
 
+                if($this->isAllNull($item))
+                    continue;
+
                 $errorLine = $arrayKey + 2;
                 $rules=[
                     '所屬一級單位'=>'required|max:11',
@@ -199,12 +202,12 @@ class StuFromPartnerSchoolController extends Controller
                 ];
 
                 $message=[
-                    'required'=>'必須填寫:attribute欄位',
-                    'max'=>':attribute欄位的輸入長度不能大於:max',
-                    'date'=>':attribute 欄位時間格式錯誤, 應為 xxxx/xx/xx'.", 第 $errorLine 行"
+                    'required'=>"必須填寫:attribute欄位, 第 $errorLine 行",
+                    "max"=>":attribute欄位的輸入長度不能大於:max, 第 $errorLine 行",
+                    "date"=>":attribute 欄位時間格式錯誤, 應為 xxxx/xx/xx".", 第 $errorLine 行"
                 ];
                 $validator = Validator::make($item,$rules,$message);
-
+                
                 foreach ($item as $key => $value) {
 
                     switch ($key) {
@@ -255,8 +258,7 @@ class StuFromPartnerSchoolController extends Controller
                             unset($item[$key]);
                             break;
                         default:
-                            return redirect('stu_from_partner_school')
-                                ->withErrors(['format'=>'檔案欄位錯誤'],"upload");
+                            unset($item[$key]);
                             break;
                     }
                 }
@@ -281,7 +283,15 @@ class StuFromPartnerSchoolController extends Controller
         return redirect('stu_from_partner_school');
     }
     
-     public function example(Request $request){
+    public function example(Request $request){
         return response()->download(public_path().'/Excel_example/stu/stu_from_partner_school.xlsx',"姊妹校學生至本校參加交換計畫.xlsx");
-    }    			
+    }
+
+    private function isAllNull($array){
+        foreach($array as $item){
+            if($item != null)
+                return false;
+        }
+        return true;
+    }
 }

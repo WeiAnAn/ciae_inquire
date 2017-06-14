@@ -186,6 +186,9 @@ class ProfForeignResearchController extends Controller
             $newArray = [];
             foreach ($array as $arrayKey => $item) {
 
+                if($this->isAllNull($item))
+                    continue;
+
                 $errorLine = $arrayKey + 2;
                 $rules = [
                     '所屬一級單位'=>'required|max:11',
@@ -257,8 +260,7 @@ class ProfForeignResearchController extends Controller
                             unset($item[$key]);
                             break;
                         default:
-                            return redirect('prof_foreign_research')
-                                ->withErrors(['format'=>'檔案欄位錯誤'],"upload");
+                            unset($item[$key]);
                             break;
                     }
                 }
@@ -287,5 +289,12 @@ class ProfForeignResearchController extends Controller
     public function example(Request $request){
         return response()->download(public_path().'/Excel_example/prof/prof_foreign_research.xlsx',"本校教師赴國外研究.xlsx");
     }
-
+    
+    private function isAllNull($array){
+        foreach($array as $item){
+            if($item != null)
+                return false;
+        }
+        return true;
+    }
 }

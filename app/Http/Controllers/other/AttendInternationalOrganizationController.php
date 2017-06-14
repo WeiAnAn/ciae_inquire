@@ -85,7 +85,7 @@ class AttendInternationalOrganizationController extends Controller
         if($request->orderBy != null)
             $orderBy = $request->orderBy;
 
-        $attendiorganization = attendinternationalorganization::join('college_data',function($join){
+        $attendiorganization = AttendInternationalOrganization::join('college_data',function($join){
                 $join->on('attend_international_organization.college','college_data.college');
                 $join->on('attend_international_organization.dept','college_data.dept');
             });
@@ -128,14 +128,14 @@ class AttendInternationalOrganizationController extends Controller
     }
 
     public function edit($id){
-        $attendiorganization = attendinternationalorganization::find($id);
+        $attendiorganization = AttendInternationalOrganization::find($id);
         if(Gate::allows('permission',$attendiorganization))
             return view('other/attend_international_organization_edit',$attendiorganization);
         return redirect('attend_international_organization');
     }
 
     public function update($id,Request $request){
-        $attendiorganization = attendinternationalorganization::find($id);
+        $attendiorganization = AttendInternationalOrganization::find($id);
         if(!Gate::allows('permission',$attendiorganization))
             return redirect('attend_international_organization');
         $rules=[
@@ -183,6 +183,9 @@ class AttendInternationalOrganizationController extends Controller
             $array = $reader->toArray();
             $newArray = [];
             foreach ($array as $arrayKey => $item) {
+
+                if($this->isAllNull($item))
+                    continue;
 
                 $errorLine = $arrayKey + 2;
                 $rules = [
@@ -232,8 +235,7 @@ class AttendInternationalOrganizationController extends Controller
                             unset($item[$key]);
                             break;
                         default:
-                            return redirect('attend_international_organization')
-                                ->withErrors(['format'=>'檔案欄位錯誤'],"upload");
+                            unset($item[$key]);
                             break;
                     }
                 }
@@ -254,12 +256,20 @@ class AttendInternationalOrganizationController extends Controller
                 }
                 array_push($newArray,$item);
             }
-            attendinternationalorganization::insert($newArray);
+            AttendInternationalOrganization::insert($newArray);
         });
         return redirect('attend_international_organization');
     }
 
     public function example(Request $request){
         return response()->download(public_path().'/Excel_example/other/attend_international_organization.xlsx',"參與國際組織.xlsx");
-    }  
+    }
+
+    private function isAllNull($array){
+        foreach($array as $item){
+            if($item != null)
+                return false;
+        }
+        return true;
+    }
 }

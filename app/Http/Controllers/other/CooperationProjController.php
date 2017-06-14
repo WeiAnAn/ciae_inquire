@@ -190,6 +190,9 @@ class CooperationProjController extends Controller
             $newArray = [];
             foreach ($array as $arrayKey => $item) {
 
+                if($this->isAllNull($item))
+                    continue;
+                    
                 $errorLine = $arrayKey + 2;
                 $rules = [
                     '所屬一級單位'=>'required|max:11',
@@ -247,8 +250,7 @@ class CooperationProjController extends Controller
                             unset($item[$key]);
                             break;
                         default:
-                            return redirect('cooperation_proj')
-                                ->withErrors(['format'=>'檔案欄位錯誤'],"upload");
+                            unset($item[$key]);
                             break;
                     }
                 }
@@ -276,5 +278,13 @@ class CooperationProjController extends Controller
 
     public function example(Request $request){
         return response()->download(public_path().'/Excel_example/other/cooperation_proj.xlsx',"國際合作交流計畫.xlsx");
+    }
+
+    private function isAllNull($array){
+        foreach($array as $item){
+            if($item != null)
+                return false;
+        }
+        return true;
     }
 }

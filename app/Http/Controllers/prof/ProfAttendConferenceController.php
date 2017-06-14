@@ -191,6 +191,9 @@ class ProfAttendConferenceController extends Controller
             $newArray = [];
             foreach ($array as $arrayKey => $item) {
 
+                if($this->isAllNull($item))
+                    continue;
+
                 $errorLine = $arrayKey + 2;
                 $rules = [
                     '所屬一級單位'=>'required|max:11',
@@ -266,8 +269,7 @@ class ProfAttendConferenceController extends Controller
                             unset($item[$key]);
                             break;
                         default:
-                            return redirect('prof_attend_conference')
-                                ->withErrors(['format'=>'檔案欄位錯誤'],"upload");
+                            unset($item[$key]);
                             break;
                     }
                 }
@@ -297,5 +299,11 @@ class ProfAttendConferenceController extends Controller
         return response()->download(public_path().'/Excel_example/prof/prof_attend_conference.xlsx',"本校教師赴國外出席國際會議.xlsx");
     }
 
-
+    private function isAllNull($array){
+        foreach($array as $item){
+            if($item != null)
+                return false;
+        }
+        return true;
+    }
 }

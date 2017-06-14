@@ -188,6 +188,9 @@ class ForeignProfExchangeController extends Controller
             $newArray = [];
             foreach ($array as $arrayKey => $item) {
 
+                if($this->isAllNull($item))
+                    continue;
+
                 $errorLine = $arrayKey + 2;
                 $rules = [
                         '邀請單位一級單位名稱'=>'required|max:11',
@@ -259,8 +262,7 @@ class ForeignProfExchangeController extends Controller
                             unset($item[$key]);
                             break;
                         default:
-                            return redirect('foreign_prof_exchange')
-                               ->withErrors(['format'=>'檔案欄位錯誤'],"upload");
+                            unset($item[$key]);
                             break;
                     }
 
@@ -288,5 +290,13 @@ class ForeignProfExchangeController extends Controller
 
     public function example(Request $request){
         return response()->download(public_path().'/Excel_example/prof/foreign_prof_exchange.xlsx',"外籍學者蒞校交換.xlsx");
+    }
+
+    private function isAllNull($array){
+        foreach($array as $item){
+            if($item != null)
+                return false;
+        }
+        return true;
     }
 }

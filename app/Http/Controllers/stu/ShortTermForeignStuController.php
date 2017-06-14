@@ -189,6 +189,9 @@ class ShortTermForeignStuController extends Controller
             $newArray = [];
             foreach ($array as $arrayKey => $item) {
 
+                if($this->isAllNull($item))
+                    continue;
+
                 $errorLine = $arrayKey + 2;
                 $rules=[
                     '所屬一級單位'=>'required|max:11',
@@ -258,8 +261,7 @@ class ShortTermForeignStuController extends Controller
                             unset($item[$key]);
                             break;
                         default:
-                            return redirect('short_term_foreign_stu')
-                                ->withErrors(['format'=>'檔案欄位錯誤'],"upload");
+                            unset($item[$key]);
                             break;
                     }
                 }
@@ -287,5 +289,13 @@ class ShortTermForeignStuController extends Controller
     
      public function example(Request $request){
         return response()->download(public_path().'/Excel_example/stu/short_term_foreign_stu.xlsx',"外籍學生至本校短期交流訪問或實習.xlsx");
-    }                   			
+    }             
+
+    private function isAllNull($array){
+        foreach($array as $item){
+            if($item != null)
+                return false;
+        }
+        return true;
+    }      			
 }

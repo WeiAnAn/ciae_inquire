@@ -192,6 +192,9 @@ public function update($id,Request $request){
             $newArray = [];
             foreach ($array as $arrayKey => $item) {
 
+                if($this->isAllNull($item))
+                    continue;
+                    
                 $errorLine = $arrayKey + 2;
                 $rules=[
                     '所屬一級單位'=>'required|max:11',
@@ -266,8 +269,7 @@ public function update($id,Request $request){
                             unset($item[$key]);
                             break;
                         default:
-                            return redirect('stu_attend_conf')
-                                ->withErrors(['format'=>'檔案欄位錯誤'],"upload");
+                            unset($item[$key]);
                             break;
                     }
                 }
@@ -293,7 +295,15 @@ public function update($id,Request $request){
         return redirect('stu_attend_conf');
     }
     
-     public function example(Request $request){
+    public function example(Request $request){
         return response()->download(public_path().'/Excel_example/stu/stu_attend_conf.xlsx',"本校學生赴國外出席國際會議.xlsx");
+    }
+
+    private function isAllNull($array){
+        foreach($array as $item){
+            if($item != null)
+                return false;
+        }
+        return true;
     }
 }

@@ -189,6 +189,9 @@ class StuForeignResearchController extends Controller
             $newArray = [];
             foreach ($array as $arrayKey => $item) {
 
+                if($this->isAllNull($item))
+                    continue;
+
                 $errorLine = $arrayKey + 2;
                 $rules=[
                     '所屬一級單位'=>'required|max:11',
@@ -258,8 +261,7 @@ class StuForeignResearchController extends Controller
                             unset($item[$key]);
                             break;
                         default:
-                            return redirect('stu_foreign_research')
-                                ->withErrors(['format'=>'檔案欄位錯誤'],"upload");
+                            unset($item[$key]);
                             break;
                     }
                 }
@@ -285,8 +287,15 @@ class StuForeignResearchController extends Controller
         return redirect('stu_foreign_research');
     }
     
-     public function example(Request $request){
+    public function example(Request $request){
         return response()->download(public_path().'/Excel_example/stu/stu_foreign_research.xlsx',"本校學生其他出國研修情形.xlsx");
     }
-                         			
+
+    private function isAllNull($array){
+        foreach($array as $item){
+            if($item != null)
+                return false;
+        }
+        return true;
+    }                 			
 }

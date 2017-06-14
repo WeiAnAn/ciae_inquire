@@ -185,6 +185,9 @@ class StuToPartnerSchoolController extends Controller
             $newArray = [];
             foreach ($array as $arrayKey => $item) {
 
+                if($this->isAllNull($item))
+                    continue;
+                                    
                 $errorLine = $arrayKey + 2;
                 $rules=[
                     '所屬一級單位'=>'required|max:11',
@@ -254,8 +257,7 @@ class StuToPartnerSchoolController extends Controller
                             unset($item[$key]);
                             break;
                         default:
-                            return redirect('stu_to_partner_school')
-                                ->withErrors(['format'=>'檔案欄位錯誤'],"upload");
+                            unset($item[$key]);
                             break;
                     }
                 }
@@ -280,7 +282,15 @@ class StuToPartnerSchoolController extends Controller
         return redirect('stu_to_partner_school');
     }
 
-     public function example(Request $request){
+    public function example(Request $request){
         return response()->download(public_path().'/Excel_example/stu/stu_to_partner_school.xlsx',"本校學生出國赴姊妹校參加交換計畫.xlsx");
+    }
+
+    private function isAllNull($array){
+        foreach($array as $item){
+            if($item != null)
+                return false;
+        }
+        return true;
     }
 }
