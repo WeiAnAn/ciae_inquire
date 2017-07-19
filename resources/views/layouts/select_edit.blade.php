@@ -228,7 +228,15 @@
 		}
 
 		function lock(value){
-			var disabled = document.createAttribute('disabled');
+			var collegeNode = document.createElement("input");
+			var nameAttr = document.createAttribute("name");
+			nameAttr.value = "college";
+			var valueAttr = document.createAttribute("value");
+			valueAttr.value = value.college;
+			collegeNode.attributes.setNamedItem(nameAttr);
+			collegeNode.attributes.setNamedItem(valueAttr);
+
+			document.getElementById('college').append(collegeNode);
 
 			document.getElementById('college').value = value.college;
 			document.getElementById('college').attributes.setNamedItem(document.createAttribute('disabled'));
@@ -237,6 +245,14 @@
 				document.getElementById('dept').value = value.dept;
 				document.getElementById('dept').attributes.setNamedItem(document.createAttribute('disabled'));
 
+				var deptNode = document.createElement("input");
+				var nameAttr = document.createAttribute("name");
+				nameAttr.value = "dept";
+				var valueAttr = document.createAttribute("value");
+				valueAttr.value = value.dept;
+				deptNode.attributes.setNamedItem(nameAttr);
+				deptNode.attributes.setNamedItem(valueAttr);
+				document.getElementById('dept').append(deptNode);
 			}else{
 				document.getElementById('dept').value = {{$dept}};
 			}

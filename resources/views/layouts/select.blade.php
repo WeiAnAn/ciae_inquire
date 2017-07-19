@@ -229,7 +229,16 @@
 		}
 
 		function lock(value){
-			var disabled = document.createAttribute('disabled');
+
+			var collegeNode = document.createElement("input");
+			var nameAttr = document.createAttribute("name");
+			nameAttr.value = "college";
+			var valueAttr = document.createAttribute("value");
+			valueAttr.value = value.college;
+			collegeNode.attributes.setNamedItem(nameAttr);
+			collegeNode.attributes.setNamedItem(valueAttr);
+
+			document.getElementById('college_option').append(collegeNode);
 
 			document.getElementById('college_option').value = value.college;
 			document.getElementById('college_option').attributes.
@@ -238,7 +247,15 @@
 			if(value.dept != '0'){
 				document.getElementById('dept_option').value = value.dept;
 				document.getElementById('dept_option').attributes.setNamedItem(document.createAttribute('disabled'));
-
+				
+				var deptNode = document.createElement("input");
+				var nameAttr = document.createAttribute("name");
+				nameAttr.value = "dept";
+				var valueAttr = document.createAttribute("value");
+				valueAttr.value = value.dept;
+				deptNode.attributes.setNamedItem(nameAttr);
+				deptNode.attributes.setNamedItem(valueAttr);
+				document.getElementById('dept_option').append(deptNode);
 			}
 		}
 		@if(Auth::user()->permission > 1)
